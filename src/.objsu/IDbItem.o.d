@@ -1,5 +1,6 @@
-.objsu/IDbItem.o: /home/jankup/SourceCpp/DatabaseExplorer/src/IDbItem.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/IDbItem.h \
+.objsu/IDbItem.o: \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.h \
  /usr/include/wx-2.8/wx/treebase.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
@@ -31,7 +32,7 @@
  /usr/include/wx-2.8/wx/generic/accel.h \
  /usr/include/wx-2.8/wx/gtk/window.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/IDbItem.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.h:
 
 /usr/include/wx-2.8/wx/treebase.h:
 

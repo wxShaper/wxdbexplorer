@@ -1,6 +1,6 @@
 .objsu/erd_table.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/erd_table.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/erd_table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h \
  controls/include/wx/wxsf/RoundRectShape.h \
  controls/include/wx/wxsf/RectShape.h \
  controls/include/wx/wxsf/ShapeBase.h /usr/include/wx-2.8/wx/wxprec.h \
@@ -112,22 +112,22 @@
  controls/include/wx/wxxmlserializer/PropertyIO.h \
  controls/include/wx/wxxmlserializer/Defs.h \
  controls/include/wx/wxsf/TextShape.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  /usr/include/wx-2.8/wx/hashset.h \
  controls/include/wx/dblayer/DatabaseLayerDef.h \
  controls/include/wx/dblayer/DatabaseErrorReporter.h \
  controls/include/wx/dblayer/DatabaseStringConverter.h \
  controls/include/wx/dblayer/ResultSetMetaData.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/columncol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/column.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/erd_table.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h:
 
 controls/include/wx/wxsf/RoundRectShape.h:
 
@@ -523,7 +523,7 @@ controls/include/wx/wxxmlserializer/Defs.h:
 
 controls/include/wx/wxsf/TextShape.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/table.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
 
@@ -537,11 +537,11 @@ controls/include/wx/dblayer/DatabaseStringConverter.h:
 
 controls/include/wx/dblayer/ResultSetMetaData.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/column.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 

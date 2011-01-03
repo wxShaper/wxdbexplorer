@@ -1,6 +1,6 @@
 .objsu/mysqldbadapter.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/mysqldbadapter.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/mysqldbadapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h \
  controls/include/wx/dblayer/MysqlDatabaseLayer.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
@@ -112,16 +112,16 @@
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/IDbAdapter.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/database.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/tablecol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/table.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/columncol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/column.h
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/mysqldbadapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h:
 
 controls/include/wx/dblayer/MysqlDatabaseLayer.h:
 
@@ -513,18 +513,18 @@ controls/include/wx/dblayer/DatabaseQueryParser.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/databasecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/database.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/tablecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/table.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/column.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:

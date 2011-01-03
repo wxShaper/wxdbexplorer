@@ -1,6 +1,6 @@
 .objsu/wxShapeFramework_ShapeDockpoint.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/ShapeDockpoint.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/ShapeDockpoint.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
@@ -112,7 +112,7 @@
  ../../src/controls/include/wx/wxsf/ShapeHandle.h \
  ../../src/controls/include/wx/wxsf/CommonFcn.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.h:
 
 /usr/include/wx-2.8/wx/wxprec.h:
 

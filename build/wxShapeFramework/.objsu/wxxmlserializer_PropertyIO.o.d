@@ -1,5 +1,5 @@
 .objsu/wxxmlserializer_PropertyIO.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wxxmlserializer/PropertyIO.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wxxmlserializer/PropertyIO.cpp \
  ../../src/controls/src/wxShapeFramework/wx_pch.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \

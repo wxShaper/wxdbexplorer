@@ -1,7 +1,7 @@
 .objsu/gui_DbSettingDialog.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbSettingDialog.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbSettingDialog.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/GUI.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbSettingDialog.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbSettingDialog.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h \
  /usr/include/wx-2.8/wx/string.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
@@ -116,7 +116,7 @@
  /usr/include/wx-2.8/wx/filepicker.h /usr/include/wx-2.8/wx/pickerbase.h \
  /usr/include/wx-2.8/wx/gtk/filepicker.h \
  /usr/include/wx-2.8/wx/generic/filepickerg.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbViewerPanel.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbViewerPanel.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/hashset.h \
  controls/include/wx/dblayer/DatabaseLayerDef.h \
@@ -135,36 +135,37 @@
  /usr/include/wx-2.8/wx/gtk/minifram.h \
  /usr/include/wx-2.8/wx/aui/auibar.h /usr/include/wx-2.8/wx/aui/auibook.h \
  /usr/include/wx-2.8/wx/aui/tabmdi.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../res/gui/folder.xpm \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../res/gui/form_blue.xpm \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../DbDatabase.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../IDbItem.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../DbTable.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../IDbItem.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../DbColumn.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/folder.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/form_blue.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../DbDatabase.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbItem.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../DbTable.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbItem.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../DbColumn.h \
  IDbConnector.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../database.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../tablecol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../table.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../columncol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../column.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../IDbAdapter.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../database.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../tablecol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../table.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../columncol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../column.h IDbAdapter.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../mysqldbadapter.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../databasecol.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/../dbitem.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
+ IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../dbitem.h \
  MySqlDbConnector.h IDbConnector.h SqliteDbConnector.h \
  controls/include/wx/dblayer/SqliteDatabaseLayer.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbSettingDialog.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbSettingDialog.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/GUI.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h:
 
 /usr/include/wx-2.8/wx/string.h:
 
@@ -574,7 +575,7 @@ controls/include/wx/propgrid/advprops.h:
 
 /usr/include/wx-2.8/wx/generic/filepickerg.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbViewerPanel.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbViewerPanel.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
@@ -618,55 +619,55 @@ controls/include/wx/dblayer/DatabaseLayer.h:
 
 /usr/include/wx-2.8/wx/aui/tabmdi.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../res/gui/folder.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/folder.xpm:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../res/gui/form_blue.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/form_blue.xpm:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../DbDatabase.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../DbDatabase.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../IDbItem.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbItem.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../DbTable.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../DbTable.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../IDbItem.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbItem.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../DbColumn.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../DbColumn.h:
 
 IDbConnector.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../databasecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../database.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../tablecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../table.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../column.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../database.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../tablecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../table.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../column.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
 
 IDbAdapter.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../mysqldbadapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../databasecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/../dbitem.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../dbitem.h:
 
 MySqlDbConnector.h:
 

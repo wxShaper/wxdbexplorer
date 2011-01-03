@@ -1,5 +1,5 @@
 .objsu/propgrid_extras.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/propgrid/extras.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/propgrid/extras.cpp \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \

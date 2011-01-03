@@ -1,5 +1,5 @@
 .objsu/gui_SqlCommandPanel.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/SqlCommandPanel.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/SqlCommandPanel.cpp \
  /usr/include/wx-2.8/wx/file.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
@@ -15,7 +15,7 @@
  /usr/include/wx-2.8/wx/msgout.h /usr/include/wx-2.8/wx/arrstr.h \
  /usr/include/wx-2.8/wx/textfile.h /usr/include/wx-2.8/wx/textbuf.h \
  /usr/include/wx-2.8/wx/convauto.h /usr/include/wx-2.8/wx/dynarray.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/SqlCommandPanel.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/SqlCommandPanel.h \
  /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/hash.h \
  /usr/include/wx-2.8/wx/hashmap.h /usr/include/wx-2.8/wx/intl.h \
  /usr/include/wx-2.8/wx/log.h /usr/include/wx-2.8/wx/generic/logg.h \
@@ -103,7 +103,7 @@
  /usr/include/wx-2.8/wx/listctrl.h /usr/include/wx-2.8/wx/listbase.h \
  /usr/include/wx-2.8/wx/generic/listctrl.h \
  controls/include/wx/dblayer/DatabaseLayerException.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/GUI.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h \
  controls/include/wx/wxScintilla/wxscintilla.h \
  /usr/include/wx-2.8/wx/dnd.h /usr/include/wx-2.8/wx/gtk/dnd.h \
  /usr/include/wx-2.8/wx/grid.h /usr/include/wx-2.8/wx/generic/grid.h \
@@ -130,7 +130,7 @@
  controls/include/wx/dblayer/MysqlDatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseErrorCodes.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/DatabaseExplorerFrame.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DatabaseExplorerFrame.h \
  /usr/include/wx-2.8/wx/aui/aui.h \
  /usr/include/wx-2.8/wx/aui/framemanager.h \
  /usr/include/wx-2.8/wx/aui/dockart.h \
@@ -195,7 +195,7 @@
 
 /usr/include/wx-2.8/wx/dynarray.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/SqlCommandPanel.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/SqlCommandPanel.h:
 
 /usr/include/wx-2.8/wx/wx.h:
 
@@ -517,7 +517,7 @@
 
 controls/include/wx/dblayer/DatabaseLayerException.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/GUI.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h:
 
 controls/include/wx/wxScintilla/wxscintilla.h:
 
@@ -587,7 +587,7 @@ controls/include/wx/dblayer/DatabaseLayer.h:
 
 controls/include/wx/dblayer/DatabaseErrorCodes.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/DatabaseExplorerFrame.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DatabaseExplorerFrame.h:
 
 /usr/include/wx-2.8/wx/aui/aui.h:
 

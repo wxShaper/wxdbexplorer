@@ -1,6 +1,6 @@
 .objsu/wxScintilla_wxscintilla.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/wxscintilla.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/ScintillaWX.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/wxscintilla.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/ScintillaWX.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Platform.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Scintilla.h \
  ../../src/controls/src/wxScintilla/scintilla/include/ScintillaWidget.h \
@@ -135,7 +135,7 @@
  /usr/include/wx-2.8/wx/tokenzr.h /usr/include/wx-2.8/wx/mstream.h \
  /usr/include/wx-2.8/wx/file.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/ScintillaWX.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/ScintillaWX.h:
 
 ../../src/controls/src/wxScintilla/scintilla/include/Platform.h:
 
