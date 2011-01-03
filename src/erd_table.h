@@ -3,6 +3,7 @@
 
 #include "wx/wxsf/RoundRectShape.h" // Base class: wxSFRoundRectShape
 #include "wx/wxsf/TextShape.h"
+#include "wx/wxsf/FlexGridShape.h"
 #include "table.h"
 
 class ErdTable : public wxSFRoundRectShape {
@@ -12,6 +13,7 @@ public:
 	ErdTable(const ErdTable& obj);
 	virtual ~ErdTable();
 	
+	void updateColumns();
 	Table* getTable() { return this->m_pTable; }
 
 protected:
@@ -25,6 +27,7 @@ protected:
 	virtual void DrawHighlighted(wxDC& dc);
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
+	void clearGrid();
 };
 
 #endif // ERDTABLE_H

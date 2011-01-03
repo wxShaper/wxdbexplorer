@@ -58,6 +58,8 @@ void ErdTable::Initialize()
 		SF_ADD_COMPONENT( m_pGrid, wxT("main_grid") );
 		
 		}
+		updateColumns();
+		Update();
 }
 
 
@@ -76,5 +78,23 @@ void ErdTable::DrawNormal(wxDC& dc)
 	wxSFRoundRectShape::DrawNormal(dc);
 }
 
+void ErdTable::updateColumns()
+{
+	clearGrid();
+	
 
+	
+}
+void ErdTable::clearGrid()
+{
+	SerializableList::compatibility_iterator node;
+	while( node = m_pGrid->GetFirstChildNode() )
+	{
+		GetParentManager()->RemoveItem( node->GetData() );
+	}
+	// re-initialize grid control
+	m_pGrid->ClearGrid();
+	m_pGrid->SetDimensions( 1, 1 );	
+	m_pGrid->Update();
+}
 

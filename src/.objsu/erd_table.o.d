@@ -112,6 +112,8 @@
  controls/include/wx/wxxmlserializer/PropertyIO.h \
  controls/include/wx/wxxmlserializer/Defs.h \
  controls/include/wx/wxsf/TextShape.h \
+ controls/include/wx/wxsf/FlexGridShape.h \
+ controls/include/wx/wxsf/GridShape.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  /usr/include/wx-2.8/wx/hashset.h \
@@ -522,6 +524,10 @@ controls/include/wx/wxxmlserializer/PropertyIO.h:
 controls/include/wx/wxxmlserializer/Defs.h:
 
 controls/include/wx/wxsf/TextShape.h:
+
+controls/include/wx/wxsf/FlexGridShape.h:
+
+controls/include/wx/wxsf/GridShape.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
 
