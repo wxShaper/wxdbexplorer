@@ -3,7 +3,7 @@
 ErdTable::ErdTable():wxSFRoundRectShape()
 {
 	m_pTable = new Table();
-	m_pTable->setName(wxT("New table"));
+	m_pTable->setName(wxT("New table 0"));
 	
 	Initialize();
 }
