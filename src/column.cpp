@@ -5,9 +5,9 @@ Column::~Column()
 // -------------------------------------------------
 // Konstruktor
 // -------------------------------------------------
-Column::Column(wxString& name,
-			wxString& parentName,
-			wxString& type,
+Column::Column(const wxString& name,
+			const wxString& parentName,
+			const wxString& type,
 			bool notNull,
 			bool primaryKey)
 {

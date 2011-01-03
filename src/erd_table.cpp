@@ -5,11 +5,21 @@ ErdTable::ErdTable():wxSFRoundRectShape()
 	m_pTable = new Table();
 	m_pTable->setName(wxT("New table"));
 	
+	m_pTable->columns->AddColumn(new Column(wxT("ID"),wxT("New table"),wxT("int"), true, true));
+	
 	Initialize();
 }
-
+ErdTable::ErdTable(const ErdTable& obj):wxSFRoundRectShape(obj)
+{
+	m_pTable = new Table();
+	m_pTable->setName(wxT("New table"));
+	
+	Initialize();
+}
 ErdTable::~ErdTable()
 {
+	delete m_pTable;
+	delete m_pLabel;
 }
 
 void ErdTable::Initialize()
@@ -44,4 +54,6 @@ void ErdTable::DrawNormal(wxDC& dc)
 	m_pLabel->SetText(m_pTable->getName());
 	wxSFRoundRectShape::DrawNormal(dc);
 }
+
+
 

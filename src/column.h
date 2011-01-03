@@ -21,9 +21,9 @@ public:
 	// -------------------------------------------------
 	// Konstruktor
 	// -------------------------------------------------
-	Column(wxString& name,
-			wxString& parentName,
-			wxString& type,
+	Column(const wxString& name,
+			const wxString& parentName,
+			const wxString& type,
 			bool notNull,
 			bool primaryKey);
 	~Column();

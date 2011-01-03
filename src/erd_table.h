@@ -9,6 +9,7 @@ class ErdTable : public wxSFRoundRectShape {
 
 public:
 	ErdTable();
+	ErdTable(const ErdTable& obj);
 	virtual ~ErdTable();
 	
 	Table* getTable() { return this->m_pTable; }
@@ -18,6 +19,8 @@ protected:
 	
 	wxSFTextShape *m_pLabel;
 	Table* m_pTable;
+	
+	wxSFFlexGridShape* m_pGrid;
 	
 	virtual void DrawHighlighted(wxDC& dc);
 	virtual void DrawHover(wxDC& dc);
