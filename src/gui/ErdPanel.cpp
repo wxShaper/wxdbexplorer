@@ -76,13 +76,15 @@ void ErdPanel::OnSave(wxCommandEvent& WXUNUSED(event)) {
 void ErdPanel::OnTxNameChange(wxCommandEvent& event) {
 	if (m_pErdTable){
 		m_pErdTable->getTable()->setName(m_txName->GetValue());
+		m_pErdTable->Update();
 		}
 }
 void ErdPanel::UpdateDetail(ErdTable* tab)
 {
 	m_pErdTable = tab;
 	if (m_pErdTable){
-		m_txName->SetValue(m_pErdTable->getTable()->getName());		
+		m_txName->SetValue(m_pErdTable->getTable()->getName());	
+		m_pErdTable->Update();
 		}	
 }
 

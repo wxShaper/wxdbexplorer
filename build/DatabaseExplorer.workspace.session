@@ -1,48 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Session Name="/home/jankup/SourceCpp/wxdbexplorer/trunk/build/DatabaseExplorer.workspace">
-  <int Value="6" Name="m_selectedTab"/>
+  <int Value="0" Name="m_selectedTab"/>
   <wxString Value="/home/jankup/SourceCpp/wxdbexplorer/trunk/build/DatabaseExplorer.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
-      <wxString Value="/home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbViewerPanel.h" Name="FileName"/>
-      <int Value="31" Name="FirstVisibleLine"/>
-      <int Value="34" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/jankup/SourceCpp/DatabaseExplorer/src/gui/DbViewerPanel.cpp" Name="FileName"/>
-      <int Value="12" Name="FirstVisibleLine"/>
-      <int Value="15" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/jankup/SourceCpp/DatabaseExplorer/src/table.h" Name="FileName"/>
-      <int Value="14" Name="FirstVisibleLine"/>
-      <int Value="27" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/jankup/SourceCpp/DatabaseExplorer/src/table.cpp" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="15" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/jankup/SourceCpp/DatabaseExplorer/src/columncol.h" Name="FileName"/>
-      <int Value="9" Name="FirstVisibleLine"/>
-      <int Value="23" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="/home/jankup/SourceCpp/DatabaseExplorer/src/columncol.cpp" Name="FileName"/>
-      <int Value="16" Name="FirstVisibleLine"/>
-      <int Value="25" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
       <wxString Value="/home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.cpp" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="5" Name="CurrentLine"/>
+      <int Value="0" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
   </TabInfoArray>

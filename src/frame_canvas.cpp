@@ -37,7 +37,7 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 		break;
 	default:
 	
-		ErdTable* table = (ErdTable*) GetShapeUnderCursor();
+		ErdTable* table = wxDynamicCast(GetShapeUnderCursor(),ErdTable);
 		if (table){
 			m_pParentPanel->UpdateDetail(table);			
 			}else{
