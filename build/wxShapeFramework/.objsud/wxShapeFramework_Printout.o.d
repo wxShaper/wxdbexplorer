@@ -1,6 +1,6 @@
 .objsud/wxShapeFramework_Printout.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/Printout.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/Printout.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -111,10 +111,12 @@
  ../../src/controls/include/wx/wxsf/ShapeBase.h \
  /usr/include/wx-2.8/wx/tokenzr.h /usr/include/wx-2.8/wx/xml/xml.h \
  ../../src/controls/include/wx/wxsf/ShapeHandle.h \
+ ../../src/controls/include/wx/wxsf/ShapeDockpoint.h \
  ../../src/controls/include/wx/wxxmlserializer/XmlSerializer.h \
  ../../src/controls/include/wx/wxxmlserializer/PropertyIO.h \
  ../../src/controls/include/wx/wxxmlserializer/Defs.h \
  ../../src/controls/include/wx/wxsf/DiagramManager.h \
+ ../../src/controls/include/wx/wxsf/CommonFcn.h \
  ../../src/controls/include/wx/wxsf/MultiSelRect.h \
  ../../src/controls/include/wx/wxsf/RectShape.h \
  ../../src/controls/include/wx/wxsf/CanvasHistory.h \
@@ -124,7 +126,7 @@
  ../../src/controls/include/wx/wxsf/EditTextShape.h \
  ../../src/controls/include/wx/wxsf/TextShape.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.h:
 
 /usr/include/wx-2.8/wx/wxprec.h:
 
@@ -522,6 +524,8 @@
 
 ../../src/controls/include/wx/wxsf/ShapeHandle.h:
 
+../../src/controls/include/wx/wxsf/ShapeDockpoint.h:
+
 ../../src/controls/include/wx/wxxmlserializer/XmlSerializer.h:
 
 ../../src/controls/include/wx/wxxmlserializer/PropertyIO.h:
@@ -529,6 +533,8 @@
 ../../src/controls/include/wx/wxxmlserializer/Defs.h:
 
 ../../src/controls/include/wx/wxsf/DiagramManager.h:
+
+../../src/controls/include/wx/wxsf/CommonFcn.h:
 
 ../../src/controls/include/wx/wxsf/MultiSelRect.h:
 

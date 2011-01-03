@@ -1,6 +1,6 @@
 .objsud/wxShapeFramework_wx_pch.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -102,7 +102,7 @@
  /usr/include/wx-2.8/wx/listctrl.h /usr/include/wx-2.8/wx/listbase.h \
  /usr/include/wx-2.8/wx/generic/listctrl.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxShapeFramework/wx_pch.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxShapeFramework/wx_pch.h:
 
 /usr/include/wx-2.8/wx/wxprec.h:
 

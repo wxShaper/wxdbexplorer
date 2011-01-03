@@ -1,36 +1,30 @@
 #include "mysqldbadapter.h"
 
-MySqlDbAdapter::MySqlDbAdapter(const wxString& serverName, const wxString& userName, const wxString& password)
-{
-		this->m_serverName = serverName;
-		this->m_userName = userName;
-		this->m_password = password;
+MySqlDbAdapter::MySqlDbAdapter(const wxString& serverName, const wxString& userName, const wxString& password) {
+	this->m_serverName = serverName;
+	this->m_userName = userName;
+	this->m_password = password;
 }
 
-MySqlDbAdapter::~MySqlDbAdapter()
-{
+MySqlDbAdapter::~MySqlDbAdapter() {
 }
 
-void MySqlDbAdapter::CloseConnection()
-{
+void MySqlDbAdapter::CloseConnection() {
 	this->m_pDbLayer->Close();
 }
 
-ColumnCol* MySqlDbAdapter::GetColumns(const wxString& tableName)
-{
+ColumnCol* MySqlDbAdapter::GetColumns(const wxString& tableName) {
 	return new ColumnCol(tableName);
 }
 
-DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer()
-{
+DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
 	DatabaseLayer* dbLayer = new MysqlDatabaseLayer(this->m_serverName, wxT(""), this->m_userName, this->m_password);
 	return dbLayer;
 }
 
-TableCol* MySqlDbAdapter::GetTables(const wxString& dbName)
-{
+TableCol* MySqlDbAdapter::GetTables(const wxString& dbName) {
 	TableCol* tab = new TableCol(dbName);
-	
+
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 	if (!dbLayer->IsOpen()) return NULL;
 	// lading tables for database
@@ -45,16 +39,14 @@ TableCol* MySqlDbAdapter::GetTables(const wxString& dbName)
 	return tab;
 }
 
-bool MySqlDbAdapter::IsConnected()
-{
+bool MySqlDbAdapter::IsConnected() {
 	return this->m_pDbLayer->IsOpen();
 }
-DatabaseCol* MySqlDbAdapter::GetDatabases()
-{
+DatabaseCol* MySqlDbAdapter::GetDatabases() {
 	DatabaseCol* col = new DatabaseCol();
-	
+
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	
+
 	if (!dbLayer->IsOpen()) return NULL;
 	// loading databases
 	//TODO:SQL:
@@ -66,6 +58,26 @@ DatabaseCol* MySqlDbAdapter::GetDatabases()
 	dbLayer->CloseResultSet(databaze);
 	dbLayer->Close();
 	delete dbLayer;
-	return col;	
+	return col;
 }
+
+
+wxString MySqlDbAdapter::GetCreateTableSql(Table* tab)
+{
+	wxString str = wxString::Format(wxT("DROP TABLE EXIST `%s`; \n"),tab->getName().c_str());
+	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
+	
+	for (int i = 0; i < tab->columns->GetColCount(); ++i){
+		
+		Column* col = (Column*) tab->columns->GetByIndex(i);
+		if (col){
+			str.append(wxString::Format(wxT("\t`%s` %s "),col->getName().c_str(), col->getType().c_str()));
+			if (i != tab->columns->GetColCount()-1) str.append(wxT(",\n ")) ; else  str.append(wxT("\n ")) ;
+			}		
+		}
+	
+	str.append(wxT(")"));
+	return str;
+}
+
 

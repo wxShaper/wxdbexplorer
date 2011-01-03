@@ -1,5 +1,5 @@
 .objsud/wxScintilla_PlatWX.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/PlatWX.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/PlatWX.cpp \
  /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -104,7 +104,7 @@
  /usr/include/wx-2.8/wx/generic/imaglist.h \
  /usr/include/wx-2.8/wx/tokenzr.h /usr/include/wx-2.8/wx/rawbmp.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Platform.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/PlatWX.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/PlatWX.h \
  ../../src/controls/include/wx/wxScintilla/wxscintilla.h \
  /usr/include/wx-2.8/wx/dnd.h /usr/include/wx-2.8/wx/gtk/dnd.h \
  /usr/include/wx-2.8/wx/popupwin.h /usr/include/wx-2.8/wx/gtk/popupwin.h \
@@ -490,7 +490,7 @@
 
 ../../src/controls/src/wxScintilla/scintilla/include/Platform.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/PlatWX.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/PlatWX.h:
 
 ../../src/controls/include/wx/wxScintilla/wxscintilla.h:
 

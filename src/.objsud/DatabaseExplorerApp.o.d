@@ -1,6 +1,6 @@
 .objsud/DatabaseExplorerApp.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/DatabaseExplorerApp.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/DatabaseExplorerApp.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/DatabaseExplorerApp.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/DatabaseExplorerApp.h \
  /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -100,8 +100,8 @@
  /usr/include/wx-2.8/wx/generic/filedlgg.h \
  /usr/include/wx-2.8/wx/listctrl.h /usr/include/wx-2.8/wx/listbase.h \
  /usr/include/wx-2.8/wx/generic/listctrl.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/DatabaseExplorerFrame.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/gui/GUI.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DatabaseExplorerFrame.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h \
  controls/include/wx/wxScintilla/wxscintilla.h \
  /usr/include/wx-2.8/wx/dnd.h /usr/include/wx-2.8/wx/gtk/dnd.h \
  /usr/include/wx-2.8/wx/grid.h /usr/include/wx-2.8/wx/generic/grid.h \
@@ -124,7 +124,7 @@
  /usr/include/wx-2.8/wx/aui/auibar.h /usr/include/wx-2.8/wx/aui/auibook.h \
  /usr/include/wx-2.8/wx/aui/tabmdi.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/DatabaseExplorerApp.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/DatabaseExplorerApp.h:
 
 /usr/include/wx-2.8/wx/wx.h:
 
@@ -492,9 +492,9 @@
 
 /usr/include/wx-2.8/wx/generic/listctrl.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/DatabaseExplorerFrame.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DatabaseExplorerFrame.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/gui/GUI.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h:
 
 controls/include/wx/wxScintilla/wxscintilla.h:
 

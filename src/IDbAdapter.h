@@ -9,7 +9,7 @@
 class ColumnCol;
 class DatabaseCol;
 class TableCol;
-
+class Table;
 
 class IDbAdapter {
 
@@ -20,6 +20,8 @@ public:
 	virtual ColumnCol* GetColumns(const wxString& tableName) = 0;
 	virtual TableCol* GetTables(const wxString& dbName) = 0;
 	virtual DatabaseCol* GetDatabases() = 0;
+
+	static wxString GetCreateTableSql(Table* tab);
 
 	virtual void CloseConnection() = 0;
 

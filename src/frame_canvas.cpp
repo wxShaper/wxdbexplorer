@@ -62,9 +62,9 @@ void FrameCanvas::OnRightDown(wxMouseEvent& event) {
 			//void *data = reinterpret_cast<void *>(event.GetItem().GetData());
 			wxMenu mnu;
 			//mnu.SetClientData( data );
-			mnu.Append(IDR_POPUP_MI1, 	wxT("Do something"));
-			mnu.Append(IDR_POPUP_MI2, 	wxT("Do something else"));
-	//mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&MyFrame::OnPopupClick, NULL, this);
+			mnu.Append(IDR_POPUP_MI1, 	wxT("Add column"));
+			mnu.Append(IDR_POPUP_MI2, 	wxT("Add create sql to clippoard"));
+			mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
 			PopupMenu(&mnu);		
 			}
 }
@@ -72,4 +72,34 @@ void FrameCanvas::OnRightDown(wxMouseEvent& event) {
 
 void FrameCanvas::OnKeyDown(wxKeyEvent& event) {
 	wxSFShapeCanvas::OnKeyDown(event);
+}
+
+void FrameCanvas::OnPopupClick(wxCommandEvent &evt)
+{
+	void *data=static_cast<wxMenu *>(evt.GetEventObject())->GetClientData();
+	switch(evt.GetId()) {
+		case IDR_POPUP_MI1:
+			{
+			//ErdTable* table = wxDynamicCast(GetShapeUnderCursor(),ErdTable);
+		
+			ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
+			if (table){
+				table->addColumn(wxT("NewCol"));
+				table->updateColumns();
+				wxMessageBox(wxT("Column added!"));
+				}
+			}
+			break;
+		case IDR_POPUP_MI2:
+			{
+			if (wxTheClipboard->Open()){
+				ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
+				if (table){
+					wxTheClipboard->SetData(new wxTextDataObject(MySqlDbAdapter::GetCreateTableSql(table->getTable())));
+					wxTheClipboard->Close();
+					}				
+				}			
+			}		
+			break;
+	}
 }

@@ -1,14 +1,14 @@
 .objsud/src_ExternalLexer.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/scintilla/src/ExternalLexer.cxx \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/scintilla/src/ExternalLexer.cxx \
  ../../src/controls/src/wxScintilla/scintilla/include/Platform.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Scintilla.h \
  ../../src/controls/src/wxScintilla/scintilla/include/SciLexer.h \
  ../../src/controls/src/wxScintilla/scintilla/include/PropSet.h \
  ../../src/controls/src/wxScintilla/scintilla/include/SString.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Accessor.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/scintilla/src/DocumentAccessor.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/scintilla/src/DocumentAccessor.h \
  ../../src/controls/src/wxScintilla/scintilla/include/KeyWords.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/scintilla/src/ExternalLexer.h
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/scintilla/src/ExternalLexer.h
 
 ../../src/controls/src/wxScintilla/scintilla/include/Platform.h:
 
@@ -22,8 +22,8 @@
 
 ../../src/controls/src/wxScintilla/scintilla/include/Accessor.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/scintilla/src/DocumentAccessor.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/scintilla/src/DocumentAccessor.h:
 
 ../../src/controls/src/wxScintilla/scintilla/include/KeyWords.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/scintilla/src/ExternalLexer.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/scintilla/src/ExternalLexer.h:

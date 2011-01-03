@@ -1,6 +1,6 @@
 .objsud/wxScintilla_ScintillaWX.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/ScintillaWX.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/ScintillaWX.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/ScintillaWX.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/ScintillaWX.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Platform.h \
  ../../src/controls/src/wxScintilla/scintilla/include/Scintilla.h \
  ../../src/controls/src/wxScintilla/scintilla/include/ScintillaWidget.h \
@@ -131,13 +131,13 @@
  /usr/include/wx-2.8/wx/generic/listctrl.h \
  /usr/include/wx-2.8/wx/clipbrd.h /usr/include/wx-2.8/wx/gtk/clipbrd.h \
  /usr/include/wx-2.8/wx/dnd.h /usr/include/wx-2.8/wx/gtk/dnd.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/PlatWX.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/PlatWX.h \
  ../../src/controls/include/wx/wxScintilla/wxscintilla.h \
  /usr/include/wx-2.8/wx/textbuf.h /usr/include/wx-2.8/wx/convauto.h \
  /usr/include/wx-2.8/wx/popupwin.h /usr/include/wx-2.8/wx/gtk/popupwin.h \
  /usr/include/wx-2.8/wx/dcbuffer.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/ScintillaWX.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/ScintillaWX.h:
 
 ../../src/controls/src/wxScintilla/scintilla/include/Platform.h:
 
@@ -571,7 +571,7 @@
 
 /usr/include/wx-2.8/wx/gtk/dnd.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/controls/src/wxScintilla/PlatWX.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/controls/src/wxScintilla/PlatWX.h:
 
 ../../src/controls/include/wx/wxScintilla/wxscintilla.h:
 

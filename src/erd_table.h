@@ -5,6 +5,7 @@
 #include "wx/wxsf/TextShape.h"
 #include "wx/wxsf/FlexGridShape.h"
 #include "table.h"
+#include "gui/Ids.h"
 
 class ErdTable : public wxSFRoundRectShape {
 
@@ -14,6 +15,7 @@ public:
 	virtual ~ErdTable();
 	
 	void updateColumns();
+	void addColumn(const wxString& colName);
 	Table* getTable() { return this->m_pTable; }
 
 protected:
@@ -28,6 +30,7 @@ protected:
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
 	void clearGrid();
+	void addColumnShape(const wxString& colName, int id);
 };
 
 #endif // ERDTABLE_H

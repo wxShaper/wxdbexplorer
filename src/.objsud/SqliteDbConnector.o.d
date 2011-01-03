@@ -1,7 +1,7 @@
 .objsud/SqliteDbConnector.o: \
- /home/jankup/SourceCpp/DatabaseExplorer/src/SqliteDbConnector.cpp \
- /home/jankup/SourceCpp/DatabaseExplorer/src/SqliteDbConnector.h \
- /home/jankup/SourceCpp/DatabaseExplorer/src/IDbConnector.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/SqliteDbConnector.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/SqliteDbConnector.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbConnector.h \
  /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -113,9 +113,9 @@
  controls/include/wx/dblayer/SqliteDatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseLayer.h
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/SqliteDbConnector.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/SqliteDbConnector.h:
 
-/home/jankup/SourceCpp/DatabaseExplorer/src/IDbConnector.h:
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbConnector.h:
 
 /usr/include/wx-2.8/wx/wx.h:
 

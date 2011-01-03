@@ -16,11 +16,13 @@ public:
 	virtual DatabaseCol* GetDatabases();
 	virtual TableCol* GetTables(const wxString& dbName);
 	virtual ColumnCol* GetColumns(const wxString& tableName);
-	
+
 	virtual bool IsConnected();
-	virtual void CloseConnection();	
-	virtual DatabaseLayer* GetDatabaseLayer();	
-	
+	virtual void CloseConnection();
+	virtual DatabaseLayer* GetDatabaseLayer();
+
+	static wxString GetCreateTableSql(Table* tab);
+
 protected:
 	wxString m_serverName;
 	wxString m_userName;
