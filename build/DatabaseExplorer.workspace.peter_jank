@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Workspace>
+  <Environment Name="&lt;Use Active Set&gt;"/>
+  <WorkspaceParserPaths>
+    <Include Path="/home/jankup/SourcesCpp/DatabaseExplorer/src/controls/include"/>
+  </WorkspaceParserPaths>
+</Workspace>

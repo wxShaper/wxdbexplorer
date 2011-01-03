@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="DatabaseExplorer">
+  <VirtualDirectory Name="gui">
+    <VirtualDirectory Name="Include">
+      <File Name="gui/DatabaseExplorerFrame.h"/>
+      <File Name="gui/DbSettingDialog.h"/>
+      <File Name="gui/DbViewerPanel.h"/>
+      <File Name="gui/ErdPanel.h"/>
+      <File Name="gui/GUI.h"/>
+      <File Name="gui/SqlCommandPanel.h"/>
+      <File Name="gui/Art.h"/>
+      <File Name="gui/Ids.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="src">
+      <File Name="gui/DatabaseExplorerFrame.cpp"/>
+      <File Name="gui/DbSettingDialog.cpp"/>
+      <File Name="gui/DbViewerPanel.cpp"/>
+      <File Name="gui/ErdPanel.cpp"/>
+      <File Name="gui/GUI.cpp"/>
+      <File Name="gui/SqlCommandPanel.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="res">
+      <File Name="gui/GUI.fbp"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <File Name="column.cpp"/>
+  <File Name="columncol.cpp"/>
+  <File Name="tablecol.cpp"/>
+  <File Name="DatabaseExplorerApp.cpp"/>
+  <File Name="DbTable.cpp"/>
+  <File Name="database.cpp"/>
+  <File Name="IDbItem.cpp"/>
+  <File Name="SqliteDbConnector.cpp"/>
+  <File Name="databasecol.cpp"/>
+  <File Name="MySqlDbConnector.cpp"/>
+  <File Name="dbitem.cpp"/>
+  <File Name="table.cpp"/>
+  <File Name="DbDatabase.cpp"/>
+  <File Name="DbColumn.cpp"/>
+  <File Name="mysqldbadapter.cpp"/>
+  <File Name="frame_canvas.cpp"/>
+  <File Name="wx_pch.cpp"/>
+  <File Name="DbDatabase.h"/>
+  <File Name="IDbAdapter.h"/>
+  <File Name="DatabaseExplorerApp.h"/>
+  <File Name="MySqlDbConnector.h"/>
+  <File Name="DbColumn.h"/>
+  <File Name="dbitem.h"/>
+  <File Name="frame_canvas.h"/>
+  <File Name="column.h"/>
+  <File Name="SqliteDbConnector.h"/>
+  <File Name="IDbItem.h"/>
+  <File Name="table.h"/>
+  <File Name="tablecol.h"/>
+  <File Name="DbTable.h"/>
+  <File Name="wx_pch.h"/>
+  <File Name="mysqldbadapter.h"/>
+  <File Name="IDbConnector.h"/>
+  <File Name="columncol.h"/>
+  <File Name="BuildNum.h"/>
+  <File Name="databasecol.h"/>
+  <File Name="database.h"/>
+  <Settings Type="Executable">
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
+      <General OutputFile="../bin/gcc/DatabaseExplorer" IntermediateDirectory=".objsu" Command="./DatabaseExplorer" CommandArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
+      <Compiler Required="yes" Options="-Wall;-O3;-fno-strict-aliasing;`wx-config --debug=no --cflags`;">
+        <IncludePath Value="controls/include"/>
+        <IncludePath Value="."/>
+        <Preprocessor Value="WXUSINGDLL"/>
+        <Preprocessor Value="UNICODE"/>
+        <Preprocessor Value="_UNICODE"/>
+        <Preprocessor Value="__WX__"/>
+        <Preprocessor Value="NDEBUG"/>
+      </Compiler>
+      <Linker Required="yes" Options="-s;-Wl,-rpath,$$``ORIGIN/lib/;`wx-config --libs`;">
+        <LibraryPath Value="../bin/gcc"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <Library Value="wx_gtk2u_propgrid-2.8_cd"/>
+        <Library Value="wx_gtk2u_scintilla-2.8_cd"/>
+        <Library Value="wx_gtk2u_shapeframework-2.8_cd"/>
+        <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
+        <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
+      </Linker>
+      <ResourceCompiler Required="no" Options=""/>
+      <CustomBuild Enabled="no">
+        <CleanCommand/>
+        <BuildCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
+      <General OutputFile="../bin/gcc/DatabaseExplorer_d" IntermediateDirectory=".objsud" Command="./DatabaseExplorer_d" CommandArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
+      <Compiler Required="yes" Options="-Wall;-g;-O0;`wx-config --debug=yes --cflags`;">
+        <IncludePath Value="controls/include"/>
+        <IncludePath Value="."/>
+        <Preprocessor Value="WXUSINGDLL"/>
+        <Preprocessor Value="UNICODE"/>
+        <Preprocessor Value="_UNICODE"/>
+        <Preprocessor Value="__WX__"/>
+        <Preprocessor Value="DEBUG"/>
+        <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="__WXDEBUG__"/>
+      </Compiler>
+      <Linker Required="yes" Options="-Wl,-rpath,$$``ORIGIN/lib/;`wx-config --debug=yes --libs`;">
+        <LibraryPath Value="../bin/gcc"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <Library Value="wx_gtk2ud_propgrid-2.8_cd"/>
+        <Library Value="wx_gtk2ud_scintilla-2.8_cd"/>
+        <Library Value="wx_gtk2ud_shapeframework-2.8_cd"/>
+        <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
+        <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
+      </Linker>
+      <ResourceCompiler Required="no" Options=""/>
+      <PreBuild>
+        <Command Enabled="yes">python $(ProjectPath)/create_buildnum.py</Command>
+      </PreBuild>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <CleanCommand/>
+        <BuildCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+  </Settings>
+  <Dependencies name="Release">
+    <Project Name="wxPropGrid"/>
+    <Project Name="wxScintilla"/>
+    <Project Name="wxShapeFramework"/>
+  </Dependencies>
+  <Dependencies name="Debug">
+    <Project Name="wxPropGrid"/>
+    <Project Name="wxScintilla"/>
+    <Project Name="wxShapeFramework"/>
+  </Dependencies>
+  <VirtualDirectory Name="interfaces"/>
+  <VirtualDirectory Name="dbEngine">
+    <VirtualDirectory Name="include"/>
+    <VirtualDirectory Name="src"/>
+  </VirtualDirectory>
+</CodeLite_Project>

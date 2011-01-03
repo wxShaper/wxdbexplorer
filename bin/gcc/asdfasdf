@@ -1,0 +1,2 @@
+-- selected database mysql
+SELECT * FROM db LIMIT 100

@@ -1,0 +1,10 @@
+/home/jankup/SourcesCpp/DatabaseExplorer/src/gui/DatabaseExplorerFrame.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/gui/DbSettingDialog.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/gui/DbViewerPanel.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/gui/GUI.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/gui/SqlCommandPanel.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/DatabaseExplorerApp.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/wx_pch.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/IDbItem.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/DbTable.cpp
+/home/jankup/SourcesCpp/DatabaseExplorer/src/DbDatabase.cpp

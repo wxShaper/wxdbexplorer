@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Workspace Name="DatabaseExplorer" Database="./DatabaseExplorer.tags">
+  <Project Name="wxPropGrid" Path="propgrid/wxPropGrid.project" Active="No"/>
+  <Project Name="wxScintilla" Path="wxScintilla/wxScintilla.project" Active="No"/>
+  <Project Name="wxShapeFramework" Path="wxShapeFramework/wxShapeFramework.project" Active="No"/>
+  <Project Name="DatabaseExplorer" Path="../src/DatabaseExplorer.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="wxPropGrid" ConfigName="Release"/>
+      <Project Name="wxScintilla" ConfigName="Release"/>
+      <Project Name="wxShapeFramework" ConfigName="Release"/>
+      <Project Name="DatabaseExplorer" ConfigName="Release"/>
+      <Project Name="DatabaseExplorer" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="wxPropGrid" ConfigName="Debug"/>
+      <Project Name="wxScintilla" ConfigName="Debug"/>
+      <Project Name="wxShapeFramework" ConfigName="Debug"/>
+      <Project Name="DatabaseExplorer" ConfigName="Debug"/>
+      <Project Name="DatabaseExplorer" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
