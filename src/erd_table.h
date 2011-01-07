@@ -6,6 +6,7 @@
 #include "wx/wxsf/FlexGridShape.h"
 #include "table.h"
 #include "gui/Ids.h"
+#include "IDbType.h"
 
 class ErdTable : public wxSFRoundRectShape {
 
@@ -15,7 +16,7 @@ public:
 	virtual ~ErdTable();
 	
 	void updateColumns();
-	void addColumn(const wxString& colName);
+	void addColumn(const wxString& colName, IDbType* type);
 	Table* getTable() { return this->m_pTable; }
 
 protected:

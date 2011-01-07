@@ -3,6 +3,7 @@
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
 #include "IDbAdapter.h"
+#include "IDbType.h"
 // ------------------------------------------------
 // Trida databazoveho sloupecku
 // -------------------------------------------------
@@ -17,6 +18,8 @@ protected:
 	
 	bool m_isSaved;	
 	
+	IDbType* m_pType;
+	
 public:
 	// -------------------------------------------------
 	// Konstruktor
@@ -24,6 +27,11 @@ public:
 	Column(const wxString& name,
 			const wxString& parentName,
 			const wxString& type,
+			bool notNull,
+			bool primaryKey);
+	Column(const wxString& name,
+			const wxString& parentName,
+			IDbType* type,
 			bool notNull,
 			bool primaryKey);
 	~Column();
@@ -41,6 +49,9 @@ public:
 	bool PrimaryKey() { return this->m_primaryKey; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
+	
+	// typ
+	IDbType* getPType(){ return this->m_pType; }
 	
 	// funkce pro editaci sloupecku - nastuvje prizna isSaved na false
 	void Edit(wxString& name,

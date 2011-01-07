@@ -7,10 +7,10 @@ BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_UPDATE_UI_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnToolUpdate)
 END_EVENT_TABLE()
 
-ErdPanel::ErdPanel(wxWindow *parent):_ErdPanel(parent) {
+ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
 	m_pErdTable = NULL;
-	
-	m_pFrameCanvas = new FrameCanvas(&m_diagramManager,m_wxsfPanel,this, wxID_ANY);
+	m_pDbAdapter = dbAdapter;
+	m_pFrameCanvas = new FrameCanvas(&m_diagramManager,dbAdapter,m_wxsfPanel,this, wxID_ANY);
 	m_wxsfSizer->Add(m_pFrameCanvas,  1, wxEXPAND, 2);
 	m_wxsfPanel->Layout();
 

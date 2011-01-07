@@ -131,8 +131,8 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 		}
 }
 
-void ErdTable::addColumn(const wxString& colName)
+void ErdTable::addColumn(const wxString& colName, IDbType* type)
 {
-	m_pTable->columns->AddColumn(new Column(colName,wxT("New table"),wxT("int"), true, true));
+	m_pTable->columns->AddColumn(new Column(colName,wxT("New table"),type, true, true));
 }
 

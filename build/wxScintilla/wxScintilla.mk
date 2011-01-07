@@ -2,10 +2,10 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=wxScintilla
-ConfigurationName      :=Release
-IntermediateDirectory  :=.objsu
+ConfigurationName      :=Debug
+IntermediateDirectory  :=.objsud
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "/home/jankup/SourceCpp/wxdbexplorer/trunk/build"
 ProjectPath            := "/home/jankup/SourceCpp/wxdbexplorer/trunk/build/wxScintilla"
@@ -30,15 +30,15 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=../../bin/gcc/lib/libwx_gtk2u_scintilla-2.8_cd.so
-Preprocessors          :=$(PreprocessorSwitch)WXMAKINGDLL_SCI $(PreprocessorSwitch)MONOLITHIC $(PreprocessorSwitch)LINK_LEXERS $(PreprocessorSwitch)SCI_LEXER $(PreprocessorSwitch)SCI_NAMESPACE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)NDEBUG 
+OutputFile             :=../../bin/gcc/lib/libwx_gtk2ud_scintilla-2.8_cd.so
+Preprocessors          :=$(PreprocessorSwitch)WXMAKINGDLL_SCI $(PreprocessorSwitch)MONOLITHIC $(PreprocessorSwitch)LINK_LEXERS $(PreprocessorSwitch)SCI_LEXER $(PreprocessorSwitch)SCI_NAMESPACE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)DEBUG $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)__WXDEBUG__ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 MakeDirCommand         :=mkdir -p
-CmpOptions             := -Wall -O3 -fPIC -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
-C_CmpOptions           := -Wall -O3 -fPIC -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
-LinkOptions            :=  -s `wx-config --libs` 
+CmpOptions             := -Wall -g -fPIC -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
+C_CmpOptions           := -Wall -g -fPIC -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
+LinkOptions            :=  `wx-config --debug=yes --libs` 
 IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)../../src/controls/include" "$(IncludeSwitch)../../src/controls/src/wxScintilla" "$(IncludeSwitch)../../src/controls/src/wxScintilla/scintilla/include" "$(IncludeSwitch)../../src/controls/src/wxScintilla/scintilla/src" 
 RcIncludePath          :=
 Libs                   :=
@@ -70,7 +70,7 @@ $(OutputFile): makeDirStep $(Objects)
 	$(SharedObjectLinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
 
 makeDirStep:
-	@test -d .objsu || $(MakeDirCommand) .objsu
+	@test -d .objsud || $(MakeDirCommand) .objsud
 
 PreBuild:
 

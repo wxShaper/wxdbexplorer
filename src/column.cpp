@@ -17,6 +17,21 @@ Column::Column(const wxString& name,
 		this->m_notNull = notNull;
 		this->m_primaryKey = primaryKey,
 		this->m_isSaved = true;
+		m_pType = NULL;
+		}
+Column::Column(const wxString& name,
+			const wxString& parentName,
+			IDbType* type,
+			bool notNull,
+			bool primaryKey)
+{
+		this->m_name = name;
+		this->m_parentName = parentName;
+		this->m_type = wxT("no type");
+		this->m_notNull = notNull;
+		this->m_primaryKey = primaryKey,
+		this->m_isSaved = true;
+		this->m_pType = type;
 		}
 // metoda pro editaci sloupecku
 void Column::Edit(wxString& name,
@@ -32,3 +47,4 @@ void Column::Edit(wxString& name,
 		this->m_primaryKey = primaryKey;				
 		this->m_isSaved = false;				
 }
+

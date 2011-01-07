@@ -37,6 +37,9 @@
 #include <wx/statbox.h>
 #include <wx/filepicker.h>
 #include <wx/dialog.h>
+#include <wx/listbox.h>
+#include <wx/combobox.h>
+#include <wx/checkbox.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -192,6 +195,63 @@ class _ErdPanel : public wxPanel
 		
 		_ErdPanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,480 ), long style = wxTAB_TRAVERSAL ); 
 		~_ErdPanel();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class _TableSettings
+///////////////////////////////////////////////////////////////////////////////
+class _TableSettings : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxPanel* m_panel7;
+		wxPanel* m_panel8;
+		wxStaticText* m_staticText7;
+		wxTextCtrl* m_txTableName;
+		wxPanel* m_panel9;
+		wxPanel* m_panel13;
+		wxListBox* m_listColumns;
+		wxPanel* m_panel14;
+		wxButton* m_button8;
+		wxButton* m_button9;
+		wxStaticLine* m_staticline2;
+		wxPanel* m_panel11;
+		wxStaticText* m_staticText8;
+		wxTextCtrl* m_txColName;
+		wxStaticText* m_staticText9;
+		wxComboBox* m_comboType;
+		wxStaticText* m_stSize;
+		wxTextCtrl* m_txSize;
+		wxCheckBox* m_chPrimary;
+		wxCheckBox* m_chNotNull;
+		wxCheckBox* m_checkBox3;
+		wxCheckBox* m_chAutoIncrement;
+		wxStdDialogButtonSizer* m_sdbSizer2;
+		wxButton* m_sdbSizer2OK;
+		wxButton* m_sdbSizer2Cancel;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnListBoxClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNewColumnClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSaveColumnClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnColNameUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnTypeSelect( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnColTypeUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnColSizeUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnPrimaryKeyUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnNotNullUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnUniqueUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnAutoIncrementUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_TableSettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Table settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_TableSettings();
 	
 };
 

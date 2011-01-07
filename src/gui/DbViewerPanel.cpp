@@ -221,5 +221,7 @@ void DbViewerPanel::OnItemSelectionChange(wxTreeEvent& event) {
 	}	*/
 }
 void DbViewerPanel::OnERDClick(wxCommandEvent& event) {
-	m_pNotebook->AddPage(new ErdPanel(m_pNotebook),wxT("ERD diagram"));
+	if (m_pDbAdapter){
+		m_pNotebook->AddPage(new ErdPanel(m_pNotebook, m_pDbAdapter),wxT("ERD diagram"));
+		}
 }

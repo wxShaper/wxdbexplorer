@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="DatabaseExplorer">
   <VirtualDirectory Name="gui">
-    <VirtualDirectory Name="Include">
+    <VirtualDirectory Name="include">
       <File Name="gui/DatabaseExplorerFrame.h"/>
       <File Name="gui/DbSettingDialog.h"/>
       <File Name="gui/DbViewerPanel.h"/>
@@ -11,6 +11,7 @@
       <File Name="gui/Art.h"/>
       <File Name="gui/Ids.h"/>
       <File Name="my_sql_type.h"/>
+      <File Name="gui/tablesettings.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="src">
       <File Name="gui/DatabaseExplorerFrame.cpp"/>
@@ -19,6 +20,7 @@
       <File Name="gui/ErdPanel.cpp"/>
       <File Name="gui/GUI.cpp"/>
       <File Name="gui/SqlCommandPanel.cpp"/>
+      <File Name="gui/tablesettings.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="res">
       <File Name="gui/GUI.fbp"/>

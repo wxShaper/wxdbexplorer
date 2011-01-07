@@ -113,13 +113,15 @@
  controls/include/wx/dblayer/DatabaseQueryParser.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h:
 
@@ -515,6 +517,8 @@ controls/include/wx/dblayer/DatabaseLayer.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
 
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
@@ -528,3 +532,5 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.h:

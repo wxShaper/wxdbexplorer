@@ -2,10 +2,10 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=DatabaseExplorer
-ConfigurationName      :=Release
-IntermediateDirectory  :=.objsu
+ConfigurationName      :=Debug
+IntermediateDirectory  :=.objsud
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "/home/jankup/SourceCpp/wxdbexplorer/trunk/build"
 ProjectPath            := "/home/jankup/SourceCpp/wxdbexplorer/trunk/src"
@@ -30,18 +30,18 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=../bin/gcc/DatabaseExplorer
-Preprocessors          :=$(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)NDEBUG 
+OutputFile             :=../bin/gcc/DatabaseExplorer_d
+Preprocessors          :=$(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)DEBUG $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)__WXDEBUG__ 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 MakeDirCommand         :=mkdir -p
-CmpOptions             := -Wall -O3 -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
-C_CmpOptions           := -Wall -O3 -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
-LinkOptions            :=  -s -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --libs` 
+CmpOptions             := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
+C_CmpOptions           := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
+LinkOptions            :=  -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --debug=yes --libs` 
 IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)controls/include" "$(IncludeSwitch)." 
 RcIncludePath          :=
-Libs                   :=$(LibrarySwitch)wx_gtk2u_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2u_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2u_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
+Libs                   :=$(LibrarySwitch)wx_gtk2ud_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2ud_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2ud_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
 LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gcc" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" 
 
 
@@ -49,9 +49,9 @@ LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gc
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects=$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IntermediateDirectory)/column$(ObjectSuffix) $(IntermediateDirectory)/columncol$(ObjectSuffix) $(IntermediateDirectory)/tablecol$(ObjectSuffix) \
-	$(IntermediateDirectory)/table$(ObjectSuffix) $(IntermediateDirectory)/DbDatabase$(ObjectSuffix) $(IntermediateDirectory)/DbColumn$(ObjectSuffix) $(IntermediateDirectory)/database$(ObjectSuffix) $(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/DbTable$(ObjectSuffix) $(IntermediateDirectory)/SqliteDbConnector$(ObjectSuffix) $(IntermediateDirectory)/MySqlDbConnector$(ObjectSuffix) $(IntermediateDirectory)/dbitem$(ObjectSuffix) \
-	$(IntermediateDirectory)/mysqldbadapter$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IntermediateDirectory)/erd_table$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix) $(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IntermediateDirectory)/column$(ObjectSuffix) $(IntermediateDirectory)/columncol$(ObjectSuffix) \
+	$(IntermediateDirectory)/tablecol$(ObjectSuffix) $(IntermediateDirectory)/table$(ObjectSuffix) $(IntermediateDirectory)/DbDatabase$(ObjectSuffix) $(IntermediateDirectory)/DbColumn$(ObjectSuffix) $(IntermediateDirectory)/database$(ObjectSuffix) $(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/DbTable$(ObjectSuffix) $(IntermediateDirectory)/SqliteDbConnector$(ObjectSuffix) $(IntermediateDirectory)/MySqlDbConnector$(ObjectSuffix) \
+	$(IntermediateDirectory)/dbitem$(ObjectSuffix) $(IntermediateDirectory)/mysqldbadapter$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IntermediateDirectory)/erd_table$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -63,9 +63,12 @@ $(OutputFile): makeDirStep $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
 
 makeDirStep:
-	@test -d .objsu || $(MakeDirCommand) .objsu
+	@test -d .objsud || $(MakeDirCommand) .objsud
 
 PreBuild:
+	@echo Executing Pre Build commands ...
+	python $(ProjectPath)/create_buildnum.py
+	@echo Done
 
 
 ##
@@ -118,6 +121,14 @@ $(IntermediateDirectory)/gui_SqlCommandPanel$(DependSuffix): gui/SqlCommandPanel
 
 $(IntermediateDirectory)/gui_SqlCommandPanel$(PreprocessSuffix): gui/SqlCommandPanel.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_SqlCommandPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/SqlCommandPanel.cpp"
+
+$(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix): gui/tablesettings.cpp $(IntermediateDirectory)/gui_tablesettings$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/tablesettings.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/gui_tablesettings$(DependSuffix): gui/tablesettings.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_tablesettings$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/tablesettings.cpp"
+
+$(IntermediateDirectory)/gui_tablesettings$(PreprocessSuffix): gui/tablesettings.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_tablesettings$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/tablesettings.cpp"
 
 $(IntermediateDirectory)/IDbItem$(ObjectSuffix): IDbItem.cpp $(IntermediateDirectory)/IDbItem$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IncludePath)
@@ -295,6 +306,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/gui_SqlCommandPanel$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/gui_SqlCommandPanel$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/gui_tablesettings$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/gui_tablesettings$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/IDbItem$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/IDbItem$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/IDbItem$(PreprocessSuffix)

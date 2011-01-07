@@ -428,3 +428,172 @@ _ErdPanel::~_ErdPanel()
 	m_txName->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( _ErdPanel::OnTxNameChange ), NULL, this );
 	
 }
+
+_TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer9;
+	fgSizer9 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer9->AddGrowableRow( 1 );
+	fgSizer9->SetFlexibleDirection( wxBOTH );
+	fgSizer9->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_panel7 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer10;
+	fgSizer10 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer10->SetFlexibleDirection( wxBOTH );
+	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_panel8 = new wxPanel( m_panel7, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxStaticBoxSizer* sbSizer5;
+	sbSizer5 = new wxStaticBoxSizer( new wxStaticBox( m_panel8, wxID_ANY, wxEmptyString ), wxHORIZONTAL );
+	
+	m_staticText7 = new wxStaticText( m_panel8, wxID_ANY, wxT("Table name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText7->Wrap( -1 );
+	sbSizer5->Add( m_staticText7, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txTableName = new wxTextCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 200,-1 ), 0 );
+	sbSizer5->Add( m_txTableName, 1, wxALL, 5 );
+	
+	m_panel8->SetSizer( sbSizer5 );
+	m_panel8->Layout();
+	sbSizer5->Fit( m_panel8 );
+	fgSizer10->Add( m_panel8, 1, wxEXPAND|wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_panel9 = new wxPanel( m_panel7, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxStaticBoxSizer* sbSizer6;
+	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( m_panel9, wxID_ANY, wxT("Columns") ), wxHORIZONTAL );
+	
+	m_panel13 = new wxPanel( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer11;
+	fgSizer11 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer11->SetFlexibleDirection( wxBOTH );
+	fgSizer11->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_listColumns = new wxListBox( m_panel13, wxID_ANY, wxDefaultPosition, wxSize( 200,300 ), 0, NULL, 0 ); 
+	fgSizer11->Add( m_listColumns, 1, wxALL|wxEXPAND, 5 );
+	
+	m_panel14 = new wxPanel( m_panel13, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer8;
+	bSizer8 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_button8 = new wxButton( m_panel14, wxID_NEW, wxT("New"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer8->Add( m_button8, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_button9 = new wxButton( m_panel14, wxID_SAVE, wxT("Save"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer8->Add( m_button9, 1, wxALL, 5 );
+	
+	m_panel14->SetSizer( bSizer8 );
+	m_panel14->Layout();
+	bSizer8->Fit( m_panel14 );
+	fgSizer11->Add( m_panel14, 1, wxEXPAND|wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_panel13->SetSizer( fgSizer11 );
+	m_panel13->Layout();
+	fgSizer11->Fit( m_panel13 );
+	sbSizer6->Add( m_panel13, 1, wxEXPAND | wxALL, 5 );
+	
+	m_staticline2 = new wxStaticLine( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	sbSizer6->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+	
+	m_panel11 = new wxPanel( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer7;
+	bSizer7 = new wxBoxSizer( wxVERTICAL );
+	
+	m_staticText8 = new wxStaticText( m_panel11, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText8->Wrap( -1 );
+	bSizer7->Add( m_staticText8, 0, wxALL, 5 );
+	
+	m_txColName = new wxTextCtrl( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_txColName, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText9 = new wxStaticText( m_panel11, wxID_ANY, wxT("Type:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText9->Wrap( -1 );
+	bSizer7->Add( m_staticText9, 0, wxALL, 5 );
+	
+	m_comboType = new wxComboBox( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	bSizer7->Add( m_comboType, 0, wxALL, 5 );
+	
+	m_stSize = new wxStaticText( m_panel11, wxID_ANY, wxT("Size:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stSize->Wrap( -1 );
+	bSizer7->Add( m_stSize, 0, wxALL, 5 );
+	
+	m_txSize = new wxTextCtrl( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_txSize, 0, wxALL, 5 );
+	
+	m_chPrimary = new wxCheckBox( m_panel11, wxID_ANY, wxT("Primary key"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_chPrimary, 0, wxALL, 5 );
+	
+	m_chNotNull = new wxCheckBox( m_panel11, wxID_ANY, wxT("Not null"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_chNotNull, 0, wxALL, 5 );
+	
+	m_checkBox3 = new wxCheckBox( m_panel11, wxID_ANY, wxT("Unique"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_checkBox3, 0, wxALL, 5 );
+	
+	m_chAutoIncrement = new wxCheckBox( m_panel11, wxID_ANY, wxT("Auto increment"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_chAutoIncrement, 0, wxALL, 5 );
+	
+	m_panel11->SetSizer( bSizer7 );
+	m_panel11->Layout();
+	bSizer7->Fit( m_panel11 );
+	sbSizer6->Add( m_panel11, 1, wxEXPAND | wxALL, 5 );
+	
+	m_panel9->SetSizer( sbSizer6 );
+	m_panel9->Layout();
+	sbSizer6->Fit( m_panel9 );
+	fgSizer10->Add( m_panel9, 1, wxEXPAND | wxALL, 5 );
+	
+	m_panel7->SetSizer( fgSizer10 );
+	m_panel7->Layout();
+	fgSizer10->Fit( m_panel7 );
+	fgSizer9->Add( m_panel7, 1, wxEXPAND | wxALL, 5 );
+	
+	m_sdbSizer2 = new wxStdDialogButtonSizer();
+	m_sdbSizer2OK = new wxButton( this, wxID_OK );
+	m_sdbSizer2->AddButton( m_sdbSizer2OK );
+	m_sdbSizer2Cancel = new wxButton( this, wxID_CANCEL );
+	m_sdbSizer2->AddButton( m_sdbSizer2Cancel );
+	m_sdbSizer2->Realize();
+	fgSizer9->Add( m_sdbSizer2, 1, wxEXPAND|wxBOTTOM|wxRIGHT, 5 );
+	
+	this->SetSizer( fgSizer9 );
+	this->Layout();
+	fgSizer9->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_listColumns->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnListBoxClick ), NULL, this );
+	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
+	m_button9->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
+	m_txColName->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
+	m_comboType->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
+	m_comboType->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColTypeUI ), NULL, this );
+	m_txSize->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColSizeUI ), NULL, this );
+	m_chPrimary->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPrimaryKeyUI ), NULL, this );
+	m_chNotNull->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
+	m_checkBox3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
+	m_chAutoIncrement->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
+	m_sdbSizer2Cancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnCancelClick ), NULL, this );
+	m_sdbSizer2OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
+}
+
+_TableSettings::~_TableSettings()
+{
+	// Disconnect Events
+	m_listColumns->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnListBoxClick ), NULL, this );
+	m_button8->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
+	m_button9->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
+	m_txColName->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
+	m_comboType->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
+	m_comboType->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColTypeUI ), NULL, this );
+	m_txSize->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColSizeUI ), NULL, this );
+	m_chPrimary->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPrimaryKeyUI ), NULL, this );
+	m_chNotNull->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
+	m_checkBox3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
+	m_chAutoIncrement->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
+	m_sdbSizer2Cancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnCancelClick ), NULL, this );
+	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
+	
+}

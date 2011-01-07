@@ -7,6 +7,7 @@
 #include "Art.h"
 #include "Ids.h"
 #include "../erd_table.h"
+#include "../IDbAdapter.h"
 
 class FrameCanvas;
 class ErdPanel : public _ErdPanel {
@@ -26,7 +27,7 @@ public:
 	}
 
 
-	ErdPanel(wxWindow *parent);
+	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter);
 	virtual ~ErdPanel();
 	
 	void UpdateDetail(ErdTable* tab);
@@ -35,6 +36,8 @@ protected:
 	wxSFDiagramManager m_diagramManager;
 	FrameCanvas* m_pFrameCanvas;
 	ErdTable* m_pErdTable;
+	
+	IDbAdapter* m_pDbAdapter;
 
 	MODE m_nToolMode;
 
