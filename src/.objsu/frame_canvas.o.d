@@ -181,6 +181,16 @@
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/Ids.h \
+ /usr/include/wx-2.8/wx/clipbrd.h /usr/include/wx-2.8/wx/gtk/clipbrd.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h \
+ controls/include/wx/dblayer/MysqlDatabaseLayer.h \
+ controls/include/wx/dblayer/DatabaseLayer.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/frame_canvas.h:
@@ -736,5 +746,27 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/Ids.h:
+
+/usr/include/wx-2.8/wx/clipbrd.h:
+
+/usr/include/wx-2.8/wx/gtk/clipbrd.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h:
+
+controls/include/wx/dblayer/MysqlDatabaseLayer.h:
+
+controls/include/wx/dblayer/DatabaseLayer.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h:

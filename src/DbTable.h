@@ -13,7 +13,7 @@ public:
 	virtual wxString GetName();
 	virtual DbItemType GetType() { return DbTableType; }
 	
-	virtual void SetParentName(wxString& databaseName);;
+	virtual void SetParentName(wxString& databaseName);
 	virtual void SetName(wxString& name);
 
 	

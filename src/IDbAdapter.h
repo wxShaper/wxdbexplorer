@@ -1,7 +1,9 @@
 #ifndef IDBADAPTER_H
 #define IDBADAPTER_H
 #include <wx/wx.h>
+#include <wx/dynarray.h>
 #include <wx/dblayer/DatabaseLayer.h>
+#include "IDbType.h"
 //#include "columncol.h"
 //#include "tablecol.h"
 //#include "databasecol.h"
@@ -24,6 +26,9 @@ public:
 	static wxString GetCreateTableSql(Table* tab);
 
 	virtual void CloseConnection() = 0;
+	
+	virtual IDbType* GetDbTypeByName(const wxString& typeName) = 0;
+	virtual wxArrayString& GetDbTypes () = 0;
 
 };
 

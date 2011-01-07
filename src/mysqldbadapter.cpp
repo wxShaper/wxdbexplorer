@@ -62,22 +62,38 @@ DatabaseCol* MySqlDbAdapter::GetDatabases() {
 }
 
 
-wxString MySqlDbAdapter::GetCreateTableSql(Table* tab)
-{
+wxString MySqlDbAdapter::GetCreateTableSql(Table* tab) {
 	wxString str = wxString::Format(wxT("DROP TABLE EXIST `%s`; \n"),tab->getName().c_str());
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
-	
-	for (int i = 0; i < tab->columns->GetColCount(); ++i){
-		
+
+	for (int i = 0; i < tab->columns->GetColCount(); ++i) {
+
 		Column* col = (Column*) tab->columns->GetByIndex(i);
-		if (col){
+		if (col) {
 			str.append(wxString::Format(wxT("\t`%s` %s "),col->getName().c_str(), col->getType().c_str()));
-			if (i != tab->columns->GetColCount()-1) str.append(wxT(",\n ")) ; else  str.append(wxT("\n ")) ;
-			}		
+			if (i != tab->columns->GetColCount()-1) str.append(wxT(",\n ")) ;
+			else  str.append(wxT("\n ")) ;
 		}
-	
+	}
+
 	str.append(wxT(")"));
 	return str;
 }
 
 
+IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
+	IDbType* type;
+	if (typeName == wxT("INT")){
+			type = new MySqlType(wxT("INT"),true,false,true,false,false);
+	}else if (typeName == wxT("VARCHAR")){	
+			type = new MySqlType(wxT("VARCHAR"),false,true,false,true,true);
+	}
+	return type;
+}
+
+wxArrayString& MySqlDbAdapter::GetDbTypes() {
+	wxArrayString names;
+	names.Add(wxT("INT"));
+	names.Add(wxT("VARCHAR"));
+	return names;
+}
