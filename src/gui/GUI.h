@@ -39,6 +39,7 @@
 #include <wx/dialog.h>
 #include <wx/listbox.h>
 #include <wx/combobox.h>
+#include <wx/valtext.h>
 #include <wx/checkbox.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,7 @@
 #define wxID_TOOL_ERD 1001
 #define wxID_Sqlite_OK 1002
 #define wxID_TX_NAME 1003
+#define wxID_TX_SIZE 1004
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame

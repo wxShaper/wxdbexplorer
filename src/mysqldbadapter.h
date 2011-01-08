@@ -26,7 +26,7 @@ public:
 	static wxString GetCreateTableSql(Table* tab);
 
 	virtual IDbType* GetDbTypeByName(const wxString& typeName);
-	virtual wxArrayString& GetDbTypes();
+	virtual wxArrayString* GetDbTypes();
 
 protected:
 	wxString m_serverName;

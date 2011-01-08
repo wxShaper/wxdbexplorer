@@ -519,8 +519,8 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_stSize->Wrap( -1 );
 	bSizer7->Add( m_stSize, 0, wxALL, 5 );
 	
-	m_txSize = new wxTextCtrl( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer7->Add( m_txSize, 0, wxALL, 5 );
+	m_txSize = new wxTextCtrl( m_panel11, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer7->Add( m_txSize, 0, wxALL|wxEXPAND, 5 );
 	
 	m_chPrimary = new wxCheckBox( m_panel11, wxID_ANY, wxT("Primary key"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chPrimary, 0, wxALL, 5 );

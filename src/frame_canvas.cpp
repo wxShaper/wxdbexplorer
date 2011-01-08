@@ -105,7 +105,7 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 		ErdTable* table = wxDynamicCast(sp->GetGrandParentShape(),ErdTable);
 		if (table) 
 			if (table->getTable() ) {
-				TableSettings settingDialog(this);
+				TableSettings settingDialog(this, m_pDbAdapter);
 				settingDialog.SetTable(table->getTable());
 				settingDialog.ShowModal();	
 			}

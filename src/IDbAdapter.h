@@ -28,7 +28,7 @@ public:
 	virtual void CloseConnection() = 0;
 	
 	virtual IDbType* GetDbTypeByName(const wxString& typeName) = 0;
-	virtual wxArrayString& GetDbTypes () = 0;
+	virtual wxArrayString* GetDbTypes () = 0;
 
 };
 

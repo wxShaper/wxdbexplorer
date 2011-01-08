@@ -91,9 +91,9 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	return type;
 }
 
-wxArrayString& MySqlDbAdapter::GetDbTypes() {
-	wxArrayString names;
-	names.Add(wxT("INT"));
-	names.Add(wxT("VARCHAR"));
-	return names;
+wxArrayString* MySqlDbAdapter::GetDbTypes() {
+	wxArrayString* pNames = new wxArrayString();
+	pNames->Add(wxT("INT"));
+	pNames->Add(wxT("VARCHAR"));
+	return pNames;
 }

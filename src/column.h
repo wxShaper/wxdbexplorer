@@ -39,6 +39,7 @@ public:
 	
 	// nazev sloupecku
 	wxString getName() { return this->m_name; }
+	void setName(const wxString& name) { this->m_name = name; }
 	// nazev rodicovskeho prvku - tabulky nebo view
 	wxString getParentName() { return this->m_parentName; }
 	// nazev typu
@@ -52,6 +53,7 @@ public:
 	
 	// typ
 	IDbType* getPType(){ return this->m_pType; }
+	void setPType(IDbType* pType ) { delete this->m_pType; this->m_pType = pType; }
 	
 	// funkce pro editaci sloupecku - nastuvje prizna isSaved na false
 	void Edit(wxString& name,
