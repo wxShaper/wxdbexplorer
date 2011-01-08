@@ -1,6 +1,8 @@
 #include "tablesettings.h"
 
 TableSettings::TableSettings(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):_TableSettings(parent,id,title,pos,size, style ) {
+	m_pTable = NULL;
+	m_pEditedColumn = NULL;
 }
 
 TableSettings::~TableSettings() {

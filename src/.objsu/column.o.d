@@ -109,7 +109,8 @@
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
- controls/include/wx/dblayer/DatabaseQueryParser.h
+ controls/include/wx/dblayer/DatabaseQueryParser.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
 
@@ -502,3 +503,5 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:

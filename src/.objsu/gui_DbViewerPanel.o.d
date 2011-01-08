@@ -150,6 +150,7 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
@@ -158,6 +159,7 @@
  IDbAdapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../my_sql_type.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../dbitem.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbSettingDialog.h \
  MySqlDbConnector.h IDbConnector.h SqliteDbConnector.h \
@@ -208,6 +210,13 @@
  controls/include/wx/wxsf/SFEvents.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../frame_canvas.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/ErdPanel.h \
+ /usr/include/wx-2.8/wx/clipbrd.h /usr/include/wx-2.8/wx/gtk/clipbrd.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/tablesettings.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/GUI.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbType.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Tool.xpm \
@@ -216,6 +225,8 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/fileopen.xpm \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../erd_table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/Ids.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
  /usr/include/wx-2.8/wx/imaglist.h \
  /usr/include/wx-2.8/wx/generic/imaglist.h
 
@@ -705,6 +716,8 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h:
 
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h:
@@ -720,6 +733,8 @@ IDbAdapter.h:
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../my_sql_type.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../dbitem.h:
 
@@ -837,6 +852,22 @@ controls/include/wx/wxsf/SFEvents.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/ErdPanel.h:
 
+/usr/include/wx-2.8/wx/clipbrd.h:
+
+/usr/include/wx-2.8/wx/gtk/clipbrd.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/tablesettings.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/GUI.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../table.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../column.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbType.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm:
@@ -852,6 +883,10 @@ controls/include/wx/wxsf/SFEvents.h:
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../erd_table.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/Ids.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h:
 
 /usr/include/wx-2.8/wx/imaglist.h:
 

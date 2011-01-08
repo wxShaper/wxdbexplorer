@@ -128,6 +128,7 @@
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h:
@@ -557,5 +558,7 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h:

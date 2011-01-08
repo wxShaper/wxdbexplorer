@@ -2,10 +2,10 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Release
 ProjectName            :=DatabaseExplorer
-ConfigurationName      :=Debug
-IntermediateDirectory  :=.objsud
+ConfigurationName      :=Release
+IntermediateDirectory  :=.objsu
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "/home/jankup/SourceCpp/wxdbexplorer/trunk/build"
 ProjectPath            := "/home/jankup/SourceCpp/wxdbexplorer/trunk/src"
@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Peter Janků
-Date                   :=7.1.2011
+Date                   :=8.1.2011
 CodeLitePath           :="/home/jankup/.codelite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -30,18 +30,18 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=../bin/gcc/DatabaseExplorer_d
-Preprocessors          :=$(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)DEBUG $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)__WXDEBUG__ 
+OutputFile             :=../bin/gcc/DatabaseExplorer
+Preprocessors          :=$(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)NDEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 MakeDirCommand         :=mkdir -p
-CmpOptions             := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
-C_CmpOptions           := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
-LinkOptions            :=  -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --debug=yes --libs` 
+CmpOptions             := -Wall -O3 -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
+C_CmpOptions           := -Wall -O3 -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
+LinkOptions            :=  -s -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --libs` 
 IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)controls/include" "$(IncludeSwitch)." 
 RcIncludePath          :=
-Libs                   :=$(LibrarySwitch)wx_gtk2ud_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2ud_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2ud_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
+Libs                   :=$(LibrarySwitch)wx_gtk2u_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2u_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2u_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
 LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gcc" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" 
 
 
@@ -63,12 +63,9 @@ $(OutputFile): makeDirStep $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
 
 makeDirStep:
-	@test -d .objsud || $(MakeDirCommand) .objsud
+	@test -d .objsu || $(MakeDirCommand) .objsu
 
 PreBuild:
-	@echo Executing Pre Build commands ...
-	python $(ProjectPath)/create_buildnum.py
-	@echo Done
 
 
 ##

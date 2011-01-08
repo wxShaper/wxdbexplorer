@@ -103,10 +103,11 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 	wxSFShapeBase* sp = GetShapeUnderCursor();
 	if (sp){
 		ErdTable* table = wxDynamicCast(sp->GetGrandParentShape(),ErdTable);
-		if (table && table->getTable() ) {
-			TableSettings settingDialog(this);
-			settingDialog.SetTable(table->getTable());
-			settingDialog.ShowModal();	
+		if (table) 
+			if (table->getTable() ) {
+				TableSettings settingDialog(this);
+				settingDialog.SetTable(table->getTable());
+				settingDialog.ShowModal();	
 			}
 	}
 }
