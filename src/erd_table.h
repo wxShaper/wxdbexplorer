@@ -11,8 +11,11 @@
 class ErdTable : public wxSFRoundRectShape {
 
 public:
+	XS_DECLARE_CLONABLE_CLASS(ErdTable);	
+
 	ErdTable();
 	ErdTable(const ErdTable& obj);
+	
 	virtual ~ErdTable();
 	
 	void updateColumns();

@@ -124,6 +124,7 @@
     <File Name="IDbItem.cpp"/>
     <File Name="IDbAdapter.h"/>
     <File Name="IDbType.h"/>
+    <File Name="my_sql_type.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="dbEngine">
     <VirtualDirectory Name="include">
@@ -165,7 +166,6 @@
     <File Name="dbitem.cpp"/>
     <File Name="mysqldbadapter.cpp"/>
     <File Name="wx_pch.cpp"/>
-    <File Name="my_sql_type.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="ErdEngine">
     <VirtualDirectory Name="Include">

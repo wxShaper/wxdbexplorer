@@ -1,6 +1,9 @@
 #include "erd_table.h"
 #define constOffset MAX_ID
 
+XS_IMPLEMENT_CLONABLE_CLASS(ErdTable,wxSFRoundRectShape);
+
+
 ErdTable::ErdTable():wxSFRoundRectShape()
 {
 	m_pTable = new Table();
@@ -9,15 +12,21 @@ ErdTable::ErdTable():wxSFRoundRectShape()
 	m_pTable->columns->AddColumn(new Column(wxT("ID"),wxT("New table"),wxT("int"), true, true));
 	m_pTable->columns->AddColumn(new Column(wxT("Name"),wxT("New table"),wxT("string"), true, true));
 	m_pTable->columns->AddColumn(new Column(wxT("Value"),wxT("New table"),wxT("long"), true, true));
-	
+	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
 	Initialize();
 }
 ErdTable::ErdTable(const ErdTable& obj):wxSFRoundRectShape(obj)
 {
-	m_pTable = new Table();
-	m_pTable->setName(wxT("New table"));
+	m_pTable = (Table*) obj.m_pTable->Clone();
+	//m_pTable->setName(wxT("New table"));
+	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
 	
-	Initialize();
+	m_pLabel = (wxSFTextShape*) obj.m_pLabel->Clone();
+	if (m_pLabel){
+		SF_ADD_COMPONENT( m_pLabel, wxT("title") );	
+		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));	
+		}
+
 }
 ErdTable::~ErdTable()
 {
@@ -42,6 +51,8 @@ void ErdTable::Initialize()
 		m_pLabel->SetText(wxT("Table name"));
 		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS );
 
+		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
+		
         SF_ADD_COMPONENT( m_pLabel, wxT("title") );		
 		
 		

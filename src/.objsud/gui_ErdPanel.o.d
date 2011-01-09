@@ -186,6 +186,8 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/GUI.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../table.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbAdapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Tool.xpm \
@@ -762,6 +764,10 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../table.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../column.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbType.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbAdapter.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h:
 

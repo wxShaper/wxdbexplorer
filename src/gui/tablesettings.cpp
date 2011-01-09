@@ -3,7 +3,10 @@
 TableSettings::TableSettings(wxWindow* parent,IDbAdapter* pDbAdapter, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):_TableSettings(parent,id,title,pos,size, style ) {
 	m_pTable = NULL;
 	m_pEditedColumn = NULL;
+	m_txSize->SetValidator(wxTextValidator(wxFILTER_NUMERIC));
+	
 	m_pDbAdapter = pDbAdapter;
+	
 	wxArrayString* pDbTypes = m_pDbAdapter->GetDbTypes();
 	for (unsigned int i = 0; i < pDbTypes->Count(); ++i){
 		m_comboType->AppendString(pDbTypes->Item(i));		
@@ -31,7 +34,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			IDbType* type = col->getPType();
 			if (type) {
 				m_comboType->SetValue(type->GetTypeName());
-				m_txSize->SetValue(wxString::Format(wxT("%i"),type->GetSize()));
+				m_txSize->SetValue(wxString::Format(wxT("%li"),type->GetSize()));
 				m_chAutoIncrement->SetValue(type->GetAutoIncrement());
 				m_chNotNull->SetValue(type->GetNotNull());
 				m_chPrimary->SetValue(type->GetPrimaryKey());
@@ -55,7 +58,11 @@ void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 			pType->SetNotNull(m_chNotNull->GetValue());
 			pType->SetAutoIncrement(m_chAutoIncrement->GetValue());
 			pType->SetPrimaryKey(m_chPrimary->GetValue());
-			pType->SetUnique(m_checkBox3->GetValue());			
+			pType->SetUnique(m_checkBox3->GetValue());	
+			
+			long s;
+			m_txSize->GetValue().ToLong(&s);
+			pType->SetSize(s);
 			}	
 		}
 	UpdateView();

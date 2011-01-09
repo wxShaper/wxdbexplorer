@@ -2,13 +2,14 @@
 #define COLUMN_H
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
+#include <wx/wxxmlserializer/XmlSerializer.h>
 #include "IDbAdapter.h"
 #include "IDbType.h"
 // ------------------------------------------------
 // Trida databazoveho sloupecku
 // -------------------------------------------------
 
-class Column {
+class Column : public xsSerializable {
 protected:
 	wxString m_name;
 	wxString m_parentName;
@@ -19,11 +20,15 @@ protected:
 	bool m_isSaved;	
 	
 	IDbType* m_pType;
+	void initSerializable();
 	
 public:
 	// -------------------------------------------------
 	// Konstruktor
 	// -------------------------------------------------
+	XS_DECLARE_CLONABLE_CLASS(Column);
+	Column();
+	Column(const Column& obj);
 	Column(const wxString& name,
 			const wxString& parentName,
 			const wxString& type,

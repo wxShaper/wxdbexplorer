@@ -30,7 +30,7 @@ public:
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter);
 	virtual ~ErdPanel();
 	
-	void UpdateDetail(ErdTable* tab);
+
 
 protected:
 	wxSFDiagramManager m_diagramManager;
@@ -46,7 +46,7 @@ protected:
 	void OnToolUpdate(wxUpdateUIEvent& event);
 	void OnLoad(wxCommandEvent& WXUNUSED(event));
 	void OnSave(wxCommandEvent& WXUNUSED(event));
-	void OnTxNameChange(wxCommandEvent& event);
+
 
 	DECLARE_EVENT_TABLE();
 

@@ -10,8 +10,8 @@ public:
 		
 		// size
 		virtual bool HaveSize() = 0;
-		virtual int GetSize() = 0;
-		virtual void SetSize(int size) = 0;
+		virtual long GetSize() = 0;
+		virtual void SetSize(long size) = 0;
 		
 		// primary key
 		virtual bool HavePrimaryKey() = 0;

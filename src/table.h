@@ -3,21 +3,27 @@
 
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
+#include <wx/wxxmlserializer/XmlSerializer.h>
 #include "columncol.h"
 #include "IDbAdapter.h"
 // -------------------------------------------------
 // Trida databazove tabulky
 // -------------------------------------------------
-class Table {
+class Table : public xsSerializable {
 protected:
 	wxString m_name;
 	wxString m_parentName;
 	int m_rowCount;	
 	bool m_isSaved;	
 	
+	void initSerializable();
+	
 	
 public:
+	XS_DECLARE_CLONABLE_CLASS(Table);
+	
 	Table();
+	Table(const Table& obj);
 	Table(IDbAdapter* dbAdapter,const wxString& tableName, const wxString& parentName, int rowCount);
 	~Table();
 	// nazev tabulky

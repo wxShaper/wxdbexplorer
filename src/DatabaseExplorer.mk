@@ -49,9 +49,9 @@ LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gc
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects=$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix) $(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IntermediateDirectory)/column$(ObjectSuffix) $(IntermediateDirectory)/columncol$(ObjectSuffix) \
-	$(IntermediateDirectory)/tablecol$(ObjectSuffix) $(IntermediateDirectory)/table$(ObjectSuffix) $(IntermediateDirectory)/DbDatabase$(ObjectSuffix) $(IntermediateDirectory)/DbColumn$(ObjectSuffix) $(IntermediateDirectory)/database$(ObjectSuffix) $(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/DbTable$(ObjectSuffix) $(IntermediateDirectory)/SqliteDbConnector$(ObjectSuffix) $(IntermediateDirectory)/MySqlDbConnector$(ObjectSuffix) \
-	$(IntermediateDirectory)/dbitem$(ObjectSuffix) $(IntermediateDirectory)/mysqldbadapter$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IntermediateDirectory)/erd_table$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix) $(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IntermediateDirectory)/column$(ObjectSuffix) \
+	$(IntermediateDirectory)/columncol$(ObjectSuffix) $(IntermediateDirectory)/tablecol$(ObjectSuffix) $(IntermediateDirectory)/table$(ObjectSuffix) $(IntermediateDirectory)/DbDatabase$(ObjectSuffix) $(IntermediateDirectory)/DbColumn$(ObjectSuffix) $(IntermediateDirectory)/database$(ObjectSuffix) $(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/DbTable$(ObjectSuffix) $(IntermediateDirectory)/SqliteDbConnector$(ObjectSuffix) \
+	$(IntermediateDirectory)/MySqlDbConnector$(ObjectSuffix) $(IntermediateDirectory)/dbitem$(ObjectSuffix) $(IntermediateDirectory)/mysqldbadapter$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IntermediateDirectory)/erd_table$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -137,6 +137,14 @@ $(IntermediateDirectory)/IDbItem$(DependSuffix): IDbItem.cpp
 
 $(IntermediateDirectory)/IDbItem$(PreprocessSuffix): IDbItem.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/IDbItem$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.cpp"
+
+$(IntermediateDirectory)/my_sql_type$(ObjectSuffix): my_sql_type.cpp $(IntermediateDirectory)/my_sql_type$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/my_sql_type$(DependSuffix): my_sql_type.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/my_sql_type$(ObjectSuffix) -MF$(IntermediateDirectory)/my_sql_type$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.cpp"
+
+$(IntermediateDirectory)/my_sql_type$(PreprocessSuffix): my_sql_type.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/my_sql_type$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.cpp"
 
 $(IntermediateDirectory)/column$(ObjectSuffix): column.cpp $(IntermediateDirectory)/column$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/column$(ObjectSuffix) $(IncludePath)
@@ -258,14 +266,6 @@ $(IntermediateDirectory)/wx_pch$(DependSuffix): wx_pch.cpp
 $(IntermediateDirectory)/wx_pch$(PreprocessSuffix): wx_pch.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/wx_pch$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/wx_pch.cpp"
 
-$(IntermediateDirectory)/my_sql_type$(ObjectSuffix): my_sql_type.cpp $(IntermediateDirectory)/my_sql_type$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/my_sql_type$(DependSuffix): my_sql_type.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/my_sql_type$(ObjectSuffix) -MF$(IntermediateDirectory)/my_sql_type$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.cpp"
-
-$(IntermediateDirectory)/my_sql_type$(PreprocessSuffix): my_sql_type.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/my_sql_type$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.cpp"
-
 $(IntermediateDirectory)/frame_canvas$(ObjectSuffix): frame_canvas.cpp $(IntermediateDirectory)/frame_canvas$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/frame_canvas.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/frame_canvas$(DependSuffix): frame_canvas.cpp
@@ -312,6 +312,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/IDbItem$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/IDbItem$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/IDbItem$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/my_sql_type$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/my_sql_type$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/column$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/column$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/column$(PreprocessSuffix)
@@ -357,9 +360,6 @@ clean:
 	$(RM) $(IntermediateDirectory)/wx_pch$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/wx_pch$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/wx_pch$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/my_sql_type$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/my_sql_type$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/frame_canvas$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/frame_canvas$(PreprocessSuffix)

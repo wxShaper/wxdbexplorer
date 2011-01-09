@@ -394,39 +394,12 @@ _ErdPanel::_ErdPanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, const
 	m_wxsfSizer->Fit( m_wxsfPanel );
 	fgSizer7->Add( m_wxsfPanel, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	m_notebook3 = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-	m_nbMainPanel = new wxPanel( m_notebook3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxFlexGridSizer* fgSizer8;
-	fgSizer8 = new wxFlexGridSizer( 2, 2, 0, 0 );
-	fgSizer8->SetFlexibleDirection( wxBOTH );
-	fgSizer8->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText6 = new wxStaticText( m_nbMainPanel, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText6->Wrap( -1 );
-	fgSizer8->Add( m_staticText6, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-	
-	m_txName = new wxTextCtrl( m_nbMainPanel, wxID_TX_NAME, wxEmptyString, wxDefaultPosition, wxSize( 200,-1 ), 0 );
-	fgSizer8->Add( m_txName, 0, wxALL, 5 );
-	
-	m_nbMainPanel->SetSizer( fgSizer8 );
-	m_nbMainPanel->Layout();
-	fgSizer8->Fit( m_nbMainPanel );
-	m_notebook3->AddPage( m_nbMainPanel, wxT("Main info"), false );
-	
-	fgSizer7->Add( m_notebook3, 1, wxALL|wxEXPAND, 5 );
-	
 	this->SetSizer( fgSizer7 );
 	this->Layout();
-	
-	// Connect Events
-	m_txName->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( _ErdPanel::OnTxNameChange ), NULL, this );
 }
 
 _ErdPanel::~_ErdPanel()
 {
-	// Disconnect Events
-	m_txName->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( _ErdPanel::OnTxNameChange ), NULL, this );
-	
 }
 
 _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )

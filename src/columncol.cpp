@@ -1,14 +1,25 @@
 #include "columncol.h"
 #include <wx/arrimpl.cpp>
 
+XS_IMPLEMENT_CLONABLE_CLASS(ColumnCol,xsSerializable);
+
 WX_DEFINE_OBJARRAY(ArrayOfColumn);
 
 ColumnCol::ColumnCol()
 {
+	initSerializable();
 }
+ColumnCol::ColumnCol(const ColumnCol& obj): xsSerializable(obj)
+{
+	m_tableName = obj.m_tableName;
+	//WX_APPEND_ARRAY(m_al, obj.m_al);
+	initSerializable();
+}
+
 ColumnCol::ColumnCol(const wxString& tableName)
 {
 	this->m_tableName = tableName;
+	initSerializable();
 }
 
 Column* ColumnCol::GetByIndex(int i)
@@ -39,5 +50,13 @@ void ColumnCol::AddColumn(Column* col)
 void ColumnCol::SetTableName(const wxString& tableName)
 {
 	this->m_tableName = tableName;
+}
+
+void ColumnCol::initSerializable()
+{
+	XS_SERIALIZE_PROPERTY(m_al, wxT("serializabledynamicnocreate"), wxT("cols"));
+	//XS_SERIALIZE(m_al, wxT("cols"));
+	XS_SERIALIZE(m_tableName,wxT("tableName")); 
+	
 }
 

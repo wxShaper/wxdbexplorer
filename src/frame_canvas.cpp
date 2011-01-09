@@ -38,12 +38,6 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 	break;
 	default:
 
-		ErdTable* table = wxDynamicCast(GetShapeUnderCursor(),ErdTable);
-		if (table) {
-			m_pParentPanel->UpdateDetail(table);
-		} else {
-			m_pParentPanel->UpdateDetail(NULL);
-		}
 		// do default actions
 		wxSFShapeCanvas::OnLeftDown(event);
 	}
@@ -108,6 +102,7 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 				TableSettings settingDialog(this, m_pDbAdapter);
 				settingDialog.SetTable(table->getTable());
 				settingDialog.ShowModal();	
+				table->updateColumns();
 			}
 	}
 }

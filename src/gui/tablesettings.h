@@ -1,11 +1,14 @@
 #ifndef TABLESETTINGS_H
 #define TABLESETTINGS_H
 
+#include <wx/wx.h>
+#include <wx/validate.h>
 #include "GUI.h" // Base class: _TableSettings
 #include "../table.h"
 #include "../column.h"
 #include "../IDbType.h"
 #include "../IDbAdapter.h"
+
 
 class TableSettings : public _TableSettings {
 
@@ -33,6 +36,8 @@ protected:
 	Table* m_pTable;
 	Column* m_pEditedColumn;
 	IDbAdapter* m_pDbAdapter;
+
+	//wxTextValidator validNum(wxFILTER_NUMERIC, NULL);
 
 	void UpdateView();
 };

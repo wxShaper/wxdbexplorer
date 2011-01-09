@@ -39,7 +39,6 @@
 #include <wx/dialog.h>
 #include <wx/listbox.h>
 #include <wx/combobox.h>
-#include <wx/valtext.h>
 #include <wx/checkbox.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -47,8 +46,7 @@
 #define wxID_TOOL_REFRESH 1000
 #define wxID_TOOL_ERD 1001
 #define wxID_Sqlite_OK 1002
-#define wxID_TX_NAME 1003
-#define wxID_TX_SIZE 1004
+#define wxID_TX_SIZE 1003
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -184,16 +182,8 @@ class _ErdPanel : public wxPanel
 		wxToolBar* m_toolBarErd;
 		wxPanel* m_wxsfPanel;
 		wxBoxSizer* m_wxsfSizer;
-		wxNotebook* m_notebook3;
-		wxPanel* m_nbMainPanel;
-		wxStaticText* m_staticText6;
-		
-		// Virtual event handlers, overide them in your derived class
-		virtual void OnTxNameChange( wxCommandEvent& event ) { event.Skip(); }
-		
 	
 	public:
-		wxTextCtrl* m_txName;
 		
 		_ErdPanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,480 ), long style = wxTAB_TRAVERSAL ); 
 		~_ErdPanel();

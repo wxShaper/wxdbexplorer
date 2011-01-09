@@ -12,7 +12,7 @@ public:
 	virtual bool GetAutoIncrement()						{ return m_autoIncrement; }
 	virtual bool GetNotNull()							{ return m_notNull; }
 	virtual bool GetPrimaryKey()						{ return m_primaryKey; }
-	virtual int GetSize()								{ return m_size; }
+	virtual long GetSize()								{ return m_size; }
 	virtual wxString GetTypeName()						{ return m_typeName; }
 	virtual bool GetUnique()							{ return m_unique; }
 	virtual bool HaveAutoIncrement() 					{ return m_haveAutoIncrement; }
@@ -23,12 +23,12 @@ public:
 	virtual void SetAutoIncrement(bool autoIncrement) 	{ m_autoIncrement = autoIncrement; }
 	virtual void SetNotNull(bool notNull) 				{ m_notNull = notNull; }
 	virtual void SetPrimaryKey(bool primaryKey) 		{ m_primaryKey = primaryKey; }
-	virtual void SetSize(int size) 						{ m_size = size; }
+	virtual void SetSize(long size) 						{ m_size = size; }
 	virtual void SetUnique(bool unique) 				{ m_unique = unique; }
 	virtual wxString ReturnSql();
 protected:
 	wxString m_typeName;
-	int m_size;
+	long m_size;
 	bool m_unique;
 	bool m_primaryKey;
 	bool m_notNull;

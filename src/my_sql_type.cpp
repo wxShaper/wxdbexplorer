@@ -8,6 +8,12 @@ MySqlType::MySqlType(const wxString& typeName, bool haveAutoIncrement, bool have
 	m_havePrimaryKey = havePrimaryKey;
 	m_haveSize = haveSize;
 	m_haveUnique = haveUnique;
+	
+	m_autoIncrement = false;
+	m_notNull = false;
+	m_primaryKey = false;
+	m_size = 0;
+	m_unique = false;
 }
 
 MySqlType::~MySqlType() {
@@ -16,7 +22,7 @@ MySqlType::~MySqlType() {
 wxString MySqlType::ReturnSql() {
 	wxString sql;
 	sql = wxString::Format(wxT(" %s"), m_typeName.c_str());
-	if (m_haveSize) sql.append(wxString::Format(wxT("(%i)"),m_size));
+	if (m_haveSize) sql.append(wxString::Format(wxT("(%li)"),m_size));
 	if (m_haveNotNull && m_notNull) sql.append(wxT(" NOT NULL"));
 	if (m_havePrimaryKey && m_primaryKey) sql.append(wxT(" PRIMARY KEY"));
 	return sql;
