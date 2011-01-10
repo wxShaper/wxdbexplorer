@@ -37,8 +37,9 @@ public:
 	int getRowCount() { return this->m_rowCount; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
-	ColumnCol *columns;
-
+	//ColumnCol *columns;
+	void AddColumn(Column* col) { this->AddChild(col); }
+	Column* GetFristColumn() { return (Column*) GetFirstChild( CLASSINFO(Column)); }
 };
 
 #endif // TABLE_H

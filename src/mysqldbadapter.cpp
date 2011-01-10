@@ -66,14 +66,12 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab) {
 	wxString str = wxString::Format(wxT("DROP TABLE EXIST `%s`; \n"),tab->getName().c_str());
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
 
-	for (int i = 0; i < tab->columns->GetColCount(); ++i) {
-
-		Column* col = (Column*) tab->columns->GetByIndex(i);
-		if (col) {
-			str.append(wxString::Format(wxT("\t`%s` %s "),col->getName().c_str(), col->getType().c_str()));
-			if (i != tab->columns->GetColCount()-1) str.append(wxT(",\n ")) ;
-			else  str.append(wxT("\n ")) ;
-		}
+	Column* col = tab->GetFristColumn();
+	while (col){
+		str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getType().c_str()));
+		col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
+		if (col) str.append(wxT(",\n ")) ;
+		else  str.append(wxT("\n ")) ;	
 	}
 
 	str.append(wxT(")"));

@@ -9,9 +9,9 @@ ErdTable::ErdTable():wxSFRoundRectShape()
 	m_pTable = new Table();
 	m_pTable->setName(wxT("New table"));
 	
-	m_pTable->columns->AddColumn(new Column(wxT("ID"),wxT("New table"),wxT("int"), true, true));
-	m_pTable->columns->AddColumn(new Column(wxT("Name"),wxT("New table"),wxT("string"), true, true));
-	m_pTable->columns->AddColumn(new Column(wxT("Value"),wxT("New table"),wxT("long"), true, true));
+	m_pTable->AddColumn(new Column(wxT("ID"),wxT("New table"),wxT("int"), true, true));
+	m_pTable->AddColumn(new Column(wxT("Name"),wxT("New table"),wxT("string"), true, true));
+	m_pTable->AddColumn(new Column(wxT("Value"),wxT("New table"),wxT("long"), true, true));
 	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
 	Initialize();
 }
@@ -98,9 +98,11 @@ void ErdTable::DrawNormal(wxDC& dc)
 void ErdTable::updateColumns()
 {
 	clearGrid();
-	for(int i=0; i<m_pTable->columns->GetColCount();++i){
-		Column* pCol = m_pTable->columns->GetByIndex(i);
-		addColumnShape(pCol->getName(),i);		
+	int i = 0;
+	Column* pCol = m_pTable->GetFristColumn();
+	while(pCol){
+		addColumnShape(pCol->getName(),i++);		
+		pCol = wxDynamicCast(pCol->GetSibbling(CLASSINFO(Column)),Column);
 		}	
 	m_pGrid->Update();
 	Update();
@@ -144,6 +146,6 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 
 void ErdTable::addColumn(const wxString& colName, IDbType* type)
 {
-	m_pTable->columns->AddColumn(new Column(colName,wxT("New table"),type, true, true));
+	m_pTable->AddColumn(new Column(colName,wxT("New table"),type, true, true));
 }
 

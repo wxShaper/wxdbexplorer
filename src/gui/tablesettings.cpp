@@ -25,8 +25,9 @@ void TableSettings::OnCancelClick(wxCommandEvent& event) {
 }
 void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 	wxString name = m_listColumns->GetStringSelection();
-	for (int i = 0; i< m_pTable->columns->GetColCount(); ++i) {
-		Column* col = m_pTable->columns->GetByIndex(i);
+	Column* col = wxDynamicCast(m_pTable->GetFristColumn(),Column);
+	while(col){
+		
 		if ((col)&&(col->getName() == name)) {
 			m_pEditedColumn = col;
 			m_txColName->SetValue(col->getName());
@@ -41,11 +42,12 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 				m_checkBox3->SetValue(type->GetUnique());
 			}
 		}
+		col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
 	}
 }
 void TableSettings::OnNewColumnClick(wxCommandEvent& event) {
 	Column* pCol = new Column(wxT("New col"),m_pTable->getName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()), false, false);
-	if (pCol) m_pTable->columns->AddColumn(pCol);
+	if (pCol) m_pTable->AddColumn(pCol);
 	UpdateView();
 }
 void TableSettings::OnOKClick(wxCommandEvent& event) {
@@ -81,13 +83,12 @@ void TableSettings::SetTable(Table* tab) {
 
 void TableSettings::UpdateView() {
 	m_listColumns->Clear();
-	if (m_pTable->columns) {
+	if (m_pTable) {
 		m_txTableName->SetValue(m_pTable->getName());
-		for (int i = 0; i< m_pTable->columns->GetColCount(); ++i) {
-			Column* col = m_pTable->columns->GetByIndex(i);
-			if (col) {
-				m_listColumns->AppendString(col->getName());
-			}
+		Column* col = m_pTable->GetFristColumn();
+		while(col){
+			m_listColumns->AppendString(col->getName());
+			col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
 		}
 	}
 
