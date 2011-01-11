@@ -148,9 +148,14 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
+ controls/include/wx/wxxmlserializer/XmlSerializer.h \
+ controls/include/wx/wxxmlserializer/PropertyIO.h \
+ /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ controls/include/wx/wxxmlserializer/Defs.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
@@ -159,9 +164,11 @@
  IDbAdapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../mysqldbadapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../my_sql_type.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../dbitem.h \
  MySqlDbConnector.h IDbConnector.h SqliteDbConnector.h \
- controls/include/wx/dblayer/SqliteDatabaseLayer.h
+ controls/include/wx/dblayer/SqliteDatabaseLayer.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../sqlitedbadapter.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbSettingDialog.h:
 
@@ -645,11 +652,23 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h:
 
+controls/include/wx/wxxmlserializer/XmlSerializer.h:
+
+controls/include/wx/wxxmlserializer/PropertyIO.h:
+
+/usr/include/wx-2.8/wx/xml/xml.h:
+
+/usr/include/wx-2.8/wx/tokenzr.h:
+
+controls/include/wx/wxxmlserializer/Defs.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h:
 
@@ -667,6 +686,8 @@ IDbAdapter.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../databasecol.h:
 
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../my_sql_type.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../dbitem.h:
 
 MySqlDbConnector.h:
@@ -676,3 +697,5 @@ IDbConnector.h:
 SqliteDbConnector.h:
 
 controls/include/wx/dblayer/SqliteDatabaseLayer.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../sqlitedbadapter.h:

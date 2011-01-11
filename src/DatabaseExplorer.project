@@ -10,7 +10,6 @@
       <File Name="gui/SqlCommandPanel.h"/>
       <File Name="gui/Art.h"/>
       <File Name="gui/Ids.h"/>
-      <File Name="my_sql_type.h"/>
       <File Name="gui/tablesettings.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="src">
@@ -124,14 +123,12 @@
     <File Name="IDbItem.cpp"/>
     <File Name="IDbAdapter.h"/>
     <File Name="IDbType.h"/>
-    <File Name="my_sql_type.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="dbEngine">
     <VirtualDirectory Name="include">
       <File Name="table.h"/>
       <File Name="tablecol.h"/>
       <File Name="column.h"/>
-      <File Name="columncol.h"/>
       <File Name="DbColumn.h"/>
       <File Name="DbDatabase.h"/>
       <File Name="databasecol.h"/>
@@ -139,7 +136,6 @@
     </VirtualDirectory>
     <VirtualDirectory Name="src">
       <File Name="column.cpp"/>
-      <File Name="columncol.cpp"/>
       <File Name="tablecol.cpp"/>
       <File Name="table.cpp"/>
       <File Name="DbDatabase.cpp"/>
@@ -157,6 +153,8 @@
     <File Name="wx_pch.h"/>
     <File Name="mysqldbadapter.h"/>
     <File Name="BuildNum.h"/>
+    <File Name="my_sql_type.h"/>
+    <File Name="sqlitedbadapter.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="DatabaseExplorerApp.cpp"/>
@@ -166,6 +164,8 @@
     <File Name="dbitem.cpp"/>
     <File Name="mysqldbadapter.cpp"/>
     <File Name="wx_pch.cpp"/>
+    <File Name="my_sql_type.cpp"/>
+    <File Name="sqlitedbadapter.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="ErdEngine">
     <VirtualDirectory Name="Include">

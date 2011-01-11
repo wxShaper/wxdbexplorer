@@ -57,6 +57,7 @@ void Column::Edit(wxString& name,
 			bool notNull,
 			bool primaryKey)
 {
+		this->m_pType = NULL;
 		this->m_name = name;
 		this->m_parentName = parentName;
 		this->m_type = type;

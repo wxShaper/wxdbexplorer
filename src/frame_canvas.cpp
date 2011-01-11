@@ -1,6 +1,10 @@
 #include "frame_canvas.h"
 #include "erd_table.h"
 
+
+// definice konstanty uzivatelského datového typu pro DnD
+static const wxChar *dropTableFormatID = wxT("dropTableFormat");
+
 FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWindow* parent, wxPanel* parentPanel, wxWindowID id):
 	wxSFShapeCanvas(manager,parent,id, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL | wxSTATIC_BORDER) {
 	m_pParentPanel = (ErdPanel*) parentPanel;

@@ -105,6 +105,10 @@
  controls/include/wx/dblayer/DatabaseErrorReporter.h \
  controls/include/wx/dblayer/DatabaseStringConverter.h \
  controls/include/wx/dblayer/ResultSetMetaData.h \
+ controls/include/wx/wxxmlserializer/XmlSerializer.h \
+ controls/include/wx/wxxmlserializer/PropertyIO.h \
+ /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ controls/include/wx/wxxmlserializer/Defs.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
@@ -493,6 +497,16 @@ controls/include/wx/dblayer/DatabaseErrorReporter.h:
 controls/include/wx/dblayer/DatabaseStringConverter.h:
 
 controls/include/wx/dblayer/ResultSetMetaData.h:
+
+controls/include/wx/wxxmlserializer/XmlSerializer.h:
+
+controls/include/wx/wxxmlserializer/PropertyIO.h:
+
+/usr/include/wx-2.8/wx/xml/xml.h:
+
+/usr/include/wx-2.8/wx/tokenzr.h:
+
+controls/include/wx/wxxmlserializer/Defs.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
 

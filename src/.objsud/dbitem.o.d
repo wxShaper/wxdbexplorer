@@ -109,6 +109,10 @@
  controls/include/wx/dblayer/ResultSetMetaData.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
+ controls/include/wx/wxxmlserializer/XmlSerializer.h \
+ controls/include/wx/wxxmlserializer/PropertyIO.h \
+ /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ controls/include/wx/wxxmlserializer/Defs.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
@@ -116,6 +120,7 @@
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h \
  /usr/include/wx-2.8/wx/treebase.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/dbitem.h:
@@ -506,6 +511,16 @@ controls/include/wx/dblayer/ResultSetMetaData.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
 
+controls/include/wx/wxxmlserializer/XmlSerializer.h:
+
+controls/include/wx/wxxmlserializer/PropertyIO.h:
+
+/usr/include/wx-2.8/wx/xml/xml.h:
+
+/usr/include/wx-2.8/wx/tokenzr.h:
+
+controls/include/wx/wxxmlserializer/Defs.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
@@ -519,5 +534,7 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:
 
 /usr/include/wx-2.8/wx/treebase.h:

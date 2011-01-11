@@ -21,7 +21,32 @@ TableSettings::~TableSettings() {
 }
 
 void TableSettings::OnListBoxClick(wxCommandEvent& event) {
-	wxString name = m_listColumns->GetStringSelection();
+	wxString name = m_listColumns->GetStringSelection();	
+	Column* col;
+	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
+	while( node ){
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
+		
+		if ((col)&&(col->getName() == name)) {
+			m_pEditedColumn = col;
+			m_txColName->SetValue(col->getName());
+
+			IDbType* type = col->getPType();
+			if (type) {
+				m_comboType->SetValue(type->GetTypeName());
+				m_txSize->SetValue(wxString::Format(wxT("%li"),type->GetSize()));
+				m_chAutoIncrement->SetValue(type->GetAutoIncrement());
+				m_chNotNull->SetValue(type->GetNotNull());
+				m_chPrimary->SetValue(type->GetPrimaryKey());
+				m_checkBox3->SetValue(type->GetUnique());
+			}
+		}		
+		node = node->GetNext();
+	}
+	
+	
+	
+	/*
 	Column* col = wxDynamicCast(m_pTable->GetFristColumn(),Column);
 	while(col){
 		
@@ -40,7 +65,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			}
 		}
 		col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
-	}
+	}*/
 }
 void TableSettings::OnNewColumnClick(wxCommandEvent& event) {
 	Column* pCol = new Column(wxT("New col"),m_pTable->getName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()), false, false);
@@ -77,20 +102,29 @@ void TableSettings::OnTypeSelect(wxCommandEvent& event) {
 
 void TableSettings::SetTable(Table* tab) {
 	m_pTable = tab;
+	if (m_pTable) m_txTableName->SetValue(tab->getName());
 	UpdateView();
 }
 
 void TableSettings::UpdateView() {
 	m_listColumns->Clear();
 	if (m_pTable) {
-		m_txTableName->SetValue(m_pTable->getName());
-		Column* col = m_pTable->GetFristColumn();
-		while(col){
-			m_listColumns->AppendString(col->getName());
-			col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
-		}
+		
+		SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
+		while( node ){
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_listColumns->AppendString(((Column*) node->GetData())->getName());
+			node = node->GetNext();
+			}
+		
 	}
-
+	m_pEditedColumn = NULL;
+	m_txColName->Clear();
+	m_txSize->Clear();
+	m_comboType->SetValue(wxT(""));
+	m_chAutoIncrement->SetValue(false);
+	m_chNotNull->SetValue(false);
+	m_chPrimary->SetValue(false);
+	m_checkBox3->SetValue(false);
 }
 
 void TableSettings::OnAutoIncrementUI(wxUpdateUIEvent& event) {
@@ -140,5 +174,16 @@ void TableSettings::OnUniqueUI(wxUpdateUIEvent& event) {
 	}
 }
 void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
-	
+	wxString name = m_listColumns->GetStringSelection();	
+	Column* col;
+	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
+	while( node ){
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
+		
+		if ((col)&&(col->getName() == name)) break;
+				
+		node = node->GetNext();
+	}	
+	m_pTable->GetParentManager()->RemoveItem(col);
+	UpdateView();
 }

@@ -147,6 +147,10 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../database.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../tablecol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
+ controls/include/wx/wxxmlserializer/XmlSerializer.h \
+ controls/include/wx/wxxmlserializer/PropertyIO.h \
+ /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ controls/include/wx/wxxmlserializer/Defs.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
@@ -164,19 +168,17 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DbSettingDialog.h \
  MySqlDbConnector.h IDbConnector.h SqliteDbConnector.h \
  controls/include/wx/dblayer/SqliteDatabaseLayer.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../sqlitedbadapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/SqlCommandPanel.h \
  controls/include/wx/dblayer/DatabaseLayerException.h \
  controls/include/wx/dblayer/DatabaseErrorCodes.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/ErdPanel.h \
  controls/include/wx/wxsf/wxShapeFramework.h \
  controls/include/wx/wxsf/DiagramManager.h \
- controls/include/wx/wxsf/ShapeBase.h /usr/include/wx-2.8/wx/tokenzr.h \
- /usr/include/wx-2.8/wx/xml/xml.h controls/include/wx/wxsf/ShapeHandle.h \
+ controls/include/wx/wxsf/ShapeBase.h \
+ controls/include/wx/wxsf/ShapeHandle.h \
  controls/include/wx/wxsf/ScaledDC.h controls/include/wx/wxsf/Defs.h \
  controls/include/wx/wxsf/ShapeDockpoint.h \
- controls/include/wx/wxxmlserializer/XmlSerializer.h \
- controls/include/wx/wxxmlserializer/PropertyIO.h \
- controls/include/wx/wxxmlserializer/Defs.h \
  controls/include/wx/wxsf/CommonFcn.h \
  controls/include/wx/wxsf/ShapeCanvas.h \
  controls/include/wx/wxsf/MultiSelRect.h \
@@ -216,6 +218,8 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/GUI.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../table.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbAdapter.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Tool.xpm \
@@ -709,6 +713,16 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h:
 
+controls/include/wx/wxxmlserializer/XmlSerializer.h:
+
+controls/include/wx/wxxmlserializer/PropertyIO.h:
+
+/usr/include/wx-2.8/wx/xml/xml.h:
+
+/usr/include/wx-2.8/wx/tokenzr.h:
+
+controls/include/wx/wxxmlserializer/Defs.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
@@ -747,6 +761,8 @@ SqliteDbConnector.h:
 
 controls/include/wx/dblayer/SqliteDatabaseLayer.h:
 
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../sqlitedbadapter.h:
+
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/SqlCommandPanel.h:
 
 controls/include/wx/dblayer/DatabaseLayerException.h:
@@ -761,10 +777,6 @@ controls/include/wx/wxsf/DiagramManager.h:
 
 controls/include/wx/wxsf/ShapeBase.h:
 
-/usr/include/wx-2.8/wx/tokenzr.h:
-
-/usr/include/wx-2.8/wx/xml/xml.h:
-
 controls/include/wx/wxsf/ShapeHandle.h:
 
 controls/include/wx/wxsf/ScaledDC.h:
@@ -772,12 +784,6 @@ controls/include/wx/wxsf/ScaledDC.h:
 controls/include/wx/wxsf/Defs.h:
 
 controls/include/wx/wxsf/ShapeDockpoint.h:
-
-controls/include/wx/wxxmlserializer/XmlSerializer.h:
-
-controls/include/wx/wxxmlserializer/PropertyIO.h:
-
-controls/include/wx/wxxmlserializer/Defs.h:
 
 controls/include/wx/wxsf/CommonFcn.h:
 
@@ -864,6 +870,10 @@ controls/include/wx/wxsf/SFEvents.h:
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../table.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../column.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbType.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/../IDbAdapter.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h:
 

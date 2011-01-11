@@ -7,12 +7,14 @@
 #include <wx/dblayer/DatabaseLayer.h>
 #include <wx/dblayer/MysqlDatabaseLayer.h>
 #include <wx/dblayer/DatabaseErrorCodes.h>
+#include "IDbAdapter.h"
+
 
 class SQLCommandPanel : public _SqlCommandPanel
 {
 
 public:
-	SQLCommandPanel(wxWindow *parent, wxString& dbName, DatabaseLayer* pDbLayer, wxString& dbTable);
+	SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  wxString& dbName, wxString& dbTable);
 	virtual ~SQLCommandPanel();
 	virtual void OnExecuteClick(wxCommandEvent& event);
 	virtual void OnScintilaKeyDown(wxKeyEvent& event);
@@ -23,7 +25,7 @@ public:
 	void ExecuteSql();
 
 protected:
-	DatabaseLayer* m_pDbLayer;
+	IDbAdapter* m_pDbAdapter;
 	wxString m_dbName;
 	wxString m_dbTable;
 

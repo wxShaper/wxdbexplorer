@@ -4,6 +4,7 @@
 WX_DEFINE_OBJARRAY(ArrayOfDatabase);
 DatabaseCol::DatabaseCol()
 {
+	this->m_al.Clear();
 }
 
 DatabaseCol::~DatabaseCol()

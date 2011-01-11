@@ -6,6 +6,7 @@ WX_DEFINE_OBJARRAY(ArrayOfTable);
 TableCol::TableCol(const wxString& dbName)
 {
 	this->m_dbName = dbName;
+	this->m_al.Clear();
 }
 TableCol::~TableCol()
 {

@@ -12,7 +12,7 @@ Table::Table(const Table& obj): xsSerializable(obj)
 	this->m_name = obj.m_name;
 	this->m_parentName = obj.m_parentName;
 	this->m_rowCount = obj.m_rowCount;
-	this->m_lstChildItems = obj.m_lstChildItems;
+	//this->m_lstChildItems = obj.m_lstChildItems;
 	initSerializable();
 
 }

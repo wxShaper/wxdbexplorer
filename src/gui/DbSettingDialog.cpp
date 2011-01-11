@@ -29,6 +29,9 @@ void DbSettingDialog::OnOkClick(wxCommandEvent& event) {
 }
 void DbSettingDialog::OnSqliteOkClick(wxCommandEvent& event) {
 	SqliteDatabaseLayer *DbLayer = new SqliteDatabaseLayer(m_filePickerSqlite->GetPath());
+	m_pParent->SetDbAdapter(new SQLiteDbAdapter(m_filePickerSqlite->GetPath()));
+	
+	
 	if (!DbLayer->IsOpen()) wxMessageBox(wxT("Cannot open DB!"));
 	//m_pParent->SetDbLayer(DbLayer);
 

@@ -17,12 +17,14 @@ public:
 
 	virtual DatabaseCol* GetDatabases();
 	virtual TableCol* GetTables(const wxString& dbName);
-	virtual ColumnCol* GetColumns(const wxString& tableName);
+	//virtual ColumnCol* GetColumns(const wxString& tableName);
 
 	virtual bool IsConnected();
 	virtual void CloseConnection();
 	virtual DatabaseLayer* GetDatabaseLayer();
 
+
+	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
 	static wxString GetCreateTableSql(Table* tab);
 
 	virtual IDbType* GetDbTypeByName(const wxString& typeName);

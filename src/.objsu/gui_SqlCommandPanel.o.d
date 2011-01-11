@@ -129,7 +129,11 @@
  controls/include/wx/dblayer/DatabaseQueryParser.h \
  controls/include/wx/dblayer/MysqlDatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
- controls/include/wx/dblayer/DatabaseErrorCodes.h \
+ controls/include/wx/dblayer/DatabaseErrorCodes.h IDbAdapter.h IDbType.h \
+ controls/include/wx/wxxmlserializer/XmlSerializer.h \
+ controls/include/wx/wxxmlserializer/PropertyIO.h \
+ /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ controls/include/wx/wxxmlserializer/Defs.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DatabaseExplorerFrame.h \
  /usr/include/wx-2.8/wx/aui/aui.h \
  /usr/include/wx-2.8/wx/aui/framemanager.h \
@@ -586,6 +590,20 @@ controls/include/wx/dblayer/MysqlDatabaseLayer.h:
 controls/include/wx/dblayer/DatabaseLayer.h:
 
 controls/include/wx/dblayer/DatabaseErrorCodes.h:
+
+IDbAdapter.h:
+
+IDbType.h:
+
+controls/include/wx/wxxmlserializer/XmlSerializer.h:
+
+controls/include/wx/wxxmlserializer/PropertyIO.h:
+
+/usr/include/wx-2.8/wx/xml/xml.h:
+
+/usr/include/wx-2.8/wx/tokenzr.h:
+
+controls/include/wx/wxxmlserializer/Defs.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/DatabaseExplorerFrame.h:
 

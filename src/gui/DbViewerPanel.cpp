@@ -35,7 +35,7 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 		Table* table = item->GetTable();
 		wxString dbName = table->getParentName();
 		wxString dbTable = table->getName();
-		m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,dbName,m_pDbAdapter->GetDatabaseLayer(),dbTable),dbName,true);
+		m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,m_pDbAdapter,dbName,dbTable),dbName,true);
 
 	}
 
@@ -78,9 +78,11 @@ void DbViewerPanel::RefreshDbView() {
 		m_treeDatabases->Expand(rootID);
 		wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
 		m_treeDatabases->Expand(dbID);
-		for (int tabC = 0; tabC < db->tables->GetTableCount(); tabC++) {
-			Table *tab =  db->tables->GetByIndex(tabC);
-			wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,tab->getName(),1,-1,new DbItem(NULL,tab)); //NULL);
+		if (db->tables){
+			for (int tabC = 0; tabC < db->tables->GetTableCount(); tabC++) {
+				Table *tab =  db->tables->GetByIndex(tabC);
+				wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,tab->getName(),1,-1,new DbItem(NULL,tab)); //NULL);
+			}
 		}
 	}
 

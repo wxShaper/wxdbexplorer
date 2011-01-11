@@ -2,8 +2,9 @@
 #define IDBTYPE_H
 
 #include <wx/wx.h>
+#include <wx/wxxmlserializer/XmlSerializer.h>
 
-class IDbType
+class IDbType: public xsSerializable
 {
 public:
 		virtual wxString GetTypeName() = 0;

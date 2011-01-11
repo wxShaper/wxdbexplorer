@@ -13,10 +13,6 @@ void MySqlDbAdapter::CloseConnection() {
 	this->m_pDbLayer->Close();
 }
 
-ColumnCol* MySqlDbAdapter::GetColumns(const wxString& tableName) {
-	return new ColumnCol(tableName);
-}
-
 DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
 	DatabaseLayer* dbLayer = new MysqlDatabaseLayer(this->m_serverName, wxT(""), this->m_userName, this->m_password);
 	return dbLayer;
@@ -67,11 +63,11 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab) {
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
 
 	Column* col = tab->GetFristColumn();
-	while (col){
+	while (col) {
 		str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getType().c_str()));
 		col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
 		if (col) str.append(wxT(",\n ")) ;
-		else  str.append(wxT("\n ")) ;	
+		else  str.append(wxT("\n ")) ;
 	}
 
 	str.append(wxT(")"));
@@ -81,16 +77,16 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab) {
 
 IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	IDbType* type;
-	if (typeName == wxT("INT")){
-			type = new MySqlType(wxT("INT"),true,false,true,false,false);
-	}else if (typeName == wxT("VARCHAR")){	
-			type = new MySqlType(wxT("VARCHAR"),false,true,false,true,true);
-	}else if (typeName == wxT("DOUBLE")){	
-			type = new MySqlType(wxT("DOUBLE"),true, false, true, false, false);
-	}else if (typeName == wxT("FLOAT")){	
-			type = new MySqlType(wxT("FLOAT"),true, false, true, false, false);
-	}else if (typeName == wxT("BOOL")){
-			type = new MySqlType(wxT("BOOL"), false, false, false, false, false);
+	if (typeName == wxT("INT")) {
+		type = new MySqlType(wxT("INT"),true,false,true,false,false);
+	} else if (typeName == wxT("VARCHAR")) {
+		type = new MySqlType(wxT("VARCHAR"),false,true,false,true,true);
+	} else if (typeName == wxT("DOUBLE")) {
+		type = new MySqlType(wxT("DOUBLE"),true, false, true, false, false);
+	} else if (typeName == wxT("FLOAT")) {
+		type = new MySqlType(wxT("FLOAT"),true, false, true, false, false);
+	} else if (typeName == wxT("BOOL")) {
+		type = new MySqlType(wxT("BOOL"), false, false, false, false, false);
 	}
 	return type;
 }
@@ -103,4 +99,8 @@ wxArrayString* MySqlDbAdapter::GetDbTypes() {
 	pNames->Add(wxT("FLOAT"));
 	pNames->Add(wxT("BOOL"));
 	return pNames;
+}
+wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
+	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s`"), dbName.c_str(), tableName.c_str());
+	return ret;
 }
