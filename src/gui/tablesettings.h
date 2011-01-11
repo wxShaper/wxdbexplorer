@@ -17,7 +17,6 @@ public:
 	virtual ~TableSettings();
 	void SetTable(Table* tab);
 
-	virtual void OnCancelClick(wxCommandEvent& event);
 	virtual void OnListBoxClick(wxCommandEvent& event);
 	virtual void OnNewColumnClick(wxCommandEvent& event);
 	virtual void OnOKClick(wxCommandEvent& event);
@@ -31,6 +30,7 @@ public:
 	virtual void OnNotNullUI(wxUpdateUIEvent& event);
 	virtual void OnPrimaryKeyUI(wxUpdateUIEvent& event);
 	virtual void OnUniqueUI(wxUpdateUIEvent& event);
+	virtual void OnDeleteColumn(wxCommandEvent& event);
 
 protected:
 	Table* m_pTable;

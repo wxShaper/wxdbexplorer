@@ -12,7 +12,7 @@ Table::Table(const Table& obj): xsSerializable(obj)
 	this->m_name = obj.m_name;
 	this->m_parentName = obj.m_parentName;
 	this->m_rowCount = obj.m_rowCount;
-		
+	this->m_lstChildItems = obj.m_lstChildItems;
 	initSerializable();
 
 }
@@ -44,6 +44,7 @@ void Table::initSerializable()
 	XS_SERIALIZE(this->m_name,wxT("tableName")); 
 	XS_SERIALIZE(this->m_parentName,wxT("parentName")); 
 	XS_SERIALIZE_INT(this->m_rowCount, wxT("rowCount"));
+	XS_SERIALIZE_LISTSERIALIZABLE(m_lstChildItems,wxT("Columns"));
 
 }
 

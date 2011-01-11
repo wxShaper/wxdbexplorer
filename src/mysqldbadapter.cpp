@@ -85,6 +85,12 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 			type = new MySqlType(wxT("INT"),true,false,true,false,false);
 	}else if (typeName == wxT("VARCHAR")){	
 			type = new MySqlType(wxT("VARCHAR"),false,true,false,true,true);
+	}else if (typeName == wxT("DOUBLE")){	
+			type = new MySqlType(wxT("DOUBLE"),true, false, true, false, false);
+	}else if (typeName == wxT("FLOAT")){	
+			type = new MySqlType(wxT("FLOAT"),true, false, true, false, false);
+	}else if (typeName == wxT("BOOL")){
+			type = new MySqlType(wxT("BOOL"), false, false, false, false, false);
 	}
 	return type;
 }
@@ -93,5 +99,8 @@ wxArrayString* MySqlDbAdapter::GetDbTypes() {
 	wxArrayString* pNames = new wxArrayString();
 	pNames->Add(wxT("INT"));
 	pNames->Add(wxT("VARCHAR"));
+	pNames->Add(wxT("DOUBLE"));
+	pNames->Add(wxT("FLOAT"));
+	pNames->Add(wxT("BOOL"));
 	return pNames;
 }

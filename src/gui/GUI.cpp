@@ -294,7 +294,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_MySqlPanel->SetSizer( fgSizer3 );
 	m_MySqlPanel->Layout();
 	fgSizer3->Fit( m_MySqlPanel );
-	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), false );
+	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), true );
 	m_Sqlite = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer31;
 	fgSizer31 = new wxFlexGridSizer( 2, 1, 0, 0 );
@@ -344,7 +344,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_Sqlite->SetSizer( fgSizer31 );
 	m_Sqlite->Layout();
 	fgSizer31->Fit( m_Sqlite );
-	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), true );
+	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), false );
 	
 	bSizer4->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	
@@ -454,6 +454,9 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_button8 = new wxButton( m_panel14, wxID_NEW, wxT("New"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer8->Add( m_button8, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
+	m_button10 = new wxButton( m_panel14, wxID_DEL, wxT("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer8->Add( m_button10, 0, wxALL, 5 );
+	
 	m_button9 = new wxButton( m_panel14, wxID_SAVE, wxT("Save"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer8->Add( m_button9, 1, wxALL, 5 );
 	
@@ -486,14 +489,14 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	bSizer7->Add( m_staticText9, 0, wxALL, 5 );
 	
 	m_comboType = new wxComboBox( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
-	bSizer7->Add( m_comboType, 0, wxALL, 5 );
+	bSizer7->Add( m_comboType, 0, wxALL|wxEXPAND, 5 );
 	
 	m_stSize = new wxStaticText( m_panel11, wxID_ANY, wxT("Size:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stSize->Wrap( -1 );
 	bSizer7->Add( m_stSize, 0, wxALL, 5 );
 	
-	m_txSize = new wxTextCtrl( m_panel11, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer7->Add( m_txSize, 0, wxALL|wxEXPAND, 5 );
+	m_txSize = new wxTextCtrl( m_panel11, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT );
+	bSizer7->Add( m_txSize, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 5 );
 	
 	m_chPrimary = new wxCheckBox( m_panel11, wxID_ANY, wxT("Primary key"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chPrimary, 0, wxALL, 5 );
@@ -525,8 +528,6 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_sdbSizer2 = new wxStdDialogButtonSizer();
 	m_sdbSizer2OK = new wxButton( this, wxID_OK );
 	m_sdbSizer2->AddButton( m_sdbSizer2OK );
-	m_sdbSizer2Cancel = new wxButton( this, wxID_CANCEL );
-	m_sdbSizer2->AddButton( m_sdbSizer2Cancel );
 	m_sdbSizer2->Realize();
 	fgSizer9->Add( m_sdbSizer2, 1, wxEXPAND|wxBOTTOM|wxRIGHT, 5 );
 	
@@ -539,6 +540,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	// Connect Events
 	m_listColumns->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnListBoxClick ), NULL, this );
 	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
+	m_button10->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnDeleteColumn ), NULL, this );
 	m_button9->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
 	m_txColName->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
 	m_comboType->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
@@ -548,7 +550,6 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_chNotNull->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
 	m_checkBox3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
 	m_chAutoIncrement->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
-	m_sdbSizer2Cancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnCancelClick ), NULL, this );
 	m_sdbSizer2OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 }
 
@@ -557,6 +558,7 @@ _TableSettings::~_TableSettings()
 	// Disconnect Events
 	m_listColumns->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnListBoxClick ), NULL, this );
 	m_button8->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
+	m_button10->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnDeleteColumn ), NULL, this );
 	m_button9->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
 	m_txColName->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
 	m_comboType->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
@@ -566,7 +568,6 @@ _TableSettings::~_TableSettings()
 	m_chNotNull->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
 	m_checkBox3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
 	m_chAutoIncrement->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
-	m_sdbSizer2Cancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnCancelClick ), NULL, this );
 	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 	
 }

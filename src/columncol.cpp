@@ -54,7 +54,7 @@ void ColumnCol::SetTableName(const wxString& tableName)
 
 void ColumnCol::initSerializable()
 {
-	XS_SERIALIZE_PROPERTY(m_al, wxT("serializabledynamicnocreate"), wxT("cols"));
+	//XS_SERIALIZE_PROPERTY(m_al, wxT("serializabledynamicnocreate"), wxT("cols"));
 	//XS_SERIALIZE(m_al, wxT("cols"));
 	XS_SERIALIZE(m_tableName,wxT("tableName")); 
 	

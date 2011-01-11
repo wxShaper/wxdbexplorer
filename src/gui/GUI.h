@@ -46,7 +46,8 @@
 #define wxID_TOOL_REFRESH 1000
 #define wxID_TOOL_ERD 1001
 #define wxID_Sqlite_OK 1002
-#define wxID_TX_SIZE 1003
+#define wxID_DEL 1003
+#define wxID_TX_SIZE 1004
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -207,6 +208,7 @@ class _TableSettings : public wxDialog
 		wxListBox* m_listColumns;
 		wxPanel* m_panel14;
 		wxButton* m_button8;
+		wxButton* m_button10;
 		wxButton* m_button9;
 		wxStaticLine* m_staticline2;
 		wxPanel* m_panel11;
@@ -222,11 +224,11 @@ class _TableSettings : public wxDialog
 		wxCheckBox* m_chAutoIncrement;
 		wxStdDialogButtonSizer* m_sdbSizer2;
 		wxButton* m_sdbSizer2OK;
-		wxButton* m_sdbSizer2Cancel;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnListBoxClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNewColumnClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnDeleteColumn( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveColumnClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnColNameUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnTypeSelect( wxCommandEvent& event ) { event.Skip(); }
@@ -236,7 +238,6 @@ class _TableSettings : public wxDialog
 		virtual void OnNotNullUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnUniqueUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnAutoIncrementUI( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	
