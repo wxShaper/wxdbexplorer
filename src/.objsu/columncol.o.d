@@ -1,6 +1,5 @@
-.objsu/columncol.o: \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.cpp \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
+.objsu/columncol.o: /home/jankup/SourceCpp/wxdbexplorer/src/columncol.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/src/columncol.h \
  /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
@@ -106,15 +105,20 @@
  controls/include/wx/dblayer/DatabaseErrorReporter.h \
  controls/include/wx/dblayer/DatabaseStringConverter.h \
  controls/include/wx/dblayer/ResultSetMetaData.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
+ controls/include/wx/wxxmlserializer/XmlSerializer.h \
+ controls/include/wx/wxxmlserializer/PropertyIO.h \
+ /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ controls/include/wx/wxxmlserializer/Defs.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h \
  /usr/include/wx-2.8/wx/arrimpl.cpp
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/columncol.h:
 
 /usr/include/wx-2.8/wx/wx.h:
 
@@ -496,9 +500,19 @@ controls/include/wx/dblayer/DatabaseStringConverter.h:
 
 controls/include/wx/dblayer/ResultSetMetaData.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
+controls/include/wx/wxxmlserializer/XmlSerializer.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
+controls/include/wx/wxxmlserializer/PropertyIO.h:
+
+/usr/include/wx-2.8/wx/xml/xml.h:
+
+/usr/include/wx-2.8/wx/tokenzr.h:
+
+controls/include/wx/wxxmlserializer/Defs.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/src/column.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
@@ -507,5 +521,7 @@ controls/include/wx/dblayer/DatabaseResultSet.h:
 controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h:
 
 /usr/include/wx-2.8/wx/arrimpl.cpp:

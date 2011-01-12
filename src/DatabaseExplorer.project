@@ -1,34 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="DatabaseExplorer">
   <VirtualDirectory Name="gui">
-    <VirtualDirectory Name="include">
-      <File Name="gui/DatabaseExplorerFrame.h"/>
-      <File Name="gui/DbSettingDialog.h"/>
-      <File Name="gui/DbViewerPanel.h"/>
-      <File Name="gui/ErdPanel.h"/>
-      <File Name="gui/GUI.h"/>
-      <File Name="gui/SqlCommandPanel.h"/>
-      <File Name="gui/Art.h"/>
-      <File Name="gui/Ids.h"/>
-      <File Name="gui/tablesettings.h"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="src">
-      <File Name="gui/DatabaseExplorerFrame.cpp"/>
-      <File Name="gui/DbSettingDialog.cpp"/>
-      <File Name="gui/DbViewerPanel.cpp"/>
-      <File Name="gui/ErdPanel.cpp"/>
-      <File Name="gui/GUI.cpp"/>
-      <File Name="gui/SqlCommandPanel.cpp"/>
-      <File Name="gui/tablesettings.cpp"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="res">
-      <File Name="gui/GUI.fbp"/>
-    </VirtualDirectory>
+    <File Name="gui/GUI.cpp"/>
+    <File Name="gui/DbViewerPanel.cpp"/>
+    <File Name="gui/SqlCommandPanel.cpp"/>
+    <File Name="gui/ErdPanel.cpp"/>
+    <File Name="gui/DbSettingDialog.cpp"/>
+    <File Name="gui/tablesettings.cpp"/>
+    <File Name="gui/DatabaseExplorerFrame.cpp"/>
+    <File Name="gui/Art.h"/>
+    <File Name="gui/tablesettings.h"/>
+    <File Name="gui/ErdPanel.h"/>
+    <File Name="gui/DbViewerPanel.h"/>
+    <File Name="gui/GUI.h"/>
+    <File Name="gui/DatabaseExplorerFrame.h"/>
+    <File Name="gui/SqlCommandPanel.h"/>
+    <File Name="gui/Ids.h"/>
+    <File Name="gui/DbSettingDialog.h"/>
+    <File Name="gui/GUI.fbp"/>
   </VirtualDirectory>
+  <File Name="column.cpp"/>
+  <File Name="columncol.cpp"/>
+  <File Name="tablecol.cpp"/>
+  <File Name="DatabaseExplorerApp.cpp"/>
+  <File Name="DbTable.cpp"/>
+  <File Name="database.cpp"/>
+  <File Name="IDbItem.cpp"/>
+  <File Name="dndtableshape.cpp"/>
+  <File Name="SqliteDbConnector.cpp"/>
+  <File Name="databasecol.cpp"/>
+  <File Name="MySqlDbConnector.cpp"/>
+  <File Name="dbitem.cpp"/>
+  <File Name="my_sql_type.cpp"/>
+  <File Name="table.cpp"/>
+  <File Name="sqlitedbadapter.cpp"/>
+  <File Name="DbDatabase.cpp"/>
+  <File Name="DbColumn.cpp"/>
+  <File Name="erd_table.cpp"/>
+  <File Name="mysqldbadapter.cpp"/>
+  <File Name="frame_canvas.cpp"/>
+  <File Name="wx_pch.cpp"/>
+  <File Name="DbDatabase.h"/>
+  <File Name="IDbAdapter.h"/>
+  <File Name="DatabaseExplorerApp.h"/>
+  <File Name="MySqlDbConnector.h"/>
+  <File Name="DbColumn.h"/>
+  <File Name="dbitem.h"/>
+  <File Name="frame_canvas.h"/>
+  <File Name="column.h"/>
+  <File Name="dndtableshape.h"/>
+  <File Name="SqliteDbConnector.h"/>
+  <File Name="IDbItem.h"/>
+  <File Name="sqlitedbadapter.h"/>
+  <File Name="erd_table.h"/>
+  <File Name="table.h"/>
+  <File Name="tablecol.h"/>
+  <File Name="DbTable.h"/>
+  <File Name="IDbType.h"/>
+  <File Name="my_sql_type.h"/>
+  <File Name="wx_pch.h"/>
+  <File Name="mysqldbadapter.h"/>
+  <File Name="IDbConnector.h"/>
+  <File Name="columncol.h"/>
+  <File Name="BuildNum.h"/>
+  <File Name="databasecol.h"/>
+  <File Name="database.h"/>
   <Settings Type="Executable">
     <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
       <General OutputFile="../bin/gcc/DatabaseExplorer" IntermediateDirectory=".objsu" Command="./DatabaseExplorer" CommandArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
-      <File Name="column.h"/>
       <Compiler Required="yes" Options="-Wall;-O3;-fno-strict-aliasing;`wx-config --debug=no --cflags`;">
         <IncludePath Value="controls/include"/>
         <IncludePath Value="."/>
@@ -51,16 +90,16 @@
       </Linker>
       <ResourceCompiler Required="no" Options=""/>
       <CustomBuild Enabled="no">
-        <CleanCommand/>
-        <BuildCommand/>
-        <SingleFileCommand/>
-        <MakefileGenerationCommand/>
+        <CleanCommand></CleanCommand>
+        <BuildCommand></BuildCommand>
+        <SingleFileCommand></SingleFileCommand>
+        <MakefileGenerationCommand></MakefileGenerationCommand>
         <ThirdPartyToolName>None</ThirdPartyToolName>
-        <WorkingDirectory/>
+        <WorkingDirectory></WorkingDirectory>
       </CustomBuild>
       <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
+        <CustomPostBuild></CustomPostBuild>
+        <CustomPreBuild></CustomPreBuild>
       </AdditionalRules>
     </Configuration>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
@@ -86,7 +125,6 @@
         <Library Value="wx_gtk2ud_shapeframework-2.8_cd"/>
         <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
         <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
-        <File Name="columncol.h"/>
       </Linker>
       <ResourceCompiler Required="no" Options=""/>
       <PreBuild>
@@ -94,16 +132,16 @@
       </PreBuild>
       <PostBuild/>
       <CustomBuild Enabled="no">
-        <CleanCommand/>
-        <BuildCommand/>
-        <SingleFileCommand/>
-        <MakefileGenerationCommand/>
+        <CleanCommand></CleanCommand>
+        <BuildCommand></BuildCommand>
+        <SingleFileCommand></SingleFileCommand>
+        <MakefileGenerationCommand></MakefileGenerationCommand>
         <ThirdPartyToolName>None</ThirdPartyToolName>
-        <WorkingDirectory/>
+        <WorkingDirectory></WorkingDirectory>
       </CustomBuild>
       <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
+        <CustomPostBuild></CustomPostBuild>
+        <CustomPreBuild></CustomPreBuild>
       </AdditionalRules>
     </Configuration>
   </Settings>
@@ -117,66 +155,4 @@
     <Project Name="wxScintilla"/>
     <Project Name="wxShapeFramework"/>
   </Dependencies>
-  <VirtualDirectory Name="interfaces">
-    <File Name="IDbConnector.h"/>
-    <File Name="IDbItem.h"/>
-    <File Name="IDbItem.cpp"/>
-    <File Name="IDbAdapter.h"/>
-    <File Name="IDbType.h"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="dbEngine">
-    <VirtualDirectory Name="include">
-      <File Name="table.h"/>
-      <File Name="tablecol.h"/>
-      <File Name="column.h"/>
-      <File Name="DbColumn.h"/>
-      <File Name="DbDatabase.h"/>
-      <File Name="databasecol.h"/>
-      <File Name="database.h"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="src">
-      <File Name="column.cpp"/>
-      <File Name="tablecol.cpp"/>
-      <File Name="table.cpp"/>
-      <File Name="DbDatabase.cpp"/>
-      <File Name="DbColumn.cpp"/>
-      <File Name="database.cpp"/>
-      <File Name="databasecol.cpp"/>
-    </VirtualDirectory>
-  </VirtualDirectory>
-  <VirtualDirectory Name="include">
-    <File Name="DatabaseExplorerApp.h"/>
-    <File Name="MySqlDbConnector.h"/>
-    <File Name="dbitem.h"/>
-    <File Name="SqliteDbConnector.h"/>
-    <File Name="DbTable.h"/>
-    <File Name="wx_pch.h"/>
-    <File Name="mysqldbadapter.h"/>
-    <File Name="BuildNum.h"/>
-    <File Name="my_sql_type.h"/>
-    <File Name="sqlitedbadapter.h"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="src">
-    <File Name="DatabaseExplorerApp.cpp"/>
-    <File Name="DbTable.cpp"/>
-    <File Name="SqliteDbConnector.cpp"/>
-    <File Name="MySqlDbConnector.cpp"/>
-    <File Name="dbitem.cpp"/>
-    <File Name="mysqldbadapter.cpp"/>
-    <File Name="wx_pch.cpp"/>
-    <File Name="my_sql_type.cpp"/>
-    <File Name="sqlitedbadapter.cpp"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="ErdEngine">
-    <VirtualDirectory Name="Include">
-      <File Name="frame_canvas.h"/>
-      <File Name="erd_table.h"/>
-      <File Name="dndtableshape.h"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="src">
-      <File Name="frame_canvas.cpp"/>
-      <File Name="erd_table.cpp"/>
-      <File Name="dndtableshape.cpp"/>
-    </VirtualDirectory>
-  </VirtualDirectory>
 </CodeLite_Project>

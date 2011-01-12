@@ -1,6 +1,5 @@
-.objsu/erd_table.o: \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.cpp \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h \
+.objsu/erd_table.o: /home/jankup/SourceCpp/wxdbexplorer/src/erd_table.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/src/erd_table.h \
  controls/include/wx/wxsf/RoundRectShape.h \
  controls/include/wx/wxsf/RectShape.h \
  controls/include/wx/wxsf/ShapeBase.h /usr/include/wx-2.8/wx/wxprec.h \
@@ -114,24 +113,24 @@
  controls/include/wx/wxsf/TextShape.h \
  controls/include/wx/wxsf/FlexGridShape.h \
  controls/include/wx/wxsf/GridShape.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/table.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  /usr/include/wx-2.8/wx/hashset.h \
  controls/include/wx/dblayer/DatabaseLayerDef.h \
  controls/include/wx/dblayer/DatabaseErrorReporter.h \
  controls/include/wx/dblayer/DatabaseStringConverter.h \
  controls/include/wx/dblayer/ResultSetMetaData.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/Ids.h
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/erd_table.h:
 
 controls/include/wx/wxsf/RoundRectShape.h:
 
@@ -531,7 +530,7 @@ controls/include/wx/wxsf/FlexGridShape.h:
 
 controls/include/wx/wxsf/GridShape.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/table.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
 
@@ -545,11 +544,11 @@ controls/include/wx/dblayer/DatabaseStringConverter.h:
 
 controls/include/wx/dblayer/ResultSetMetaData.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/columncol.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/column.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
@@ -559,6 +558,6 @@ controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/Ids.h:

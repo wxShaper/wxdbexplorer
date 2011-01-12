@@ -8,7 +8,7 @@
 #include "MySqlDbConnector.h"
 #include "SqliteDbConnector.h"
 #include "../mysqldbadapter.h"
-#include "../sqlitedbadapter.h"
+//#include "../sqlitedbadapter.h"
 
 class DbSettingDialog : public _DBSettingsDialog {
 

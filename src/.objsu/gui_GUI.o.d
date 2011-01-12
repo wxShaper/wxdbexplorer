@@ -1,6 +1,5 @@
-.objsu/gui_GUI.o: \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.cpp \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h \
+.objsu/gui_GUI.o: /home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.h \
  /usr/include/wx-2.8/wx/string.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
@@ -115,11 +114,11 @@
  /usr/include/wx-2.8/wx/filepicker.h /usr/include/wx-2.8/wx/pickerbase.h \
  /usr/include/wx-2.8/wx/gtk/filepicker.h \
  /usr/include/wx-2.8/wx/generic/filepickerg.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/fileopen.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/refresh.xpm
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/elements/Bound.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/fileopen.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/refresh.xpm
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.h:
 
 /usr/include/wx-2.8/wx/string.h:
 
@@ -529,8 +528,8 @@ controls/include/wx/propgrid/advprops.h:
 
 /usr/include/wx-2.8/wx/generic/filepickerg.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/elements/Bound.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/fileopen.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/fileopen.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/refresh.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/refresh.xpm:

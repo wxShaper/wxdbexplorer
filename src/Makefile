@@ -51,13 +51,17 @@ OBJECTS := \
 	$(OBJDIR)/DbTable.o \
 	$(OBJDIR)/database.o \
 	$(OBJDIR)/IDbItem.o \
+	$(OBJDIR)/dndtableshape.o \
 	$(OBJDIR)/SqliteDbConnector.o \
 	$(OBJDIR)/databasecol.o \
 	$(OBJDIR)/MySqlDbConnector.o \
 	$(OBJDIR)/dbitem.o \
+	$(OBJDIR)/my_sql_type.o \
 	$(OBJDIR)/table.o \
+	$(OBJDIR)/sqlitedbadapter.o \
 	$(OBJDIR)/DbDatabase.o \
 	$(OBJDIR)/DbColumn.o \
+	$(OBJDIR)/erd_table.o \
 	$(OBJDIR)/mysqldbadapter.o \
 	$(OBJDIR)/frame_canvas.o \
 	$(OBJDIR)/wx_pch.o \
@@ -66,6 +70,7 @@ OBJECTS := \
 	$(OBJDIR)/SqlCommandPanel.o \
 	$(OBJDIR)/ErdPanel.o \
 	$(OBJDIR)/DbSettingDialog.o \
+	$(OBJDIR)/tablesettings.o \
 	$(OBJDIR)/DatabaseExplorerFrame.o \
 
 MKDIR_TYPE := msdos
@@ -146,6 +151,11 @@ $(OBJDIR)/IDbItem.o: IDbItem.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/dndtableshape.o: dndtableshape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/SqliteDbConnector.o: SqliteDbConnector.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
@@ -166,7 +176,17 @@ $(OBJDIR)/dbitem.o: dbitem.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/my_sql_type.o: my_sql_type.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/table.o: table.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/sqlitedbadapter.o: sqlitedbadapter.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -177,6 +197,11 @@ $(OBJDIR)/DbDatabase.o: DbDatabase.cpp
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/DbColumn.o: DbColumn.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/erd_table.o: erd_table.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -217,6 +242,11 @@ $(OBJDIR)/ErdPanel.o: gui/ErdPanel.cpp
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/DbSettingDialog.o: gui/DbSettingDialog.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/tablesettings.o: gui/tablesettings.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
