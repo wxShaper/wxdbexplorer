@@ -19,6 +19,8 @@
 #include "../DbColumn.h"
 #include "IDbConnector.h"
 
+#include "../dndtableshape.h"
+
 #include "../databasecol.h"
 #include "../database.h"
 #include "../tablecol.h"
@@ -59,6 +61,7 @@ public:
 	virtual void OnRefreshClick(wxCommandEvent& event);
 	virtual void OnItemSelectionChange(wxTreeEvent& event);
 	virtual void OnERDClick(wxCommandEvent& event);
+	virtual void OnDnDStart(wxTreeEvent& event);
 
 	void RefreshDbView();
 

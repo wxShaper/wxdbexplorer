@@ -29,6 +29,7 @@ public:
 
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter);
 	virtual ~ErdPanel();
+	wxSFShapeCanvas* getCanvas();
 	
 
 

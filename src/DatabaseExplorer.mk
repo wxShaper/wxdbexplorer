@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Peter Janků
-Date                   :=11.1.2011
+Date                   :=12.1.2011
 CodeLitePath           :="/home/jankup/.codelite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -51,7 +51,7 @@ LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gc
 CodeLiteDir:=/usr/share/codelite
 Objects=$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_tablesettings$(ObjectSuffix) $(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IntermediateDirectory)/column$(ObjectSuffix) $(IntermediateDirectory)/tablecol$(ObjectSuffix) \
 	$(IntermediateDirectory)/table$(ObjectSuffix) $(IntermediateDirectory)/DbDatabase$(ObjectSuffix) $(IntermediateDirectory)/DbColumn$(ObjectSuffix) $(IntermediateDirectory)/database$(ObjectSuffix) $(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/DbTable$(ObjectSuffix) $(IntermediateDirectory)/SqliteDbConnector$(ObjectSuffix) $(IntermediateDirectory)/MySqlDbConnector$(ObjectSuffix) $(IntermediateDirectory)/dbitem$(ObjectSuffix) \
-	$(IntermediateDirectory)/mysqldbadapter$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IntermediateDirectory)/sqlitedbadapter$(ObjectSuffix) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IntermediateDirectory)/erd_table$(ObjectSuffix) 
+	$(IntermediateDirectory)/mysqldbadapter$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/my_sql_type$(ObjectSuffix) $(IntermediateDirectory)/sqlitedbadapter$(ObjectSuffix) $(IntermediateDirectory)/frame_canvas$(ObjectSuffix) $(IntermediateDirectory)/erd_table$(ObjectSuffix) $(IntermediateDirectory)/dndtableshape$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -279,6 +279,14 @@ $(IntermediateDirectory)/erd_table$(DependSuffix): erd_table.cpp
 $(IntermediateDirectory)/erd_table$(PreprocessSuffix): erd_table.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/erd_table$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.cpp"
 
+$(IntermediateDirectory)/dndtableshape$(ObjectSuffix): dndtableshape.cpp $(IntermediateDirectory)/dndtableshape$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/dndtableshape.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/dndtableshape$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/dndtableshape$(DependSuffix): dndtableshape.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/dndtableshape$(ObjectSuffix) -MF$(IntermediateDirectory)/dndtableshape$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/dndtableshape.cpp"
+
+$(IntermediateDirectory)/dndtableshape$(PreprocessSuffix): dndtableshape.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/dndtableshape$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/trunk/src/dndtableshape.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -363,6 +371,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/erd_table$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/erd_table$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/erd_table$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/dndtableshape$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/dndtableshape$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/dndtableshape$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 
 

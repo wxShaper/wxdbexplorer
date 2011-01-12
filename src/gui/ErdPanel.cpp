@@ -75,3 +75,8 @@ void ErdPanel::OnSave(wxCommandEvent& WXUNUSED(event)) {
 }
 
 
+wxSFShapeCanvas* ErdPanel::getCanvas()
+{	
+	return m_pFrameCanvas;
+}
+

@@ -15,6 +15,7 @@ public:
 
 	ErdTable();
 	ErdTable(const ErdTable& obj);
+	ErdTable(Table* tab);
 	
 	virtual ~ErdTable();
 	

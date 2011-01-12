@@ -124,6 +124,7 @@ class _DbViewerPanel : public wxPanel
 		virtual void OnConncectUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnRefreshClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnERDClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnDnDStart( wxTreeEvent& event ) { event.Skip(); }
 		virtual void OnItemActivate( wxTreeEvent& event ) { event.Skip(); }
 		virtual void OnItemSelectionChange( wxTreeEvent& event ) { event.Skip(); }
 		

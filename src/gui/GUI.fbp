@@ -1441,7 +1441,7 @@
                                             <event name="OnRightUp"></event>
                                             <event name="OnSetFocus"></event>
                                             <event name="OnSize"></event>
-                                            <event name="OnTreeBeginDrag"></event>
+                                            <event name="OnTreeBeginDrag">OnDnDStart</event>
                                             <event name="OnTreeBeginLabelEdit"></event>
                                             <event name="OnTreeBeginRDrag"></event>
                                             <event name="OnTreeDeleteItem"></event>
@@ -1638,7 +1638,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>

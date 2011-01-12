@@ -171,10 +171,12 @@
     <VirtualDirectory Name="Include">
       <File Name="frame_canvas.h"/>
       <File Name="erd_table.h"/>
+      <File Name="dndtableshape.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="src">
       <File Name="frame_canvas.cpp"/>
       <File Name="erd_table.cpp"/>
+      <File Name="dndtableshape.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
 </CodeLite_Project>

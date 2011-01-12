@@ -9,6 +9,8 @@ FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWi
 	wxSFShapeCanvas(manager,parent,id, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL | wxSTATIC_BORDER) {
 	m_pParentPanel = (ErdPanel*) parentPanel;
 
+
+
 	m_pDbAdapter = dbAdapter;
 
 	AddStyle(sfsGRID_USE);
@@ -79,7 +81,7 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 		ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
 		if (table) {
 			table->addColumn(wxT("NewCol"),m_pDbAdapter->GetDbTypeByName(wxT("VARCHAR")));
-			table->addColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));			
+			table->addColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));
 			table->updateColumns();
 			wxMessageBox(wxT("Column added!"));
 		}
@@ -99,14 +101,38 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 }
 void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 	wxSFShapeBase* sp = GetShapeUnderCursor();
-	if (sp){
+	if (sp) {
 		ErdTable* table = wxDynamicCast(sp->GetGrandParentShape(),ErdTable);
-		if (table) 
+		if (table)
 			if (table->getTable() ) {
 				TableSettings settingDialog(this, m_pDbAdapter);
 				settingDialog.SetTable(table->getTable());
-				settingDialog.ShowModal();	
+				settingDialog.ShowModal();
 				table->updateColumns();
 			}
 	}
+}
+void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped) {
+	ShapeList::compatibility_iterator node = dropped.GetFirst();
+	dndTableShape* dndTab = NULL;
+	while( node )
+		{
+		dndTab = wxDynamicCast(node->GetData(),dndTableShape);
+		node = node->GetNext();
+		}
+	if (dndTab){
+		ErdTable* table = new ErdTable((Table* ) dndTab->GetUserData());
+		
+		wxSFShapeBase* pShape = GetDiagramManager()->AddShape(table, NULL, wxPoint( x,y), sfINITIALIZE, sfDONT_SAVE_STATE);
+			//pShape = GetDiagramManager()->AddShape(CLASSINFO(wxSFRoundRectShape), event.GetPosition(), sfDONT_SAVE_STATE);
+			if (pShape) {
+				pShape->AcceptConnection(wxT("All"));
+				pShape->AcceptSrcNeighbour(wxT("All"));
+				pShape->AcceptTrgNeighbour(wxT("All"));
+			}
+		
+		dndTab->SetUserData(NULL);		
+	}
+	wxSFShapeCanvas::OnDrop(x,y,def,dropped);			
+			
 }

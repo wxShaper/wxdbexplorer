@@ -199,6 +199,7 @@
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/trunk/src/dndtableshape.h \
  /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/frame_canvas.h:
@@ -792,5 +793,7 @@ controls/include/wx/dblayer/DatabaseLayer.h:
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/trunk/src/dndtableshape.h:
 
 /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h:

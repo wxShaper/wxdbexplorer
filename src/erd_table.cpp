@@ -9,20 +9,24 @@ ErdTable::ErdTable():wxSFRoundRectShape()
 	m_pTable = new Table();
 	m_pTable->setName(wxT("New table"));
 	
-	//m_pTable->AddColumn(new Column(wxT("ID"),wxT("New table"),wxT("int"), true, true));
-	//m_pTable->AddColumn(new Column(wxT("Name"),wxT("New table"),wxT("string"), true, true));
-	//m_pTable->AddColumn(new Column(wxT("Value"),wxT("New table"),wxT("long"), true, true));
 	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
 	Initialize();
 }
+ErdTable::ErdTable(Table* tab):wxSFRoundRectShape()
+{
+	m_pTable = tab;
+	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
+	Initialize();
+}
+
 ErdTable::ErdTable(const ErdTable& obj):wxSFRoundRectShape(obj)
 {
 	m_pTable = (Table*) obj.m_pTable->Clone();
-	//m_pTable->setName(wxT("New table"));
 	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
 	
 	m_pLabel = (wxSFTextShape*) obj.m_pLabel->Clone();
 	if (m_pLabel){
+		m_pLabel->SetStyle(sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 		SF_ADD_COMPONENT( m_pLabel, wxT("title") );	
 		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));	
 		}
@@ -49,7 +53,7 @@ void ErdTable::Initialize()
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
 		m_pLabel->SetText(wxT("Table name"));
-		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS );
+		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 
 		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
 		
@@ -58,7 +62,7 @@ void ErdTable::Initialize()
 		
 		// set grid
 		m_pGrid->SetRelativePosition( 0, 20 );
-		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL );
+		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
 		m_pGrid->SetFill( *wxTRANSPARENT_BRUSH );
@@ -77,6 +81,7 @@ void ErdTable::Initialize()
 		
 		updateColumns();
 		Update();
+		Refresh();
 }
 
 
@@ -118,6 +123,7 @@ void ErdTable::updateColumns()
 		}	*/
 	m_pGrid->Update();
 	Update();
+	Refresh();
 }
 void ErdTable::clearGrid()
 {
@@ -130,12 +136,14 @@ void ErdTable::clearGrid()
 	m_pGrid->ClearGrid();
 	m_pGrid->SetDimensions( 1, 1 );	
 	m_pGrid->Update();
+	Refresh();
 }
 
 void ErdTable::addColumnShape(const wxString& colName, int id)
 {
 	wxSFTextShape* m_pCol = new wxSFTextShape();
 	if (m_pCol){	
+		m_pCol->SetStyle(sfsHOVERING |sfsEMIT_EVENTS| sfsALWAYS_INSIDE | sfsSIZE_CHANGE | sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION );
 		m_pCol->SetId(id + constOffset);
 		if (m_pGrid->AppendToGrid(m_pCol)){
 			m_pCol->SetText( wxString::Format(wxT("col: %s"), colName.c_str()));			
@@ -146,7 +154,7 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 			m_pCol->SetVBorder(2);
 			m_pCol->SetHBorder(2);
 			m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT);
-			m_pCol->SetStyle(sfsALWAYS_INSIDE | sfsSIZE_CHANGE );			
+						
 		}else{			
 			delete m_pCol;
 			m_pCol = NULL;			
@@ -160,4 +168,6 @@ void ErdTable::addColumn(const wxString& colName, IDbType* type)
 {
 	m_pTable->AddColumn(new Column(colName,wxT("New table"),type, true, true));
 }
+
+
 

@@ -78,7 +78,7 @@ void DbViewerPanel::RefreshDbView() {
 		m_treeDatabases->Expand(rootID);
 		wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
 		m_treeDatabases->Expand(dbID);
-		if (db->tables){
+		if (db->tables) {
 			for (int tabC = 0; tabC < db->tables->GetTableCount(); tabC++) {
 				Table *tab =  db->tables->GetByIndex(tabC);
 				wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,tab->getName(),1,-1,new DbItem(NULL,tab)); //NULL);
@@ -223,7 +223,25 @@ void DbViewerPanel::OnItemSelectionChange(wxTreeEvent& event) {
 	}	*/
 }
 void DbViewerPanel::OnERDClick(wxCommandEvent& event) {
-	if (m_pDbAdapter){
+	if (m_pDbAdapter) {
 		m_pNotebook->AddPage(new ErdPanel(m_pNotebook, m_pDbAdapter),wxT("ERD diagram"));
-		}
+	}
+}
+void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
+	ShapeList lstDnD;
+	
+	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
+	if ((item != NULL)&&(item->GetTable() != NULL)) {
+		Table* table = item->GetTable();	
+		
+		wxSFShapeBase *pShape = new dndTableShape(table);
+		lstDnD.Append(pShape);
+		
+		if (m_pNotebook->GetSelection()!= wxNOT_FOUND){			
+
+			ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);	
+			panel->getCanvas()->DoDragDrop(lstDnD);
+			}	
+		delete pShape;
+	}	
 }
