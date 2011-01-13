@@ -18,7 +18,8 @@ public:
 	virtual DatabaseCol* GetDatabases();
 	virtual TableCol* GetTables(const wxString& dbName);
 	//virtual ColumnCol* GetColumns(const wxString& tableName);
-
+	virtual bool GetColumns(Table* pTab, const wxString& tableName) = 0;
+	
 	virtual bool IsConnected();
 	virtual void CloseConnection();
 	virtual DatabaseLayer* GetDatabaseLayer();
@@ -31,6 +32,9 @@ public:
 	virtual wxArrayString* GetDbTypes();
 
 protected:
+
+	MySqlType* parseTypeString(const wxString& typeString);
+
 	wxString m_serverName;
 	wxString m_userName;
 	wxString m_password;

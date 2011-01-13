@@ -59,6 +59,7 @@ DatabaseCol* MySqlDbAdapter::GetDatabases() {
 
 
 wxString MySqlDbAdapter::GetCreateTableSql(Table* tab) {
+	//TODO:SQL:
 	wxString str = wxString::Format(wxT("DROP TABLE EXIST `%s`; \n"),tab->getName().c_str());
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
 
@@ -101,6 +102,33 @@ wxArrayString* MySqlDbAdapter::GetDbTypes() {
 	return pNames;
 }
 wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
+	//TODO:SQL:
 	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s`"), dbName.c_str(), tableName.c_str());
 	return ret;
 }
+
+bool MySqlDbAdapter::GetColumns(Table* pTab, const wxString& tableName){
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+
+	if (!dbLayer->IsOpen()) return NULL;
+	// loading columns
+	//TODO:SQL:
+	DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxString::Fromat(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),tableName.c_str()));
+	while (databaze->Next()) {
+		
+		Column* pCol = new Column()
+		
+		
+		}
+	dbLayer->CloseResultSet(databaze);
+	dbLayer->Close();
+	delete dbLayer;
+	return col;
+	
+}
+MySqlType* MySqlDbAdapter::parseTypeString(const wxString& typeString)
+{
+	wxString text  = typeString.MakeUpper();
+	
+}
+
