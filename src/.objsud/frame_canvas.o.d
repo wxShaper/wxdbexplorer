@@ -1,8 +1,8 @@
 .objsud/frame_canvas.o: \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/frame_canvas.cpp \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/frame_canvas.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/ErdPanel.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/frame_canvas.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/src/frame_canvas.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/ErdPanel.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.h \
  /usr/include/wx-2.8/wx/string.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -158,54 +158,55 @@
  controls/include/wx/wxsf/CurveShape.h \
  controls/include/wx/wxsf/OrthoShape.h \
  controls/include/wx/wxsf/SFEvents.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../frame_canvas.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Tool.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/Grid.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/filesave.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/fileopen.xpm \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../erd_table.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../frame_canvas.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/Art.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/elements/Bound.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/elements/Tool.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/Grid.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/filesave.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/fileopen.xpm \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/Ids.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../erd_table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../table.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  /usr/include/wx-2.8/wx/hashset.h \
  controls/include/wx/dblayer/DatabaseLayerDef.h \
  controls/include/wx/dblayer/DatabaseErrorReporter.h \
  controls/include/wx/dblayer/DatabaseStringConverter.h \
  controls/include/wx/dblayer/ResultSetMetaData.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbAdapter.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/Ids.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../gui/Ids.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbAdapter.h \
  /usr/include/wx-2.8/wx/clipbrd.h /usr/include/wx-2.8/wx/gtk/clipbrd.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/mysqldbadapter.h \
  controls/include/wx/dblayer/MysqlDatabaseLayer.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/tablesettings.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/database.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/tablecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/my_sql_type.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/tablesettings.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/dndtableshape.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/erd_table.h
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/frame_canvas.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/frame_canvas.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/ErdPanel.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/ErdPanel.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/GUI.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.h:
 
 /usr/include/wx-2.8/wx/string.h:
 
@@ -709,25 +710,25 @@ controls/include/wx/wxsf/OrthoShape.h:
 
 controls/include/wx/wxsf/SFEvents.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../frame_canvas.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../frame_canvas.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Art.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/Art.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Bound.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/elements/Bound.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/elements/Tool.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/elements/Tool.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/Grid.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/Grid.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/filesave.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/filesave.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../res/gui/fileopen.xpm:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../res/gui/fileopen.xpm:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/Ids.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/Ids.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../erd_table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../erd_table.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../table.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
 
@@ -741,11 +742,11 @@ controls/include/wx/dblayer/DatabaseStringConverter.h:
 
 controls/include/wx/dblayer/ResultSetMetaData.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../columncol.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../column.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbAdapter.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
@@ -755,42 +756,44 @@ controls/include/wx/dblayer/PreparedStatement.h:
 
 controls/include/wx/dblayer/DatabaseQueryParser.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbType.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../gui/Ids.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../gui/Ids.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbAdapter.h:
 
 /usr/include/wx-2.8/wx/clipbrd.h:
 
 /usr/include/wx-2.8/wx/gtk/clipbrd.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/mysqldbadapter.h:
 
 controls/include/wx/dblayer/MysqlDatabaseLayer.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/databasecol.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/database.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/tablecol.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/table.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/my_sql_type.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/tablesettings.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/tablesettings.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../table.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../column.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../column.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/gui/../IDbType.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/gui/../IDbType.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/erd_table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/dndtableshape.h:
+
+/home/jankup/SourceCpp/wxdbexplorer/src/erd_table.h:

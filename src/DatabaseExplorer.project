@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Project Name="DatabaseExplorer">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
+  </Plugins>
   <VirtualDirectory Name="gui">
     <File Name="gui/GUI.cpp"/>
     <File Name="gui/DbViewerPanel.cpp"/>
@@ -66,86 +71,6 @@
       <File Name="wx_pch.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
-  <Settings Type="Executable">
-    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
-      <General OutputFile="../bin/gcc/DatabaseExplorer" IntermediateDirectory=".objsu" Command="./DatabaseExplorer" CommandArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
-      <Compiler Required="yes" Options="-Wall;-O3;-fno-strict-aliasing;`wx-config --debug=no --cflags`;">
-        <IncludePath Value="controls/include"/>
-        <IncludePath Value="."/>
-        <Preprocessor Value="WXUSINGDLL"/>
-        <Preprocessor Value="UNICODE"/>
-        <Preprocessor Value="_UNICODE"/>
-        <Preprocessor Value="__WX__"/>
-        <Preprocessor Value="NDEBUG"/>
-      </Compiler>
-      <Linker Required="yes" Options="-s;-Wl,-rpath,$$``ORIGIN/lib/;`wx-config --libs`;">
-        <LibraryPath Value="../bin/gcc"/>
-        <LibraryPath Value="../bin/gcc/lib"/>
-        <LibraryPath Value="../bin/gcc/lib"/>
-        <LibraryPath Value="../bin/gcc/lib"/>
-        <Library Value="wx_gtk2u_propgrid-2.8_cd"/>
-        <Library Value="wx_gtk2u_scintilla-2.8_cd"/>
-        <Library Value="wx_gtk2u_shapeframework-2.8_cd"/>
-        <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
-        <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
-      </Linker>
-      <ResourceCompiler Required="no" Options=""/>
-      <CustomBuild Enabled="no">
-        <CleanCommand/>
-        <BuildCommand/>
-        <SingleFileCommand/>
-        <MakefileGenerationCommand/>
-        <ThirdPartyToolName>None</ThirdPartyToolName>
-        <WorkingDirectory/>
-      </CustomBuild>
-      <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
-      </AdditionalRules>
-    </Configuration>
-    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
-      <General OutputFile="../bin/gcc/DatabaseExplorer_d" IntermediateDirectory=".objsud" Command="./DatabaseExplorer_d" CommandArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
-      <Compiler Required="yes" Options="-Wall;-g;-O0;`wx-config --debug=yes --cflags`;">
-        <IncludePath Value="controls/include"/>
-        <IncludePath Value="."/>
-        <Preprocessor Value="WXUSINGDLL"/>
-        <Preprocessor Value="UNICODE"/>
-        <Preprocessor Value="_UNICODE"/>
-        <Preprocessor Value="__WX__"/>
-        <Preprocessor Value="DEBUG"/>
-        <Preprocessor Value="_DEBUG"/>
-        <Preprocessor Value="__WXDEBUG__"/>
-      </Compiler>
-      <Linker Required="yes" Options="-Wl,-rpath,$$``ORIGIN/lib/;`wx-config --debug=yes --libs`;">
-        <LibraryPath Value="../bin/gcc"/>
-        <LibraryPath Value="../bin/gcc/lib"/>
-        <LibraryPath Value="../bin/gcc/lib"/>
-        <LibraryPath Value="../bin/gcc/lib"/>
-        <Library Value="wx_gtk2ud_propgrid-2.8_cd"/>
-        <Library Value="wx_gtk2ud_scintilla-2.8_cd"/>
-        <Library Value="wx_gtk2ud_shapeframework-2.8_cd"/>
-        <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
-        <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
-      </Linker>
-      <ResourceCompiler Required="no" Options=""/>
-      <PreBuild>
-        <Command Enabled="yes">python $(ProjectPath)/create_buildnum.py</Command>
-      </PreBuild>
-      <PostBuild/>
-      <CustomBuild Enabled="no">
-        <CleanCommand/>
-        <BuildCommand/>
-        <SingleFileCommand/>
-        <MakefileGenerationCommand/>
-        <ThirdPartyToolName>None</ThirdPartyToolName>
-        <WorkingDirectory/>
-      </CustomBuild>
-      <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
-      </AdditionalRules>
-    </Configuration>
-  </Settings>
   <Dependencies name="Release">
     <Project Name="wxPropGrid"/>
     <Project Name="wxScintilla"/>
@@ -175,4 +100,109 @@
       <File Name="dndtableshape.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
+  <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-Wall;-g;-O0;`wx-config --debug=yes --cflags`;" C_Options="-Wall;-g;-O0;`wx-config --debug=yes --cflags`;" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="controls/include"/>
+        <IncludePath Value="."/>
+        <Preprocessor Value="WXUSINGDLL"/>
+        <Preprocessor Value="UNICODE"/>
+        <Preprocessor Value="_UNICODE"/>
+        <Preprocessor Value="__WX__"/>
+        <Preprocessor Value="DEBUG"/>
+        <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="__WXDEBUG__"/>
+      </Compiler>
+      <Linker Options="-Wl,-rpath,$$``ORIGIN/lib/;`wx-config --debug=yes --libs`;" Required="yes">
+        <LibraryPath Value="../bin/gcc"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <Library Value="wx_gtk2ud_propgrid-2.8_cd"/>
+        <Library Value="wx_gtk2ud_scintilla-2.8_cd"/>
+        <Library Value="wx_gtk2ud_shapeframework-2.8_cd"/>
+        <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
+        <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
+      </Linker>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="../bin/gcc/DatabaseExplorer_d" IntermediateDirectory=".objsud" Command="./DatabaseExplorer_d" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild>
+        <Command Enabled="yes">python $(ProjectPath)/create_buildnum.py</Command>
+      </PreBuild>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-Wall;-O3;-fno-strict-aliasing;`wx-config --debug=no --cflags`;" C_Options="-Wall;-O3;-fno-strict-aliasing;`wx-config --debug=no --cflags`;" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="controls/include"/>
+        <IncludePath Value="."/>
+        <Preprocessor Value="WXUSINGDLL"/>
+        <Preprocessor Value="UNICODE"/>
+        <Preprocessor Value="_UNICODE"/>
+        <Preprocessor Value="__WX__"/>
+        <Preprocessor Value="NDEBUG"/>
+      </Compiler>
+      <Linker Options="-s;-Wl,-rpath,$$``ORIGIN/lib/;`wx-config --libs`;" Required="yes">
+        <LibraryPath Value="../bin/gcc"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <LibraryPath Value="../bin/gcc/lib"/>
+        <Library Value="wx_gtk2u_propgrid-2.8_cd"/>
+        <Library Value="wx_gtk2u_scintilla-2.8_cd"/>
+        <Library Value="wx_gtk2u_shapeframework-2.8_cd"/>
+        <Library Value="wxcode_gtk2_databaselayer_mysql-2.8"/>
+        <Library Value="wxcode_gtk2_databaselayer_sqlite-2.8"/>
+      </Linker>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="../bin/gcc/DatabaseExplorer" IntermediateDirectory=".objsu" Command="./DatabaseExplorer" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="../bin/gcc" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+  </Settings>
 </CodeLite_Project>

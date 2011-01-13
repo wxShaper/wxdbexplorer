@@ -1,6 +1,8 @@
 #ifndef ERDTABLE_H
 #define ERDTABLE_H
 
+#include <wx/wx.h>
+#include <wx/wxxmlserializer/XmlSerializer.h>
 #include "wx/wxsf/RoundRectShape.h" // Base class: wxSFRoundRectShape
 #include "wx/wxsf/TextShape.h"
 #include "wx/wxsf/FlexGridShape.h"
@@ -21,13 +23,13 @@ public:
 	
 	void updateColumns();
 	void addColumn(const wxString& colName, IDbType* type);
-	Table* getTable() { return this->m_pTable; }
+	Table* getTable() { return (Table*) this->GetUserData(); }
 
 protected:
 	void Initialize();
 	
 	wxSFTextShape *m_pLabel;
-	Table* m_pTable;
+	//Table* m_pTable;
 	
 	wxSFFlexGridShape* m_pGrid;
 	

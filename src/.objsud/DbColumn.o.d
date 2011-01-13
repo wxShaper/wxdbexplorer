@@ -1,6 +1,5 @@
-.objsud/DbColumn.o: \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/DbColumn.cpp \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/DbColumn.h \
+.objsud/DbColumn.o: /home/jankup/SourceCpp/wxdbexplorer/src/DbColumn.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/src/DbColumn.h \
  /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
  /usr/lib/wx/include/gtk2-unicode-debug-2.8/wx/setup.h \
@@ -100,10 +99,10 @@
  /usr/include/wx-2.8/wx/generic/filedlgg.h \
  /usr/include/wx-2.8/wx/listctrl.h /usr/include/wx-2.8/wx/listbase.h \
  /usr/include/wx-2.8/wx/generic/listctrl.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbItem.h \
  /usr/include/wx-2.8/wx/treebase.h
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/DbColumn.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/DbColumn.h:
 
 /usr/include/wx-2.8/wx/wx.h:
 
@@ -471,6 +470,6 @@
 
 /usr/include/wx-2.8/wx/generic/listctrl.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbItem.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbItem.h:
 
 /usr/include/wx-2.8/wx/treebase.h:

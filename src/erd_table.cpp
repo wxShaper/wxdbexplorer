@@ -6,23 +6,27 @@ XS_IMPLEMENT_CLONABLE_CLASS(ErdTable,wxSFRoundRectShape);
 
 ErdTable::ErdTable():wxSFRoundRectShape()
 {
-	m_pTable = new Table();
-	m_pTable->setName(wxT("New table"));
+	Table* tab = new Table();
+	tab->setName(wxT("New table"));
+	SetUserData(tab);
+//	m_pTable = new Table();
+//	m_pTable->setName(wxT("New table"));
 	
-	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
+//	XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pTable, wxT("Table"));
 	Initialize();
 }
 ErdTable::ErdTable(Table* tab):wxSFRoundRectShape()
 {
-	m_pTable = tab;
-	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
+	SetUserData(tab);
+//	m_pTable = tab;
+//	XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pTable, wxT("Table"));
 	Initialize();
 }
 
 ErdTable::ErdTable(const ErdTable& obj):wxSFRoundRectShape(obj)
 {
-	m_pTable = (Table*) obj.m_pTable->Clone();
-	XS_SERIALIZE_DYNAMIC_OBJECT(m_pTable, wxT("Table"));
+	//m_pTable = (Table*) obj.m_pTable->Clone();
+	//XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pTable, wxT("Table"));
 	
 	m_pLabel = (wxSFTextShape*) obj.m_pLabel->Clone();
 	if (m_pLabel){
@@ -34,7 +38,7 @@ ErdTable::ErdTable(const ErdTable& obj):wxSFRoundRectShape(obj)
 }
 ErdTable::~ErdTable()
 {
-	delete m_pTable;
+	//delete m_pTable;
 	//delete m_pLabel;
 }
 
@@ -87,7 +91,8 @@ void ErdTable::Initialize()
 
 void ErdTable::DrawHighlighted(wxDC& dc)
 {
-	m_pLabel->SetText(m_pTable->getName());
+	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
+	m_pLabel->SetText(tab->getName());
 	wxSFRoundRectShape::DrawHighlighted(dc);
 }
 void ErdTable::DrawHover(wxDC& dc)
@@ -96,7 +101,8 @@ void ErdTable::DrawHover(wxDC& dc)
 }
 void ErdTable::DrawNormal(wxDC& dc)
 {
-	m_pLabel->SetText(m_pTable->getName());
+	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
+	m_pLabel->SetText(tab->getName());
 	wxSFRoundRectShape::DrawNormal(dc);
 }
 
@@ -105,8 +111,8 @@ void ErdTable::updateColumns()
 	clearGrid();
 	int i = 0;
 	
-	
-	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
+	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
+	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 	while( node )
 		{
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  addColumnShape(((Column*) node->GetData())->getName(),i++);
@@ -166,7 +172,8 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 
 void ErdTable::addColumn(const wxString& colName, IDbType* type)
 {
-	m_pTable->AddColumn(new Column(colName,wxT("New table"),type, true, true));
+	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
+	tab->AddColumn(new Column(colName,wxT("New table"),type));
 }
 
 

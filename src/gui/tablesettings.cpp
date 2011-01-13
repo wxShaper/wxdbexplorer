@@ -40,7 +40,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 				m_chPrimary->SetValue(type->GetPrimaryKey());
 				m_checkBox3->SetValue(type->GetUnique());
 			}
-		}		
+		}	
 		node = node->GetNext();
 	}
 	
@@ -68,7 +68,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 	}*/
 }
 void TableSettings::OnNewColumnClick(wxCommandEvent& event) {
-	Column* pCol = new Column(wxT("New col"),m_pTable->getName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()), false, false);
+	Column* pCol = new Column(wxT("New col"),m_pTable->getName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()));
 	if (pCol) m_pTable->AddColumn(pCol);
 	UpdateView();
 }

@@ -13,10 +13,6 @@ class Column : public xsSerializable {
 protected:
 	wxString m_name;
 	wxString m_parentName;
-	wxString m_type;	
-	bool m_notNull;
-	bool m_primaryKey;
-	
 	bool m_isSaved;	
 	
 	IDbType* m_pType;
@@ -31,14 +27,7 @@ public:
 	Column(const Column& obj);
 	Column(const wxString& name,
 			const wxString& parentName,
-			const wxString& type,
-			bool notNull,
-			bool primaryKey);
-	Column(const wxString& name,
-			const wxString& parentName,
-			IDbType* type,
-			bool notNull,
-			bool primaryKey);
+			IDbType* type);
 	~Column();
 	
 	
@@ -47,12 +36,6 @@ public:
 	void setName(const wxString& name) { this->m_name = name; }
 	// nazev rodicovskeho prvku - tabulky nebo view
 	wxString getParentName() { return this->m_parentName; }
-	// nazev typu
-	wxString getType() { return this->m_type; }
-	// parametr NotNull
-	bool NotNull() { return this->m_notNull; }
-	// parametr PrimaryKey
-	bool PrimaryKey() { return this->m_primaryKey; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
 	
@@ -63,9 +46,7 @@ public:
 	// funkce pro editaci sloupecku - nastuvje prizna isSaved na false
 	void Edit(wxString& name,
 			wxString& parentName,
-			wxString& type,
-			bool notNull,
-			bool primaryKey);
+			IDbType* type);
 	
 };
 

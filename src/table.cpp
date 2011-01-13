@@ -24,6 +24,8 @@ Table::Table(IDbAdapter* dbAdapter, const wxString& tableName, const wxString& p
 	this->m_parentName = parentName;
 	this->m_rowCount = rowCount;
 	
+	dbAdapter->GetColumns(this,tableName);
+	
 	initSerializable();
 }
 Table::~Table()

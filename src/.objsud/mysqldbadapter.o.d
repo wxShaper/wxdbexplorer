@@ -1,6 +1,6 @@
 .objsud/mysqldbadapter.o: \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.cpp \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/mysqldbadapter.cpp \
+ /home/jankup/SourceCpp/wxdbexplorer/src/mysqldbadapter.h \
  controls/include/wx/dblayer/MysqlDatabaseLayer.h \
  /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/defs.h \
  /usr/include/wx-2.8/wx/platform.h \
@@ -112,22 +112,22 @@
  controls/include/wx/dblayer/PreparedStatement.h \
  controls/include/wx/dblayer/DatabaseQueryParser.h \
  controls/include/wx/dblayer/DatabaseLayer.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h \
  controls/include/wx/wxxmlserializer/XmlSerializer.h \
  controls/include/wx/wxxmlserializer/PropertyIO.h \
  /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
  controls/include/wx/wxxmlserializer/Defs.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/databasecol.h \
  controls/include/wx/dblayer/DatabaseResultSet.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h \
- /home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.h
+ /home/jankup/SourceCpp/wxdbexplorer/src/database.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/tablecol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/table.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/columncol.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/column.h \
+ /home/jankup/SourceCpp/wxdbexplorer/src/my_sql_type.h
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/mysqldbadapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/mysqldbadapter.h:
 
 controls/include/wx/dblayer/MysqlDatabaseLayer.h:
 
@@ -519,9 +519,9 @@ controls/include/wx/dblayer/DatabaseQueryParser.h:
 
 controls/include/wx/dblayer/DatabaseLayer.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbAdapter.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbAdapter.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/IDbType.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/IDbType.h:
 
 controls/include/wx/wxxmlserializer/XmlSerializer.h:
 
@@ -533,18 +533,18 @@ controls/include/wx/wxxmlserializer/PropertyIO.h:
 
 controls/include/wx/wxxmlserializer/Defs.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/databasecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/databasecol.h:
 
 controls/include/wx/dblayer/DatabaseResultSet.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/database.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/database.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/tablecol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/tablecol.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/table.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/table.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/columncol.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/columncol.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/column.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/column.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/trunk/src/my_sql_type.h:
+/home/jankup/SourceCpp/wxdbexplorer/src/my_sql_type.h:

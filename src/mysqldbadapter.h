@@ -7,6 +7,7 @@
 #include "databasecol.h"
 #include "database.h"
 #include "my_sql_type.h"
+#include "IDbType.h"
 
 class MySqlDbAdapter : public IDbAdapter {
 
@@ -18,7 +19,7 @@ public:
 	virtual DatabaseCol* GetDatabases();
 	virtual TableCol* GetTables(const wxString& dbName);
 	//virtual ColumnCol* GetColumns(const wxString& tableName);
-	virtual bool GetColumns(Table* pTab, const wxString& tableName) = 0;
+	virtual bool GetColumns(Table* pTab, const wxString& tableName) ;
 	
 	virtual bool IsConnected();
 	virtual void CloseConnection();
@@ -33,7 +34,7 @@ public:
 
 protected:
 
-	MySqlType* parseTypeString(const wxString& typeString);
+	IDbType* parseTypeString(const wxString& typeString);
 
 	wxString m_serverName;
 	wxString m_userName;
