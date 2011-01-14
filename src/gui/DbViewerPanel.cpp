@@ -229,10 +229,12 @@ void DbViewerPanel::OnERDClick(wxCommandEvent& event) {
 }
 void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 	ShapeList lstDnD;
+	lstDnD.DeleteContents(true);
+	
 	
 	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
 	if ((item != NULL)&&(item->GetTable() != NULL)) {
-		Table* table = item->GetTable();	
+		Table* table =(Table*)((Table*)item->GetTable())->Clone();	
 		
 		wxSFShapeBase *pShape = new dndTableShape(table);
 		lstDnD.Append(pShape);
@@ -242,6 +244,6 @@ void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 			ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);	
 			panel->getCanvas()->DoDragDrop(lstDnD);
 			}	
-		delete pShape;
+		//delete pShape;
 	}	
 }

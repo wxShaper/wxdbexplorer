@@ -59,7 +59,7 @@ void ErdTable::Initialize()
 		m_pLabel->SetText(wxT("Table name"));
 		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 
-		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
+		//XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
 		
         SF_ADD_COMPONENT( m_pLabel, wxT("title") );		
 		
@@ -88,8 +88,6 @@ void ErdTable::Initialize()
 
 void ErdTable::DrawHighlighted(wxDC& dc)
 {
-	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
-	m_pLabel->SetText(tab->getName());
 	wxSFRoundRectShape::DrawHighlighted(dc);
 }
 void ErdTable::DrawHover(wxDC& dc)
@@ -98,33 +96,28 @@ void ErdTable::DrawHover(wxDC& dc)
 }
 void ErdTable::DrawNormal(wxDC& dc)
 {
-	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
-	m_pLabel->SetText(tab->getName());
+
 	wxSFRoundRectShape::DrawNormal(dc);
 }
 
 void ErdTable::updateColumns()
-{
+{	
 	clearGrid();
 	int i = 0;
 	
 	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
-	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
-	while( node )
-		{
-		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  addColumnShape(((Column*) node->GetData())->getName(),i++);
-		node = node->GetNext();
-		}
+	if (tab){		
+		m_pLabel->SetText(tab->getName());
+		SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
+		while( node )
+			{
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  addColumnShape(((Column*) node->GetData())->getName(),i++);
+			node = node->GetNext();
+			}
+	}
 	
-	
-	/*
-	
-	Column* pCol = m_pTable->GetFristColumn();
-	while(pCol){
-		addColumnShape(pCol->getName(),i++);		
-		pCol = wxDynamicCast(pCol->GetSibbling(CLASSINFO(Column)),Column);
-		}	*/
 	m_pGrid->Update();
+	m_pLabel->Update();
 	Update();
 	Refresh();
 }

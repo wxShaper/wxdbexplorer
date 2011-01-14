@@ -137,15 +137,10 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 				pShape->AcceptSrcNeighbour(wxT("All"));
 				pShape->AcceptTrgNeighbour(wxT("All"));
 				((ErdTable*)pShape)->updateColumns();
-				
-				pShape->DoAlignment();
-				pShape->FitToChildren();
-				
-				pShape->Refresh();
+				pShape->Update();
 			}
 		
 		dndTab->SetUserData(NULL);		
+		GetDiagramManager()->RemoveShape(dndTab);
 	}
-	wxSFShapeCanvas::OnDrop(x,y,def,dropped);			
-			
 }
