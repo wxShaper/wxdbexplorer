@@ -25,7 +25,7 @@ public:
 	Table();
 	Table(const Table& obj);
 	Table(IDbAdapter* dbAdapter,const wxString& tableName, const wxString& parentName, int rowCount);
-	~Table();
+	virtual ~Table();
 	// nazev tabulky
 	wxString getName() { return this->m_name; }
 	// nazev rodicovskeho prvku - databaze

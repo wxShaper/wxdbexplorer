@@ -28,7 +28,7 @@ public:
 	Column(const wxString& name,
 			const wxString& parentName,
 			IDbType* type);
-	~Column();
+	virtual ~Column();
 	
 	
 	// nazev sloupecku

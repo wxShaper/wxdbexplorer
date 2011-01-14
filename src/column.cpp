@@ -50,6 +50,6 @@ void Column::initSerializable()
 {
 		XS_SERIALIZE(m_name,wxT("m_name")); 
 		XS_SERIALIZE(m_parentName,wxT("m_parentName")); 
-		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pType, wxT("type"));
+		XS_SERIALIZE_DYNAMIC_OBJECT(m_pType, wxT("type"));
 }
 

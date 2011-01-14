@@ -4,9 +4,11 @@
 #include <wx/wx.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
 
-class IDbType
+class IDbType :public xsSerializable
 {
 public:
+	IDbType(){}
+	IDbType(const IDbType& obj):xsSerializable(obj){}
 
 	/*! \brief Basic dbType parameter */
 	enum PROPERTY
@@ -64,7 +66,6 @@ public:
 		virtual long GetPropertyFlags() = 0;
 		virtual void SetPropertyFlags(long flags) = 0;
 		
-		virtual wxObject* Clone() = 0;
 	
 };
 

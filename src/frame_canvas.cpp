@@ -39,6 +39,13 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 			pShape->AcceptConnection(wxT("All"));
 			pShape->AcceptSrcNeighbour(wxT("All"));
 			pShape->AcceptTrgNeighbour(wxT("All"));
+			
+			Table* tab = new Table();
+			tab->setName(wxT("New table"));
+			pShape->SetUserData(tab);
+			
+			((ErdTable*)pShape)->updateColumns();
+			pShape->Refresh();
 		}
 	}
 	break;
@@ -129,6 +136,12 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 				pShape->AcceptConnection(wxT("All"));
 				pShape->AcceptSrcNeighbour(wxT("All"));
 				pShape->AcceptTrgNeighbour(wxT("All"));
+				((ErdTable*)pShape)->updateColumns();
+				
+				pShape->DoAlignment();
+				pShape->FitToChildren();
+				
+				pShape->Refresh();
 			}
 		
 		dndTab->SetUserData(NULL);		

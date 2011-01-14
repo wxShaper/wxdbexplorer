@@ -38,15 +38,12 @@ void Table::setName(const wxString& name)
 	 this->m_name = name; 
 }
 
-
-
-
 void Table::initSerializable()
 {
 	XS_SERIALIZE(this->m_name,wxT("tableName")); 
 	XS_SERIALIZE(this->m_parentName,wxT("parentName")); 
 	XS_SERIALIZE_INT(this->m_rowCount, wxT("rowCount"));
-	XS_SERIALIZE_LISTSERIALIZABLE(m_lstChildItems,wxT("Columns"));
+	XS_SERIALIZE(m_lstChildItems,wxT("columns"));
 
 }
 

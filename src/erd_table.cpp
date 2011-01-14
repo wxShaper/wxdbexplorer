@@ -6,9 +6,9 @@ XS_IMPLEMENT_CLONABLE_CLASS(ErdTable,wxSFRoundRectShape);
 
 ErdTable::ErdTable():wxSFRoundRectShape()
 {
-	Table* tab = new Table();
+	/*Table* tab = new Table();
 	tab->setName(wxT("New table"));
-	SetUserData(tab);
+	SetUserData(tab);*/
 //	m_pTable = new Table();
 //	m_pTable->setName(wxT("New table"));
 	
@@ -83,9 +83,6 @@ void ErdTable::Initialize()
 		}
 		
 		
-		updateColumns();
-		Update();
-		Refresh();
 }
 
 

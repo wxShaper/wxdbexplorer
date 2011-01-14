@@ -4,14 +4,14 @@
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "IDbType.h" // Base class: IDbType
 
-class MySqlType : public IDbType, public xsSerializable {
+class MySqlType : public IDbType {
 
 public:
 	XS_DECLARE_CLONABLE_CLASS(Table);
 	MySqlType();
 	MySqlType(const MySqlType& obj);
 	MySqlType(const wxString& typeName, long propertyFlags);
-	~MySqlType();
+	virtual ~MySqlType();
 	void InitSerialize();
 
 	virtual bool GetAutoIncrement()						{
