@@ -65,7 +65,7 @@ void ErdTable::Initialize()
 		
 		
 		// set grid
-		m_pGrid->SetRelativePosition( 0, 20 );
+		m_pGrid->SetRelativePosition( 20, 30 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
@@ -73,10 +73,9 @@ void ErdTable::Initialize()
 		m_pGrid->SetBorder( *wxTRANSPARENT_PEN );
 		
 		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
-		m_pGrid->SetHBorder( 0 );
-		m_pGrid->SetVBorder( 5 );
-		m_pGrid->SetCellSpace( 10 );
-		
+		m_pGrid->SetCellSpace( 1 );
+		m_pGrid->SetVBorder(2);
+		m_pGrid->SetHBorder(2);
 		m_pGrid->AcceptChild( wxT("All") );
 		SF_ADD_COMPONENT( m_pGrid, wxT("main_grid") );
 		
@@ -144,11 +143,14 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 		if (m_pGrid->AppendToGrid(m_pCol)){
 			m_pCol->SetText( wxString::Format(wxT("col: %s"), colName.c_str()));			
 			m_pCol->SetHAlign(wxSFShapeBase::halignLEFT);
-			m_pCol->SetVAlign(wxSFShapeBase::valignTOP);
+			m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
 			//	m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
 			//m_pLabel->SetHAlign(wxSFShapeBase::halignCENTER);
-			m_pCol->SetVBorder(2);
+			m_pCol->SetVBorder(0);
 			m_pCol->SetHBorder(2);
+			m_pCol->GetFont().SetPointSize(9);
+
+			
 			m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT);
 						
 		}else{			
