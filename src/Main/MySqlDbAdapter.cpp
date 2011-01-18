@@ -86,13 +86,41 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 		type = new MySqlType(wxT("DOUBLE"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
 	} else if (typeName == wxT("FLOAT")) {
 		type = new MySqlType(wxT("FLOAT"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	} else if (typeName == wxT("BOOL")) {
+	} else if (typeName == wxT("DECIMAL")) {
+		type = new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	}  else if (typeName == wxT("BOOL")) {
 		type = new MySqlType(wxT("BOOL"), 0);
 	} else if (typeName == wxT("DATETIME")) {
 		type = new MySqlType(wxT("DATETIME"), IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL);
 	} else if (typeName == wxT("TINYINT")) {
 		type = new MySqlType(wxT("TINYINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+	} else if (typeName == wxT("BIGINT")) {
+		type = new MySqlType(wxT("BIGINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+	}  else if (typeName == wxT("SMALLINT")) {
+		type = new MySqlType(wxT("SMALLINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+	} else if (typeName == wxT("CHAR")) {
+		type = new MySqlType(wxT("CHAR"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+	} else if (typeName == wxT("TIMESTAMP")) {
+		type = new MySqlType(wxT("TIMESTAMP"), 0);
+	} else if (typeName == wxT("ENUM")) {
+		type = new MySqlType(wxT("ENUM"), 0);
+	}else if (typeName == wxT("SET")) {
+		type = new MySqlType(wxT("SET"), 0);
+	} else if (typeName == wxT("LONGBLOB")) {
+		type = new MySqlType(wxT("LONGBLOB"), 0);
+	} else if (typeName == wxT("BLOB")) {
+		type = new MySqlType(wxT("BLOB"), 0);
+	} else if (typeName == wxT("MEDIUMTEXT")) {
+		type = new MySqlType(wxT("MEDIUMTEXT"), IDbType::dbtNOT_NULL);
+	} else if (typeName == wxT("TEXT")) {
+		type = new MySqlType(wxT("TEXT"), 0);
+	} else if (typeName == wxT("LONGTEXT")) {
+		type = new MySqlType(wxT("LONGTEXT"), 0);
 	}
+	if (!type){
+		int i;
+		i++;
+		}
 	wxASSERT(type);
 	return type;
 }
@@ -100,12 +128,25 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 wxArrayString* MySqlDbAdapter::GetDbTypes() {
 	wxArrayString* pNames = new wxArrayString();
 	pNames->Add(wxT("INT"));
+	pNames->Add(wxT("SMALLINT"));
+	pNames->Add(wxT("BIGINT"));	
+	pNames->Add(wxT("TINYINT"));	
 	pNames->Add(wxT("VARCHAR"));
 	pNames->Add(wxT("DOUBLE"));
 	pNames->Add(wxT("FLOAT"));
+	pNames->Add(wxT("DECIMAL"));	
 	pNames->Add(wxT("BOOL"));
 	pNames->Add(wxT("DATETIME"));
-	pNames->Add(wxT("TINYINT"));
+	pNames->Add(wxT("CHAR"));	
+	pNames->Add(wxT("TIMESTAMP"));	
+	pNames->Add(wxT("ENUM"));	
+	pNames->Add(wxT("SET"));	
+	pNames->Add(wxT("LONGBLOB"));	
+	pNames->Add(wxT("BLOB"));
+	pNames->Add(wxT("MEDIUMTEXT"));
+	pNames->Add(wxT("TEXT"));
+	pNames->Add(wxT("LONGTEXT"));
+	
 	
 	return pNames;
 }
@@ -148,7 +189,8 @@ IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString)
 	
 	IDbType* type = this->GetDbTypeByName(typeName);
 	if (type){
-		if (iZavorka > 0){
+		//TODO:Doresit enum
+		if ((iZavorka > 0) && (typeName.compare(wxT("ENUM")))){
 			int iKonecZavorky = text.Find(wxT(")"));
 			int iCarka = text.Find(wxT(","));
 			if ((iCarka > 0) && (iCarka<iKonecZavorky)){
