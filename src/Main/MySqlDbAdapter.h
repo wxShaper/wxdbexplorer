@@ -3,11 +3,12 @@
 #include <wx/dblayer/MysqlDatabaseLayer.h>
 #include <wx/dblayer/DatabaseLayer.h>
 #include <wx/dynarray.h>
-#include "IDbAdapter.h" // Base class: IDbAdapter
-#include "databasecol.h"
-#include "database.h"
+#include "../Interfaces/IDbAdapter.h" // Base class: IDbAdapter
+#include "../Interfaces/IDbType.h"
+#include "../DbEngine/databasecol.h"
+#include "../DbEngine/database.h"
 #include "MySqlType.h"
-#include "IDbType.h"
+
 
 class MySqlDbAdapter : public IDbAdapter {
 

@@ -1,14 +1,14 @@
 #ifndef FRAMECANVAS_H
 #define FRAMECANVAS_H
 
-#include "gui/ErdPanel.h"
+#include "Gui/ErdPanel.h"
 #include <wx/wx.h>
 #include <wx/list.h>
 #include "wx/wxsf/ShapeCanvas.h" // Base class: wxSFShapeCanvas
 #include <wx/clipbrd.h>
-#include "MySqlDbAdapter.h"
-#include "gui/TableSettingsDialog.h"
-#include "IDbAdapter.h"
+#include "../Main/MySqlDbAdapter.h"
+#include "../Gui/TableSettingsDialog.h"
+#include "../Interfaces/IDbAdapter.h"
 #include "DnDTableShape.h"
 
 class ErdPanel;

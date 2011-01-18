@@ -1,5 +1,5 @@
 #include "DatabaseExplorerApp.h"
-#include "gui/DatabaseExplorerFrame.h"
+#include "../Gui/DatabaseExplorerFrame.h"
 
 IMPLEMENT_APP(DatabaseExplorerApp);
 

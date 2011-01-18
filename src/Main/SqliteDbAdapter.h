@@ -2,10 +2,10 @@
 #define SQLITEDBADAPTER_H
 
 #include <wx/wx.h>
-#include "IDbAdapter.h"
-#include "table.h"
-#include "database.h"
-#include "databasecol.h"
+#include "../Interfaces/IDbAdapter.h"
+#include "../DbEngine/table.h"
+#include "../DbEngine/database.h"
+#include "../DbEngine/databasecol.h"
 #include <wx/dblayer/SqliteDatabaseLayer.h>
 #include <wx/dblayer/DatabaseLayer.h>
 

@@ -5,7 +5,7 @@
 #include <wx/dblayer/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "column.h"
-#include "IDbAdapter.h"
+#include "Interfaces/IDbAdapter.h"
 // -------------------------------------------------
 // Trida databazove tabulky
 // -------------------------------------------------

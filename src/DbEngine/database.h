@@ -3,7 +3,7 @@
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
 #include "tablecol.h"
-#include "IDbAdapter.h"
+#include "Interfaces/IDbAdapter.h"
 
 // -------------------------------------------------
 // Trida databaze

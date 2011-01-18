@@ -6,9 +6,9 @@
 #include "wx/wxsf/RoundRectShape.h" // Base class: wxSFRoundRectShape
 #include "wx/wxsf/TextShape.h"
 #include "wx/wxsf/FlexGridShape.h"
-#include "table.h"
-#include "gui/Ids.h"
-#include "IDbType.h"
+#include "../DbEngine/table.h"
+#include "Gui/Ids.h"
+#include "Interfaces/IDbType.h"
 
 class ErdTable : public wxSFRoundRectShape {
 

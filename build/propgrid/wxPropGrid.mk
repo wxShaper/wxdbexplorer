@@ -2,10 +2,10 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Release
 ProjectName            :=wxPropGrid
-ConfigurationName      :=Debug
-IntermediateDirectory  :=.objsud
+ConfigurationName      :=Release
+IntermediateDirectory  :=.objsu
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "/home/jankup/SourceCpp/wxdbexplorer/build"
 ProjectPath            := "/home/jankup/SourceCpp/wxdbexplorer/build/propgrid"
@@ -30,15 +30,15 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=../../bin/gcc/lib/libwx_gtk2ud_propgrid-2.8_cd.so
-Preprocessors          :=$(PreprocessorSwitch)WXMAKINGDLL_PROPGRID $(PreprocessorSwitch)MONOLITHIC $(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)DEBUG $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)__WXDEBUG__ 
+OutputFile             :=../../bin/gcc/lib/libwx_gtk2u_propgrid-2.8_cd.so
+Preprocessors          :=$(PreprocessorSwitch)WXMAKINGDLL_PROPGRID $(PreprocessorSwitch)MONOLITHIC $(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)NDEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 MakeDirCommand         :=mkdir -p
-CmpOptions             := -Wall -g -fPIC -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
-C_CmpOptions           := -Wall -g -fPIC -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
-LinkOptions            :=  `wx-config --debug=yes --libs` 
+CmpOptions             := -Wall -O3 -fPIC -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
+C_CmpOptions           := -Wall -O3 -fPIC -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
+LinkOptions            :=  -s `wx-config --libs` 
 IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)../../src/controls/include" 
 RcIncludePath          :=
 Libs                   :=
@@ -61,7 +61,7 @@ $(OutputFile): makeDirStep $(Objects)
 	$(SharedObjectLinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
 
 makeDirStep:
-	@test -d .objsud || $(MakeDirCommand) .objsud
+	@test -d .objsu || $(MakeDirCommand) .objsu
 
 PreBuild:
 

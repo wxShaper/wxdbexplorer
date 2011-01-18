@@ -4,7 +4,7 @@
 #include <wx/dynarray.h>
 #include <wx/dblayer/DatabaseResultSet.h>
 #include "table.h"
-#include "IDbAdapter.h"
+#include "Interfaces/IDbAdapter.h"
 
 WX_DECLARE_OBJARRAY(Table, ArrayOfTable);
 

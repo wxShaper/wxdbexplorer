@@ -2,62 +2,68 @@
 <CodeLite_Project Name="DatabaseExplorer">
   <Plugins>
     <Plugin Name="qmake">
-      <![CDATA[00010001N0005Debug000000000000]]>
+      <![CDATA[00010001N0007Release000000000000]]>
     </Plugin>
   </Plugins>
-  <VirtualDirectory Name="gui">
-    <File Name="gui/GUI.cpp"/>
-    <File Name="gui/DbViewerPanel.cpp"/>
-    <File Name="gui/SqlCommandPanel.cpp"/>
-    <File Name="gui/ErdPanel.cpp"/>
-    <File Name="gui/DbSettingDialog.cpp"/>
-    <File Name="gui/DatabaseExplorerFrame.cpp"/>
-    <File Name="gui/Art.h"/>
-    <File Name="gui/ErdPanel.h"/>
-    <File Name="gui/DbViewerPanel.h"/>
-    <File Name="gui/GUI.h"/>
-    <File Name="gui/DatabaseExplorerFrame.h"/>
-    <File Name="gui/SqlCommandPanel.h"/>
-    <File Name="gui/Ids.h"/>
-    <File Name="gui/DbSettingDialog.h"/>
-    <File Name="gui/GUI.fbp"/>
-    <File Name="gui/TableSettingsDialog.cpp"/>
-    <File Name="gui/TableSettingsDialog.h"/>
+  <VirtualDirectory Name="ErdEngine">
+    <File Name="ErdEngine/FrameCanvas.cpp"/>
+    <File Name="ErdEngine/DnDTableShape.cpp"/>
+    <File Name="ErdEngine/ErdTable.cpp"/>
+    <File Name="ErdEngine/FrameCanvas.h"/>
+    <File Name="ErdEngine/ErdTable.h"/>
+    <File Name="ErdEngine/DnDTableShape.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Interfaces">
+    <File Name="Interfaces/IDbItem.cpp"/>
+    <File Name="Interfaces/IDbAdapter.h"/>
+    <File Name="Interfaces/IDbItem.h"/>
+    <File Name="Interfaces/IDbType.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Gui">
+    <File Name="Gui/GUI.cpp"/>
+    <File Name="Gui/DbViewerPanel.cpp"/>
+    <File Name="Gui/SqlCommandPanel.cpp"/>
+    <File Name="Gui/TableSettingsDialog.cpp"/>
+    <File Name="Gui/ErdPanel.cpp"/>
+    <File Name="Gui/DbSettingDialog.cpp"/>
+    <File Name="Gui/DatabaseExplorerFrame.cpp"/>
+    <File Name="Gui/Art.h"/>
+    <File Name="Gui/TableSettingsDialog.h"/>
+    <File Name="Gui/ErdPanel.h"/>
+    <File Name="Gui/DbViewerPanel.h"/>
+    <File Name="Gui/GUI.h"/>
+    <File Name="Gui/DatabaseExplorerFrame.h"/>
+    <File Name="Gui/SqlCommandPanel.h"/>
+    <File Name="Gui/Ids.h"/>
+    <File Name="Gui/DbSettingDialog.h"/>
+    <File Name="Gui/GUI.fbp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="DbEngine">
-    <VirtualDirectory Name="src">
-      <File Name="column.cpp"/>
-      <File Name="tablecol.cpp"/>
-      <File Name="table.cpp"/>
-      <File Name="database.cpp"/>
-      <File Name="databasecol.cpp"/>
-      <File Name="dbitem.cpp"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="include">
-      <File Name="tablecol.h"/>
-      <File Name="table.h"/>
-      <File Name="column.h"/>
-      <File Name="database.h"/>
-      <File Name="databasecol.h"/>
-      <File Name="dbitem.h"/>
-    </VirtualDirectory>
+    <File Name="DbEngine/column.cpp"/>
+    <File Name="DbEngine/tablecol.cpp"/>
+    <File Name="DbEngine/database.cpp"/>
+    <File Name="DbEngine/databasecol.cpp"/>
+    <File Name="DbEngine/dbitem.cpp"/>
+    <File Name="DbEngine/table.cpp"/>
+    <File Name="DbEngine/dbitem.h"/>
+    <File Name="DbEngine/column.h"/>
+    <File Name="DbEngine/table.h"/>
+    <File Name="DbEngine/tablecol.h"/>
+    <File Name="DbEngine/databasecol.h"/>
+    <File Name="DbEngine/database.h"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="other">
-    <VirtualDirectory Name="src">
-      <File Name="DatabaseExplorerApp.cpp"/>
-      <File Name="wx_pch.cpp"/>
-      <File Name="MySqlType.cpp"/>
-      <File Name="MySqlDbAdapter.cpp"/>
-      <File Name="SqliteDbAdapter.cpp"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="include">
-      <File Name="BuildNum.h"/>
-      <File Name="DatabaseExplorerApp.h"/>
-      <File Name="wx_pch.h"/>
-      <File Name="MySqlType.h"/>
-      <File Name="MySqlDbAdapter.h"/>
-      <File Name="SqliteDbAdapter.h"/>
-    </VirtualDirectory>
+  <VirtualDirectory Name="Main">
+    <File Name="Main/DatabaseExplorerApp.cpp"/>
+    <File Name="Main/SqliteDbAdapter.cpp"/>
+    <File Name="Main/MySqlDbAdapter.cpp"/>
+    <File Name="Main/MySqlType.cpp"/>
+    <File Name="Main/wx_pch.cpp"/>
+    <File Name="Main/DatabaseExplorerApp.h"/>
+    <File Name="Main/MySqlType.h"/>
+    <File Name="Main/MySqlDbAdapter.h"/>
+    <File Name="Main/SqliteDbAdapter.h"/>
+    <File Name="Main/wx_pch.h"/>
+    <File Name="Main/BuildNum.h"/>
   </VirtualDirectory>
   <Dependencies name="Release">
     <Project Name="wxPropGrid"/>
@@ -69,24 +75,6 @@
     <Project Name="wxScintilla"/>
     <Project Name="wxShapeFramework"/>
   </Dependencies>
-  <VirtualDirectory Name="interfaces">
-    <File Name="IDbAdapter.h"/>
-    <File Name="IDbItem.cpp"/>
-    <File Name="IDbItem.h"/>
-    <File Name="IDbType.h"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="ErdEngine">
-    <VirtualDirectory Name="include">
-      <File Name="ErdTable.h"/>
-      <File Name="DnDTableShape.h"/>
-      <File Name="FrameCanvas.h"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="src">
-      <File Name="ErdTable.cpp"/>
-      <File Name="DnDTableShape.cpp"/>
-      <File Name="FrameCanvas.cpp"/>
-    </VirtualDirectory>
-  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="">
@@ -174,7 +162,9 @@
         <PostConnectCommands/>
         <StartupCommands/>
       </Debugger>
-      <PreBuild/>
+      <PreBuild>
+        <Command Enabled="yes">python $(ProjectPath)/create_buildnum.py</Command>
+      </PreBuild>
       <PostBuild/>
       <CustomBuild Enabled="no">
         <RebuildCommand/>

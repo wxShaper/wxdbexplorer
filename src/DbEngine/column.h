@@ -3,8 +3,8 @@
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
-#include "IDbAdapter.h"
-#include "IDbType.h"
+#include "Interfaces/IDbAdapter.h"
+#include "Interfaces/IDbType.h"
 // ------------------------------------------------
 // Trida databazoveho sloupecku
 // -------------------------------------------------

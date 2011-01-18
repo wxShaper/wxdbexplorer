@@ -2,7 +2,7 @@
 #define DNDTABLESHAPE_H
 
 #include <wx/wxsf/ShapeBase.h> // Base class: wxSFShapeBase
-#include "table.h"
+#include "../DbEngine/table.h"
 
 class dndTableShape : public wxSFShapeBase {
 

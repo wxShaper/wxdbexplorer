@@ -2,10 +2,10 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Release
 ProjectName            :=DatabaseExplorer
-ConfigurationName      :=Debug
-IntermediateDirectory  :=.objsud
+ConfigurationName      :=Release
+IntermediateDirectory  :=.objsu
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "/home/jankup/SourceCpp/wxdbexplorer/build"
 ProjectPath            := "/home/jankup/SourceCpp/wxdbexplorer/src"
@@ -30,18 +30,18 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=../bin/gcc/DatabaseExplorer_d
-Preprocessors          :=$(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)DEBUG $(PreprocessorSwitch)_DEBUG $(PreprocessorSwitch)__WXDEBUG__ 
+OutputFile             :=../bin/gcc/DatabaseExplorer
+Preprocessors          :=$(PreprocessorSwitch)WXUSINGDLL $(PreprocessorSwitch)UNICODE $(PreprocessorSwitch)_UNICODE $(PreprocessorSwitch)__WX__ $(PreprocessorSwitch)NDEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 MakeDirCommand         :=mkdir -p
-CmpOptions             := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
-C_CmpOptions           := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
-LinkOptions            :=  -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --debug=yes --libs` 
+CmpOptions             := -Wall -O3 -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
+C_CmpOptions           := -Wall -O3 -fno-strict-aliasing `wx-config --debug=no --cflags`  $(Preprocessors)
+LinkOptions            :=  -s -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --libs` 
 IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)controls/include" "$(IncludeSwitch)." 
 RcIncludePath          :=
-Libs                   :=$(LibrarySwitch)wx_gtk2ud_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2ud_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2ud_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
+Libs                   :=$(LibrarySwitch)wx_gtk2u_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2u_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2u_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
 LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gcc" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" 
 
 
@@ -49,9 +49,9 @@ LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gc
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects=$(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/column$(ObjectSuffix) $(IntermediateDirectory)/tablecol$(ObjectSuffix) $(IntermediateDirectory)/table$(ObjectSuffix) \
-	$(IntermediateDirectory)/database$(ObjectSuffix) $(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IntermediateDirectory)/dbitem$(ObjectSuffix) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IntermediateDirectory)/MySqlType$(ObjectSuffix) $(IntermediateDirectory)/MySqlDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IntermediateDirectory)/ErdTable$(ObjectSuffix) \
-	$(IntermediateDirectory)/DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/FrameCanvas$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) \
+	$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) \
+	$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -63,7 +63,7 @@ $(OutputFile): makeDirStep $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
 
 makeDirStep:
-	@test -d .objsud || $(MakeDirCommand) .objsud
+	@test -d .objsu || $(MakeDirCommand) .objsu
 
 PreBuild:
 	@echo Executing Pre Build commands ...
@@ -74,181 +74,181 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/gui_GUI$(ObjectSuffix): gui/GUI.cpp $(IntermediateDirectory)/gui_GUI$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_GUI$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_GUI$(DependSuffix): gui/GUI.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_GUI$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_GUI$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.cpp"
+$(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix): ErdEngine/FrameCanvas.cpp $(IntermediateDirectory)/ErdEngine_FrameCanvas$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/FrameCanvas.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ErdEngine_FrameCanvas$(DependSuffix): ErdEngine/FrameCanvas.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) -MF$(IntermediateDirectory)/ErdEngine_FrameCanvas$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/FrameCanvas.cpp"
 
-$(IntermediateDirectory)/gui_GUI$(PreprocessSuffix): gui/GUI.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_GUI$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.cpp"
+$(IntermediateDirectory)/ErdEngine_FrameCanvas$(PreprocessSuffix): ErdEngine/FrameCanvas.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/FrameCanvas.cpp"
 
-$(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix): gui/DbViewerPanel.cpp $(IntermediateDirectory)/gui_DbViewerPanel$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DbViewerPanel.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DbViewerPanel$(DependSuffix): gui/DbViewerPanel.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DbViewerPanel$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DbViewerPanel.cpp"
+$(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix): ErdEngine/DnDTableShape.cpp $(IntermediateDirectory)/ErdEngine_DnDTableShape$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/DnDTableShape.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ErdEngine_DnDTableShape$(DependSuffix): ErdEngine/DnDTableShape.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) -MF$(IntermediateDirectory)/ErdEngine_DnDTableShape$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/DnDTableShape.cpp"
 
-$(IntermediateDirectory)/gui_DbViewerPanel$(PreprocessSuffix): gui/DbViewerPanel.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DbViewerPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DbViewerPanel.cpp"
+$(IntermediateDirectory)/ErdEngine_DnDTableShape$(PreprocessSuffix): ErdEngine/DnDTableShape.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/DnDTableShape.cpp"
 
-$(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix): gui/SqlCommandPanel.cpp $(IntermediateDirectory)/gui_SqlCommandPanel$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/SqlCommandPanel.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_SqlCommandPanel$(DependSuffix): gui/SqlCommandPanel.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_SqlCommandPanel$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/SqlCommandPanel.cpp"
+$(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix): ErdEngine/ErdTable.cpp $(IntermediateDirectory)/ErdEngine_ErdTable$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/ErdTable.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ErdEngine_ErdTable$(DependSuffix): ErdEngine/ErdTable.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) -MF$(IntermediateDirectory)/ErdEngine_ErdTable$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/ErdTable.cpp"
 
-$(IntermediateDirectory)/gui_SqlCommandPanel$(PreprocessSuffix): gui/SqlCommandPanel.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_SqlCommandPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/SqlCommandPanel.cpp"
+$(IntermediateDirectory)/ErdEngine_ErdTable$(PreprocessSuffix): ErdEngine/ErdTable.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ErdEngine_ErdTable$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdEngine/ErdTable.cpp"
 
-$(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix): gui/ErdPanel.cpp $(IntermediateDirectory)/gui_ErdPanel$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/ErdPanel.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_ErdPanel$(DependSuffix): gui/ErdPanel.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_ErdPanel$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/ErdPanel.cpp"
+$(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix): Interfaces/IDbItem.cpp $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Interfaces/IDbItem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix): Interfaces/IDbItem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) -MF$(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Interfaces/IDbItem.cpp"
 
-$(IntermediateDirectory)/gui_ErdPanel$(PreprocessSuffix): gui/ErdPanel.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_ErdPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/ErdPanel.cpp"
+$(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix): Interfaces/IDbItem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Interfaces/IDbItem.cpp"
 
-$(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix): gui/DbSettingDialog.cpp $(IntermediateDirectory)/gui_DbSettingDialog$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DbSettingDialog.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DbSettingDialog$(DependSuffix): gui/DbSettingDialog.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DbSettingDialog$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DbSettingDialog.cpp"
+$(IntermediateDirectory)/Gui_GUI$(ObjectSuffix): Gui/GUI.cpp $(IntermediateDirectory)/Gui_GUI$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/GUI.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_GUI$(DependSuffix): Gui/GUI.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_GUI$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/GUI.cpp"
 
-$(IntermediateDirectory)/gui_DbSettingDialog$(PreprocessSuffix): gui/DbSettingDialog.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DbSettingDialog$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DbSettingDialog.cpp"
+$(IntermediateDirectory)/Gui_GUI$(PreprocessSuffix): Gui/GUI.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_GUI$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/GUI.cpp"
 
-$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix): gui/DatabaseExplorerFrame.cpp $(IntermediateDirectory)/gui_DatabaseExplorerFrame$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DatabaseExplorerFrame.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(DependSuffix): gui/DatabaseExplorerFrame.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DatabaseExplorerFrame.cpp"
+$(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix): Gui/DbViewerPanel.cpp $(IntermediateDirectory)/Gui_DbViewerPanel$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DbViewerPanel.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_DbViewerPanel$(DependSuffix): Gui/DbViewerPanel.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_DbViewerPanel$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DbViewerPanel.cpp"
 
-$(IntermediateDirectory)/gui_DatabaseExplorerFrame$(PreprocessSuffix): gui/DatabaseExplorerFrame.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_DatabaseExplorerFrame$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/DatabaseExplorerFrame.cpp"
+$(IntermediateDirectory)/Gui_DbViewerPanel$(PreprocessSuffix): Gui/DbViewerPanel.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_DbViewerPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DbViewerPanel.cpp"
 
-$(IntermediateDirectory)/gui_TableSettingsDialog$(ObjectSuffix): gui/TableSettingsDialog.cpp $(IntermediateDirectory)/gui_TableSettingsDialog$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/TableSettingsDialog.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/gui_TableSettingsDialog$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/gui_TableSettingsDialog$(DependSuffix): gui/TableSettingsDialog.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/gui_TableSettingsDialog$(ObjectSuffix) -MF$(IntermediateDirectory)/gui_TableSettingsDialog$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/gui/TableSettingsDialog.cpp"
+$(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix): Gui/SqlCommandPanel.cpp $(IntermediateDirectory)/Gui_SqlCommandPanel$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/SqlCommandPanel.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_SqlCommandPanel$(DependSuffix): Gui/SqlCommandPanel.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_SqlCommandPanel$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/SqlCommandPanel.cpp"
 
-$(IntermediateDirectory)/gui_TableSettingsDialog$(PreprocessSuffix): gui/TableSettingsDialog.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/gui_TableSettingsDialog$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/gui/TableSettingsDialog.cpp"
+$(IntermediateDirectory)/Gui_SqlCommandPanel$(PreprocessSuffix): Gui/SqlCommandPanel.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_SqlCommandPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/SqlCommandPanel.cpp"
 
-$(IntermediateDirectory)/column$(ObjectSuffix): column.cpp $(IntermediateDirectory)/column$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/column.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/column$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/column$(DependSuffix): column.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/column$(ObjectSuffix) -MF$(IntermediateDirectory)/column$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/column.cpp"
+$(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix): Gui/TableSettingsDialog.cpp $(IntermediateDirectory)/Gui_TableSettingsDialog$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/TableSettingsDialog.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_TableSettingsDialog$(DependSuffix): Gui/TableSettingsDialog.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_TableSettingsDialog$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/TableSettingsDialog.cpp"
 
-$(IntermediateDirectory)/column$(PreprocessSuffix): column.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/column$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/column.cpp"
+$(IntermediateDirectory)/Gui_TableSettingsDialog$(PreprocessSuffix): Gui/TableSettingsDialog.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_TableSettingsDialog$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/TableSettingsDialog.cpp"
 
-$(IntermediateDirectory)/tablecol$(ObjectSuffix): tablecol.cpp $(IntermediateDirectory)/tablecol$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/tablecol.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/tablecol$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/tablecol$(DependSuffix): tablecol.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/tablecol$(ObjectSuffix) -MF$(IntermediateDirectory)/tablecol$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/tablecol.cpp"
+$(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix): Gui/ErdPanel.cpp $(IntermediateDirectory)/Gui_ErdPanel$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/ErdPanel.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_ErdPanel$(DependSuffix): Gui/ErdPanel.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_ErdPanel$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/ErdPanel.cpp"
 
-$(IntermediateDirectory)/tablecol$(PreprocessSuffix): tablecol.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/tablecol$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/tablecol.cpp"
+$(IntermediateDirectory)/Gui_ErdPanel$(PreprocessSuffix): Gui/ErdPanel.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_ErdPanel$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/ErdPanel.cpp"
 
-$(IntermediateDirectory)/table$(ObjectSuffix): table.cpp $(IntermediateDirectory)/table$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/table.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/table$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/table$(DependSuffix): table.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/table$(ObjectSuffix) -MF$(IntermediateDirectory)/table$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/table.cpp"
+$(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix): Gui/DbSettingDialog.cpp $(IntermediateDirectory)/Gui_DbSettingDialog$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DbSettingDialog.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_DbSettingDialog$(DependSuffix): Gui/DbSettingDialog.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_DbSettingDialog$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DbSettingDialog.cpp"
 
-$(IntermediateDirectory)/table$(PreprocessSuffix): table.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/table$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/table.cpp"
+$(IntermediateDirectory)/Gui_DbSettingDialog$(PreprocessSuffix): Gui/DbSettingDialog.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_DbSettingDialog$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DbSettingDialog.cpp"
 
-$(IntermediateDirectory)/database$(ObjectSuffix): database.cpp $(IntermediateDirectory)/database$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/database.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/database$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/database$(DependSuffix): database.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/database$(ObjectSuffix) -MF$(IntermediateDirectory)/database$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/database.cpp"
+$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix): Gui/DatabaseExplorerFrame.cpp $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DatabaseExplorerFrame.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(DependSuffix): Gui/DatabaseExplorerFrame.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DatabaseExplorerFrame.cpp"
 
-$(IntermediateDirectory)/database$(PreprocessSuffix): database.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/database$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/database.cpp"
+$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(PreprocessSuffix): Gui/DatabaseExplorerFrame.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DatabaseExplorerFrame.cpp"
 
-$(IntermediateDirectory)/databasecol$(ObjectSuffix): databasecol.cpp $(IntermediateDirectory)/databasecol$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/databasecol.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/databasecol$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/databasecol$(DependSuffix): databasecol.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/databasecol$(ObjectSuffix) -MF$(IntermediateDirectory)/databasecol$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/databasecol.cpp"
+$(IntermediateDirectory)/DbEngine_column$(ObjectSuffix): DbEngine/column.cpp $(IntermediateDirectory)/DbEngine_column$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/column.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DbEngine_column$(DependSuffix): DbEngine/column.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_column$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/column.cpp"
 
-$(IntermediateDirectory)/databasecol$(PreprocessSuffix): databasecol.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/databasecol$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/databasecol.cpp"
+$(IntermediateDirectory)/DbEngine_column$(PreprocessSuffix): DbEngine/column.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_column$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/column.cpp"
 
-$(IntermediateDirectory)/dbitem$(ObjectSuffix): dbitem.cpp $(IntermediateDirectory)/dbitem$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/dbitem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/dbitem$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/dbitem$(DependSuffix): dbitem.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/dbitem$(ObjectSuffix) -MF$(IntermediateDirectory)/dbitem$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/dbitem.cpp"
+$(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix): DbEngine/tablecol.cpp $(IntermediateDirectory)/DbEngine_tablecol$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/tablecol.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DbEngine_tablecol$(DependSuffix): DbEngine/tablecol.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_tablecol$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/tablecol.cpp"
 
-$(IntermediateDirectory)/dbitem$(PreprocessSuffix): dbitem.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/dbitem$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/dbitem.cpp"
+$(IntermediateDirectory)/DbEngine_tablecol$(PreprocessSuffix): DbEngine/tablecol.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_tablecol$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/tablecol.cpp"
 
-$(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix): DatabaseExplorerApp.cpp $(IntermediateDirectory)/DatabaseExplorerApp$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DatabaseExplorerApp.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/DatabaseExplorerApp$(DependSuffix): DatabaseExplorerApp.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix) -MF$(IntermediateDirectory)/DatabaseExplorerApp$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DatabaseExplorerApp.cpp"
+$(IntermediateDirectory)/DbEngine_database$(ObjectSuffix): DbEngine/database.cpp $(IntermediateDirectory)/DbEngine_database$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/database.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DbEngine_database$(DependSuffix): DbEngine/database.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_database$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/database.cpp"
 
-$(IntermediateDirectory)/DatabaseExplorerApp$(PreprocessSuffix): DatabaseExplorerApp.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DatabaseExplorerApp$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DatabaseExplorerApp.cpp"
+$(IntermediateDirectory)/DbEngine_database$(PreprocessSuffix): DbEngine/database.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_database$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/database.cpp"
 
-$(IntermediateDirectory)/wx_pch$(ObjectSuffix): wx_pch.cpp $(IntermediateDirectory)/wx_pch$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/wx_pch.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/wx_pch$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/wx_pch$(DependSuffix): wx_pch.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/wx_pch$(ObjectSuffix) -MF$(IntermediateDirectory)/wx_pch$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/wx_pch.cpp"
+$(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix): DbEngine/databasecol.cpp $(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/databasecol.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix): DbEngine/databasecol.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/databasecol.cpp"
 
-$(IntermediateDirectory)/wx_pch$(PreprocessSuffix): wx_pch.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/wx_pch$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/wx_pch.cpp"
+$(IntermediateDirectory)/DbEngine_databasecol$(PreprocessSuffix): DbEngine/databasecol.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_databasecol$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/databasecol.cpp"
 
-$(IntermediateDirectory)/MySqlType$(ObjectSuffix): MySqlType.cpp $(IntermediateDirectory)/MySqlType$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/MySqlType.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/MySqlType$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/MySqlType$(DependSuffix): MySqlType.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/MySqlType$(ObjectSuffix) -MF$(IntermediateDirectory)/MySqlType$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/MySqlType.cpp"
+$(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix): DbEngine/dbitem.cpp $(IntermediateDirectory)/DbEngine_dbitem$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/dbitem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DbEngine_dbitem$(DependSuffix): DbEngine/dbitem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_dbitem$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/dbitem.cpp"
 
-$(IntermediateDirectory)/MySqlType$(PreprocessSuffix): MySqlType.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/MySqlType$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/MySqlType.cpp"
+$(IntermediateDirectory)/DbEngine_dbitem$(PreprocessSuffix): DbEngine/dbitem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_dbitem$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/dbitem.cpp"
 
-$(IntermediateDirectory)/MySqlDbAdapter$(ObjectSuffix): MySqlDbAdapter.cpp $(IntermediateDirectory)/MySqlDbAdapter$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/MySqlDbAdapter.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/MySqlDbAdapter$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/MySqlDbAdapter$(DependSuffix): MySqlDbAdapter.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/MySqlDbAdapter$(ObjectSuffix) -MF$(IntermediateDirectory)/MySqlDbAdapter$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/MySqlDbAdapter.cpp"
+$(IntermediateDirectory)/DbEngine_table$(ObjectSuffix): DbEngine/table.cpp $(IntermediateDirectory)/DbEngine_table$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/table.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/DbEngine_table$(DependSuffix): DbEngine/table.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_table$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/table.cpp"
 
-$(IntermediateDirectory)/MySqlDbAdapter$(PreprocessSuffix): MySqlDbAdapter.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/MySqlDbAdapter$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/MySqlDbAdapter.cpp"
+$(IntermediateDirectory)/DbEngine_table$(PreprocessSuffix): DbEngine/table.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_table$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/table.cpp"
 
-$(IntermediateDirectory)/SqliteDbAdapter$(ObjectSuffix): SqliteDbAdapter.cpp $(IntermediateDirectory)/SqliteDbAdapter$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/SqliteDbAdapter.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/SqliteDbAdapter$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/SqliteDbAdapter$(DependSuffix): SqliteDbAdapter.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SqliteDbAdapter$(ObjectSuffix) -MF$(IntermediateDirectory)/SqliteDbAdapter$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/SqliteDbAdapter.cpp"
+$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix): Main/DatabaseExplorerApp.cpp $(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix): Main/DatabaseExplorerApp.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp"
 
-$(IntermediateDirectory)/SqliteDbAdapter$(PreprocessSuffix): SqliteDbAdapter.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SqliteDbAdapter$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/SqliteDbAdapter.cpp"
+$(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix): Main/DatabaseExplorerApp.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp"
 
-$(IntermediateDirectory)/IDbItem$(ObjectSuffix): IDbItem.cpp $(IntermediateDirectory)/IDbItem$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/IDbItem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/IDbItem$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/IDbItem$(DependSuffix): IDbItem.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/IDbItem$(ObjectSuffix) -MF$(IntermediateDirectory)/IDbItem$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/IDbItem.cpp"
+$(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix): Main/SqliteDbAdapter.cpp $(IntermediateDirectory)/Main_SqliteDbAdapter$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/SqliteDbAdapter.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Main_SqliteDbAdapter$(DependSuffix): Main/SqliteDbAdapter.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_SqliteDbAdapter$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/SqliteDbAdapter.cpp"
 
-$(IntermediateDirectory)/IDbItem$(PreprocessSuffix): IDbItem.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/IDbItem$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/IDbItem.cpp"
+$(IntermediateDirectory)/Main_SqliteDbAdapter$(PreprocessSuffix): Main/SqliteDbAdapter.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_SqliteDbAdapter$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/SqliteDbAdapter.cpp"
 
-$(IntermediateDirectory)/ErdTable$(ObjectSuffix): ErdTable.cpp $(IntermediateDirectory)/ErdTable$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdTable.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/ErdTable$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/ErdTable$(DependSuffix): ErdTable.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ErdTable$(ObjectSuffix) -MF$(IntermediateDirectory)/ErdTable$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/ErdTable.cpp"
+$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix): Main/MySqlDbAdapter.cpp $(IntermediateDirectory)/Main_MySqlDbAdapter$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlDbAdapter.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Main_MySqlDbAdapter$(DependSuffix): Main/MySqlDbAdapter.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_MySqlDbAdapter$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlDbAdapter.cpp"
 
-$(IntermediateDirectory)/ErdTable$(PreprocessSuffix): ErdTable.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ErdTable$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/ErdTable.cpp"
+$(IntermediateDirectory)/Main_MySqlDbAdapter$(PreprocessSuffix): Main/MySqlDbAdapter.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_MySqlDbAdapter$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlDbAdapter.cpp"
 
-$(IntermediateDirectory)/DnDTableShape$(ObjectSuffix): DnDTableShape.cpp $(IntermediateDirectory)/DnDTableShape$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DnDTableShape.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DnDTableShape$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/DnDTableShape$(DependSuffix): DnDTableShape.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DnDTableShape$(ObjectSuffix) -MF$(IntermediateDirectory)/DnDTableShape$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DnDTableShape.cpp"
+$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix): Main/MySqlType.cpp $(IntermediateDirectory)/Main_MySqlType$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlType.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Main_MySqlType$(DependSuffix): Main/MySqlType.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_MySqlType$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlType.cpp"
 
-$(IntermediateDirectory)/DnDTableShape$(PreprocessSuffix): DnDTableShape.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DnDTableShape$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DnDTableShape.cpp"
+$(IntermediateDirectory)/Main_MySqlType$(PreprocessSuffix): Main/MySqlType.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_MySqlType$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlType.cpp"
 
-$(IntermediateDirectory)/FrameCanvas$(ObjectSuffix): FrameCanvas.cpp $(IntermediateDirectory)/FrameCanvas$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/FrameCanvas.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/FrameCanvas$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/FrameCanvas$(DependSuffix): FrameCanvas.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/FrameCanvas$(ObjectSuffix) -MF$(IntermediateDirectory)/FrameCanvas$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/FrameCanvas.cpp"
+$(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix): Main/wx_pch.cpp $(IntermediateDirectory)/Main_wx_pch$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/wx_pch.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Main_wx_pch$(DependSuffix): Main/wx_pch.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_wx_pch$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/wx_pch.cpp"
 
-$(IntermediateDirectory)/FrameCanvas$(PreprocessSuffix): FrameCanvas.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/FrameCanvas$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/FrameCanvas.cpp"
+$(IntermediateDirectory)/Main_wx_pch$(PreprocessSuffix): Main/wx_pch.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_wx_pch$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/wx_pch.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
@@ -256,72 +256,72 @@ $(IntermediateDirectory)/FrameCanvas$(PreprocessSuffix): FrameCanvas.cpp
 ## Clean
 ##
 clean:
-	$(RM) $(IntermediateDirectory)/gui_GUI$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_GUI$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_GUI$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DbViewerPanel$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DbViewerPanel$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DbViewerPanel$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/gui_SqlCommandPanel$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_SqlCommandPanel$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_SqlCommandPanel$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/gui_ErdPanel$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_ErdPanel$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_ErdPanel$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DbSettingDialog$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DbSettingDialog$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DbSettingDialog$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DatabaseExplorerFrame$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DatabaseExplorerFrame$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_DatabaseExplorerFrame$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/gui_TableSettingsDialog$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/gui_TableSettingsDialog$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/gui_TableSettingsDialog$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/column$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/column$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/column$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/tablecol$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/tablecol$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/tablecol$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/table$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/table$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/table$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/database$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/database$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/database$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/databasecol$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/databasecol$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/databasecol$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/dbitem$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/dbitem$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/dbitem$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/DatabaseExplorerApp$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/DatabaseExplorerApp$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/DatabaseExplorerApp$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/wx_pch$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/wx_pch$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/wx_pch$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/MySqlType$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/MySqlType$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/MySqlType$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/MySqlDbAdapter$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/MySqlDbAdapter$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/MySqlDbAdapter$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/SqliteDbAdapter$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/SqliteDbAdapter$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/SqliteDbAdapter$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/IDbItem$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/IDbItem$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/IDbItem$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/ErdTable$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/ErdTable$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/ErdTable$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/DnDTableShape$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/DnDTableShape$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/DnDTableShape$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/FrameCanvas$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/FrameCanvas$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/FrameCanvas$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_ErdTable$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/ErdEngine_ErdTable$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_GUI$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_GUI$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DbViewerPanel$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DbViewerPanel$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_SqlCommandPanel$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_SqlCommandPanel$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_TableSettingsDialog$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_TableSettingsDialog$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_ErdPanel$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_ErdPanel$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DbSettingDialog$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DbSettingDialog$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_column$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_column$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_tablecol$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_tablecol$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_database$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_database$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_database$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_databasecol$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_dbitem$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_dbitem$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_table$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/DbEngine_table$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Main_SqliteDbAdapter$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Main_SqliteDbAdapter$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Main_MySqlDbAdapter$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Main_MySqlDbAdapter$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Main_MySqlType$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Main_MySqlType$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Main_wx_pch$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Main_wx_pch$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 
 
