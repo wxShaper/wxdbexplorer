@@ -39,10 +39,10 @@ MakeDirCommand         :=mkdir -p
 CmpOptions             := -Wall -g -fPIC -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
 C_CmpOptions           := -Wall -g -fPIC -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
 LinkOptions            :=  `wx-config --debug=yes --libs` 
-IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)../../src/controls/include" "$(IncludeSwitch)../../src/controls/src/wxScintilla" "$(IncludeSwitch)../../src/controls/src/wxScintilla/scintilla/include" "$(IncludeSwitch)../../src/controls/src/wxScintilla/scintilla/src" 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../../src/controls/include $(IncludeSwitch)../../src/controls/src/wxScintilla $(IncludeSwitch)../../src/controls/src/wxScintilla/scintilla/include $(IncludeSwitch)../../src/controls/src/wxScintilla/scintilla/src 
 RcIncludePath          :=
 Libs                   :=
-LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../../bin/gcc/lib" "$(LibraryPathSwitch)../../bin/gcc" 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)../../bin/gcc/lib $(LibraryPathSwitch)../../bin/gcc 
 
 
 ##

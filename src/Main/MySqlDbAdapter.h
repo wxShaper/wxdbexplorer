@@ -28,7 +28,7 @@ public:
 
 
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
-	static wxString GetCreateTableSql(Table* tab);
+	static wxString GetCreateTableSql(Table* tab, bool dropTable);
 
 	virtual IDbType* GetDbTypeByName(const wxString& typeName);
 	virtual wxArrayString* GetDbTypes();

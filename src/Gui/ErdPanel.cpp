@@ -3,6 +3,7 @@
 BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_MENU(wxID_OPEN, ErdPanel::OnLoad)
 	EVT_MENU(wxID_SAVE, ErdPanel::OnSave)
+	EVT_MENU(IDS_ERD_SAVE_SQL, ErdPanel::OnSaveSql)
 	EVT_TOOL_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnTool)
 	EVT_UPDATE_UI_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnToolUpdate)
 END_EVENT_TABLE()
@@ -16,8 +17,9 @@ ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
 
 
 	m_toolBarErd->SetToolBitmapSize(wxSize(16, 15));
-	m_toolBarErd->AddTool(wxID_SAVE, wxT("Save"), wxBitmap(filesave_xpm),  wxT("Save diagram"));
 	m_toolBarErd->AddTool(wxID_OPEN, wxT("Open"), wxBitmap(fileopen_xpm),  wxT("Open diagram"));
+	m_toolBarErd->AddTool(wxID_SAVE, wxT("Save"), wxBitmap(filesave_xpm),  wxT("Save diagram"));
+	m_toolBarErd->AddTool(IDS_ERD_SAVE_SQL, wxT("Save SQL"), wxBitmap(filesavesql_xpm),wxT("Save SQL"));
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Database table"));
@@ -78,5 +80,25 @@ void ErdPanel::OnSave(wxCommandEvent& WXUNUSED(event)) {
 wxSFShapeCanvas* ErdPanel::getCanvas()
 {	
 	return m_pFrameCanvas;
+}
+
+void ErdPanel::OnSaveSql(wxCommandEvent& event)
+{
+	wxFileDialog dlg(this, wxT("Save SQL create query..."), wxGetCwd(), wxT(""), wxT("SQL Files (*.sql)|*.sql"), wxSAVE | wxFD_OVERWRITE_PROMPT);
+
+	if(dlg.ShowModal() == wxID_OK) {
+		wxTextFile file(dlg.GetPath());
+		if (file.Exists()) file.Open();
+		else file.Create();
+		if (file.IsOpened()){
+			file.Clear();
+			file.AddLine(wxT("-- SQL script created by DatabaseExplorer "));
+			file.AddLine(wxT(""));
+			file.AddLine(m_pFrameCanvas->GetSqlScript());	
+			file.Write();
+			file.Close();
+			}			
+		wxMessageBox(wxString::Format(wxT("The chart has been saved to '%s'."), dlg.GetPath().GetData()), wxT("ShapeFramework"));
+	}
 }
 

@@ -58,20 +58,35 @@ DatabaseCol* MySqlDbAdapter::GetDatabases() {
 }
 
 
-wxString MySqlDbAdapter::GetCreateTableSql(Table* tab) {
+wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
-	wxString str = wxString::Format(wxT("DROP TABLE EXIST `%s`; \n"),tab->getName().c_str());
+	wxString str = wxT("");
+	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s`; \n"),tab->getName().c_str());
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
-
-	Column* col = tab->GetFristColumn();
+	
+	
+	
+	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
+	while( node )
+		{
+		Column* col = NULL;
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
+		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
+		node = node->GetNext();
+		if (node) str.append(wxT(",\n ")) ;
+		else  str.append(wxT("\n ")) ;
+		}
+		
+/*	Column* col = tab->GetFristColumn();
 	while (col) {
 		str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
-		col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
+		col = wxDynamicCast(col->GetSibbling(),Column);
 		if (col) str.append(wxT(",\n ")) ;
 		else  str.append(wxT("\n ")) ;
-	}
+	}*/
 
-	str.append(wxT(")"));
+	str.append(wxT(");\n"));
+	str.append(wxT("-- -------------------------------------------------------------\n"));	
 	return str;
 }
 
@@ -85,7 +100,7 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	} else if (typeName == wxT("DOUBLE")) {
 		type = new MySqlType(wxT("DOUBLE"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
 	} else if (typeName == wxT("FLOAT")) {
-		type = new MySqlType(wxT("FLOAT"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+		type = new MySqlType(wxT("FLOAT"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL );
 	} else if (typeName == wxT("DECIMAL")) {
 		type = new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
 	}  else if (typeName == wxT("BOOL")) {
@@ -117,10 +132,6 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	} else if (typeName == wxT("LONGTEXT")) {
 		type = new MySqlType(wxT("LONGTEXT"), 0);
 	}
-	if (!type){
-		int i;
-		i++;
-		}
 	wxASSERT(type);
 	return type;
 }
@@ -186,7 +197,7 @@ IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString)
 		typeName = text.Mid(0,iZavorka);
 		text = text.Mid(iZavorka);
 	}
-	
+
 	IDbType* type = this->GetDbTypeByName(typeName);
 	if (type){
 		//TODO:Doresit enum

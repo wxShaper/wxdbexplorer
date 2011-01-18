@@ -5,6 +5,8 @@
 #include <wx/wx.h>
 #include <wx/list.h>
 #include "wx/wxsf/ShapeCanvas.h" // Base class: wxSFShapeCanvas
+#include <wx/wxsf/DiagramManager.h>
+#include <wx/hashmap.h>
 #include <wx/clipbrd.h>
 #include "../Main/MySqlDbAdapter.h"
 #include "../Gui/TableSettingsDialog.h"
@@ -29,6 +31,8 @@ public:
 	virtual void OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped);
 
 	void OnPopupClick(wxCommandEvent &evt);
+	
+	wxString GetSqlScript();
 
 protected:
 	ErdPanel* m_pParentPanel;

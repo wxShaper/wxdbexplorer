@@ -24,7 +24,7 @@ public:
 	virtual DatabaseCol* GetDatabases() = 0;
 
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName) = 0;
-	static wxString GetCreateTableSql(Table* tab);
+	static wxString GetCreateTableSql(Table* tab, bool dropTable);
 
 	virtual void CloseConnection() = 0;
 	

@@ -39,10 +39,10 @@ MakeDirCommand         :=mkdir -p
 CmpOptions             := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
 C_CmpOptions           := -Wall -g -O0 `wx-config --debug=yes --cflags`  $(Preprocessors)
 LinkOptions            :=  -Wl,-rpath,$$``ORIGIN/lib/ `wx-config --debug=yes --libs` 
-IncludePath            :=  "$(IncludeSwitch)." "$(IncludeSwitch)controls/include" "$(IncludeSwitch)." 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)controls/include $(IncludeSwitch). 
 RcIncludePath          :=
 Libs                   :=$(LibrarySwitch)wx_gtk2ud_propgrid-2.8_cd $(LibrarySwitch)wx_gtk2ud_scintilla-2.8_cd $(LibrarySwitch)wx_gtk2ud_shapeframework-2.8_cd $(LibrarySwitch)wxcode_gtk2_databaselayer_mysql-2.8 $(LibrarySwitch)wxcode_gtk2_databaselayer_sqlite-2.8 
-LibPath                := "$(LibraryPathSwitch)." "$(LibraryPathSwitch)../bin/gcc" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" "$(LibraryPathSwitch)../bin/gcc/lib" 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)../bin/gcc $(LibraryPathSwitch)../bin/gcc/lib $(LibraryPathSwitch)../bin/gcc/lib $(LibraryPathSwitch)../bin/gcc/lib 
 
 
 ##

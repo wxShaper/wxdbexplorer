@@ -8,6 +8,7 @@ enum APPIDS
 
     // tool ErdPanel IDs
     //---------------------------------------------------------------//
+	IDS_ERD_SAVE_SQL,
 	IDT_ERD_FIRST,
     IDT_ERD_TOOL,
 	IDT_ERD_TABLE,

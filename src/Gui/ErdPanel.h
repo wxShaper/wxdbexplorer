@@ -2,6 +2,8 @@
 #define ERDPANEL_H
 
 #include "GUI.h" // Base class: _ErdPanel
+#include <wx/wx.h>
+#include <wx/textfile.h>
 #include "wx/wxsf/wxShapeFramework.h"
 #include "../ErdEngine/FrameCanvas.h"
 #include "Art.h"
@@ -47,7 +49,7 @@ protected:
 	void OnToolUpdate(wxUpdateUIEvent& event);
 	void OnLoad(wxCommandEvent& WXUNUSED(event));
 	void OnSave(wxCommandEvent& WXUNUSED(event));
-
+	void OnSaveSql(wxCommandEvent& WXUNUSED(event));
 
 	DECLARE_EVENT_TABLE();
 
