@@ -1,4 +1,4 @@
-#include "my_sql_type.h"
+#include "MySqlType.h"
 XS_IMPLEMENT_CLONABLE_CLASS(MySqlType,IDbType);
 MySqlType::MySqlType()
 {

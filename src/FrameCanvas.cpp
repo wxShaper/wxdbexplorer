@@ -1,5 +1,5 @@
-#include "frame_canvas.h"
-#include "erd_table.h"
+#include "FrameCanvas.h"
+#include "ErdTable.h"
 
 
 // definice konstanty uzivatelského datového typu pro DnD

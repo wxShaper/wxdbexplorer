@@ -4,10 +4,7 @@
 #include "GUI.h" // Base class: _DBSettingsDialog
 #include <wx/wx.h>
 #include "DbViewerPanel.h"
-#include "IDbConnector.h"
-#include "MySqlDbConnector.h"
-#include "SqliteDbConnector.h"
-#include "../mysqldbadapter.h"
+#include "../MySqlDbAdapter.h"
 //#include "../sqlitedbadapter.h"
 
 class DbSettingDialog : public _DBSettingsDialog {

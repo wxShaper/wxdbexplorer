@@ -1,4 +1,4 @@
-#include "erd_table.h"
+#include "ErdTable.h"
 #define constOffset MAX_ID
 
 XS_IMPLEMENT_CLONABLE_CLASS(ErdTable,wxSFRoundRectShape);

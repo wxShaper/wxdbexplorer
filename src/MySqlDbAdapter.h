@@ -6,7 +6,7 @@
 #include "IDbAdapter.h" // Base class: IDbAdapter
 #include "databasecol.h"
 #include "database.h"
-#include "my_sql_type.h"
+#include "MySqlType.h"
 #include "IDbType.h"
 
 class MySqlDbAdapter : public IDbAdapter {

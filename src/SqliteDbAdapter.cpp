@@ -1,4 +1,4 @@
-#include "sqlitedbadapter.h"
+#include "SqliteDbAdapter.h"
 
 SQLiteDbAdapter::SQLiteDbAdapter(const wxString& fileName) {
 	m_sFileName = fileName;

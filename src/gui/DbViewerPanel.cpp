@@ -7,15 +7,13 @@
 #include <wx/imaglist.h>
 DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewerPanel(parent) {
 	m_pNotebook = notebook;
-	//m_pDbLayer = NULL;
-	m_pDbConnector = NULL;
+	m_pDbAdapter = NULL;
 }
 
 DbViewerPanel::~DbViewerPanel() {
-	//if ((m_pDbLayer != NULL)&&(m_pDbLayer->IsOpen())) m_pDbLayer->Close();
-	//delete m_pDbLayer;
-	if ((m_pDbConnector != NULL)&&(m_pDbConnector->IsConnected())) m_pDbConnector->CloseConnection();
-	delete m_pDbConnector;
+	//if ((m_pDbConnector != NULL)&&(m_pDbConnector->IsConnected())) m_pDbConnector->CloseConnection();
+	//delete m_pDbConnector;
+	delete m_pDbAdapter;
 }
 
 void DbViewerPanel::OnConncectClick(wxCommandEvent& event) {
@@ -24,9 +22,7 @@ void DbViewerPanel::OnConncectClick(wxCommandEvent& event) {
 	RefreshDbView();
 }
 void DbViewerPanel::OnConncectUI(wxUpdateUIEvent& event) {
-	//if (m_pDbLayer == NULL) event.Enable(true);
-	if (m_pDbConnector == NULL) event.Enable(true);
-
+	if (m_pDbAdapter == NULL ) event.Enable(true);
 	//else event.Enable(false);
 }
 void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {

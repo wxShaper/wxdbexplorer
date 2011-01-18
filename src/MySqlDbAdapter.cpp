@@ -1,4 +1,4 @@
-#include "mysqldbadapter.h"
+#include "MySqlDbAdapter.h"
 
 MySqlDbAdapter::MySqlDbAdapter(const wxString& serverName, const wxString& userName, const wxString& password) {
 	this->m_serverName = serverName;

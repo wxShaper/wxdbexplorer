@@ -3,10 +3,10 @@
 
 #include "GUI.h" // Base class: _ErdPanel
 #include "wx/wxsf/wxShapeFramework.h"
-#include "../frame_canvas.h"
+#include "../FrameCanvas.h"
 #include "Art.h"
 #include "Ids.h"
-#include "../erd_table.h"
+#include "../ErdTable.h"
 #include "../IDbAdapter.h"
 
 class FrameCanvas;

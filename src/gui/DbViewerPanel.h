@@ -13,23 +13,18 @@
 #include "../res/gui/folder.xpm"
 #include "../res/gui/form_blue.xpm"
 // other
-#include "../DbDatabase.h"
-#include "../DbTable.h"
 #include "../IDbItem.h"
-#include "../DbColumn.h"
-#include "IDbConnector.h"
 
-#include "../dndtableshape.h"
+#include "../DnDTableShape.h"
 
 #include "../databasecol.h"
 #include "../database.h"
 #include "../tablecol.h"
 #include "../table.h"
-#include "../columncol.h"
 #include "../column.h"
 #include "IDbAdapter.h"
 
-#include "../mysqldbadapter.h"
+#include "../MySqlDbAdapter.h"
 
 #include "../dbitem.h"
 
@@ -40,12 +35,6 @@ class DbViewerPanel : public _DbViewerPanel {
 public:
 	DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook);
 	virtual ~DbViewerPanel();
-	//void SetDbLayer(DatabaseLayer *DbLayer) {
-	//	m_pDbLayer = DbLayer;
-	//}
-	void SetDbConnector(IDbConnector *dbConnector) {
-		m_pDbConnector = dbConnector;
-	}
 	void SetDbAdapter(IDbAdapter *dbAdapter) {
 		m_pDbAdapter = dbAdapter;
 	}
@@ -66,7 +55,6 @@ public:
 	void RefreshDbView();
 
 protected:
-	IDbConnector *m_pDbConnector;
 	IDbAdapter* m_pDbAdapter;
 	//DatabaseLayer *m_pDbLayer;
 	wxString m_server;

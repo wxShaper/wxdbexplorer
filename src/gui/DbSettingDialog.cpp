@@ -20,7 +20,7 @@ void DbSettingDialog::OnOkClick(wxCommandEvent& event) {
 	m_pParent->SetDbAdapter(new MySqlDbAdapter(m_txServer->GetValue(),m_txUserName->GetValue(),m_txPassword->GetValue()));
 
 	if (!DbLayer->IsOpen()) wxMessageBox(wxT("Cannot open DB!"));
-	m_pParent->SetDbConnector(new MySqlDbConnector(DbLayer));
+//	m_pParent->SetDbConnector(new MySqlDbConnector(DbLayer));
 	
 	//m_pParent->SetDbLayer(DbLayer);
 	wxString serverName = m_txServer->GetValue();
@@ -34,8 +34,6 @@ void DbSettingDialog::OnSqliteOkClick(wxCommandEvent& event) {
 	
 	if (!DbLayer->IsOpen()) wxMessageBox(wxT("Cannot open DB!"));
 	//m_pParent->SetDbLayer(DbLayer);
-
-	m_pParent->SetDbConnector(new SqliteDbConnector(DbLayer));
 	wxString serverName = m_filePickerSqlite->GetPath();
 	m_pParent->SetServer(serverName);
 	Destroy();
