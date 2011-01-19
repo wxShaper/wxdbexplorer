@@ -88,8 +88,8 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event)
 
 	if(dlg.ShowModal() == wxID_OK) {
 		wxTextFile file(dlg.GetPath());
-		if (file.Exists()) file.Open();
-		else file.Create();
+		if (!file.Exists()) file.Create();
+		file.Open();
 		if (file.IsOpened()){
 			file.Clear();
 			file.AddLine(wxT("-- SQL script created by DatabaseExplorer "));

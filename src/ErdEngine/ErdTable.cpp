@@ -76,7 +76,7 @@ void ErdTable::Initialize()
 		m_pGrid->SetCellSpace( 1 );
 		m_pGrid->SetVBorder(2);
 		m_pGrid->SetHBorder(2);
-		m_pGrid->AcceptChild( wxT("All") );
+		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
 		SF_ADD_COMPONENT( m_pGrid, wxT("main_grid") );
 		
 		}
