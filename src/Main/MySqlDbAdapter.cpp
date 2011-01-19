@@ -1,5 +1,10 @@
 #include "MySqlDbAdapter.h"
-
+MySqlDbAdapter::MySqlDbAdapter()
+{
+	this->m_serverName = wxT("");
+	this->m_userName = wxT("");
+	this->m_password = wxT("");
+}
 MySqlDbAdapter::MySqlDbAdapter(const wxString& serverName, const wxString& userName, const wxString& password) {
 	this->m_serverName = serverName;
 	this->m_userName = userName;
@@ -14,7 +19,9 @@ void MySqlDbAdapter::CloseConnection() {
 }
 
 DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
-	DatabaseLayer* dbLayer = new MysqlDatabaseLayer(this->m_serverName, wxT(""), this->m_userName, this->m_password);
+	DatabaseLayer* dbLayer;
+	if (!CanConnect())  return new MysqlDatabaseLayer();
+	dbLayer = new MysqlDatabaseLayer(this->m_serverName, wxT(""), this->m_userName, this->m_password);
 	return dbLayer;
 }
 
@@ -63,30 +70,29 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	wxString str = wxT("");
 	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s`; \n"),tab->getName().c_str());
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
-	
-	
-	
+
+
+
 	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
-	while( node )
-		{
+	while( node ) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
 		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
 		node = node->GetNext();
 		if (node) str.append(wxT(",\n ")) ;
 		else  str.append(wxT("\n ")) ;
-		}
-		
-/*	Column* col = tab->GetFristColumn();
-	while (col) {
-		str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
-		col = wxDynamicCast(col->GetSibbling(),Column);
-		if (col) str.append(wxT(",\n ")) ;
-		else  str.append(wxT("\n ")) ;
-	}*/
+	}
+
+	/*	Column* col = tab->GetFristColumn();
+		while (col) {
+			str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
+			col = wxDynamicCast(col->GetSibbling(),Column);
+			if (col) str.append(wxT(",\n ")) ;
+			else  str.append(wxT("\n ")) ;
+		}*/
 
 	str.append(wxT(");\n"));
-	str.append(wxT("-- -------------------------------------------------------------\n"));	
+	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
 }
 
@@ -119,7 +125,7 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 		type = new MySqlType(wxT("TIMESTAMP"), 0);
 	} else if (typeName == wxT("ENUM")) {
 		type = new MySqlType(wxT("ENUM"), 0);
-	}else if (typeName == wxT("SET")) {
+	} else if (typeName == wxT("SET")) {
 		type = new MySqlType(wxT("SET"), 0);
 	} else if (typeName == wxT("LONGBLOB")) {
 		type = new MySqlType(wxT("LONGBLOB"), 0);
@@ -140,25 +146,25 @@ wxArrayString* MySqlDbAdapter::GetDbTypes() {
 	wxArrayString* pNames = new wxArrayString();
 	pNames->Add(wxT("INT"));
 	pNames->Add(wxT("SMALLINT"));
-	pNames->Add(wxT("BIGINT"));	
-	pNames->Add(wxT("TINYINT"));	
+	pNames->Add(wxT("BIGINT"));
+	pNames->Add(wxT("TINYINT"));
 	pNames->Add(wxT("VARCHAR"));
 	pNames->Add(wxT("DOUBLE"));
 	pNames->Add(wxT("FLOAT"));
-	pNames->Add(wxT("DECIMAL"));	
+	pNames->Add(wxT("DECIMAL"));
 	pNames->Add(wxT("BOOL"));
 	pNames->Add(wxT("DATETIME"));
-	pNames->Add(wxT("CHAR"));	
-	pNames->Add(wxT("TIMESTAMP"));	
-	pNames->Add(wxT("ENUM"));	
-	pNames->Add(wxT("SET"));	
-	pNames->Add(wxT("LONGBLOB"));	
+	pNames->Add(wxT("CHAR"));
+	pNames->Add(wxT("TIMESTAMP"));
+	pNames->Add(wxT("ENUM"));
+	pNames->Add(wxT("SET"));
+	pNames->Add(wxT("LONGBLOB"));
 	pNames->Add(wxT("BLOB"));
 	pNames->Add(wxT("MEDIUMTEXT"));
 	pNames->Add(wxT("TEXT"));
 	pNames->Add(wxT("LONGTEXT"));
-	
-	
+
+
 	return pNames;
 }
 wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
@@ -167,7 +173,7 @@ wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString
 	return ret;
 }
 
-bool MySqlDbAdapter::GetColumns(Table* pTab, const wxString& tableName){
+bool MySqlDbAdapter::GetColumns(Table* pTab, const wxString& tableName) {
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 
 	if (!dbLayer->IsOpen()) return NULL;
@@ -176,18 +182,17 @@ bool MySqlDbAdapter::GetColumns(Table* pTab, const wxString& tableName){
 	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),tableName.c_str()));
 	while (database->Next()) {
 		IDbType* pType = parseTypeString(database->GetResultString(2));
-		if (pType){
+		if (pType) {
 			Column* pCol = new Column(database->GetResultString(1),pTab->getName(), pType);
 			pTab->AddChild(pCol);
-			}
 		}
+	}
 	dbLayer->CloseResultSet(database);
 	dbLayer->Close();
 	delete dbLayer;
-	return true;	
+	return true;
 }
-IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString)
-{
+IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString) {
 	wxString text   = typeString.Upper().Trim();
 	wxString typeName ;
 	//int iMezera = text.Find(wxT(" "));
@@ -199,12 +204,12 @@ IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString)
 	}
 
 	IDbType* type = this->GetDbTypeByName(typeName);
-	if (type){
+	if (type) {
 		//TODO:Doresit enum
-		if ((iZavorka > 0) && (typeName.compare(wxT("ENUM")))){
+		if ((iZavorka > 0) && (typeName.compare(wxT("ENUM")))) {
 			int iKonecZavorky = text.Find(wxT(")"));
 			int iCarka = text.Find(wxT(","));
-			if ((iCarka > 0) && (iCarka<iKonecZavorky)){
+			if ((iCarka > 0) && (iCarka<iKonecZavorky)) {
 				long s = 0;
 				long s2 = 0;
 				text.Mid(1,iCarka-1).ToLong(&s);
@@ -212,13 +217,18 @@ IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString)
 				type->SetSize(s);
 				type->SetSize2(s2);
 				type->SetPropertyFlags(type->GetPropertyFlags() | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-			}else{
+			} else {
 				long s = 0;
 				text.Mid(1,iKonecZavorky-1).ToLong(&s);
 				type->SetSize(s);
-				}			
-			}		
-		}	
+			}
+		}
+	}
 	return type;
 }
+
+bool MySqlDbAdapter::CanConnect() {
+	return ((m_serverName != wxT(""))&&(m_userName != wxT("")));
+}
+
 

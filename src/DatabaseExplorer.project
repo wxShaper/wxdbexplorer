@@ -64,6 +64,8 @@
     <File Name="Main/SqliteDbAdapter.h"/>
     <File Name="Main/wx_pch.h"/>
     <File Name="Main/BuildNum.h"/>
+    <File Name="SqliteType.h"/>
+    <File Name="SqliteType.cpp"/>
   </VirtualDirectory>
   <Dependencies name="Release">
     <Project Name="wxPropGrid"/>

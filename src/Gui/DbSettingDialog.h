@@ -5,7 +5,7 @@
 #include <wx/wx.h>
 #include "DbViewerPanel.h"
 #include "../Main/MySqlDbAdapter.h"
-//#include "../sqlitedbadapter.h"
+#include "../Main/SqliteDbAdapter.h"
 
 class DbSettingDialog : public _DBSettingsDialog {
 

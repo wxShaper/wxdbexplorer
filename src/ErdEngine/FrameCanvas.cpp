@@ -104,7 +104,7 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 					//TODO:LANG:
 					wxMessageDialog dlg(this,wxT("Add drop table statement?"),wxT("Drop table"),wxYES_NO);
 					bool dropTable = (dlg.ShowModal() == wxID_YES);
-					wxTheClipboard->SetData(new wxTextDataObject(MySqlDbAdapter::GetCreateTableSql(table->getTable(), dropTable)));
+					wxTheClipboard->SetData(new wxTextDataObject(m_pDbAdapter->GetCreateTableSql(table->getTable(), dropTable)));
 					wxTheClipboard->Close();
 				}
 			}
@@ -163,7 +163,7 @@ wxString FrameCanvas::GetSqlScript()
 		{
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
 		if (tab){			
-			retStr.append(MySqlDbAdapter::GetCreateTableSql(tab->getTable(),true));
+			retStr.append(m_pDbAdapter->GetCreateTableSql(tab->getTable(),true));
 			node = node->GetNext();
 			}	
 		}

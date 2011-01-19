@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Peter Janků
-Date                   :=18.1.2011
+Date                   :=19.1.2011
 CodeLitePath           :="/home/jankup/.codelite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -51,7 +51,7 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)../bin/gcc $
 CodeLiteDir:=/usr/share/codelite
 Objects=$(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) \
 	$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) \
-	$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) 
+	$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -250,6 +250,14 @@ $(IntermediateDirectory)/Main_wx_pch$(DependSuffix): Main/wx_pch.cpp
 $(IntermediateDirectory)/Main_wx_pch$(PreprocessSuffix): Main/wx_pch.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_wx_pch$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/wx_pch.cpp"
 
+$(IntermediateDirectory)/SqliteType$(ObjectSuffix): SqliteType.cpp $(IntermediateDirectory)/SqliteType$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/SqliteType.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/SqliteType$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/SqliteType$(DependSuffix): SqliteType.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/SqliteType$(ObjectSuffix) -MF$(IntermediateDirectory)/SqliteType$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/SqliteType.cpp"
+
+$(IntermediateDirectory)/SqliteType$(PreprocessSuffix): SqliteType.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/SqliteType$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/SqliteType.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -322,6 +330,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Main_wx_pch$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Main_wx_pch$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/SqliteType$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/SqliteType$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/SqliteType$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 
 

@@ -13,6 +13,7 @@
 class MySqlDbAdapter : public IDbAdapter {
 
 public:
+	MySqlDbAdapter();
 	MySqlDbAdapter(const wxString& serverName, const wxString& userName, const wxString& password);
 	~MySqlDbAdapter();
 
@@ -21,14 +22,15 @@ public:
 	virtual TableCol* GetTables(const wxString& dbName);
 	//virtual ColumnCol* GetColumns(const wxString& tableName);
 	virtual bool GetColumns(Table* pTab, const wxString& tableName) ;
-	
+
+	virtual bool CanConnect();
 	virtual bool IsConnected();
 	virtual void CloseConnection();
 	virtual DatabaseLayer* GetDatabaseLayer();
 
 
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
-	static wxString GetCreateTableSql(Table* tab, bool dropTable);
+	virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
 
 	virtual IDbType* GetDbTypeByName(const wxString& typeName);
 	virtual wxArrayString* GetDbTypes();

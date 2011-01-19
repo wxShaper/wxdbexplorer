@@ -1,39 +1,43 @@
-#ifndef MYSQLTYPE_H
-#define MYSQLTYPE_H
+#ifndef SQLITETYPE_H
+#define SQLITETYPE_H
 
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "Interfaces/IDbType.h" // Base class: IDbType
 
-class MySqlType : public IDbType {
+class SqliteType : public IDbType {
 
 public:
-	XS_DECLARE_CLONABLE_CLASS(MySqlType);
-	MySqlType();
-	MySqlType(const MySqlType& obj);
-	MySqlType(const wxString& typeName, long propertyFlags);
-	virtual ~MySqlType();
+	XS_DECLARE_CLONABLE_CLASS(SqliteType);
+	SqliteType();
+	SqliteType(const SqliteType& obj);
+	SqliteType(const wxString& typeName, long propertyFlags);
+	virtual ~SqliteType();
 	void InitSerialize();
 
-	virtual bool GetAutoIncrement()						{
-		return m_autoIncrement;
+public:
+	virtual bool GetAutoIncrement()			{
+		return false;
 	}
-	virtual bool GetNotNull()							{
+	virtual bool GetNotNull()				{
 		return m_notNull;
 	}
-	virtual bool GetPrimaryKey()						{
-		return m_primaryKey;
+	virtual bool GetPrimaryKey()			{
+		return false;
 	}
-	virtual long GetSize()								{
-		return m_size;
+	virtual long GetPropertyFlags()			{
+		return m_dbtPropertyFlags;
 	}
-	virtual long GetSize2()								{
-		return m_size2;
+	virtual long GetSize()					{
+		return 0;
 	}
-	virtual wxString GetTypeName()						{
+	virtual long GetSize2()					{
+		return 0;
+	}
+	virtual wxString GetTypeName()			{
 		return m_typeName;
 	}
-	virtual bool GetUnique()							{
-		return m_unique;
+	virtual bool GetUnique()				{
+		return false;
 	}
 	virtual bool HaveAutoIncrement() 					{
 		return (m_dbtPropertyFlags & dbtAUTO_INCREMENT);
@@ -47,7 +51,7 @@ public:
 	virtual bool HaveSize() 							{
 		return (m_dbtPropertyFlags & dbtSIZE);
 	}
-		virtual bool HaveSize2() {
+	virtual bool HaveSize2() {
 		return (m_dbtPropertyFlags & dbtSIZE_TWO);
 	}
 	virtual bool HaveUnique() 							{
@@ -71,26 +75,24 @@ public:
 	virtual void SetUnique(bool unique) 				{
 		m_unique = unique;
 	}
+
+	virtual void SetPropertyFlags(long flags) 			{
+		m_dbtPropertyFlags = flags;
+	}
+
 	virtual wxString ReturnSql();
 
-	virtual long GetPropertyFlags(){
-		return m_dbtPropertyFlags;
-		}
-	virtual void SetPropertyFlags(long flags){
-		m_dbtPropertyFlags = flags;
-		}
-
 protected:
+
 	wxString m_typeName;
 	long m_dbtPropertyFlags;
-	
+
 	long m_size;
 	long m_size2;
 	bool m_unique;
 	bool m_primaryKey;
 	bool m_notNull;
 	bool m_autoIncrement;
-
 };
 
-#endif // MYSQLTYPE_H
+#endif // SQLITETYPE_H
