@@ -35,9 +35,9 @@
 #include <wx/notebook.h>
 #include <wx/textctrl.h>
 #include <wx/statbox.h>
+#include <wx/listbox.h>
 #include <wx/filepicker.h>
 #include <wx/dialog.h>
-#include <wx/listbox.h>
 #include <wx/combobox.h>
 #include <wx/checkbox.h>
 
@@ -146,6 +146,8 @@ class _DBSettingsDialog : public wxDialog
 	protected:
 		wxNotebook* m_notebook2;
 		wxPanel* m_MySqlPanel;
+		wxStaticText* m_staticText10;
+		wxTextCtrl* m_txName;
 		wxStaticText* m_staticText1;
 		wxTextCtrl* m_txServer;
 		wxStaticText* m_staticText2;
@@ -154,6 +156,9 @@ class _DBSettingsDialog : public wxDialog
 		wxTextCtrl* m_txPassword;
 		wxButton* m_btnOK;
 		wxButton* m_btnCancel;
+		wxButton* m_btnSave;
+		wxButton* m_btnRemove;
+		wxListBox* m_listBox2;
 		wxPanel* m_Sqlite;
 		wxStaticText* m_staticText11;
 		wxFilePickerCtrl* m_filePickerSqlite;
@@ -162,7 +167,15 @@ class _DBSettingsDialog : public wxDialog
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOkClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOKUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSaveClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSaveUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnRemoveClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnRmoveUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnHistoryClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnHistoryDClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnHistoruUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnSqliteOkClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	

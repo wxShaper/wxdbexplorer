@@ -37,6 +37,8 @@
     <File Name="Gui/Ids.h"/>
     <File Name="Gui/DbSettingDialog.h"/>
     <File Name="Gui/GUI.fbp"/>
+    <File Name="Gui/MysqlConnectionHistory.h"/>
+    <File Name="Gui/MysqlConnectionHistory.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="DbEngine">
     <File Name="DbEngine/column.cpp"/>
@@ -66,6 +68,7 @@
     <File Name="Main/BuildNum.h"/>
     <File Name="SqliteType.h"/>
     <File Name="SqliteType.cpp"/>
+    <File Name="Main/TODO_tasks.txt"/>
   </VirtualDirectory>
   <Dependencies name="Release">
     <Project Name="wxPropGrid"/>

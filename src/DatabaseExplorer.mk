@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Peter Janků
-Date                   :=19.1.2011
+Date                   :=24.1.2011
 CodeLitePath           :="/home/jankup/.codelite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)../bin/gcc $
 ##
 CodeLiteDir:=/usr/share/codelite
 Objects=$(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) \
-	$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) \
-	$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
+	$(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) \
+	$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -161,6 +161,14 @@ $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(DependSuffix): Gui/DatabaseE
 
 $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(PreprocessSuffix): Gui/DatabaseExplorerFrame.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/DatabaseExplorerFrame.cpp"
+
+$(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix): Gui/MysqlConnectionHistory.cpp $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/MysqlConnectionHistory.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_MysqlConnectionHistory$(DependSuffix): Gui/MysqlConnectionHistory.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_MysqlConnectionHistory$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/MysqlConnectionHistory.cpp"
+
+$(IntermediateDirectory)/Gui_MysqlConnectionHistory$(PreprocessSuffix): Gui/MysqlConnectionHistory.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/MysqlConnectionHistory.cpp"
 
 $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix): DbEngine/column.cpp $(IntermediateDirectory)/DbEngine_column$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/column.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IncludePath)
@@ -297,6 +305,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_column$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_column$(PreprocessSuffix)

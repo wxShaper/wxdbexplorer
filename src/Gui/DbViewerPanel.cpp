@@ -34,19 +34,6 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 		m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,m_pDbAdapter,dbName,dbTable),dbName,true);
 
 	}
-
-	/*DbTable* table = (DbTable*) m_treeDatabases->GetItemData(event.GetItem());
-
-
-	if ((table!=NULL)&&(table->GetType() == DbTableType)) {
-
-		wxString dbName = table->GetParentName();
-		wxString dbTable = table->GetName();
-		//m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,dbName,m_pDbLayer,dbTable),dbName,true);
-		m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,dbName,m_pDbConnector->GetDatabaseLayer(),dbTable),dbName,true);
-
-	}
-	//	m_propertyGrid->Append(wxT("Nova"));*/
 }
 void DbViewerPanel::OnRefreshClick(wxCommandEvent& event) {
 	RefreshDbView();
@@ -64,13 +51,13 @@ void DbViewerPanel::RefreshDbView() {
 	m_treeDatabases->SetImageList(pImageList);
 
 	// add root item
-	wxTreeItemId rootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases (%s)"),m_server.GetData()),0);
+	wxTreeItemId rootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases (%s)"),m_server.GetData()),-1);
 
 
 
 	for (int i = 0 ; i<dbCol->GetDbCount(); i++) {
 		Database *db = dbCol->GetByIndex(i);
-		wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,db->getName(),0,-1, new DbItem(db,NULL));//new DbDatabase(db->getName()));
+		wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,db->getName(),-1,-1, new DbItem(db,NULL));//new DbDatabase(db->getName()));
 		m_treeDatabases->Expand(rootID);
 		wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
 		m_treeDatabases->Expand(dbID);
