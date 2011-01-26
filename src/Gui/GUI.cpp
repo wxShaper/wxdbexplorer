@@ -189,13 +189,9 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	bSizer4->Add( m_toolBar1, 0, wxEXPAND, 5 );
 	
 	m_treeDatabases = new wxTreeCtrl( m_panel2, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTR_DEFAULT_STYLE );
+	m_treeDatabases->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 90, false, wxEmptyString ) );
+	
 	bSizer4->Add( m_treeDatabases, 1, wxEXPAND, 5 );
-	
-	m_staticline1 = new wxStaticLine( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	bSizer4->Add( m_staticline1, 0, wxEXPAND | wxALL, 5 );
-	
-	m_propertyGrid = new wxPropertyGrid(m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxPG_DEFAULT_STYLE);
-	bSizer4->Add( m_propertyGrid, 1, wxEXPAND, 5 );
 	
 	m_panel2->SetSizer( bSizer4 );
 	m_panel2->Layout();

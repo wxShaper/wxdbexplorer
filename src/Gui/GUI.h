@@ -29,15 +29,13 @@
 #include <wx/grid.h>
 #include <wx/toolbar.h>
 #include <wx/treectrl.h>
-#include <wx/statline.h>
-#include <wx/propgrid/propgrid.h>
-#include <wx/propgrid/advprops.h>
 #include <wx/notebook.h>
 #include <wx/textctrl.h>
 #include <wx/statbox.h>
 #include <wx/listbox.h>
 #include <wx/filepicker.h>
 #include <wx/dialog.h>
+#include <wx/statline.h>
 #include <wx/combobox.h>
 #include <wx/checkbox.h>
 
@@ -116,8 +114,6 @@ class _DbViewerPanel : public wxPanel
 		wxPanel* m_panel2;
 		wxToolBar* m_toolBar1;
 		wxTreeCtrl* m_treeDatabases;
-		wxStaticLine* m_staticline1;
-		wxPropertyGrid* m_propertyGrid;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnConncectClick( wxCommandEvent& event ) { event.Skip(); }

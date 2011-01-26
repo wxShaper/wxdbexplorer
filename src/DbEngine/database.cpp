@@ -1,4 +1,7 @@
 #include "database.h"
+
+
+
 Database::Database(IDbAdapter* dbAdapter,const wxString& dbName)
 {
 	this->m_name = dbName;
@@ -7,6 +10,15 @@ Database::Database(IDbAdapter* dbAdapter,const wxString& dbName)
 Database::~Database()
 {
 	delete this->tables;
+}
+
+
+Database::Database()
+{
+}
+
+Database::Database(const Database& obj)
+{
 }
 
 

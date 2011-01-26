@@ -53,6 +53,8 @@
     <File Name="DbEngine/tablecol.h"/>
     <File Name="DbEngine/databasecol.h"/>
     <File Name="DbEngine/database.h"/>
+    <File Name="DbEngine/dbconnection.h"/>
+    <File Name="DbEngine/dbconnection.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Main">
     <File Name="Main/DatabaseExplorerApp.cpp"/>

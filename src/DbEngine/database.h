@@ -2,17 +2,23 @@
 #define DATABASE_H
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
+#include <wx/wxxmlserializer/XmlSerializer.h>
 #include "tablecol.h"
 #include "Interfaces/IDbAdapter.h"
 
 // -------------------------------------------------
 // Trida databaze
 // -------------------------------------------------
-class Database {
+class Database : public xsSerializable {
+	
+	
 protected:
 	wxString m_name;
 	bool m_isSaved;	
 public:
+	XS_DECLARE_CLONABLE_CLASS(Database);
+	Database();
+	Database(const Database& obj);
 	Database(IDbAdapter* dbAdapter,const wxString& dbName);
 	~Database();
 

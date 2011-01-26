@@ -16,7 +16,7 @@
 #include "../Interfaces/IDbItem.h"
 
 #include "../ErdEngine/DnDTableShape.h"
-
+#include "../DbEngine/dbconnection.h"
 #include "../DbEngine/databasecol.h"
 #include "../DbEngine/database.h"
 #include "../DbEngine/tablecol.h"
@@ -55,6 +55,9 @@ public:
 	void RefreshDbView();
 
 protected:
+
+	xsSerializable* m_pConnections;
+
 	IDbAdapter* m_pDbAdapter;
 	//DatabaseLayer *m_pDbLayer;
 	wxString m_server;
