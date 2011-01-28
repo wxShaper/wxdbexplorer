@@ -5,8 +5,6 @@
 #include <wx/dynarray.h>
 #include "../Interfaces/IDbAdapter.h" // Base class: IDbAdapter
 #include "../Interfaces/IDbType.h"
-#include "../DbEngine/databasecol.h"
-#include "../DbEngine/database.h"
 #include "MySqlType.h"
 
 
@@ -19,17 +17,9 @@ public:
 
 
 
-	virtual void GetColumns(DbConnection* dbCon, Table* pTab, const wxString& tableName);
+	virtual bool GetColumns(Table* pTab);
 	virtual void GetDatabases(DbConnection* dbCon);
-	virtual void GetTables(DbConnection* dbCon, Database* db);
-
-
-
-
-	virtual DatabaseCol* GetDatabases();
-	virtual TableCol* GetTables(const wxString& dbName);
-	//virtual ColumnCol* GetColumns(const wxString& tableName);
-	virtual bool GetColumns(Table* pTab, const wxString& tableName) ;
+	virtual void GetTables(Database* db);
 
 	virtual bool CanConnect();
 	virtual bool IsConnected();

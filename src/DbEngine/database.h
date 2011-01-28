@@ -4,31 +4,33 @@
 #include <wx/dblayer/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "tablecol.h"
-#include "Interfaces/IDbAdapter.h"
+
 
 // -------------------------------------------------
 // Trida databaze
 // -------------------------------------------------
+class IDbAdapter;
 class Database : public xsSerializable {
 	
 	
 protected:
 	wxString m_name;
 	bool m_isSaved;	
-	DbConnection* m_pDbConnection;	
+	IDbAdapter* m_pDbAdapter;
+	
 public:
 	XS_DECLARE_CLONABLE_CLASS(Database);
 	Database();
 	Database(const Database& obj);
 	Database(IDbAdapter* dbAdapter,const wxString& dbName);
-	Database(DbConnection* pDbConnection, const wxString& dbName);
 	~Database();
 
+	IDbAdapter* getDbAdapter() { return this->m_pDbAdapter; }
 	// nazev databáze
 	wxString getName() { return this->m_name; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
-	TableCol *tables;
+	//TableCol *tables;
 
 };
 

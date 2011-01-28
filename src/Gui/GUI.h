@@ -17,6 +17,7 @@
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
+#include <wx/statusbr.h>
 #include <wx/frame.h>
 #include <wx/wxScintilla/wxscintilla.h>
 #ifdef __VISUALC__
@@ -41,11 +42,12 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
-#define wxID_TOOL_REFRESH 1000
-#define wxID_TOOL_ERD 1001
-#define wxID_Sqlite_OK 1002
-#define wxID_DEL 1003
-#define wxID_TX_SIZE 1004
+#define wxID_CLOSE_CONNECTION 1000
+#define wxID_TOOL_REFRESH 1001
+#define wxID_TOOL_ERD 1002
+#define wxID_Sqlite_OK 1003
+#define wxID_DEL 1004
+#define wxID_TX_SIZE 1005
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -58,6 +60,7 @@ class _MainFrame : public wxFrame
 		wxMenuBar* m_menubar3;
 		wxMenu* menuFile;
 		wxMenu* menuHelp;
+		wxStatusBar* m_statusBar1;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnExit( wxCommandEvent& event ) { event.Skip(); }
@@ -118,10 +121,13 @@ class _DbViewerPanel : public wxPanel
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnConncectClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnConncectUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnToolCloseClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnToolCloseUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnRefreshClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnERDClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDnDStart( wxTreeEvent& event ) { event.Skip(); }
 		virtual void OnItemActivate( wxTreeEvent& event ) { event.Skip(); }
+		virtual void OnItemRightClick( wxTreeEvent& event ) { event.Skip(); }
 		virtual void OnItemSelectionChange( wxTreeEvent& event ) { event.Skip(); }
 		
 	

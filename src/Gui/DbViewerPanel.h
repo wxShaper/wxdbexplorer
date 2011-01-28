@@ -39,6 +39,9 @@ public:
 		m_pDbAdapter = dbAdapter;
 	}
 
+	void AddDbConnection(DbConnection* pDbCon) {
+		m_pConnections->AddChild(pDbCon);
+	}
 
 	void SetServer(wxString& server) {
 		m_server = server;
@@ -51,6 +54,11 @@ public:
 	virtual void OnItemSelectionChange(wxTreeEvent& event);
 	virtual void OnERDClick(wxCommandEvent& event);
 	virtual void OnDnDStart(wxTreeEvent& event);
+	virtual void OnItemRightClick(wxTreeEvent& event);
+	virtual void OnToolCloseClick(wxCommandEvent& event);
+	virtual void OnToolCloseUI(wxUpdateUIEvent& event);
+
+
 
 	void RefreshDbView();
 

@@ -4,7 +4,7 @@
 #include <wx/wx.h>
 #include <wx/dblayer/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
-#include "Interfaces/IDbAdapter.h"
+#include "../Interfaces/IDbAdapter.h"
 
 class DbConnection : public xsSerializable {
 
@@ -16,6 +16,7 @@ public:
 	DbConnection(const DbConnection& obj);
 	virtual ~DbConnection();
 	
+	wxString GetServerName() { return m_serverName; }
 	void Load();
 	IDbAdapter* GetDbAdapter() { return m_pDbAdapter; }
 	

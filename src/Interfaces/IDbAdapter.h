@@ -7,12 +7,9 @@
 //#include "columncol.h"
 //#include "tablecol.h"
 //#include "databasecol.h"
-
-class ColumnCol;
-class DatabaseCol;
-class TableCol;
-class Table;
 class DbConnection;
+class Database;
+class Table;
 
 class IDbAdapter {
 
@@ -26,18 +23,12 @@ public:
 	
 	/*! \brief Function connect databases to the DbConnection */
 	virtual void GetDatabases(DbConnection* dbCon) = 0;
-	/*! \brief Function return collection of databases */
-	virtual DatabaseCol* GetDatabases() = 0;
 
 	/*! \brief Function connect tables to the Database */
-	virtual void GetTables(DbConnection* dbCon, Database* db) = 0;
-	/*! \brief Function return collection of databases */
-	virtual TableCol* GetTables(const wxString& dbName) = 0;
+	virtual void GetTables(Database* db) = 0;
 
 	/*! \brief Function connect columns to the Table */
-	virtual void GetColumns(DbConnection* dbCon, Table* pTab, const wxString& tableName) = 0;
-	/*! \brief Function connect columns to the Table */
-	virtual bool GetColumns(Table* pTab, const wxString& tableName) = 0;
+	virtual bool GetColumns(Table* pTab) = 0;
 	
 	
 	/*! \brief Return wxString with defalut SELECT for defined table and db */

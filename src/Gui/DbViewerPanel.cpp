@@ -8,6 +8,7 @@
 DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewerPanel(parent) {
 	m_pNotebook = notebook;
 	m_pDbAdapter = NULL;
+	m_pConnections = new xsSerializable();
 }
 
 DbViewerPanel::~DbViewerPanel() {
@@ -39,9 +40,6 @@ void DbViewerPanel::OnRefreshClick(wxCommandEvent& event) {
 	RefreshDbView();
 }
 void DbViewerPanel::RefreshDbView() {
-	DatabaseCol* dbCol = this->m_pDbAdapter->GetDatabases();
-
-
 	// clear items from tree
 	m_treeDatabases->DeleteAllItems();
 	// create imageList for icons
@@ -50,24 +48,65 @@ void DbViewerPanel::RefreshDbView() {
 	pImageList->Add(wxIcon(form_blue_xpm));						// table icon
 	m_treeDatabases->SetImageList(pImageList);
 
-	// add root item
-	wxTreeItemId rootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases (%s)"),m_server.GetData()),-1);
+	wxTreeItemId totalRootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases")),-1);
 
+	// ---------------- load connections ----------------------------
+	SerializableList::compatibility_iterator connectionNode = m_pConnections->GetFirstChildNode();
+	while(connectionNode) {
+		DbConnection* pDbCon = wxDynamicCast(connectionNode->GetData(),DbConnection);
+		if (pDbCon) {
+			wxTreeItemId rootID = m_treeDatabases->AppendItem(totalRootID,wxString::Format(wxT("Databases (%s)"),pDbCon->GetServerName().c_str()),-1);
 
+			// ----------------------- load databases -------------------------------
+			SerializableList::compatibility_iterator dbNode = pDbCon->GetFirstChildNode();
+			while(dbNode) {
+				Database* pDatabase = wxDynamicCast(dbNode->GetData(), Database);
+				if (pDatabase) {
+					wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,pDatabase->getName(),-1,-1, new DbItem(pDatabase,NULL));//new DbDatabase(db->getName()));
+					m_treeDatabases->Expand(rootID);
+					wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
+					m_treeDatabases->Expand(dbID);
 
-	for (int i = 0 ; i<dbCol->GetDbCount(); i++) {
-		Database *db = dbCol->GetByIndex(i);
-		wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,db->getName(),-1,-1, new DbItem(db,NULL));//new DbDatabase(db->getName()));
-		m_treeDatabases->Expand(rootID);
-		wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
-		m_treeDatabases->Expand(dbID);
-		if (db->tables) {
-			for (int tabC = 0; tabC < db->tables->GetTableCount(); tabC++) {
-				Table *tab =  db->tables->GetByIndex(tabC);
-				wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,tab->getName(),1,-1,new DbItem(NULL,tab)); //NULL);
+					// ----------------------------- load tables ----------------------------------
+					SerializableList::compatibility_iterator tabNode = pDatabase->GetFirstChildNode();
+					while(tabNode) {
+						Table* pTable = wxDynamicCast(tabNode->GetData(), Table);
+						if (pTable) {
+							wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pTable->getName(),1,-1,new DbItem(NULL,pTable)); //NULL);
+						}
+						tabNode = tabNode->GetNext();
+					}
+					// ----------------------------------------------------------------------------
+				}
+				dbNode = dbNode->GetNext();
 			}
+			// -----------------------------------------------------------------------
 		}
+		connectionNode = connectionNode->GetNext();
 	}
+
+
+
+
+
+	/*	// add root item
+		wxTreeItemId rootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases (%s)"),m_server.GetData()),-1);
+
+
+
+		for (int i = 0 ; i<dbCol->GetDbCount(); i++) {
+			Database *db = dbCol->GetByIndex(i);
+			wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,db->getName(),-1,-1, new DbItem(db,NULL));//new DbDatabase(db->getName()));
+			m_treeDatabases->Expand(rootID);
+			wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
+			m_treeDatabases->Expand(dbID);
+			if (db->tables) {
+				for (int tabC = 0; tabC < db->tables->GetTableCount(); tabC++) {
+					Table *tab =  db->tables->GetByIndex(tabC);
+					wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,tab->getName(),1,-1,new DbItem(NULL,tab)); //NULL);
+				}
+			}
+		}*/
 
 
 	/*DatabaseResultSet *tabulky;
@@ -213,20 +252,30 @@ void DbViewerPanel::OnERDClick(wxCommandEvent& event) {
 void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 	ShapeList lstDnD;
 	lstDnD.DeleteContents(true);
-	
-	
+
+
 	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
 	if ((item != NULL)&&(item->GetTable() != NULL)) {
-		Table* table =(Table*)((Table*)item->GetTable())->Clone();	
-		
+		Table* table =(Table*)((Table*)item->GetTable())->Clone();
+
 		wxSFShapeBase *pShape = new dndTableShape(table);
 		lstDnD.Append(pShape);
-		
-		if (m_pNotebook->GetSelection()!= wxNOT_FOUND){			
 
-			ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);	
+		if (m_pNotebook->GetSelection()!= wxNOT_FOUND) {
+
+			ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);
 			panel->getCanvas()->DoDragDrop(lstDnD);
-			}	
+		}
 		//delete pShape;
-	}	
+	}
+}
+void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
+
+
+
+}
+void DbViewerPanel::OnToolCloseClick(wxCommandEvent& event) {
+}
+
+void DbViewerPanel::OnToolCloseUI(wxUpdateUIEvent& event) {
 }

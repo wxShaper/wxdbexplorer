@@ -1,4 +1,9 @@
 #include "MySqlDbAdapter.h"
+#include "../DbEngine/dbconnection.h"
+#include "../DbEngine/database.h"
+#include "../DbEngine/table.h"
+
+
 MySqlDbAdapter::MySqlDbAdapter() {
 	this->m_serverName = wxT("");
 	this->m_userName = wxT("");
@@ -24,7 +29,7 @@ DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
 	return dbLayer;
 }
 
-TableCol* MySqlDbAdapter::GetTables(const wxString& dbName) {
+/*TableCol* MySqlDbAdapter::GetTables(const wxString& dbName) {
 	TableCol* tab = new TableCol(dbName);
 
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
@@ -39,12 +44,12 @@ TableCol* MySqlDbAdapter::GetTables(const wxString& dbName) {
 	dbLayer->Close();
 	delete dbLayer;
 	return tab;
-}
+}*/
 
 bool MySqlDbAdapter::IsConnected() {
 	return this->m_pDbLayer->IsOpen();
 }
-DatabaseCol* MySqlDbAdapter::GetDatabases() {
+/*DatabaseCol* MySqlDbAdapter::GetDatabases() {
 	DatabaseCol* col = new DatabaseCol();
 
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
@@ -61,7 +66,7 @@ DatabaseCol* MySqlDbAdapter::GetDatabases() {
 	dbLayer->Close();
 	delete dbLayer;
 	return col;
-}
+}*/
 
 
 wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
@@ -172,13 +177,13 @@ wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString
 	return ret;
 }
 
-bool MySqlDbAdapter::GetColumns(Table* pTab, const wxString& tableName) {
+bool MySqlDbAdapter::GetColumns(Table* pTab) {
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 
 	if (!dbLayer->IsOpen()) return NULL;
 	// loading columns
 	//TODO:SQL:
-	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),tableName.c_str()));
+	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),pTab->getName().c_str()));
 	while (database->Next()) {
 		IDbType* pType = parseTypeString(database->GetResultString(2));
 		if (pType) {
@@ -229,26 +234,41 @@ IDbType* MySqlDbAdapter::parseTypeString(const wxString& typeString) {
 bool MySqlDbAdapter::CanConnect() {
 	return ((m_serverName != wxT(""))&&(m_userName != wxT("")));
 }
-
-
-void MySqlDbAdapter::GetColumns(DbConnection* dbCon, Table* pTab, const wxString& tableName) {
-}
-
 void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (!dbLayer->IsOpen()) return;
-	
-	// loading databases
-	//TODO:SQL:
-	DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("SHOW DATABASES"));
-	while (databaze->Next()) {
-		dbCon->AddChild( new Database(this, databaze->GetResultString(1)) );
+	if (dbCon){
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		if (dbLayer){
+			if (!dbLayer->IsOpen()) return;
+			
+			// loading databases
+			//TODO:SQL:
+			DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("SHOW DATABASES"));
+			while (databaze->Next()) {
+				dbCon->AddChild( new Database(this, databaze->GetResultString(1)) );
+			}
+			dbLayer->CloseResultSet(databaze);
+			dbLayer->Close();
+			delete dbLayer;		
+		}		
 	}
-	dbLayer->CloseResultSet(databaze);
-	dbLayer->Close();
-	delete dbLayer;
 	return;
 }
 
-void MySqlDbAdapter::GetTables(DbConnection* dbCon, Database* db) {
+void MySqlDbAdapter::GetTables(Database* db) {
+	if (db){
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		if (dbLayer){
+			if (!dbLayer->IsOpen()) return;
+			// lading tables for database
+			//TODO:SQL:
+			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
+			while (tabulky->Next()) {
+				db->AddChild(new Table(this,  tabulky->GetResultString(1), db->getName(),0));
+			}
+			dbLayer->CloseResultSet(tabulky);
+			dbLayer->Close();
+			delete dbLayer;
+		}
+	}
+	return;
 }
