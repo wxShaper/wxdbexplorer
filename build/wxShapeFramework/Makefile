@@ -39,47 +39,47 @@ ifeq ($(CONFIG),Debug)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/DiagramManager.o \
+	$(OBJDIR)/CanvasHistory.o \
+	$(OBJDIR)/RectShape.o \
+	$(OBJDIR)/EditTextShape.o \
+	$(OBJDIR)/SFEvents.o \
+	$(OBJDIR)/BitmapShapeXml.o \
 	$(OBJDIR)/CanvasState.o \
-	$(OBJDIR)/SolidArrow.o \
 	$(OBJDIR)/RoundRectShape.o \
 	$(OBJDIR)/ControlShape.o \
-	$(OBJDIR)/CircleShape.o \
-	$(OBJDIR)/TextShapeXml.o \
-	$(OBJDIR)/MultiSelRect.o \
-	$(OBJDIR)/ShapeDataObject.o \
-	$(OBJDIR)/RectShape.o \
-	$(OBJDIR)/ScaledDC.o \
-	$(OBJDIR)/OpenArrow.o \
-	$(OBJDIR)/SFEvents.o \
-	$(OBJDIR)/Printout.o \
-	$(OBJDIR)/PolygonShape.o \
-	$(OBJDIR)/ArrowBase.o \
-	$(OBJDIR)/OrthoShape.o \
-	$(OBJDIR)/GridShape.o \
-	$(OBJDIR)/ShapeBaseXml.o \
-	$(OBJDIR)/AutoLayout.o \
-	$(OBJDIR)/PolygonShapeXml.o \
-	$(OBJDIR)/EditTextShape.o \
-	$(OBJDIR)/Thumbnail.o \
-	$(OBJDIR)/CurveShape.o \
-	$(OBJDIR)/FlexGridShape.o \
-	$(OBJDIR)/DiamondShape.o \
-	$(OBJDIR)/FixedRectShape.o \
-	$(OBJDIR)/ShapeDockpoint.o \
 	$(OBJDIR)/ShapeBase.o \
-	$(OBJDIR)/DiamondArrow.o \
-	$(OBJDIR)/BitmapShape.o \
-	$(OBJDIR)/BitmapShapeXml.o \
-	$(OBJDIR)/ShapeHandle.o \
-	$(OBJDIR)/CanvasHistory.o \
-	$(OBJDIR)/LineShape.o \
-	$(OBJDIR)/CommonFcn.o \
+	$(OBJDIR)/Printout.o \
 	$(OBJDIR)/ShapeCanvas.o \
-	$(OBJDIR)/TextShape.o \
-	$(OBJDIR)/DiagramManager.o \
-	$(OBJDIR)/wx_pch.o \
-	$(OBJDIR)/CircleArrow.o \
+	$(OBJDIR)/CircleShape.o \
+	$(OBJDIR)/FixedRectShape.o \
+	$(OBJDIR)/PolygonShapeXml.o \
+	$(OBJDIR)/Thumbnail.o \
+	$(OBJDIR)/OrthoShape.o \
+	$(OBJDIR)/ScaledDC.o \
+	$(OBJDIR)/DiamondArrow.o \
 	$(OBJDIR)/EllipseShape.o \
+	$(OBJDIR)/ShapeDockpoint.o \
+	$(OBJDIR)/DiamondShape.o \
+	$(OBJDIR)/CurveShape.o \
+	$(OBJDIR)/ShapeBaseXml.o \
+	$(OBJDIR)/ShapeHandle.o \
+	$(OBJDIR)/FlexGridShape.o \
+	$(OBJDIR)/CommonFcn.o \
+	$(OBJDIR)/SolidArrow.o \
+	$(OBJDIR)/TextShapeXml.o \
+	$(OBJDIR)/PolygonShape.o \
+	$(OBJDIR)/wx_pch.o \
+	$(OBJDIR)/MultiSelRect.o \
+	$(OBJDIR)/BitmapShape.o \
+	$(OBJDIR)/LineShape.o \
+	$(OBJDIR)/AutoLayout.o \
+	$(OBJDIR)/ArrowBase.o \
+	$(OBJDIR)/OpenArrow.o \
+	$(OBJDIR)/TextShape.o \
+	$(OBJDIR)/GridShape.o \
+	$(OBJDIR)/CircleArrow.o \
+	$(OBJDIR)/ShapeDataObject.o \
 	$(OBJDIR)/XmlSerializer.o \
 	$(OBJDIR)/PropertyIO.o \
 
@@ -123,12 +123,37 @@ else
 	-@if exist $(subst /,\,$(OBJDIR)) rmdir /s /q $(subst /,\,$(OBJDIR))
 endif
 
-$(OBJDIR)/CanvasState.o: ../../src/controls/src/wxShapeFramework/CanvasState.cpp
+$(OBJDIR)/DiagramManager.o: ../../src/controls/src/wxShapeFramework/DiagramManager.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/SolidArrow.o: ../../src/controls/src/wxShapeFramework/SolidArrow.cpp
+$(OBJDIR)/CanvasHistory.o: ../../src/controls/src/wxShapeFramework/CanvasHistory.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/RectShape.o: ../../src/controls/src/wxShapeFramework/RectShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/EditTextShape.o: ../../src/controls/src/wxShapeFramework/EditTextShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/SFEvents.o: ../../src/controls/src/wxShapeFramework/SFEvents.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/BitmapShapeXml.o: ../../src/controls/src/wxShapeFramework/BitmapShapeXml.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/CanvasState.o: ../../src/controls/src/wxShapeFramework/CanvasState.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -143,42 +168,7 @@ $(OBJDIR)/ControlShape.o: ../../src/controls/src/wxShapeFramework/ControlShape.c
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/CircleShape.o: ../../src/controls/src/wxShapeFramework/CircleShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/TextShapeXml.o: ../../src/controls/src/wxShapeFramework/TextShapeXml.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MultiSelRect.o: ../../src/controls/src/wxShapeFramework/MultiSelRect.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ShapeDataObject.o: ../../src/controls/src/wxShapeFramework/ShapeDataObject.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/RectShape.o: ../../src/controls/src/wxShapeFramework/RectShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ScaledDC.o: ../../src/controls/src/wxShapeFramework/ScaledDC.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/OpenArrow.o: ../../src/controls/src/wxShapeFramework/OpenArrow.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/SFEvents.o: ../../src/controls/src/wxShapeFramework/SFEvents.cpp
+$(OBJDIR)/ShapeBase.o: ../../src/controls/src/wxShapeFramework/ShapeBase.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -188,62 +178,12 @@ $(OBJDIR)/Printout.o: ../../src/controls/src/wxShapeFramework/Printout.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/PolygonShape.o: ../../src/controls/src/wxShapeFramework/PolygonShape.cpp
+$(OBJDIR)/ShapeCanvas.o: ../../src/controls/src/wxShapeFramework/ShapeCanvas.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ArrowBase.o: ../../src/controls/src/wxShapeFramework/ArrowBase.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/OrthoShape.o: ../../src/controls/src/wxShapeFramework/OrthoShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/GridShape.o: ../../src/controls/src/wxShapeFramework/GridShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ShapeBaseXml.o: ../../src/controls/src/wxShapeFramework/ShapeBaseXml.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/AutoLayout.o: ../../src/controls/src/wxShapeFramework/AutoLayout.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PolygonShapeXml.o: ../../src/controls/src/wxShapeFramework/PolygonShapeXml.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/EditTextShape.o: ../../src/controls/src/wxShapeFramework/EditTextShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Thumbnail.o: ../../src/controls/src/wxShapeFramework/Thumbnail.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/CurveShape.o: ../../src/controls/src/wxShapeFramework/CurveShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/FlexGridShape.o: ../../src/controls/src/wxShapeFramework/FlexGridShape.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/DiamondShape.o: ../../src/controls/src/wxShapeFramework/DiamondShape.cpp
+$(OBJDIR)/CircleShape.o: ../../src/controls/src/wxShapeFramework/CircleShape.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -253,12 +193,22 @@ $(OBJDIR)/FixedRectShape.o: ../../src/controls/src/wxShapeFramework/FixedRectSha
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ShapeDockpoint.o: ../../src/controls/src/wxShapeFramework/ShapeDockpoint.cpp
+$(OBJDIR)/PolygonShapeXml.o: ../../src/controls/src/wxShapeFramework/PolygonShapeXml.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ShapeBase.o: ../../src/controls/src/wxShapeFramework/ShapeBase.cpp
+$(OBJDIR)/Thumbnail.o: ../../src/controls/src/wxShapeFramework/Thumbnail.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OrthoShape.o: ../../src/controls/src/wxShapeFramework/OrthoShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ScaledDC.o: ../../src/controls/src/wxShapeFramework/ScaledDC.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -268,12 +218,27 @@ $(OBJDIR)/DiamondArrow.o: ../../src/controls/src/wxShapeFramework/DiamondArrow.c
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/BitmapShape.o: ../../src/controls/src/wxShapeFramework/BitmapShape.cpp
+$(OBJDIR)/EllipseShape.o: ../../src/controls/src/wxShapeFramework/EllipseShape.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/BitmapShapeXml.o: ../../src/controls/src/wxShapeFramework/BitmapShapeXml.cpp
+$(OBJDIR)/ShapeDockpoint.o: ../../src/controls/src/wxShapeFramework/ShapeDockpoint.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DiamondShape.o: ../../src/controls/src/wxShapeFramework/DiamondShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/CurveShape.o: ../../src/controls/src/wxShapeFramework/CurveShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ShapeBaseXml.o: ../../src/controls/src/wxShapeFramework/ShapeBaseXml.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -283,12 +248,7 @@ $(OBJDIR)/ShapeHandle.o: ../../src/controls/src/wxShapeFramework/ShapeHandle.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/CanvasHistory.o: ../../src/controls/src/wxShapeFramework/CanvasHistory.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LineShape.o: ../../src/controls/src/wxShapeFramework/LineShape.cpp
+$(OBJDIR)/FlexGridShape.o: ../../src/controls/src/wxShapeFramework/FlexGridShape.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -298,17 +258,17 @@ $(OBJDIR)/CommonFcn.o: ../../src/controls/src/wxShapeFramework/CommonFcn.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ShapeCanvas.o: ../../src/controls/src/wxShapeFramework/ShapeCanvas.cpp
+$(OBJDIR)/SolidArrow.o: ../../src/controls/src/wxShapeFramework/SolidArrow.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/TextShape.o: ../../src/controls/src/wxShapeFramework/TextShape.cpp
+$(OBJDIR)/TextShapeXml.o: ../../src/controls/src/wxShapeFramework/TextShapeXml.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/DiagramManager.o: ../../src/controls/src/wxShapeFramework/DiagramManager.cpp
+$(OBJDIR)/PolygonShape.o: ../../src/controls/src/wxShapeFramework/PolygonShape.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -318,12 +278,52 @@ $(OBJDIR)/wx_pch.o: ../../src/controls/src/wxShapeFramework/wx_pch.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/MultiSelRect.o: ../../src/controls/src/wxShapeFramework/MultiSelRect.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/BitmapShape.o: ../../src/controls/src/wxShapeFramework/BitmapShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LineShape.o: ../../src/controls/src/wxShapeFramework/LineShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/AutoLayout.o: ../../src/controls/src/wxShapeFramework/AutoLayout.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ArrowBase.o: ../../src/controls/src/wxShapeFramework/ArrowBase.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OpenArrow.o: ../../src/controls/src/wxShapeFramework/OpenArrow.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/TextShape.o: ../../src/controls/src/wxShapeFramework/TextShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/GridShape.o: ../../src/controls/src/wxShapeFramework/GridShape.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/CircleArrow.o: ../../src/controls/src/wxShapeFramework/CircleArrow.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/EllipseShape.o: ../../src/controls/src/wxShapeFramework/EllipseShape.cpp
+$(OBJDIR)/ShapeDataObject.o: ../../src/controls/src/wxShapeFramework/ShapeDataObject.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"

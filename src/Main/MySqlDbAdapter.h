@@ -18,6 +18,14 @@ public:
 	~MySqlDbAdapter();
 
 
+
+	virtual void GetColumns(DbConnection* dbCon, Table* pTab, const wxString& tableName);
+	virtual void GetDatabases(DbConnection* dbCon);
+	virtual void GetTables(DbConnection* dbCon, Database* db);
+
+
+
+
 	virtual DatabaseCol* GetDatabases();
 	virtual TableCol* GetTables(const wxString& dbName);
 	//virtual ColumnCol* GetColumns(const wxString& tableName);

@@ -40,97 +40,97 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/PlatWX.o \
-	$(OBJDIR)/ScintillaWX.o \
 	$(OBJDIR)/wxscintilla.o \
-	$(OBJDIR)/LexGui4Cli.o \
-	$(OBJDIR)/LexEScript.o \
+	$(OBJDIR)/ScintillaWX.o \
 	$(OBJDIR)/LexSQL.o \
-	$(OBJDIR)/ContractionState.o \
+	$(OBJDIR)/LexKix.o \
 	$(OBJDIR)/LexGAP.o \
-	$(OBJDIR)/LexLisp.o \
-	$(OBJDIR)/LexFlagship.o \
-	$(OBJDIR)/RunStyles.o \
-	$(OBJDIR)/ScintillaBase.o \
-	$(OBJDIR)/ViewStyle.o \
-	$(OBJDIR)/LexBaan.o \
-	$(OBJDIR)/LexBullant.o \
-	$(OBJDIR)/XPM.o \
-	$(OBJDIR)/LexCLW.o \
-	$(OBJDIR)/LexPascal.o \
-	$(OBJDIR)/LexPython.o \
-	$(OBJDIR)/LexTeX.o \
-	$(OBJDIR)/Indicator.o \
-	$(OBJDIR)/LexVHDL.o \
-	$(OBJDIR)/LexCPP.o \
 	$(OBJDIR)/LexVerilog.o \
-	$(OBJDIR)/LexLout.o \
-	$(OBJDIR)/StyleContext.o \
-	$(OBJDIR)/LexAda.o \
-	$(OBJDIR)/CellBuffer.o \
-	$(OBJDIR)/LexTCL.o \
-	$(OBJDIR)/KeyWords.o \
-	$(OBJDIR)/LexScriptol.o \
-	$(OBJDIR)/LexInno.o \
-	$(OBJDIR)/LexHTML.o \
-	$(OBJDIR)/Document.o \
-	$(OBJDIR)/LexPerl.o \
-	$(OBJDIR)/LexCmake.o \
-	$(OBJDIR)/LexVB.o \
-	$(OBJDIR)/LineMarker.o \
-	$(OBJDIR)/LexSmalltalk.o \
-	$(OBJDIR)/LexMMIXAL.o \
+	$(OBJDIR)/LexCsound.o \
+	$(OBJDIR)/LexPOV.o \
+	$(OBJDIR)/LexD.o \
+	$(OBJDIR)/LexNsis.o \
+	$(OBJDIR)/Style.o \
 	$(OBJDIR)/LexSpecman.o \
+	$(OBJDIR)/LexFortran.o \
+	$(OBJDIR)/LexRuby.o \
+	$(OBJDIR)/StyleContext.o \
+	$(OBJDIR)/LexYAML.o \
+	$(OBJDIR)/LexTADS3.o \
+	$(OBJDIR)/Document.o \
+	$(OBJDIR)/LexCLW.o \
+	$(OBJDIR)/LexConf.o \
+	$(OBJDIR)/LexAsn1.o \
+	$(OBJDIR)/LexGui4Cli.o \
+	$(OBJDIR)/LexPascal.o \
+	$(OBJDIR)/Indicator.o \
+	$(OBJDIR)/LexBullant.o \
+	$(OBJDIR)/LexAda.o \
+	$(OBJDIR)/LexEScript.o \
 	$(OBJDIR)/LexAPDL.o \
 	$(OBJDIR)/ExternalLexer.o \
-	$(OBJDIR)/CharClassify.o \
 	$(OBJDIR)/LexCrontab.o \
-	$(OBJDIR)/LexPOV.o \
-	$(OBJDIR)/LexCaml.o \
-	$(OBJDIR)/LexBash.o \
-	$(OBJDIR)/CallTip.o \
-	$(OBJDIR)/LexAU3.o \
-	$(OBJDIR)/LexMSSQL.o \
-	$(OBJDIR)/LexHaskell.o \
-	$(OBJDIR)/LexMPT.o \
-	$(OBJDIR)/Editor.o \
-	$(OBJDIR)/LexTADS3.o \
-	$(OBJDIR)/LexEiffel.o \
-	$(OBJDIR)/RESearch.o \
-	$(OBJDIR)/LexFortran.o \
-	$(OBJDIR)/Style.o \
-	$(OBJDIR)/LexAsn1.o \
-	$(OBJDIR)/LexKix.o \
-	$(OBJDIR)/LexOthers.o \
-	$(OBJDIR)/UniConversion.o \
-	$(OBJDIR)/LexMetapost.o \
-	$(OBJDIR)/PositionCache.o \
-	$(OBJDIR)/LexForth.o \
-	$(OBJDIR)/LexOpal.o \
 	$(OBJDIR)/LexPS.o \
-	$(OBJDIR)/LexLua.o \
-	$(OBJDIR)/LexErlang.o \
-	$(OBJDIR)/LexNsis.o \
-	$(OBJDIR)/DocumentAccessor.o \
-	$(OBJDIR)/LexSpice.o \
-	$(OBJDIR)/LexConf.o \
-	$(OBJDIR)/LexD.o \
-	$(OBJDIR)/LexMatlab.o \
-	$(OBJDIR)/LexAsm.o \
-	$(OBJDIR)/LexRebol.o \
+	$(OBJDIR)/LexScriptol.o \
+	$(OBJDIR)/LexMetapost.o \
+	$(OBJDIR)/Editor.o \
+	$(OBJDIR)/ScintillaBase.o \
+	$(OBJDIR)/LexTCL.o \
+	$(OBJDIR)/LexLisp.o \
 	$(OBJDIR)/LexPB.o \
-	$(OBJDIR)/Decoration.o \
-	$(OBJDIR)/KeyMap.o \
+	$(OBJDIR)/RESearch.o \
+	$(OBJDIR)/LexTeX.o \
+	$(OBJDIR)/XPM.o \
+	$(OBJDIR)/UniConversion.o \
+	$(OBJDIR)/LexVHDL.o \
+	$(OBJDIR)/LexOthers.o \
+	$(OBJDIR)/LexLua.o \
+	$(OBJDIR)/ContractionState.o \
 	$(OBJDIR)/LexCSS.o \
-	$(OBJDIR)/LexBasic.o \
-	$(OBJDIR)/LexPLM.o \
-	$(OBJDIR)/PropSet.o \
-	$(OBJDIR)/AutoComplete.o \
-	$(OBJDIR)/LexProgress.o \
-	$(OBJDIR)/LexRuby.o \
-	$(OBJDIR)/WindowAccessor.o \
-	$(OBJDIR)/LexYAML.o \
-	$(OBJDIR)/LexCsound.o \
+	$(OBJDIR)/Decoration.o \
 	$(OBJDIR)/LexAVE.o \
+	$(OBJDIR)/LexProgress.o \
+	$(OBJDIR)/AutoComplete.o \
+	$(OBJDIR)/LexCmake.o \
+	$(OBJDIR)/LexPLM.o \
+	$(OBJDIR)/LexCPP.o \
+	$(OBJDIR)/KeyMap.o \
+	$(OBJDIR)/LexHaskell.o \
+	$(OBJDIR)/LexFlagship.o \
+	$(OBJDIR)/LexForth.o \
+	$(OBJDIR)/LexMPT.o \
+	$(OBJDIR)/LexMSSQL.o \
+	$(OBJDIR)/LexBaan.o \
+	$(OBJDIR)/DocumentAccessor.o \
+	$(OBJDIR)/CallTip.o \
+	$(OBJDIR)/LexVB.o \
+	$(OBJDIR)/LexMMIXAL.o \
+	$(OBJDIR)/KeyWords.o \
+	$(OBJDIR)/LexBasic.o \
+	$(OBJDIR)/LexHTML.o \
+	$(OBJDIR)/LexInno.o \
+	$(OBJDIR)/LexErlang.o \
+	$(OBJDIR)/LexSmalltalk.o \
+	$(OBJDIR)/PropSet.o \
+	$(OBJDIR)/PositionCache.o \
+	$(OBJDIR)/LexAU3.o \
+	$(OBJDIR)/LexEiffel.o \
+	$(OBJDIR)/LexRebol.o \
+	$(OBJDIR)/CharClassify.o \
+	$(OBJDIR)/WindowAccessor.o \
+	$(OBJDIR)/LexCaml.o \
+	$(OBJDIR)/LexPerl.o \
+	$(OBJDIR)/ViewStyle.o \
+	$(OBJDIR)/CellBuffer.o \
+	$(OBJDIR)/LexMatlab.o \
+	$(OBJDIR)/LexBash.o \
+	$(OBJDIR)/LexOpal.o \
+	$(OBJDIR)/LexSpice.o \
+	$(OBJDIR)/RunStyles.o \
+	$(OBJDIR)/LexPython.o \
+	$(OBJDIR)/LineMarker.o \
+	$(OBJDIR)/LexLout.o \
+	$(OBJDIR)/LexAsm.o \
 
 MKDIR_TYPE := msdos
 CMD := $(subst \,\\,$(ComSpec)$(COMSPEC))
@@ -177,22 +177,12 @@ $(OBJDIR)/PlatWX.o: ../../src/controls/src/wxScintilla/PlatWX.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ScintillaWX.o: ../../src/controls/src/wxScintilla/ScintillaWX.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/wxscintilla.o: ../../src/controls/src/wxScintilla/wxscintilla.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexGui4Cli.o: ../../src/controls/src/wxScintilla/scintilla/src/LexGui4Cli.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexEScript.o: ../../src/controls/src/wxScintilla/scintilla/src/LexEScript.cxx
+$(OBJDIR)/ScintillaWX.o: ../../src/controls/src/wxScintilla/ScintillaWX.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -202,7 +192,7 @@ $(OBJDIR)/LexSQL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSQL.cxx
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ContractionState.o: ../../src/controls/src/wxScintilla/scintilla/src/ContractionState.cxx
+$(OBJDIR)/LexKix.o: ../../src/controls/src/wxScintilla/scintilla/src/LexKix.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -212,87 +202,47 @@ $(OBJDIR)/LexGAP.o: ../../src/controls/src/wxScintilla/scintilla/src/LexGAP.cxx
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexLisp.o: ../../src/controls/src/wxScintilla/scintilla/src/LexLisp.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexFlagship.o: ../../src/controls/src/wxScintilla/scintilla/src/LexFlagship.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/RunStyles.o: ../../src/controls/src/wxScintilla/scintilla/src/RunStyles.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ScintillaBase.o: ../../src/controls/src/wxScintilla/scintilla/src/ScintillaBase.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/ViewStyle.o: ../../src/controls/src/wxScintilla/scintilla/src/ViewStyle.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexBaan.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBaan.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexBullant.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBullant.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/XPM.o: ../../src/controls/src/wxScintilla/scintilla/src/XPM.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexCLW.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCLW.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexPascal.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPascal.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexPython.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPython.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexTeX.o: ../../src/controls/src/wxScintilla/scintilla/src/LexTeX.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Indicator.o: ../../src/controls/src/wxScintilla/scintilla/src/Indicator.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexVHDL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexVHDL.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexCPP.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCPP.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/LexVerilog.o: ../../src/controls/src/wxScintilla/scintilla/src/LexVerilog.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexLout.o: ../../src/controls/src/wxScintilla/scintilla/src/LexLout.cxx
+$(OBJDIR)/LexCsound.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCsound.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexPOV.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPOV.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexD.o: ../../src/controls/src/wxScintilla/scintilla/src/LexD.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexNsis.o: ../../src/controls/src/wxScintilla/scintilla/src/LexNsis.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Style.o: ../../src/controls/src/wxScintilla/scintilla/src/Style.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexSpecman.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSpecman.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexFortran.o: ../../src/controls/src/wxScintilla/scintilla/src/LexFortran.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexRuby.o: ../../src/controls/src/wxScintilla/scintilla/src/LexRuby.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -302,37 +252,12 @@ $(OBJDIR)/StyleContext.o: ../../src/controls/src/wxScintilla/scintilla/src/Style
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexAda.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAda.cxx
+$(OBJDIR)/LexYAML.o: ../../src/controls/src/wxScintilla/scintilla/src/LexYAML.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/CellBuffer.o: ../../src/controls/src/wxScintilla/scintilla/src/CellBuffer.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexTCL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexTCL.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/KeyWords.o: ../../src/controls/src/wxScintilla/scintilla/src/KeyWords.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexScriptol.o: ../../src/controls/src/wxScintilla/scintilla/src/LexScriptol.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexInno.o: ../../src/controls/src/wxScintilla/scintilla/src/LexInno.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexHTML.o: ../../src/controls/src/wxScintilla/scintilla/src/LexHTML.cxx
+$(OBJDIR)/LexTADS3.o: ../../src/controls/src/wxScintilla/scintilla/src/LexTADS3.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -342,37 +267,47 @@ $(OBJDIR)/Document.o: ../../src/controls/src/wxScintilla/scintilla/src/Document.
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexPerl.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPerl.cxx
+$(OBJDIR)/LexCLW.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCLW.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexCmake.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCmake.cxx
+$(OBJDIR)/LexConf.o: ../../src/controls/src/wxScintilla/scintilla/src/LexConf.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexVB.o: ../../src/controls/src/wxScintilla/scintilla/src/LexVB.cxx
+$(OBJDIR)/LexAsn1.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAsn1.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LineMarker.o: ../../src/controls/src/wxScintilla/scintilla/src/LineMarker.cxx
+$(OBJDIR)/LexGui4Cli.o: ../../src/controls/src/wxScintilla/scintilla/src/LexGui4Cli.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexSmalltalk.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSmalltalk.cxx
+$(OBJDIR)/LexPascal.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPascal.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexMMIXAL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMMIXAL.cxx
+$(OBJDIR)/Indicator.o: ../../src/controls/src/wxScintilla/scintilla/src/Indicator.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexSpecman.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSpecman.cxx
+$(OBJDIR)/LexBullant.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBullant.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexAda.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAda.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexEScript.o: ../../src/controls/src/wxScintilla/scintilla/src/LexEScript.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -387,122 +322,7 @@ $(OBJDIR)/ExternalLexer.o: ../../src/controls/src/wxScintilla/scintilla/src/Exte
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/CharClassify.o: ../../src/controls/src/wxScintilla/scintilla/src/CharClassify.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/LexCrontab.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCrontab.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexPOV.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPOV.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexCaml.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCaml.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexBash.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBash.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/CallTip.o: ../../src/controls/src/wxScintilla/scintilla/src/CallTip.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexAU3.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAU3.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexMSSQL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMSSQL.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexHaskell.o: ../../src/controls/src/wxScintilla/scintilla/src/LexHaskell.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexMPT.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMPT.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Editor.o: ../../src/controls/src/wxScintilla/scintilla/src/Editor.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexTADS3.o: ../../src/controls/src/wxScintilla/scintilla/src/LexTADS3.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexEiffel.o: ../../src/controls/src/wxScintilla/scintilla/src/LexEiffel.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/RESearch.o: ../../src/controls/src/wxScintilla/scintilla/src/RESearch.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexFortran.o: ../../src/controls/src/wxScintilla/scintilla/src/LexFortran.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Style.o: ../../src/controls/src/wxScintilla/scintilla/src/Style.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexAsn1.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAsn1.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexKix.o: ../../src/controls/src/wxScintilla/scintilla/src/LexKix.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexOthers.o: ../../src/controls/src/wxScintilla/scintilla/src/LexOthers.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/UniConversion.o: ../../src/controls/src/wxScintilla/scintilla/src/UniConversion.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexMetapost.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMetapost.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PositionCache.o: ../../src/controls/src/wxScintilla/scintilla/src/PositionCache.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexForth.o: ../../src/controls/src/wxScintilla/scintilla/src/LexForth.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexOpal.o: ../../src/controls/src/wxScintilla/scintilla/src/LexOpal.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -512,52 +332,32 @@ $(OBJDIR)/LexPS.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPS.cxx
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexLua.o: ../../src/controls/src/wxScintilla/scintilla/src/LexLua.cxx
+$(OBJDIR)/LexScriptol.o: ../../src/controls/src/wxScintilla/scintilla/src/LexScriptol.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexErlang.o: ../../src/controls/src/wxScintilla/scintilla/src/LexErlang.cxx
+$(OBJDIR)/LexMetapost.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMetapost.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexNsis.o: ../../src/controls/src/wxScintilla/scintilla/src/LexNsis.cxx
+$(OBJDIR)/Editor.o: ../../src/controls/src/wxScintilla/scintilla/src/Editor.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/DocumentAccessor.o: ../../src/controls/src/wxScintilla/scintilla/src/DocumentAccessor.cxx
+$(OBJDIR)/ScintillaBase.o: ../../src/controls/src/wxScintilla/scintilla/src/ScintillaBase.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexSpice.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSpice.cxx
+$(OBJDIR)/LexTCL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexTCL.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexConf.o: ../../src/controls/src/wxScintilla/scintilla/src/LexConf.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexD.o: ../../src/controls/src/wxScintilla/scintilla/src/LexD.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexMatlab.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMatlab.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexAsm.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAsm.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/LexRebol.o: ../../src/controls/src/wxScintilla/scintilla/src/LexRebol.cxx
+$(OBJDIR)/LexLisp.o: ../../src/controls/src/wxScintilla/scintilla/src/LexLisp.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -567,12 +367,42 @@ $(OBJDIR)/LexPB.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPB.cxx
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/Decoration.o: ../../src/controls/src/wxScintilla/scintilla/src/Decoration.cxx
+$(OBJDIR)/RESearch.o: ../../src/controls/src/wxScintilla/scintilla/src/RESearch.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/KeyMap.o: ../../src/controls/src/wxScintilla/scintilla/src/KeyMap.cxx
+$(OBJDIR)/LexTeX.o: ../../src/controls/src/wxScintilla/scintilla/src/LexTeX.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/XPM.o: ../../src/controls/src/wxScintilla/scintilla/src/XPM.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/UniConversion.o: ../../src/controls/src/wxScintilla/scintilla/src/UniConversion.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexVHDL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexVHDL.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexOthers.o: ../../src/controls/src/wxScintilla/scintilla/src/LexOthers.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexLua.o: ../../src/controls/src/wxScintilla/scintilla/src/LexLua.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ContractionState.o: ../../src/controls/src/wxScintilla/scintilla/src/ContractionState.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -582,22 +412,12 @@ $(OBJDIR)/LexCSS.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCSS.cxx
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexBasic.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBasic.cxx
+$(OBJDIR)/Decoration.o: ../../src/controls/src/wxScintilla/scintilla/src/Decoration.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexPLM.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPLM.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/PropSet.o: ../../src/controls/src/wxScintilla/scintilla/src/PropSet.cxx
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/AutoComplete.o: ../../src/controls/src/wxScintilla/scintilla/src/AutoComplete.cxx
+$(OBJDIR)/LexAVE.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAVE.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -607,7 +427,137 @@ $(OBJDIR)/LexProgress.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPro
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexRuby.o: ../../src/controls/src/wxScintilla/scintilla/src/LexRuby.cxx
+$(OBJDIR)/AutoComplete.o: ../../src/controls/src/wxScintilla/scintilla/src/AutoComplete.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexCmake.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCmake.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexPLM.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPLM.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexCPP.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCPP.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/KeyMap.o: ../../src/controls/src/wxScintilla/scintilla/src/KeyMap.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexHaskell.o: ../../src/controls/src/wxScintilla/scintilla/src/LexHaskell.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexFlagship.o: ../../src/controls/src/wxScintilla/scintilla/src/LexFlagship.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexForth.o: ../../src/controls/src/wxScintilla/scintilla/src/LexForth.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexMPT.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMPT.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexMSSQL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMSSQL.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexBaan.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBaan.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DocumentAccessor.o: ../../src/controls/src/wxScintilla/scintilla/src/DocumentAccessor.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/CallTip.o: ../../src/controls/src/wxScintilla/scintilla/src/CallTip.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexVB.o: ../../src/controls/src/wxScintilla/scintilla/src/LexVB.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexMMIXAL.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMMIXAL.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/KeyWords.o: ../../src/controls/src/wxScintilla/scintilla/src/KeyWords.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexBasic.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBasic.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexHTML.o: ../../src/controls/src/wxScintilla/scintilla/src/LexHTML.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexInno.o: ../../src/controls/src/wxScintilla/scintilla/src/LexInno.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexErlang.o: ../../src/controls/src/wxScintilla/scintilla/src/LexErlang.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexSmalltalk.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSmalltalk.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PropSet.o: ../../src/controls/src/wxScintilla/scintilla/src/PropSet.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/PositionCache.o: ../../src/controls/src/wxScintilla/scintilla/src/PositionCache.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexAU3.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAU3.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexEiffel.o: ../../src/controls/src/wxScintilla/scintilla/src/LexEiffel.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexRebol.o: ../../src/controls/src/wxScintilla/scintilla/src/LexRebol.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/CharClassify.o: ../../src/controls/src/wxScintilla/scintilla/src/CharClassify.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -617,17 +567,67 @@ $(OBJDIR)/WindowAccessor.o: ../../src/controls/src/wxScintilla/scintilla/src/Win
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexYAML.o: ../../src/controls/src/wxScintilla/scintilla/src/LexYAML.cxx
+$(OBJDIR)/LexCaml.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCaml.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexCsound.o: ../../src/controls/src/wxScintilla/scintilla/src/LexCsound.cxx
+$(OBJDIR)/LexPerl.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPerl.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/LexAVE.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAVE.cxx
+$(OBJDIR)/ViewStyle.o: ../../src/controls/src/wxScintilla/scintilla/src/ViewStyle.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/CellBuffer.o: ../../src/controls/src/wxScintilla/scintilla/src/CellBuffer.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexMatlab.o: ../../src/controls/src/wxScintilla/scintilla/src/LexMatlab.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexBash.o: ../../src/controls/src/wxScintilla/scintilla/src/LexBash.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexOpal.o: ../../src/controls/src/wxScintilla/scintilla/src/LexOpal.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexSpice.o: ../../src/controls/src/wxScintilla/scintilla/src/LexSpice.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/RunStyles.o: ../../src/controls/src/wxScintilla/scintilla/src/RunStyles.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexPython.o: ../../src/controls/src/wxScintilla/scintilla/src/LexPython.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LineMarker.o: ../../src/controls/src/wxScintilla/scintilla/src/LineMarker.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexLout.o: ../../src/controls/src/wxScintilla/scintilla/src/LexLout.cxx
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/LexAsm.o: ../../src/controls/src/wxScintilla/scintilla/src/LexAsm.cxx
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"

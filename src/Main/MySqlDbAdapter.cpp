@@ -1,6 +1,5 @@
 #include "MySqlDbAdapter.h"
-MySqlDbAdapter::MySqlDbAdapter()
-{
+MySqlDbAdapter::MySqlDbAdapter() {
 	this->m_serverName = wxT("");
 	this->m_userName = wxT("");
 	this->m_password = wxT("");
@@ -232,3 +231,24 @@ bool MySqlDbAdapter::CanConnect() {
 }
 
 
+void MySqlDbAdapter::GetColumns(DbConnection* dbCon, Table* pTab, const wxString& tableName) {
+}
+
+void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	if (!dbLayer->IsOpen()) return;
+	
+	// loading databases
+	//TODO:SQL:
+	DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("SHOW DATABASES"));
+	while (databaze->Next()) {
+		dbCon->AddChild( new Database(this, databaze->GetResultString(1)) );
+	}
+	dbLayer->CloseResultSet(databaze);
+	dbLayer->Close();
+	delete dbLayer;
+	return;
+}
+
+void MySqlDbAdapter::GetTables(DbConnection* dbCon, Database* db) {
+}

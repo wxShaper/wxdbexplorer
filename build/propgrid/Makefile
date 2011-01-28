@@ -39,12 +39,12 @@ ifeq ($(CONFIG),Debug)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/odcombo.o \
-	$(OBJDIR)/extras.o \
-	$(OBJDIR)/manager.o \
 	$(OBJDIR)/advprops.o \
 	$(OBJDIR)/propgrid.o \
+	$(OBJDIR)/odcombo.o \
+	$(OBJDIR)/extras.o \
 	$(OBJDIR)/props.o \
+	$(OBJDIR)/manager.o \
 
 MKDIR_TYPE := msdos
 CMD := $(subst \,\\,$(ComSpec)$(COMSPEC))
@@ -86,21 +86,6 @@ else
 	-@if exist $(subst /,\,$(OBJDIR)) rmdir /s /q $(subst /,\,$(OBJDIR))
 endif
 
-$(OBJDIR)/odcombo.o: ../../src/controls/src/propgrid/odcombo.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/extras.o: ../../src/controls/src/propgrid/extras.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/manager.o: ../../src/controls/src/propgrid/manager.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/advprops.o: ../../src/controls/src/propgrid/advprops.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
@@ -111,7 +96,22 @@ $(OBJDIR)/propgrid.o: ../../src/controls/src/propgrid/propgrid.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/odcombo.o: ../../src/controls/src/propgrid/odcombo.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/extras.o: ../../src/controls/src/propgrid/extras.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/props.o: ../../src/controls/src/propgrid/props.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/manager.o: ../../src/controls/src/propgrid/manager.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"

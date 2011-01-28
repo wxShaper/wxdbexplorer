@@ -126,11 +126,6 @@ void DbSettingDialog::LoadHistory()
 				MysqlHistItem *item = (MysqlHistItem*) node->GetData();
 				m_listBox2->Append(item->GetName(),item->Clone());				
 				} 
-			if (( node->GetData()->IsKindOf( CLASSINFO(MysqlConnectionHistory)) )){
-				bool test;
-				test = true;
-				
-				}
 			node = node->GetNext();
 			}			
 	}	

@@ -15,11 +15,13 @@ class Database : public xsSerializable {
 protected:
 	wxString m_name;
 	bool m_isSaved;	
+	DbConnection* m_pDbConnection;	
 public:
 	XS_DECLARE_CLONABLE_CLASS(Database);
 	Database();
 	Database(const Database& obj);
 	Database(IDbAdapter* dbAdapter,const wxString& dbName);
+	Database(DbConnection* pDbConnection, const wxString& dbName);
 	~Database();
 
 	// nazev databáze

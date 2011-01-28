@@ -4,23 +4,23 @@
     <VirtualDirectory Name="controls">
       <VirtualDirectory Name="src">
         <VirtualDirectory Name="propgrid">
-          <File Name="../../src/controls/src/propgrid/odcombo.cpp"/>
-          <File Name="../../src/controls/src/propgrid/extras.cpp"/>
-          <File Name="../../src/controls/src/propgrid/manager.cpp"/>
           <File Name="../../src/controls/src/propgrid/advprops.cpp"/>
           <File Name="../../src/controls/src/propgrid/propgrid.cpp"/>
+          <File Name="../../src/controls/src/propgrid/odcombo.cpp"/>
+          <File Name="../../src/controls/src/propgrid/extras.cpp"/>
           <File Name="../../src/controls/src/propgrid/props.cpp"/>
+          <File Name="../../src/controls/src/propgrid/manager.cpp"/>
         </VirtualDirectory>
       </VirtualDirectory>
       <VirtualDirectory Name="include">
         <VirtualDirectory Name="wx">
           <VirtualDirectory Name="propgrid">
-            <File Name="../../src/controls/include/wx/propgrid/extras.h"/>
-            <File Name="../../src/controls/include/wx/propgrid/propgrid.h"/>
+            <File Name="../../src/controls/include/wx/propgrid/advprops.h"/>
             <File Name="../../src/controls/include/wx/propgrid/manager.h"/>
+            <File Name="../../src/controls/include/wx/propgrid/propgrid.h"/>
+            <File Name="../../src/controls/include/wx/propgrid/extras.h"/>
             <File Name="../../src/controls/include/wx/propgrid/odcombo.h"/>
             <File Name="../../src/controls/include/wx/propgrid/propdev.h"/>
-            <File Name="../../src/controls/include/wx/propgrid/advprops.h"/>
           </VirtualDirectory>
         </VirtualDirectory>
       </VirtualDirectory>

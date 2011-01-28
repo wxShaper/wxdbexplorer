@@ -44,27 +44,30 @@ ifeq ($(CONFIG),Debug)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/SqliteType.o \
+	$(OBJDIR)/database.o \
+	$(OBJDIR)/column.o \
+	$(OBJDIR)/dbitem.o \
+	$(OBJDIR)/dbconnection.o \
+	$(OBJDIR)/databasecol.o \
+	$(OBJDIR)/table.o \
+	$(OBJDIR)/tablecol.o \
 	$(OBJDIR)/FrameCanvas.o \
 	$(OBJDIR)/DnDTableShape.o \
 	$(OBJDIR)/ErdTable.o \
-	$(OBJDIR)/IDbItem.o \
-	$(OBJDIR)/GUI.o \
-	$(OBJDIR)/DbViewerPanel.o \
+	$(OBJDIR)/DbSettingDialog.o \
+	$(OBJDIR)/ErdPanel.o \
+	$(OBJDIR)/MysqlConnectionHistory.o \
 	$(OBJDIR)/SqlCommandPanel.o \
 	$(OBJDIR)/TableSettingsDialog.o \
-	$(OBJDIR)/ErdPanel.o \
-	$(OBJDIR)/DbSettingDialog.o \
+	$(OBJDIR)/DbViewerPanel.o \
 	$(OBJDIR)/DatabaseExplorerFrame.o \
-	$(OBJDIR)/column.o \
-	$(OBJDIR)/tablecol.o \
-	$(OBJDIR)/database.o \
-	$(OBJDIR)/databasecol.o \
-	$(OBJDIR)/dbitem.o \
-	$(OBJDIR)/table.o \
+	$(OBJDIR)/GUI.o \
+	$(OBJDIR)/IDbItem.o \
+	$(OBJDIR)/MySqlType.o \
+	$(OBJDIR)/MySqlDbAdapter.o \
 	$(OBJDIR)/DatabaseExplorerApp.o \
 	$(OBJDIR)/SqliteDbAdapter.o \
-	$(OBJDIR)/MySqlDbAdapter.o \
-	$(OBJDIR)/MySqlType.o \
 	$(OBJDIR)/wx_pch.o \
 
 MKDIR_TYPE := msdos
@@ -110,6 +113,46 @@ else
 	-@if exist $(subst /,\,$(OBJDIR)) rmdir /s /q $(subst /,\,$(OBJDIR))
 endif
 
+$(OBJDIR)/SqliteType.o: SqliteType.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/database.o: DbEngine/database.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/column.o: DbEngine/column.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dbitem.o: DbEngine/dbitem.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/dbconnection.o: DbEngine/dbconnection.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/databasecol.o: DbEngine/databasecol.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/table.o: DbEngine/table.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/tablecol.o: DbEngine/tablecol.cpp
+	-@$(CMD_MKOBJDIR)
+	@echo $(notdir $<)
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/FrameCanvas.o: ErdEngine/FrameCanvas.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
@@ -125,17 +168,17 @@ $(OBJDIR)/ErdTable.o: ErdEngine/ErdTable.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/IDbItem.o: Interfaces/IDbItem.cpp
+$(OBJDIR)/DbSettingDialog.o: Gui/DbSettingDialog.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/GUI.o: Gui/GUI.cpp
+$(OBJDIR)/ErdPanel.o: Gui/ErdPanel.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/DbViewerPanel.o: Gui/DbViewerPanel.cpp
+$(OBJDIR)/MysqlConnectionHistory.o: Gui/MysqlConnectionHistory.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -150,12 +193,7 @@ $(OBJDIR)/TableSettingsDialog.o: Gui/TableSettingsDialog.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/ErdPanel.o: Gui/ErdPanel.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/DbSettingDialog.o: Gui/DbSettingDialog.cpp
+$(OBJDIR)/DbViewerPanel.o: Gui/DbViewerPanel.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -165,32 +203,22 @@ $(OBJDIR)/DatabaseExplorerFrame.o: Gui/DatabaseExplorerFrame.cpp
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/column.o: DbEngine/column.cpp
+$(OBJDIR)/GUI.o: Gui/GUI.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/tablecol.o: DbEngine/tablecol.cpp
+$(OBJDIR)/IDbItem.o: Interfaces/IDbItem.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/database.o: DbEngine/database.cpp
+$(OBJDIR)/MySqlType.o: Main/MySqlType.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/databasecol.o: DbEngine/databasecol.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/dbitem.o: DbEngine/dbitem.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/table.o: DbEngine/table.cpp
+$(OBJDIR)/MySqlDbAdapter.o: Main/MySqlDbAdapter.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
@@ -201,16 +229,6 @@ $(OBJDIR)/DatabaseExplorerApp.o: Main/DatabaseExplorerApp.cpp
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/SqliteDbAdapter.o: Main/SqliteDbAdapter.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MySqlDbAdapter.o: Main/MySqlDbAdapter.cpp
-	-@$(CMD_MKOBJDIR)
-	@echo $(notdir $<)
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MySqlType.o: Main/MySqlType.cpp
 	-@$(CMD_MKOBJDIR)
 	@echo $(notdir $<)
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
