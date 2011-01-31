@@ -23,7 +23,7 @@ public:
 	Database();
 	Database(const Database& obj);
 	Database(IDbAdapter* dbAdapter,const wxString& dbName);
-	~Database();
+	virtual ~Database();
 
 	IDbAdapter* getDbAdapter() { return this->m_pDbAdapter; }
 	// nazev databáze

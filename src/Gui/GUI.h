@@ -42,12 +42,13 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
-#define wxID_CLOSE_CONNECTION 1000
-#define wxID_TOOL_REFRESH 1001
-#define wxID_TOOL_ERD 1002
-#define wxID_Sqlite_OK 1003
-#define wxID_DEL 1004
-#define wxID_TX_SIZE 1005
+#define wxID_CONNECT 1000
+#define wxID_CLOSE_CONNECTION 1001
+#define wxID_TOOL_REFRESH 1002
+#define wxID_TOOL_ERD 1003
+#define wxID_Sqlite_OK 1004
+#define wxID_DEL 1005
+#define wxID_TX_SIZE 1006
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame

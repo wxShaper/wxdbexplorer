@@ -183,7 +183,7 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 	
 	m_toolBar1 = new wxToolBar( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL ); 
-	m_toolBar1->AddTool( wxID_ANY, wxT("Open connection"), wxBitmap( fileopen_xpm ), wxNullBitmap, wxITEM_NORMAL, wxT("Open new connection"), wxT("Open new connection"), NULL ); 
+	m_toolBar1->AddTool( wxID_CONNECT, wxT("Open connection"), wxBitmap( fileopen_xpm ), wxNullBitmap, wxITEM_NORMAL, wxT("Open new connection"), wxT("Open new connection"), NULL ); 
 	m_toolBar1->AddTool( wxID_CLOSE_CONNECTION, wxT("tool"), wxBitmap( delete_xpm ), wxNullBitmap, wxITEM_NORMAL, wxT("Close selected connection"), wxT("Close selected connection"), NULL ); 
 	m_toolBar1->AddTool( wxID_TOOL_REFRESH, wxT("tool"), wxBitmap( refresh_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL ); 
 	m_toolBar1->AddTool( wxID_TOOL_ERD, wxT("ERD"), wxBitmap( Bound_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL ); 
@@ -191,7 +191,7 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	
 	bSizer4->Add( m_toolBar1, 0, wxEXPAND, 5 );
 	
-	m_treeDatabases = new wxTreeCtrl( m_panel2, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT );
+	m_treeDatabases = new wxTreeCtrl( m_panel2, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT|wxTR_LINES_AT_ROOT );
 	m_treeDatabases->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 90, false, wxEmptyString ) );
 	
 	bSizer4->Add( m_treeDatabases, 1, wxEXPAND, 5 );
@@ -207,8 +207,8 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	this->Layout();
 	
 	// Connect Events
-	this->Connect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnConncectClick ) );
-	this->Connect( wxID_ANY, wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DbViewerPanel::OnConncectUI ) );
+	this->Connect( wxID_CONNECT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnConncectClick ) );
+	this->Connect( wxID_CONNECT, wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DbViewerPanel::OnConncectUI ) );
 	this->Connect( wxID_CLOSE_CONNECTION, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnToolCloseClick ) );
 	this->Connect( wxID_CLOSE_CONNECTION, wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DbViewerPanel::OnToolCloseUI ) );
 	this->Connect( wxID_TOOL_REFRESH, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnRefreshClick ) );
@@ -222,8 +222,8 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 _DbViewerPanel::~_DbViewerPanel()
 {
 	// Disconnect Events
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnConncectClick ) );
-	this->Disconnect( wxID_ANY, wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DbViewerPanel::OnConncectUI ) );
+	this->Disconnect( wxID_CONNECT, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnConncectClick ) );
+	this->Disconnect( wxID_CONNECT, wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DbViewerPanel::OnConncectUI ) );
 	this->Disconnect( wxID_CLOSE_CONNECTION, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnToolCloseClick ) );
 	this->Disconnect( wxID_CLOSE_CONNECTION, wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DbViewerPanel::OnToolCloseUI ) );
 	this->Disconnect( wxID_TOOL_REFRESH, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( _DbViewerPanel::OnRefreshClick ) );
@@ -320,7 +320,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_MySqlPanel->SetSizer( fgSizer3 );
 	m_MySqlPanel->Layout();
 	fgSizer3->Fit( m_MySqlPanel );
-	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), true );
+	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), false );
 	m_Sqlite = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer31;
 	fgSizer31 = new wxFlexGridSizer( 2, 1, 0, 0 );
@@ -344,7 +344,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_staticText11->Wrap( -1 );
 	fgSizer41->Add( m_staticText11, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	m_filePickerSqlite = new wxFilePickerCtrl( m_Sqlite, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Database file (*.sqlite)|*.sqlite"), wxDefaultPosition, wxSize( -1,-1 ), wxFLP_DEFAULT_STYLE );
+	m_filePickerSqlite = new wxFilePickerCtrl( m_Sqlite, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Database file (*.sqlite)|*.sqlite"), wxDefaultPosition, wxSize( -1,-1 ), wxFLP_OPEN );
 	fgSizer41->Add( m_filePickerSqlite, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	sbSizer31->Add( fgSizer41, 1, wxEXPAND, 5 );
@@ -370,7 +370,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_Sqlite->SetSizer( fgSizer31 );
 	m_Sqlite->Layout();
 	fgSizer31->Fit( m_Sqlite );
-	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), false );
+	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), true );
 	
 	bSizer4->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	

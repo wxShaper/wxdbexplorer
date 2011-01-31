@@ -5,12 +5,10 @@
     <File Name="DbEngine/column.cpp"/>
     <File Name="DbEngine/dbitem.cpp"/>
     <File Name="DbEngine/dbconnection.cpp"/>
-    <File Name="DbEngine/databasecol.cpp"/>
     <File Name="DbEngine/table.cpp"/>
     <File Name="DbEngine/tablecol.cpp"/>
     <File Name="DbEngine/dbitem.h"/>
     <File Name="DbEngine/tablecol.h"/>
-    <File Name="DbEngine/databasecol.h"/>
     <File Name="DbEngine/table.h"/>
     <File Name="DbEngine/column.h"/>
     <File Name="DbEngine/database.h"/>
@@ -50,11 +48,11 @@
     <File Name="Interfaces/IDbAdapter.h"/>
     <File Name="Interfaces/IDbItem.h"/>
     <File Name="Interfaces/IDbType.h"/>
+    <File Name="Main/DatabaseExplorerApp.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Main">
     <File Name="Main/MySqlType.cpp"/>
     <File Name="Main/MySqlDbAdapter.cpp"/>
-    <File Name="Main/DatabaseExplorerApp.cpp"/>
     <File Name="Main/SqliteDbAdapter.cpp"/>
     <File Name="Main/wx_pch.cpp"/>
     <File Name="Main/SqliteDbAdapter.h"/>
@@ -91,16 +89,16 @@
       </Linker>
       <ResourceCompiler Required="no" Options=""/>
       <CustomBuild Enabled="no">
-        <CleanCommand></CleanCommand>
-        <BuildCommand></BuildCommand>
-        <SingleFileCommand></SingleFileCommand>
-        <MakefileGenerationCommand></MakefileGenerationCommand>
+        <CleanCommand/>
+        <BuildCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
         <ThirdPartyToolName>None</ThirdPartyToolName>
-        <WorkingDirectory></WorkingDirectory>
+        <WorkingDirectory/>
       </CustomBuild>
       <AdditionalRules>
-        <CustomPostBuild></CustomPostBuild>
-        <CustomPreBuild></CustomPreBuild>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable">
@@ -133,16 +131,16 @@
       </PreBuild>
       <PostBuild/>
       <CustomBuild Enabled="no">
-        <CleanCommand></CleanCommand>
-        <BuildCommand></BuildCommand>
-        <SingleFileCommand></SingleFileCommand>
-        <MakefileGenerationCommand></MakefileGenerationCommand>
+        <CleanCommand/>
+        <BuildCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
         <ThirdPartyToolName>None</ThirdPartyToolName>
-        <WorkingDirectory></WorkingDirectory>
+        <WorkingDirectory/>
       </CustomBuild>
       <AdditionalRules>
-        <CustomPostBuild></CustomPostBuild>
-        <CustomPreBuild></CustomPreBuild>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
       </AdditionalRules>
     </Configuration>
   </Settings>

@@ -28,13 +28,22 @@ void DbViewerPanel::OnConncectUI(wxUpdateUIEvent& event) {
 }
 void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
-	if ((item != NULL)&&(item->GetTable() != NULL)) {
+	if (item){
+		if (Table* tab =  wxDynamicCast(item->GetData(), Table)){
+			wxString dbName = tab->getParentName();
+			wxString dbTable = tab->getName();
+			m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter(),dbName,dbTable),dbName,true);			
+			}		
+		}
+	
+	
+/*	if ((item != NULL)&&(item->GetTable() != NULL)) {
 		Table* table = item->GetTable();
 		wxString dbName = table->getParentName();
 		wxString dbTable = table->getName();
 		m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,m_pDbAdapter,dbName,dbTable),dbName,true);
 
-	}
+	}*/
 }
 void DbViewerPanel::OnRefreshClick(wxCommandEvent& event) {
 	RefreshDbView();
@@ -53,26 +62,28 @@ void DbViewerPanel::RefreshDbView() {
 	// ---------------- load connections ----------------------------
 	SerializableList::compatibility_iterator connectionNode = m_pConnections->GetFirstChildNode();
 	while(connectionNode) {
-		DbConnection* pDbCon = wxDynamicCast(connectionNode->GetData(),DbConnection);
+		DbConnection* pDbCon = (DbConnection*) wxDynamicCast(connectionNode->GetData(),DbConnection);
 		if (pDbCon) {
-			wxTreeItemId rootID = m_treeDatabases->AppendItem(totalRootID,wxString::Format(wxT("Databases (%s)"),pDbCon->GetServerName().c_str()),-1);
+			wxTreeItemId rootID = m_treeDatabases->AppendItem(totalRootID,wxString::Format(wxT("Databases (%s)"),pDbCon->GetServerName().c_str()),-1,-1, new DbItem(pDbCon));
 
 			// ----------------------- load databases -------------------------------
 			SerializableList::compatibility_iterator dbNode = pDbCon->GetFirstChildNode();
 			while(dbNode) {
 				Database* pDatabase = wxDynamicCast(dbNode->GetData(), Database);
 				if (pDatabase) {
-					wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,pDatabase->getName(),-1,-1, new DbItem(pDatabase,NULL));//new DbDatabase(db->getName()));
+					//wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,pDatabase->getName(),-1,-1, new DbItem(pDatabase,NULL));//new DbDatabase(db->getName()));
+					wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,pDatabase->getName(),-1,-1, new DbItem(pDatabase));//new DbDatabase(db->getName()));
 					m_treeDatabases->Expand(rootID);
 					wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
-					m_treeDatabases->Expand(dbID);
+					//m_treeDatabases->Expand(dbID);
 
 					// ----------------------------- load tables ----------------------------------
 					SerializableList::compatibility_iterator tabNode = pDatabase->GetFirstChildNode();
 					while(tabNode) {
 						Table* pTable = wxDynamicCast(tabNode->GetData(), Table);
 						if (pTable) {
-							wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pTable->getName(),1,-1,new DbItem(NULL,pTable)); //NULL);
+							//wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pTable->getName(),1,-1,new DbItem(NULL,pTable)); //NULL);
+							wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pTable->getName(),1,-1,new DbItem(pTable)); //NULL);
 						}
 						tabNode = tabNode->GetNext();
 					}
@@ -85,126 +96,6 @@ void DbViewerPanel::RefreshDbView() {
 		connectionNode = connectionNode->GetNext();
 	}
 
-
-
-
-
-	/*	// add root item
-		wxTreeItemId rootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases (%s)"),m_server.GetData()),-1);
-
-
-
-		for (int i = 0 ; i<dbCol->GetDbCount(); i++) {
-			Database *db = dbCol->GetByIndex(i);
-			wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,db->getName(),-1,-1, new DbItem(db,NULL));//new DbDatabase(db->getName()));
-			m_treeDatabases->Expand(rootID);
-			wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
-			m_treeDatabases->Expand(dbID);
-			if (db->tables) {
-				for (int tabC = 0; tabC < db->tables->GetTableCount(); tabC++) {
-					Table *tab =  db->tables->GetByIndex(tabC);
-					wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,tab->getName(),1,-1,new DbItem(NULL,tab)); //NULL);
-				}
-			}
-		}*/
-
-
-	/*DatabaseResultSet *tabulky;
-	//if ((m_pDbLayer != NULL)&&(m_pDbLayer->IsOpen())) {
-	if ((m_pDbConnector != NULL)&&(m_pDbConnector->IsConnected())) {
-		try{
-			// clear items from tree
-			m_treeDatabases->DeleteAllItems();
-
-			// create imageList for icons
-			wxImageList *pImageList = new wxImageList(16,16,true,3);
-			pImageList->Add(wxIcon(folder_xpm));						// folder icon
-			pImageList->Add(wxIcon(form_blue_xpm));						// table icon
-			m_treeDatabases->SetImageList(pImageList);
-
-			// add root item
-			wxTreeItemId rootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases (%s)"),m_server.GetData()),0);
-
-
-			// loading databases
-			//TODO:SQL:
-			//DatabaseResultSet *databaze = m_pDbLayer->RunQueryWithResults(wxT("SHOW DATABASES"));
-			//while (databaze->Next()) {
-			//	wxString dbName = databaze->GetResultString(1);
-			//	wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,dbName,0,-1,new DbDatabase(dbName));
-			//}
-			//m_pDbLayer->CloseResultSets();
-
-			wxArrayString databases = m_pDbConnector->GetDatabases();
-			for (int i =0 ; i< databases.Count(); i++){
-				wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,databases[i],0,-1,new DbDatabase(databases[i]));
-				}
-			m_treeDatabases->Expand(rootID);
-
-			// define items for browsing databases
-			wxTreeItemIdValue  cookie;
-			wxTreeItemId dbID = m_treeDatabases->GetFirstChild(rootID,cookie);
-
-			//TODO:SQL:
-			while (dbID.IsOk()) {
-				DbDatabase* dbData = (DbDatabase*) m_treeDatabases->GetItemData(dbID);
-
-				// add virtual folder "tables"
-				wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
-				m_treeDatabases->Expand(dbID);
-
-				// lading tables for database
-				//TODO:SQL:
-	//				tabulky = m_pDbLayer->RunQueryWithResults( wxT("SHOW TABLES IN ") + dbData->GetParentName() );
-	//				while (tabulky->Next()) {
-	//					wxString databaseName = dbData->GetParentName();
-	//					wxString tableName = tabulky->GetResultString(1);
-	//					wxTreeItemId id = m_treeDatabases->AppendItem(idFolder,tableName, 1, -1, new DbTable( tableName, databaseName));
-	//					m_hashTables[databaseName+wxT("-")+tableName] = id;
-	//				}
-	//				m_pDbLayer->CloseResultSet(tabulky);
-	//				dbID = m_treeDatabases->GetNextChild(rootID, cookie);
-				wxString databaseName = dbData->GetParentName();
-				wxArrayString tables = m_pDbConnector->GetTablses(databaseName);
-				for (int i=0; i<tables.Count(); ++i){
-					wxTreeItemId id = m_treeDatabases->AppendItem(idFolder,tables[i], 1, -1, new DbTable( tables[i], databaseName));
-					m_hashTables[databaseName+wxT("-")+tables[i]] = id;
-					}
-				dbID = m_treeDatabases->GetNextChild(rootID, cookie);
-				}
-	//			m_pDbLayer->CloseResultSets();
-
-
-			TableHashMap::iterator it;
-			for( it = m_hashTables.begin(); it != m_hashTables.end(); ++it )
-			{
-				//wxString key = it->first, value = it->second;
-				wxTreeItemId id = it->second;
-				if (id.IsOk()){
-					IDbItem* tabData = (DbTable* ) m_treeDatabases->GetItemData(id);
-					//wxString query = wxT("SHOW COLUMNS IN " ) + tabData->GetParentName() + wxT(".") + tabData->GetName();
-					//wxMessageBox(query);
-					//wxString query2 = wxT("SHOW COLUMNS IN TestDb.Jmena");
-					//DatabaseResultSet *cols = m_pDbLayer->RunQueryWithResults(query);
-					//DatabaseResultSet *cols = m_pDbConnector->GetDatabaseLayer()->RunQueryWithResults(query);
-					DatabaseResultSet *cols = m_pDbConnector->GetTableInfo(tabData->GetParentName(),tabData->GetName());
-					while (cols->Next()){
-						DbColumn* col = new DbColumn(tabData->GetName(),cols->GetResultString(1),cols->GetResultString(2),cols->GetResultString(3), cols->GetResultString(4));
-						m_treeDatabases->AppendItem(id,cols->GetResultString(1),-1,-1,col);
-						}
-					//m_pDbLayer->CloseResultSet(cols);
-					m_pDbConnector->GetDatabaseLayer()->CloseResultSet(cols);
-					}
-				// do something useful with key and value
-			}
-
-
-			//m_pDbLayer->CloseResultSets();
-			m_pDbConnector->GetDatabaseLayer()->CloseResultSets();
-		} catch (DatabaseLayerException& e){
-			wxMessageBox(e.GetErrorMessage());
-			}
-	}*/
 }
 
 void DbViewerPanel::OnItemSelectionChange(wxTreeEvent& event) {
@@ -275,7 +166,27 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 
 }
 void DbViewerPanel::OnToolCloseClick(wxCommandEvent& event) {
+	
+	// getting selected item data
+	DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+	if (data){
+		DbConnection* pCon = wxDynamicCast(data->GetData(), DbConnection);
+		if (pCon) {
+			wxMessageDialog dlg(this,wxT("Close connection?"),wxT("Close"),wxYES_NO);		
+			if (dlg.ShowModal() == wxID_YES){
+				delete pCon;
+				RefreshDbView();				
+				}
+			}
+		}
 }
 
-void DbViewerPanel::OnToolCloseUI(wxUpdateUIEvent& event) {
+void DbViewerPanel::OnToolCloseUI(wxUpdateUIEvent& event) {	
+	event.Enable(false);
+	// getting selected item data
+	DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+	if (data){
+		DbConnection* pCon = wxDynamicCast(data->GetData(), DbConnection);
+		if (pCon) event.Enable(true);		
+		}
 }

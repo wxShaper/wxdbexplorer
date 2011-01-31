@@ -1,7 +1,9 @@
 #include "SqliteDbAdapter.h"
+#include "../DbEngine/dbconnection.h"
+#include "../DbEngine/database.h"
+#include "../DbEngine/table.h"
 
-SQLiteDbAdapter::SQLiteDbAdapter()
-{
+SQLiteDbAdapter::SQLiteDbAdapter() {
 	m_sFileName = wxT("");
 }
 SQLiteDbAdapter::SQLiteDbAdapter(const wxString& fileName) {
@@ -17,8 +19,8 @@ DatabaseLayer* SQLiteDbAdapter::GetDatabaseLayer() {
 	DatabaseLayer* pDatabase = new SqliteDatabaseLayer(m_sFileName);
 	return pDatabase;
 }
-DatabaseCol* SQLiteDbAdapter::GetDatabases() {
-	DatabaseCol* col = new DatabaseCol();
+/*DatabaseCol* SQLiteDbAdapter::GetDatabases() {
+	//DatabaseCol* col = new DatabaseCol();
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 	if (!dbLayer->IsOpen()) return NULL;
 
@@ -26,14 +28,14 @@ DatabaseCol* SQLiteDbAdapter::GetDatabases() {
 	//TODO:SQL:
 	DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("PRAGMA database_list;"));
 	while (databaze->Next()) {
-		col->AddDatabase(new Database(this, databaze->GetResultString(2)));
+		//col->AddDatabase(new Database(this, databaze->GetResultString(2)));
 	}
 	dbLayer->CloseResultSet(databaze);
 	dbLayer->Close();
 	delete dbLayer;
-	return col;
+//	return col;
 
-}
+}*/
 IDbType* SQLiteDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	IDbType* type = NULL;
 	if (typeName == wxT("NULL")) {
@@ -60,7 +62,7 @@ wxArrayString* SQLiteDbAdapter::GetDbTypes() {
 	pNames->Add(wxT("BLOB"));
 	return pNames;
 }
-TableCol* SQLiteDbAdapter::GetTables(const wxString& dbName) {
+/*TableCol* SQLiteDbAdapter::GetTables(const wxString& dbName) {
 	TableCol* tab = new TableCol(dbName);
 
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
@@ -76,40 +78,36 @@ TableCol* SQLiteDbAdapter::GetTables(const wxString& dbName) {
 	delete dbLayer;
 	return tab;
 
-}
+}*/
 bool SQLiteDbAdapter::IsConnected() {
 }
 wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	return wxString::Format(wxT("SELECT * FROM '%s'.'%s';"),dbName.c_str(),tableName.c_str());
 }
-bool SQLiteDbAdapter::GetColumns(Table* pTab, const wxString& tableName) {
+bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-
-	if (!dbLayer->IsOpen()) return NULL;
-	// loading columns
-	//TODO:SQL:
-	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("PRAGMA table_info('%s')"),tableName.c_str()));
-	while (database->Next()) {
-		IDbType* pType = GetDbTypeByName(database->GetResultString(3));
-		if (pType) {
-			pType->SetNotNull(database->GetResultInt(4) == 1);
-			Column* pCol = new Column(database->GetResultString(2),pTab->getName(), pType);
-			pTab->AddChild(pCol);
+	if (dbLayer){
+		if (!dbLayer->IsOpen()) return NULL;
+		// loading columns
+		//TODO:SQL:
+		DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("PRAGMA table_info('%s')"),pTab->getName().c_str()));
+		while (database->Next()) {
+			IDbType* pType = GetDbTypeByName(database->GetResultString(3));
+			if (pType) {
+				pType->SetNotNull(database->GetResultInt(4) == 1);
+				Column* pCol = new Column(database->GetResultString(2),pTab->getName(), pType);
+				pTab->AddChild(pCol);
+			}
 		}
+		dbLayer->CloseResultSet(database);
+		dbLayer->Close();
+		delete dbLayer;
+		
 	}
-	dbLayer->CloseResultSet(database);
-	dbLayer->Close();
-	delete dbLayer;
 	return true;
-
-
-
-
-	//PRAGMA table_info(Table1)
 }
-wxString SQLiteDbAdapter::GetCreateTableSql(Table* tab, bool dropTable)
-{
+wxString SQLiteDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
 	wxString str = wxT("");
 	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s`; \n"),tab->getName().c_str());
@@ -136,4 +134,36 @@ wxString SQLiteDbAdapter::GetCreateTableSql(Table* tab, bool dropTable)
 
 bool SQLiteDbAdapter::CanConnect() {
 	return m_sFileName != wxT("");
+}
+
+void SQLiteDbAdapter::GetDatabases(DbConnection* dbCon) {
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	if (dbLayer){	
+		if (!dbLayer->IsOpen()) return;
+
+		//TODO:SQL:
+		DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("PRAGMA database_list;"));
+		while (databaze->Next()) {
+			dbCon->AddChild(new Database(this, databaze->GetResultString(2)));
+		}
+		dbLayer->CloseResultSet(databaze);
+		dbLayer->Close();
+		delete dbLayer;
+	}
+}
+
+void SQLiteDbAdapter::GetTables(Database* db) {
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	if (dbLayer){
+	if (!dbLayer->IsOpen()) return;
+		//TODO:SQL:
+		DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='table'"), db->getName().c_str()) );
+		while (tabulky->Next()) {
+			db->AddChild(new Table(this, tabulky->GetResultString(2), db->getName(), 0));
+		}
+		dbLayer->CloseResultSet(tabulky);
+		dbLayer->Close();
+		delete dbLayer;
+	}
+	
 }

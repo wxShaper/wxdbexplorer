@@ -17,17 +17,21 @@ public:
 	~SQLiteDbAdapter();
 	virtual void CloseConnection();
 	virtual DatabaseLayer* GetDatabaseLayer() ;
-	virtual DatabaseCol* GetDatabases();
+
+
+	virtual void GetDatabases(DbConnection* dbCon);
+	virtual void GetTables(Database* db);
+	virtual bool GetColumns(Table* pTab);
+
 
 
 	virtual IDbType* GetDbTypeByName(const wxString& typeName);
 	virtual wxArrayString* GetDbTypes();
-	virtual  TableCol* GetTables(const wxString& dbName);
 
-	virtual bool GetColumns(Table* pTab, const wxString& tableName);
 
 	virtual bool CanConnect();
 	virtual bool IsConnected();
+
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
 	virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
 

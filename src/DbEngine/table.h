@@ -13,6 +13,7 @@ class Table : public xsSerializable {
 protected:
 	wxString m_name;
 	wxString m_parentName;
+	IDbAdapter* m_pDbAdapter;
 	int m_rowCount;	
 	bool m_isSaved;	
 	
@@ -40,6 +41,8 @@ public:
 	//ColumnCol *columns;
 	void AddColumn(Column* col) { this->AddChild(col); }
 	Column* GetFristColumn() { return (Column*) GetFirstChild( CLASSINFO(Column)); }
+	
+	IDbAdapter* GetDbAdapter() { return m_pDbAdapter; }
 };
 
 #endif // TABLE_H

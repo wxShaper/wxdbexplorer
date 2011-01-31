@@ -23,7 +23,7 @@ Table::Table(IDbAdapter* dbAdapter, const wxString& tableName, const wxString& p
 	this->m_name = tableName;
 	this->m_parentName = parentName;
 	this->m_rowCount = rowCount;
-	
+	this->m_pDbAdapter = dbAdapter;
 	dbAdapter->GetColumns(this);
 	
 	initSerializable();

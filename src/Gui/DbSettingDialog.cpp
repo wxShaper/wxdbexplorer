@@ -32,16 +32,10 @@ void DbSettingDialog::OnCancelClick(wxCommandEvent& event) {
 void DbSettingDialog::OnOkClick(wxCommandEvent& event) {
 	try
 		{
-		MysqlDatabaseLayer *DbLayer = new MysqlDatabaseLayer(m_txServer->GetValue(),wxT(""),m_txUserName->GetValue(),m_txPassword->GetValue());
-		//m_pParent->SetDbAdapter(new MySqlDbAdapter(m_txServer->GetValue(),m_txUserName->GetValue(),m_txPassword->GetValue()));
+		//MysqlDatabaseLayer *DbLayer = new MysqlDatabaseLayer(m_txServer->GetValue(),wxT(""),m_txUserName->GetValue(),m_txPassword->GetValue());
 		IDbAdapter* adapt = new MySqlDbAdapter(m_txServer->GetValue(),m_txUserName->GetValue(),m_txPassword->GetValue());
 
-		if (!DbLayer->IsOpen()) wxMessageBox(wxT("Cannot open DB!"));
-	//	m_pParent->SetDbConnector(new MySqlDbConnector(DbLayer));
-
-		//m_pParent->SetDbLayer(DbLayer);
-		wxString serverName = m_txServer->GetValue();
-		
+		wxString serverName = m_txServer->GetValue();		
 		m_pParent->AddDbConnection(new DbConnection(adapt, serverName));
 		
 		m_pParent->SetServer(serverName);
@@ -62,11 +56,15 @@ void DbSettingDialog::OnOkClick(wxCommandEvent& event) {
 void DbSettingDialog::OnSqliteOkClick(wxCommandEvent& event) {
 	try
 		{
-		SqliteDatabaseLayer *DbLayer = new SqliteDatabaseLayer(m_filePickerSqlite->GetPath());
-//		m_pParent->SetDbAdapter(new SQLiteDbAdapter(m_filePickerSqlite->GetPath()));
-		if (!DbLayer->IsOpen()) wxMessageBox(wxT("Cannot open DB!"));
+		
+		//SqliteDatabaseLayer *DbLayer = new SqliteDatabaseLayer(m_filePickerSqlite->GetPath());
+		IDbAdapter* pAdapt = new SQLiteDbAdapter(m_filePickerSqlite->GetPath());	
+			
+	
 		//m_pParent->SetDbLayer(DbLayer);
 		wxString serverName = m_filePickerSqlite->GetPath();
+		m_pParent->AddDbConnection(new DbConnection(pAdapt, serverName));
+		
 		m_pParent->SetServer(serverName);
 		Destroy();
 	}

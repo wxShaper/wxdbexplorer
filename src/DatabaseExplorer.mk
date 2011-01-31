@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Peter Janků
-Date                   :=28.1.2011
+Date                   :=31.1.2011
 CodeLitePath           :="/home/jankup/.codelite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -49,9 +49,9 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)../bin/gcc $
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects=$(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbconnection$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) \
-	$(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) \
-	$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbconnection$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) \
+	$(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) \
+	$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -105,14 +105,6 @@ $(IntermediateDirectory)/DbEngine_dbconnection$(DependSuffix): DbEngine/dbconnec
 
 $(IntermediateDirectory)/DbEngine_dbconnection$(PreprocessSuffix): DbEngine/dbconnection.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_dbconnection$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/dbconnection.cpp"
-
-$(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix): DbEngine/databasecol.cpp $(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/databasecol.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix): DbEngine/databasecol.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix) -MF$(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/databasecol.cpp"
-
-$(IntermediateDirectory)/DbEngine_databasecol$(PreprocessSuffix): DbEngine/databasecol.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/DbEngine_databasecol$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/databasecol.cpp"
 
 $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix): DbEngine/table.cpp $(IntermediateDirectory)/DbEngine_table$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/DbEngine/table.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IncludePath)
@@ -226,6 +218,14 @@ $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix): Interfaces/IDbItem.c
 $(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix): Interfaces/IDbItem.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Interfaces/IDbItem.cpp"
 
+$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix): Main/DatabaseExplorerApp.cpp $(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix): Main/DatabaseExplorerApp.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp"
+
+$(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix): Main/DatabaseExplorerApp.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp"
+
 $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix): Main/MySqlType.cpp $(IntermediateDirectory)/Main_MySqlType$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlType.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Main_MySqlType$(DependSuffix): Main/MySqlType.cpp
@@ -241,14 +241,6 @@ $(IntermediateDirectory)/Main_MySqlDbAdapter$(DependSuffix): Main/MySqlDbAdapter
 
 $(IntermediateDirectory)/Main_MySqlDbAdapter$(PreprocessSuffix): Main/MySqlDbAdapter.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_MySqlDbAdapter$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/MySqlDbAdapter.cpp"
-
-$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix): Main/DatabaseExplorerApp.cpp $(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix)
-	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix): Main/DatabaseExplorerApp.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) -MF$(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp"
-
-$(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix): Main/DatabaseExplorerApp.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/DatabaseExplorerApp.cpp"
 
 $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix): Main/SqliteDbAdapter.cpp $(IntermediateDirectory)/Main_SqliteDbAdapter$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Main/SqliteDbAdapter.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IncludePath)
@@ -292,9 +284,6 @@ clean:
 	$(RM) $(IntermediateDirectory)/DbEngine_dbconnection$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_dbconnection$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_dbconnection$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/DbEngine_databasecol$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/DbEngine_databasecol$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/DbEngine_databasecol$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_table$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/DbEngine_table$(PreprocessSuffix)
@@ -337,15 +326,15 @@ clean:
 	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Main_MySqlType$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Main_MySqlType$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Main_MySqlDbAdapter$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Main_MySqlDbAdapter$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Main_SqliteDbAdapter$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Main_SqliteDbAdapter$(PreprocessSuffix)
