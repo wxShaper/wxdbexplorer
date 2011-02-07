@@ -52,6 +52,18 @@ _MainFrame::~_MainFrame()
 	
 }
 
+_ThumbPane::_ThumbPane( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxPanel( parent, id, pos, size, style )
+{
+	mainSizer = new wxBoxSizer( wxVERTICAL );
+	
+	this->SetSizer( mainSizer );
+	this->Layout();
+}
+
+_ThumbPane::~_ThumbPane()
+{
+}
+
 _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxPanel( parent, id, pos, size, style )
 {
 	wxFlexGridSizer* fgSizer3;
@@ -169,6 +181,37 @@ _SqlCommandPanel::~_SqlCommandPanel()
 	m_btnExecute->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnExecuteClick ), NULL, this );
 	m_btnSave->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnSaveClick ), NULL, this );
 	m_btnLoad->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnLoadClick ), NULL, this );
+	
+}
+
+_AdapterSelectDlg::_AdapterSelectDlg( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer9;
+	bSizer9 = new wxBoxSizer( wxVERTICAL );
+	
+	m_btnMySql = new wxButton( this, wxID_ANY, wxT("MySql"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer9->Add( m_btnMySql, 0, wxALL|wxEXPAND, 5 );
+	
+	m_btnSqlite = new wxButton( this, wxID_ANY, wxT("SQLite"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer9->Add( m_btnSqlite, 0, wxALL|wxEXPAND, 5 );
+	
+	this->SetSizer( bSizer9 );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_btnMySql->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnMysqlClick ), NULL, this );
+	m_btnSqlite->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnSqliteClick ), NULL, this );
+}
+
+_AdapterSelectDlg::~_AdapterSelectDlg()
+{
+	// Disconnect Events
+	m_btnMySql->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnMysqlClick ), NULL, this );
+	m_btnSqlite->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnSqliteClick ), NULL, this );
 	
 }
 

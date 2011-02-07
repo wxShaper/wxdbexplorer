@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Peter Janků
-Date                   :=31.1.2011
+Date                   :=4.2.2011
 CodeLitePath           :="/home/jankup/.codelite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)../bin/gcc $
 ##
 CodeLiteDir:=/usr/share/codelite
 Objects=$(IntermediateDirectory)/DbEngine_database$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_column$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbitem$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_dbconnection$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_table$(ObjectSuffix) $(IntermediateDirectory)/DbEngine_tablecol$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_FrameCanvas$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_DnDTableShape$(ObjectSuffix) $(IntermediateDirectory)/ErdEngine_ErdTable$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbSettingDialog$(ObjectSuffix) \
-	$(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) \
-	$(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
+	$(IntermediateDirectory)/Gui_ErdPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_MysqlConnectionHistory$(ObjectSuffix) $(IntermediateDirectory)/Gui_SqlCommandPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_TableSettingsDialog$(ObjectSuffix) $(IntermediateDirectory)/Gui_DbViewerPanel$(ObjectSuffix) $(IntermediateDirectory)/Gui_DatabaseExplorerFrame$(ObjectSuffix) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix) $(IntermediateDirectory)/Gui_AdapterSelectDlg$(ObjectSuffix) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IntermediateDirectory)/Main_DatabaseExplorerApp$(ObjectSuffix) \
+	$(IntermediateDirectory)/Main_MySqlType$(ObjectSuffix) $(IntermediateDirectory)/Main_MySqlDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_SqliteDbAdapter$(ObjectSuffix) $(IntermediateDirectory)/Main_wx_pch$(ObjectSuffix) $(IntermediateDirectory)/SqliteType$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -210,6 +210,14 @@ $(IntermediateDirectory)/Gui_GUI$(DependSuffix): Gui/GUI.cpp
 $(IntermediateDirectory)/Gui_GUI$(PreprocessSuffix): Gui/GUI.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_GUI$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/GUI.cpp"
 
+$(IntermediateDirectory)/Gui_AdapterSelectDlg$(ObjectSuffix): Gui/AdapterSelectDlg.cpp $(IntermediateDirectory)/Gui_AdapterSelectDlg$(DependSuffix)
+	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/AdapterSelectDlg.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Gui_AdapterSelectDlg$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Gui_AdapterSelectDlg$(DependSuffix): Gui/AdapterSelectDlg.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Gui_AdapterSelectDlg$(ObjectSuffix) -MF$(IntermediateDirectory)/Gui_AdapterSelectDlg$(DependSuffix) -MM "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/AdapterSelectDlg.cpp"
+
+$(IntermediateDirectory)/Gui_AdapterSelectDlg$(PreprocessSuffix): Gui/AdapterSelectDlg.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Gui_AdapterSelectDlg$(PreprocessSuffix) "/home/jankup/SourceCpp/wxdbexplorer/src/Gui/AdapterSelectDlg.cpp"
+
 $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix): Interfaces/IDbItem.cpp $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix)
 	$(CompilerName) $(SourceSwitch) "/home/jankup/SourceCpp/wxdbexplorer/src/Interfaces/IDbItem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix): Interfaces/IDbItem.cpp
@@ -323,6 +331,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/Gui_GUI$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Gui_GUI$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Gui_GUI$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_AdapterSelectDlg$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_AdapterSelectDlg$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/Gui_AdapterSelectDlg$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/Interfaces_IDbItem$(PreprocessSuffix)

@@ -2,6 +2,7 @@
 #include "DbSettingDialog.h"
 #include "SqlCommandPanel.h"
 #include "ErdPanel.h"
+#include "AdapterSelectDlg.h"
 
 #include <wx/propgrid/propgrid.h>
 #include <wx/imaglist.h>
@@ -136,8 +137,14 @@ void DbViewerPanel::OnItemSelectionChange(wxTreeEvent& event) {
 	}	*/
 }
 void DbViewerPanel::OnERDClick(wxCommandEvent& event) {
+	AdapterSelectDlg dlg(this, m_pNotebook);
+	dlg.ShowModal();
 	if (m_pDbAdapter) {
-		m_pNotebook->AddPage(new ErdPanel(m_pNotebook, m_pDbAdapter),wxT("ERD diagram"));
+		
+
+		
+		
+		//m_pNotebook->AddPage(new ErdPanel(m_pNotebook, m_pDbAdapter),wxT("ERD diagram"));
 	}
 }
 void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
@@ -146,17 +153,19 @@ void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 
 
 	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
-	if ((item != NULL)&&(item->GetTable() != NULL)) {
-		Table* table =(Table*)((Table*)item->GetTable())->Clone();
-
-		wxSFShapeBase *pShape = new dndTableShape(table);
-		lstDnD.Append(pShape);
-
-		if (m_pNotebook->GetSelection()!= wxNOT_FOUND) {
-
-			ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);
-			panel->getCanvas()->DoDragDrop(lstDnD);
-		}
+	
+	
+	if (item != NULL) {
+		Table* table = wxDynamicCast(item->GetData(),Table);
+		if (table){
+			if (m_pNotebook->GetSelection()!= wxNOT_FOUND) {
+				table = (Table*) table->Clone();
+				wxSFShapeBase *pShape = new dndTableShape(table);
+				lstDnD.Append(pShape);
+				ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);
+				panel->getCanvas()->DoDragDrop(lstDnD);
+				}				
+			}
 		//delete pShape;
 	}
 }

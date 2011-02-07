@@ -19,15 +19,16 @@
 #include <wx/settings.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
+#include <wx/sizer.h>
+#include <wx/panel.h>
 #include <wx/wxScintilla/wxscintilla.h>
 #ifdef __VISUALC__
 #include <wx/link_additions.h>
 #endif //__VISUALC__
 #include <wx/button.h>
 #include <wx/stattext.h>
-#include <wx/sizer.h>
-#include <wx/panel.h>
 #include <wx/grid.h>
+#include <wx/dialog.h>
 #include <wx/toolbar.h>
 #include <wx/treectrl.h>
 #include <wx/notebook.h>
@@ -35,7 +36,6 @@
 #include <wx/statbox.h>
 #include <wx/listbox.h>
 #include <wx/filepicker.h>
-#include <wx/dialog.h>
 #include <wx/statline.h>
 #include <wx/combobox.h>
 #include <wx/checkbox.h>
@@ -77,6 +77,23 @@ class _MainFrame : public wxFrame
 };
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Class _ThumbPane
+///////////////////////////////////////////////////////////////////////////////
+class _ThumbPane : public wxPanel 
+{
+	private:
+	
+	protected:
+		wxBoxSizer* mainSizer;
+	
+	public:
+		
+		_ThumbPane( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,300 ), long style = wxTAB_TRAVERSAL ); 
+		~_ThumbPane();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
 /// Class _SqlCommandPanel
 ///////////////////////////////////////////////////////////////////////////////
 class _SqlCommandPanel : public wxPanel 
@@ -103,6 +120,29 @@ class _SqlCommandPanel : public wxPanel
 		
 		_SqlCommandPanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,480 ), long style = wxTAB_TRAVERSAL ); 
 		~_SqlCommandPanel();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class _AdapterSelectDlg
+///////////////////////////////////////////////////////////////////////////////
+class _AdapterSelectDlg : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxButton* m_btnMySql;
+		wxButton* m_btnSqlite;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnMysqlClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSqliteClick( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_AdapterSelectDlg( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Select dbAdapter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 200,-1 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_AdapterSelectDlg();
 	
 };
 

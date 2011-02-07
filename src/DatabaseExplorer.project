@@ -42,6 +42,8 @@
     <File Name="Gui/MysqlConnectionHistory.h"/>
     <File Name="Gui/DbSettingDialog.h"/>
     <File Name="Gui/GUI.fbp"/>
+    <File Name="Gui/AdapterSelectDlg.h"/>
+    <File Name="Gui/AdapterSelectDlg.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Interfaces">
     <File Name="Interfaces/IDbItem.cpp"/>
