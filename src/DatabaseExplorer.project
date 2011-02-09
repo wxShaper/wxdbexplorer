@@ -8,11 +8,12 @@
     <File Name="DbEngine/table.cpp"/>
     <File Name="DbEngine/tablecol.cpp"/>
     <File Name="DbEngine/dbitem.h"/>
-    <File Name="DbEngine/tablecol.h"/>
     <File Name="DbEngine/table.h"/>
     <File Name="DbEngine/column.h"/>
     <File Name="DbEngine/database.h"/>
     <File Name="DbEngine/dbconnection.h"/>
+    <File Name="DbEngine/constraint.cpp"/>
+    <File Name="DbEngine/constraint.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="ErdEngine">
     <File Name="ErdEngine/FrameCanvas.cpp"/>
@@ -44,6 +45,7 @@
     <File Name="Gui/GUI.fbp"/>
     <File Name="Gui/AdapterSelectDlg.h"/>
     <File Name="Gui/AdapterSelectDlg.cpp"/>
+    <File Name="DbEngine/tablecol.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Interfaces">
     <File Name="Interfaces/IDbItem.cpp"/>

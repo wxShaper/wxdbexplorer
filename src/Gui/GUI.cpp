@@ -387,7 +387,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_staticText11->Wrap( -1 );
 	fgSizer41->Add( m_staticText11, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	m_filePickerSqlite = new wxFilePickerCtrl( m_Sqlite, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Database file (*.sqlite)|*.sqlite"), wxDefaultPosition, wxSize( -1,-1 ), wxFLP_OPEN );
+	m_filePickerSqlite = new wxFilePickerCtrl( m_Sqlite, wxID_ANY, wxT("/home/jankup/SourcesCpp/wxdbexplorer/build/gsdgsdg.sqlite"), wxT("Select a file"), wxT("Database file (*.sqlite)|*.sqlite"), wxDefaultPosition, wxSize( -1,-1 ), wxFLP_OPEN|wxFLP_USE_TEXTCTRL );
 	fgSizer41->Add( m_filePickerSqlite, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	sbSizer31->Add( fgSizer41, 1, wxEXPAND, 5 );
@@ -536,8 +536,11 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	wxBoxSizer* bSizer8;
 	bSizer8 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_button8 = new wxButton( m_panel14, wxID_NEW, wxT("New"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_button8 = new wxButton( m_panel14, wxID_NEW_COL, wxT("New column"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer8->Add( m_button8, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_button15 = new wxButton( m_panel14, wxID_NEW_CONSTRAIN, wxT("New constraint"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer8->Add( m_button15, 0, wxALL, 5 );
 	
 	m_button10 = new wxButton( m_panel14, wxID_DEL, wxT("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer8->Add( m_button10, 0, wxALL, 5 );
@@ -558,47 +561,92 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_staticline2 = new wxStaticLine( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	sbSizer6->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
 	
-	m_panel11 = new wxPanel( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_notebook3 = new wxNotebook( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	m_pageType = new wxPanel( m_notebook3, wxID_PAGE_TYPE, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer7;
 	bSizer7 = new wxBoxSizer( wxVERTICAL );
 	
-	m_staticText8 = new wxStaticText( m_panel11, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText8 = new wxStaticText( m_pageType, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText8->Wrap( -1 );
 	bSizer7->Add( m_staticText8, 0, wxALL, 5 );
 	
-	m_txColName = new wxTextCtrl( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_txColName = new wxTextCtrl( m_pageType, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_txColName, 0, wxALL|wxEXPAND, 5 );
 	
-	m_staticText9 = new wxStaticText( m_panel11, wxID_ANY, wxT("Type:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText9 = new wxStaticText( m_pageType, wxID_ANY, wxT("Type:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText9->Wrap( -1 );
 	bSizer7->Add( m_staticText9, 0, wxALL, 5 );
 	
-	m_comboType = new wxComboBox( m_panel11, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	m_comboType = new wxComboBox( m_pageType, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
 	bSizer7->Add( m_comboType, 0, wxALL|wxEXPAND, 5 );
 	
-	m_stSize = new wxStaticText( m_panel11, wxID_ANY, wxT("Size:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stSize = new wxStaticText( m_pageType, wxID_ANY, wxT("Size:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stSize->Wrap( -1 );
 	bSizer7->Add( m_stSize, 0, wxALL, 5 );
 	
-	m_txSize = new wxTextCtrl( m_panel11, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT );
+	m_txSize = new wxTextCtrl( m_pageType, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT );
 	bSizer7->Add( m_txSize, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 5 );
 	
-	m_chPrimary = new wxCheckBox( m_panel11, wxID_ANY, wxT("Primary key"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_chPrimary = new wxCheckBox( m_pageType, wxID_ANY, wxT("Primary key"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chPrimary, 0, wxALL, 5 );
 	
-	m_chNotNull = new wxCheckBox( m_panel11, wxID_ANY, wxT("Not null"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_chNotNull = new wxCheckBox( m_pageType, wxID_ANY, wxT("Not null"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chNotNull, 0, wxALL, 5 );
 	
-	m_checkBox3 = new wxCheckBox( m_panel11, wxID_ANY, wxT("Unique"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_checkBox3 = new wxCheckBox( m_pageType, wxID_ANY, wxT("Unique"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_checkBox3, 0, wxALL, 5 );
 	
-	m_chAutoIncrement = new wxCheckBox( m_panel11, wxID_ANY, wxT("Auto increment"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_chAutoIncrement = new wxCheckBox( m_pageType, wxID_ANY, wxT("Auto increment"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chAutoIncrement, 0, wxALL, 5 );
 	
-	m_panel11->SetSizer( bSizer7 );
-	m_panel11->Layout();
-	bSizer7->Fit( m_panel11 );
-	sbSizer6->Add( m_panel11, 1, wxEXPAND | wxALL, 5 );
+	m_pageType->SetSizer( bSizer7 );
+	m_pageType->Layout();
+	bSizer7->Fit( m_pageType );
+	m_notebook3->AddPage( m_pageType, wxT("Column"), false );
+	m_pageConstraint = new wxPanel( m_notebook3, wxID_PAGE_CONSTRAINT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer11;
+	bSizer11 = new wxBoxSizer( wxVERTICAL );
+	
+	m_staticText11 = new wxStaticText( m_pageConstraint, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText11->Wrap( -1 );
+	bSizer11->Add( m_staticText11, 0, wxALL, 5 );
+	
+	m_txConstraintName = new wxTextCtrl( m_pageConstraint, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer11->Add( m_txConstraintName, 0, wxALL|wxALIGN_RIGHT|wxEXPAND, 5 );
+	
+	m_staticText12 = new wxStaticText( m_pageConstraint, wxID_ANY, wxT("Local column name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText12->Wrap( -1 );
+	bSizer11->Add( m_staticText12, 0, wxALL, 5 );
+	
+	m_comboLocalColumn = new wxComboBox( m_pageConstraint, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY ); 
+	bSizer11->Add( m_comboLocalColumn, 0, wxALL|wxALIGN_RIGHT, 5 );
+	
+	wxString m_radioBox1Choices[] = { wxT("Primary key"), wxT("Foreign key") };
+	int m_radioBox1NChoices = sizeof( m_radioBox1Choices ) / sizeof( wxString );
+	m_radioBox1 = new wxRadioBox( m_pageConstraint, wxID_ANY, wxT("Constraint type:"), wxDefaultPosition, wxDefaultSize, m_radioBox1NChoices, m_radioBox1Choices, 1, 0 );
+	m_radioBox1->SetSelection( 0 );
+	bSizer11->Add( m_radioBox1, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText13 = new wxStaticText( m_pageConstraint, wxID_ANY, wxT("Reference table:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText13->Wrap( -1 );
+	bSizer11->Add( m_staticText13, 0, wxALL, 5 );
+	
+	m_comboRefTable = new wxComboBox( m_pageConstraint, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY ); 
+	bSizer11->Add( m_comboRefTable, 0, wxALL|wxALIGN_RIGHT, 5 );
+	
+	m_staticText14 = new wxStaticText( m_pageConstraint, wxID_ANY, wxT("Reference column:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText14->Wrap( -1 );
+	bSizer11->Add( m_staticText14, 0, wxALL, 5 );
+	
+	m_comboRefColumn = new wxComboBox( m_pageConstraint, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY ); 
+	bSizer11->Add( m_comboRefColumn, 0, wxALL|wxALIGN_RIGHT, 5 );
+	
+	m_pageConstraint->SetSizer( bSizer11 );
+	m_pageConstraint->Layout();
+	bSizer11->Fit( m_pageConstraint );
+	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), true );
+	
+	sbSizer6->Add( m_notebook3, 1, wxEXPAND | wxALL, 5 );
 	
 	m_panel9->SetSizer( sbSizer6 );
 	m_panel9->Layout();
@@ -625,8 +673,10 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	// Connect Events
 	m_listColumns->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnListBoxClick ), NULL, this );
 	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
+	m_button15->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewConstrainClick ), NULL, this );
 	m_button10->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnDeleteColumn ), NULL, this );
 	m_button9->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
+	m_pageType->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageTypeUI ), NULL, this );
 	m_txColName->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
 	m_comboType->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
 	m_comboType->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColTypeUI ), NULL, this );
@@ -635,6 +685,10 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_chNotNull->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
 	m_checkBox3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
 	m_chAutoIncrement->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
+	m_pageConstraint->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageConstraintUI ), NULL, this );
+	m_comboRefTable->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnRefTabChange ), NULL, this );
+	m_comboRefTable->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefTabUI ), NULL, this );
+	m_comboRefColumn->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefColUI ), NULL, this );
 	m_sdbSizer2OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 }
 
@@ -643,8 +697,10 @@ _TableSettings::~_TableSettings()
 	// Disconnect Events
 	m_listColumns->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnListBoxClick ), NULL, this );
 	m_button8->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
+	m_button15->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewConstrainClick ), NULL, this );
 	m_button10->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnDeleteColumn ), NULL, this );
 	m_button9->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
+	m_pageType->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageTypeUI ), NULL, this );
 	m_txColName->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
 	m_comboType->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
 	m_comboType->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColTypeUI ), NULL, this );
@@ -653,6 +709,10 @@ _TableSettings::~_TableSettings()
 	m_chNotNull->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
 	m_checkBox3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
 	m_chAutoIncrement->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
+	m_pageConstraint->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageConstraintUI ), NULL, this );
+	m_comboRefTable->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnRefTabChange ), NULL, this );
+	m_comboRefTable->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefTabUI ), NULL, this );
+	m_comboRefColumn->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefColUI ), NULL, this );
 	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 	
 }

@@ -6,6 +6,7 @@
 #include "GUI.h" // Base class: _TableSettings
 #include "../DbEngine/table.h"
 #include "../DbEngine/column.h"
+#include "../DbEngine/constraint.h"
 #include "../Interfaces/IDbType.h"
 #include "../Interfaces/IDbAdapter.h"
 
@@ -32,11 +33,22 @@ public:
 	virtual void OnUniqueUI(wxUpdateUIEvent& event);
 	virtual void OnDeleteColumn(wxCommandEvent& event);
 
+
+	virtual void OnNewConstrainClick(wxCommandEvent& event);
+	virtual void OnPageConstraintUI(wxUpdateUIEvent& event);
+	virtual void OnPageTypeUI(wxUpdateUIEvent& event);
+	virtual void OnRefColUI(wxUpdateUIEvent& event);
+	virtual void OnRefTabChange(wxCommandEvent& event);
+	virtual void OnRefTabUI(wxUpdateUIEvent& event);
+
+
+
 protected:
 	Table* m_pTable;
 	Column* m_pEditedColumn;
+	Constraint* m_pEditedConstraint;
 	IDbAdapter* m_pDbAdapter;
-
+	
 	//wxTextValidator validNum(wxFILTER_NUMERIC, NULL);
 
 	void UpdateView();

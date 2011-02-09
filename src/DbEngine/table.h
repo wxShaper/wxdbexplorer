@@ -5,6 +5,7 @@
 #include <wx/dblayer/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "column.h"
+#include "constraint.h"
 #include "../Interfaces/IDbAdapter.h"
 // -------------------------------------------------
 // Trida databazove tabulky
@@ -40,6 +41,8 @@ public:
 	bool IsSaved() { return this->m_isSaved; }
 	//ColumnCol *columns;
 	void AddColumn(Column* col) { this->AddChild(col); }
+	void AddConstraint(Constraint* cont) { this->AddChild(cont); } 
+	
 	Column* GetFristColumn() { return (Column*) GetFirstChild( CLASSINFO(Column)); }
 	
 	IDbAdapter* GetDbAdapter() { return m_pDbAdapter; }

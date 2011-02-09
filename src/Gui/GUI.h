@@ -39,6 +39,7 @@
 #include <wx/statline.h>
 #include <wx/combobox.h>
 #include <wx/checkbox.h>
+#include <wx/radiobox.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -47,8 +48,12 @@
 #define wxID_TOOL_REFRESH 1002
 #define wxID_TOOL_ERD 1003
 #define wxID_Sqlite_OK 1004
-#define wxID_DEL 1005
-#define wxID_TX_SIZE 1006
+#define wxID_NEW_COL 1005
+#define wxID_NEW_CONSTRAIN 1006
+#define wxID_DEL 1007
+#define wxID_PAGE_TYPE 1008
+#define wxID_TX_SIZE 1009
+#define wxID_PAGE_CONSTRAINT 1010
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -265,10 +270,12 @@ class _TableSettings : public wxDialog
 		wxListBox* m_listColumns;
 		wxPanel* m_panel14;
 		wxButton* m_button8;
+		wxButton* m_button15;
 		wxButton* m_button10;
 		wxButton* m_button9;
 		wxStaticLine* m_staticline2;
-		wxPanel* m_panel11;
+		wxNotebook* m_notebook3;
+		wxPanel* m_pageType;
 		wxStaticText* m_staticText8;
 		wxTextCtrl* m_txColName;
 		wxStaticText* m_staticText9;
@@ -279,14 +286,26 @@ class _TableSettings : public wxDialog
 		wxCheckBox* m_chNotNull;
 		wxCheckBox* m_checkBox3;
 		wxCheckBox* m_chAutoIncrement;
+		wxPanel* m_pageConstraint;
+		wxStaticText* m_staticText11;
+		wxTextCtrl* m_txConstraintName;
+		wxStaticText* m_staticText12;
+		wxComboBox* m_comboLocalColumn;
+		wxRadioBox* m_radioBox1;
+		wxStaticText* m_staticText13;
+		wxComboBox* m_comboRefTable;
+		wxStaticText* m_staticText14;
+		wxComboBox* m_comboRefColumn;
 		wxStdDialogButtonSizer* m_sdbSizer2;
 		wxButton* m_sdbSizer2OK;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnListBoxClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNewColumnClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNewConstrainClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDeleteColumn( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveColumnClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPageTypeUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnColNameUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnTypeSelect( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnColTypeUI( wxUpdateUIEvent& event ) { event.Skip(); }
@@ -295,6 +314,10 @@ class _TableSettings : public wxDialog
 		virtual void OnNotNullUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnUniqueUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnAutoIncrementUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnPageConstraintUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnRefTabChange( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnRefTabUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnRefColUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	

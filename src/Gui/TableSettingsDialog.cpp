@@ -21,12 +21,17 @@ TableSettings::~TableSettings() {
 }
 
 void TableSettings::OnListBoxClick(wxCommandEvent& event) {
-	wxString name = m_listColumns->GetStringSelection();	
-	Column* col;
+	wxString name = m_listColumns->GetStringSelection();
+	Column* col = NULL;
+	Constraint* constr = NULL;
+	
+	m_pEditedColumn = NULL;
+	m_pEditedConstraint = NULL;
+	
 	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
-	while( node ){
+	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
-		
+
 		if ((col)&&(col->getName() == name)) {
 			m_pEditedColumn = col;
 			m_txColName->SetValue(col->getName());
@@ -39,17 +44,36 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 				m_chNotNull->SetValue(type->GetNotNull());
 				m_chPrimary->SetValue(type->GetPrimaryKey());
 				m_checkBox3->SetValue(type->GetUnique());
-			}
+			}		
+		}
+		
+		if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  constr = (Constraint*) node->GetData();
+
+		if ((constr)&&(constr->GetName() == name)) {
+			m_txConstraintName->SetValue(constr->GetName());
+			m_comboLocalColumn->SetValue(constr->GetLocalColumn());
+			if (m_pTable){
+			SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
+				while( node ) {
+					if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_comboLocalColumn->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
+					node = node->GetNext();
+				}		
+			}				
+			m_radioBox1->Select(constr->GetType());
+			m_comboRefTable->SetValue(constr->GetRefTable());
+			
+			
 		}	
+		
 		node = node->GetNext();
 	}
-	
-	
-	
+
+
+
 	/*
 	Column* col = wxDynamicCast(m_pTable->GetFristColumn(),Column);
 	while(col){
-		
+
 		if ((col)&&(col->getName() == name)) {
 			m_pEditedColumn = col;
 			m_txColName->SetValue(col->getName());
@@ -109,13 +133,18 @@ void TableSettings::SetTable(Table* tab) {
 void TableSettings::UpdateView() {
 	m_listColumns->Clear();
 	if (m_pTable) {
-		
+
 		SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
-		while( node ){
-			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_listColumns->AppendString(((Column*) node->GetData())->getName());
+		while( node ) {
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_listColumns->AppendString(wxString::Format(wxT("col:%s"),((Column*) node->GetData())->getName().c_str()));
 			node = node->GetNext();
-			}
-		
+		}
+		node = m_pTable->GetFirstChildNode();
+		while( node ) {
+			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  m_listColumns->AppendString(wxString::Format(wxT("key:%s"),((Column*) node->GetData())->getName().c_str()));
+			node = node->GetNext();
+		}
+
 	}
 	m_pEditedColumn = NULL;
 	m_txColName->Clear();
@@ -174,16 +203,42 @@ void TableSettings::OnUniqueUI(wxUpdateUIEvent& event) {
 	}
 }
 void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
-	wxString name = m_listColumns->GetStringSelection();	
+	wxString name = m_listColumns->GetStringSelection();
 	Column* col;
 	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
-	while( node ){
+	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
-		
+
 		if ((col)&&(col->getName() == name)) break;
-				
+
 		node = node->GetNext();
-	}	
+	}
 	m_pTable->GetParentManager()->RemoveItem(col);
 	UpdateView();
+}
+void TableSettings::OnNewConstrainClick(wxCommandEvent& event) {
+	Constraint* pConst = new Constraint(wxString::Format(wxT("PK_%s"),m_pTable->getName().c_str()), wxT(""), Constraint::primaryKey);
+	if (pConst) m_pTable->AddConstraint(pConst);
+	UpdateView();
+}
+
+void TableSettings::OnPageConstraintUI(wxUpdateUIEvent& event) {
+	event.Enable(false);
+	if (m_pEditedConstraint) event.Enable(true);
+}
+
+void TableSettings::OnPageTypeUI(wxUpdateUIEvent& event) {
+	event.Enable(false);
+	if (m_pEditedColumn) event.Enable(true);
+}
+
+void TableSettings::OnRefColUI(wxUpdateUIEvent& event) {
+	
+}
+
+void TableSettings::OnRefTabChange(wxCommandEvent& event) {
+}
+
+void TableSettings::OnRefTabUI(wxUpdateUIEvent& event) {
+	event.Enable(m_radioBox1->GetSelection() == 2);
 }
