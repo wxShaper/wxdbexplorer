@@ -2,7 +2,9 @@
 
 TableSettings::TableSettings(wxWindow* parent,IDbAdapter* pDbAdapter, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style):_TableSettings(parent,id,title,pos,size, style ) {
 	m_pTable = NULL;
+	m_pDiagramManager = NULL;
 	m_pEditedColumn = NULL;
+	m_pEditedConstraint = NULL;
 	m_txSize->SetValidator(wxTextValidator(wxFILTER_NUMERIC));
 
 	m_pDbAdapter = pDbAdapter;
@@ -21,13 +23,13 @@ TableSettings::~TableSettings() {
 }
 
 void TableSettings::OnListBoxClick(wxCommandEvent& event) {
-	wxString name = m_listColumns->GetStringSelection();
+	wxString name = m_listColumns->GetStringSelection().substr(4);
 	Column* col = NULL;
 	Constraint* constr = NULL;
-	
+
 	m_pEditedColumn = NULL;
 	m_pEditedConstraint = NULL;
-	
+
 	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
 	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
@@ -44,27 +46,29 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 				m_chNotNull->SetValue(type->GetNotNull());
 				m_chPrimary->SetValue(type->GetPrimaryKey());
 				m_checkBox3->SetValue(type->GetUnique());
-			}		
+			}
 		}
-		
+
 		if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  constr = (Constraint*) node->GetData();
 
 		if ((constr)&&(constr->GetName() == name)) {
+			m_comboLocalColumn->Clear();
+			m_pEditedConstraint = constr;
 			m_txConstraintName->SetValue(constr->GetName());
 			m_comboLocalColumn->SetValue(constr->GetLocalColumn());
-			if (m_pTable){
-			SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
+			if (m_pTable) {
+				SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
 				while( node ) {
 					if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_comboLocalColumn->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
 					node = node->GetNext();
-				}		
-			}				
+				}
+			}
 			m_radioBox1->Select(constr->GetType());
 			m_comboRefTable->SetValue(constr->GetRefTable());
-			
-			
-		}	
-		
+
+
+		}
+
 		node = node->GetNext();
 	}
 
@@ -124,9 +128,27 @@ void TableSettings::OnTypeSelect(wxCommandEvent& event) {
 	}
 }
 
-void TableSettings::SetTable(Table* tab) {
+void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 	m_pTable = tab;
-	if (m_pTable) m_txTableName->SetValue(tab->getName());
+	m_pDiagramManager = pManager;
+	if (m_pTable) {
+		m_txTableName->SetValue(tab->getName());
+		if (pManager){
+			ShapeList lstShapes;
+			pManager->GetShapes( CLASSINFO(ErdTable), lstShapes );
+			ShapeList::compatibility_iterator it = lstShapes.GetFirst();
+			while( it ){
+				ErdTable* pTab = wxDynamicCast(it->GetData(),ErdTable);
+				if (pTab){					
+					if (m_pTable->getName() != pTab->getTable()->getName()){
+						m_comboRefTable->AppendString(pTab->getTable()->getName());
+					}
+				}
+				it = it->GetNext();
+			}
+		
+		}
+	}
 	UpdateView();
 }
 
@@ -141,7 +163,7 @@ void TableSettings::UpdateView() {
 		}
 		node = m_pTable->GetFirstChildNode();
 		while( node ) {
-			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  m_listColumns->AppendString(wxString::Format(wxT("key:%s"),((Column*) node->GetData())->getName().c_str()));
+			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  m_listColumns->AppendString(wxString::Format(wxT("key:%s"),((Constraint*) node->GetData())->GetName().c_str()));
 			node = node->GetNext();
 		}
 
@@ -203,17 +225,25 @@ void TableSettings::OnUniqueUI(wxUpdateUIEvent& event) {
 	}
 }
 void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
-	wxString name = m_listColumns->GetStringSelection();
-	Column* col;
+	wxString name = m_listColumns->GetStringSelection().substr(4);
+	Column* col  = NULL;
+	Constraint* constr = NULL;
 	SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
 	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
+		if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  constr = (Constraint*) node->GetData();
 
-		if ((col)&&(col->getName() == name)) break;
-
+		if ((col)&&(col->getName() == name)) {
+			constr = NULL;
+			break;
+			} else col = NULL;
+		if ((constr)&&(constr->GetName() == name)) break;
+			else constr = NULL;
+		
 		node = node->GetNext();
 	}
-	m_pTable->GetParentManager()->RemoveItem(col);
+	if (col) m_pTable->GetParentManager()->RemoveItem(col);
+	if (constr) m_pTable->GetParentManager()->RemoveItem(constr);
 	UpdateView();
 }
 void TableSettings::OnNewConstrainClick(wxCommandEvent& event) {
@@ -233,12 +263,49 @@ void TableSettings::OnPageTypeUI(wxUpdateUIEvent& event) {
 }
 
 void TableSettings::OnRefColUI(wxUpdateUIEvent& event) {
-	
+	event.Enable(false);
+	if ((m_pEditedConstraint) && (m_comboRefTable->GetValue().length() > 0 )) event.Enable(true);
 }
 
 void TableSettings::OnRefTabChange(wxCommandEvent& event) {
+	ErdTable* pErdTab = NULL;
+	Table* pTab = NULL;
+	m_comboRefColumn->Clear();
+	m_comboRefColumn->SetValue(wxT(""));
+	if (m_pDiagramManager){
+			ShapeList lstShapes;
+			m_pDiagramManager->GetShapes( CLASSINFO(ErdTable), lstShapes );
+			ShapeList::compatibility_iterator it = lstShapes.GetFirst();
+			while( it ){
+				pErdTab = wxDynamicCast(it->GetData(),ErdTable);
+				if (pErdTab){					
+					if (pErdTab->getTable()->getName() == m_comboRefTable->GetValue()){
+					pTab = pErdTab->getTable();
+						
+					}
+				}
+				it = it->GetNext();
+			}		
+		}
+	if (pTab){
+		SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+		while( node ) {
+			Column* col = wxDynamicCast(node->GetData(),Column);
+			if (col){
+				m_comboRefColumn->AppendString(col->getName());				
+			}
+			node = node->GetNext();	
+		}		
+	}	
 }
 
 void TableSettings::OnRefTabUI(wxUpdateUIEvent& event) {
-	event.Enable(m_radioBox1->GetSelection() == 2);
+	event.Enable(m_radioBox1->GetSelection() == 1);
+}
+void TableSettings::OnNotebookUI(wxUpdateUIEvent& event) {
+	if (m_pEditedConstraint){
+			m_notebook3->SetSelection(1);
+		}else{
+			m_notebook3->SetSelection(0);			
+			}
 }

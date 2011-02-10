@@ -5419,7 +5419,7 @@
                                                 <event name="OnRightUp"></event>
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
-                                                <event name="OnUpdateUI"></event>
+                                                <event name="OnUpdateUI">OnNotebookUI</event>
                                                 <object class="notebookpage" expanded="1">
                                                     <property name="bitmap"></property>
                                                     <property name="label">Column</property>

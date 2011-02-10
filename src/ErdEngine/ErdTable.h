@@ -7,6 +7,8 @@
 #include "wx/wxsf/TextShape.h"
 #include "wx/wxsf/FlexGridShape.h"
 #include "../DbEngine/table.h"
+#include "../DbEngine/constraint.h"
+
 #include "Gui/Ids.h"
 #include "Interfaces/IDbType.h"
 

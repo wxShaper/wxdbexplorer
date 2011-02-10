@@ -119,7 +119,7 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 		if (table)
 			if (table->getTable() ) {
 				TableSettings settingDialog(this, m_pDbAdapter);
-				settingDialog.SetTable(table->getTable());
+				settingDialog.SetTable(table->getTable(),(wxSFDiagramManager*) table->GetParentManager());
 				settingDialog.ShowModal();
 				table->updateColumns();
 			}

@@ -305,6 +305,7 @@ class _TableSettings : public wxDialog
 		virtual void OnNewConstrainClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDeleteColumn( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveColumnClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNotebookUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnPageTypeUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnColNameUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnTypeSelect( wxCommandEvent& event ) { event.Skip(); }

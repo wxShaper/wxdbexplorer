@@ -108,9 +108,14 @@ void ErdTable::updateColumns()
 	if (tab){		
 		m_pLabel->SetText(tab->getName());
 		SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
-		while( node )
-			{
-			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  addColumnShape(((Column*) node->GetData())->getName(),i++);
+		while( node ){
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  addColumnShape(wxString::Format(wxT("col: %s"),((Column*) node->GetData())->getName().c_str()),i++);
+			node = node->GetNext();
+			}		
+			
+		node = tab->GetFirstChildNode();
+		while( node ){
+			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  addColumnShape(wxString::Format(wxT("key: %s"),((Constraint*) node->GetData())->GetName().c_str()),i++);
 			node = node->GetNext();
 			}
 	}
@@ -141,7 +146,7 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 		m_pCol->SetStyle(sfsHOVERING |sfsEMIT_EVENTS| sfsALWAYS_INSIDE | sfsSIZE_CHANGE | sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION );
 		m_pCol->SetId(id + constOffset);
 		if (m_pGrid->AppendToGrid(m_pCol)){
-			m_pCol->SetText( wxString::Format(wxT("col: %s"), colName.c_str()));			
+			m_pCol->SetText( wxString::Format(wxT("%s"), colName.c_str()));			
 			m_pCol->SetHAlign(wxSFShapeBase::halignLEFT);
 			m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
 			//	m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
