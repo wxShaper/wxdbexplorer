@@ -17,7 +17,8 @@ public:
 
 	enum MODE {
 		modeDESIGN,
-		modeTABLE
+		modeTABLE,
+		modeLine
 	};
 
 	// public data accessors

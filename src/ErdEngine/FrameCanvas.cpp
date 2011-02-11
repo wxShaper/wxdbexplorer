@@ -25,6 +25,10 @@ FrameCanvas::~FrameCanvas() {
 }
 
 void FrameCanvas::OnConnectionFinished(wxSFLineShape* connection) {
+	wxMessageBox(wxT("hotovo2"));
+	m_pParentPanel->SetToolMode(ErdPanel::modeDESIGN);
+	
+	return;
 }
 
 void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
@@ -39,14 +43,20 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 			pShape->AcceptConnection(wxT("All"));
 			pShape->AcceptSrcNeighbour(wxT("All"));
 			pShape->AcceptTrgNeighbour(wxT("All"));
-			
+
 			Table* tab = new Table();
 			tab->setName(wxT("New table"));
 			pShape->SetUserData(tab);
-			
+
 			((ErdTable*)pShape)->updateColumns();
 			pShape->Refresh();
 		}
+	}
+	break;
+	case ErdPanel::modeLine: {
+		if (GetMode() == modeREADY) {
+			StartInteractiveConnection(CLASSINFO(wxSFOrthoLineShape), event.GetPosition());
+		} else wxSFShapeCanvas::OnLeftDown(event);
 	}
 	break;
 	default:
@@ -62,20 +72,20 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 
 }
 void FrameCanvas::OnRightDown(wxMouseEvent& event) {
-	
+
 	wxSFShapeBase* sBase = GetShapeUnderCursor();
-	if (sBase){
+	if (sBase) {
 		ErdTable* table = wxDynamicCast(sBase->GetGrandParentShape(), ErdTable);
-			if (table) {
-				//void *data = reinterpret_cast<void *>(event.GetItem().GetData());
-				wxMenu mnu;
-				//mnu.SetClientData( data );
-				mnu.Append(IDR_POPUP_MI1, 	wxT("Add column"));
-				mnu.Append(IDR_POPUP_MI2, 	wxT("Add create sql to clippoard"));
-				mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
-				PopupMenu(&mnu);
-			}		
-		}	
+		if (table) {
+			//void *data = reinterpret_cast<void *>(event.GetItem().GetData());
+			wxMenu mnu;
+			//mnu.SetClientData( data );
+			mnu.Append(IDR_POPUP_MI1, 	wxT("Add column"));
+			mnu.Append(IDR_POPUP_MI2, 	wxT("Add create sql to clippoard"));
+			mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
+			PopupMenu(&mnu);
+		}
+	}
 
 }
 
@@ -87,29 +97,29 @@ void FrameCanvas::OnKeyDown(wxKeyEvent& event) {
 void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 	void *data=static_cast<wxMenu *>(evt.GetEventObject())->GetClientData();
 	switch(evt.GetId()) {
-		case IDR_POPUP_MI1: {
+	case IDR_POPUP_MI1: {
+		ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
+		if (table) {
+			table->addColumn(wxT("NewCol"),m_pDbAdapter->GetDbTypeByName(wxT("VARCHAR")));
+			table->addColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));
+			table->updateColumns();
+			wxMessageBox(wxT("Column added!"));
+		}
+	}
+	break;
+	case IDR_POPUP_MI2: {
+		if (wxTheClipboard->Open()) {
 			ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
 			if (table) {
-				table->addColumn(wxT("NewCol"),m_pDbAdapter->GetDbTypeByName(wxT("VARCHAR")));
-				table->addColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));
-				table->updateColumns();
-				wxMessageBox(wxT("Column added!"));
+				//TODO:LANG:
+				wxMessageDialog dlg(this,wxT("Add drop table statement?"),wxT("Drop table"),wxYES_NO);
+				bool dropTable = (dlg.ShowModal() == wxID_YES);
+				wxTheClipboard->SetData(new wxTextDataObject(m_pDbAdapter->GetCreateTableSql(table->getTable(), dropTable)));
+				wxTheClipboard->Close();
 			}
 		}
-		break;
-		case IDR_POPUP_MI2: {
-			if (wxTheClipboard->Open()) {
-				ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
-				if (table) {
-					//TODO:LANG:
-					wxMessageDialog dlg(this,wxT("Add drop table statement?"),wxT("Drop table"),wxYES_NO);
-					bool dropTable = (dlg.ShowModal() == wxID_YES);
-					wxTheClipboard->SetData(new wxTextDataObject(m_pDbAdapter->GetCreateTableSql(table->getTable(), dropTable)));
-					wxTheClipboard->Close();
-				}
-			}
-		}
-		break;
+	}
+	break;
 	}
 }
 void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
@@ -128,45 +138,46 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped) {
 	ShapeList::compatibility_iterator node = dropped.GetFirst();
 	dndTableShape* dndTab = NULL;
-	while( node )
-		{
+	while( node ) {
 		dndTab = wxDynamicCast(node->GetData(),dndTableShape);
 		node = node->GetNext();
-		}
-	if (dndTab){
+	}
+	if (dndTab) {
 		ErdTable* table = new ErdTable((Table* ) dndTab->GetUserData());
-		
+
 		wxSFShapeBase* pShape = GetDiagramManager()->AddShape(table, NULL, wxPoint( x,y), sfINITIALIZE, sfDONT_SAVE_STATE);
-			//pShape = GetDiagramManager()->AddShape(CLASSINFO(wxSFRoundRectShape), event.GetPosition(), sfDONT_SAVE_STATE);
-			if (pShape) {
-				pShape->AcceptConnection(wxT("All"));
-				pShape->AcceptSrcNeighbour(wxT("All"));
-				pShape->AcceptTrgNeighbour(wxT("All"));
-				((ErdTable*)pShape)->updateColumns();
-				pShape->Update();
-			}
-		
-		dndTab->SetUserData(NULL);		
+		//pShape = GetDiagramManager()->AddShape(CLASSINFO(wxSFRoundRectShape), event.GetPosition(), sfDONT_SAVE_STATE);
+		if (pShape) {
+			pShape->AcceptConnection(wxT("All"));
+			pShape->AcceptSrcNeighbour(wxT("All"));
+			pShape->AcceptTrgNeighbour(wxT("All"));
+			((ErdTable*)pShape)->updateColumns();
+			pShape->Update();
+		}
+
+		dndTab->SetUserData(NULL);
 		GetDiagramManager()->RemoveShape(dndTab);
 	}
 }
-wxString FrameCanvas::GetSqlScript()
-{
+wxString FrameCanvas::GetSqlScript() {
 	wxString retStr;
-	
+
 	ShapeList lstShapes;
 	GetDiagramManager()->GetShapes( CLASSINFO(ErdTable), lstShapes );
-		
-		// remove all child shapes
+
+	// remove all child shapes
 	ShapeList::compatibility_iterator node = lstShapes.GetFirst();
-	while( node )
-		{
+	while( node ) {
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
-		if (tab){			
+		if (tab) {
 			retStr.append(m_pDbAdapter->GetCreateTableSql(tab->getTable(),true));
 			node = node->GetNext();
-			}	
 		}
+	}
 	return retStr;
+}
+bool FrameCanvas::OnPreConnectionFinished(wxSFLineShape* connection){
+	wxMessageBox(wxT("hotovo"));
+	return true;
 }
 

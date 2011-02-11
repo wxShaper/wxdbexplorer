@@ -45,6 +45,11 @@ ErdTable::~ErdTable()
 void ErdTable::Initialize()
 {
 	SetFill(wxBrush(wxColour(254, 253, 211)));
+	
+	AddConnectionPoint( wxSFConnectionPoint::cpCENTERLEFT );
+	AddConnectionPoint( wxSFConnectionPoint::cpCENTERRIGHT );
+	
+	
 	m_pLabel = new wxSFTextShape();
 	
 	m_pGrid = new wxSFFlexGridShape();

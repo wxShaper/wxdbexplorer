@@ -23,6 +23,8 @@ ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Database table"));
+	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Line"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Foreign key connection"));
+	
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->Realize();
 
@@ -40,6 +42,8 @@ void ErdPanel::OnTool(wxCommandEvent& event) {
 	case IDT_ERD_TABLE:
 		m_nToolMode = modeTABLE;
 		break;
+	case IDT_ERD_LINE:
+		m_nToolMode = modeLine;
 	}
 
 }
@@ -51,6 +55,8 @@ void ErdPanel::OnToolUpdate(wxUpdateUIEvent& event) {
 	case IDT_ERD_TABLE:
 		event.Check(m_nToolMode == modeTABLE);
 		break;
+	case IDT_ERD_LINE:
+		event.Check(m_nToolMode == modeLine);
 	default:
 		event.Skip();
 		break;

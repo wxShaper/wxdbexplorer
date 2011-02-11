@@ -22,13 +22,13 @@
     <File Name="ErdEngine/DnDTableShape.h"/>
     <File Name="ErdEngine/ErdTable.h"/>
     <File Name="ErdEngine/FrameCanvas.h"/>
+    <File Name="Gui/TableSettingsDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Gui">
     <File Name="Gui/DbSettingDialog.cpp"/>
     <File Name="Gui/ErdPanel.cpp"/>
     <File Name="Gui/MysqlConnectionHistory.cpp"/>
     <File Name="Gui/SqlCommandPanel.cpp"/>
-    <File Name="Gui/TableSettingsDialog.cpp"/>
     <File Name="Gui/DbViewerPanel.cpp"/>
     <File Name="Gui/DatabaseExplorerFrame.cpp"/>
     <File Name="Gui/GUI.cpp"/>
