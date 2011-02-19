@@ -35,6 +35,12 @@ public:
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName) = 0;
 	/*! \brief Return Create table sql statement */
 	virtual wxString GetCreateTableSql(Table* tab, bool dropTable) = 0;
+	
+	/*! \brief Return Create database SQL statement. */
+	virtual wxString GetCreateDatabaseSql(const wxString& dbName) = 0;
+	/*! \brief Return Drop table SQL statement. */
+	virtual wxString GetDropTableSql(Table* pTab) = 0;
+	
 
 	virtual void CloseConnection() = 0;
 	

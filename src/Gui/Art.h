@@ -7,6 +7,6 @@
 #include "../res/gui/filesave.xpm"
 #include "../res/gui/filesavesql.xpm"
 #include "../res/gui/fileopen.xpm"
-
+#include "../res/gui/link_editor.xpm"
 
 #endif // ART_H_INCLUDED

@@ -34,6 +34,9 @@ public:
 
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
 	virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
+	virtual wxString GetCreateDatabaseSql(const wxString& dbName);
+	virtual wxString GetDropTableSql(Table* pTab);
+
 
 protected:
 	wxString m_sFileName;

@@ -20,6 +20,8 @@ public:
 	void Load();
 	IDbAdapter* GetDbAdapter() { return m_pDbAdapter; }
 	
+	void RefreshChildren();
+	
 protected:
 	IDbAdapter* m_pDbAdapter;
 	wxString m_serverName;

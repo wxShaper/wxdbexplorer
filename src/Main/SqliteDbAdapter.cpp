@@ -87,7 +87,7 @@ wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& dbName, const wxStrin
 bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (dbLayer){
+	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return NULL;
 		// loading columns
 		//TODO:SQL:
@@ -103,7 +103,7 @@ bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 		dbLayer->CloseResultSet(database);
 		dbLayer->Close();
 		delete dbLayer;
-		
+
 	}
 	return true;
 }
@@ -138,7 +138,7 @@ bool SQLiteDbAdapter::CanConnect() {
 
 void SQLiteDbAdapter::GetDatabases(DbConnection* dbCon) {
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (dbLayer){	
+	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return;
 
 		//TODO:SQL:
@@ -154,8 +154,8 @@ void SQLiteDbAdapter::GetDatabases(DbConnection* dbCon) {
 
 void SQLiteDbAdapter::GetTables(Database* db) {
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (dbLayer){
-	if (!dbLayer->IsOpen()) return;
+	if (dbLayer) {
+		if (!dbLayer->IsOpen()) return;
 		//TODO:SQL:
 		DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='table'"), db->getName().c_str()) );
 		while (tabulky->Next()) {
@@ -165,5 +165,11 @@ void SQLiteDbAdapter::GetTables(Database* db) {
 		dbLayer->Close();
 		delete dbLayer;
 	}
-	
+
+}
+wxString SQLiteDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
+	return wxT("");
+}
+wxString SQLiteDbAdapter::GetDropTableSql(Table* pTab) {
+	return wxT("");
 }

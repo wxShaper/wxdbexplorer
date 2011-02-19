@@ -235,11 +235,11 @@ bool MySqlDbAdapter::CanConnect() {
 	return ((m_serverName != wxT(""))&&(m_userName != wxT("")));
 }
 void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
-	if (dbCon){
+	if (dbCon) {
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-		if (dbLayer){
+		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
-			
+
 			// loading databases
 			//TODO:SQL:
 			DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("SHOW DATABASES"));
@@ -248,16 +248,16 @@ void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 			}
 			dbLayer->CloseResultSet(databaze);
 			dbLayer->Close();
-			delete dbLayer;		
-		}		
+			delete dbLayer;
+		}
 	}
 	return;
 }
 
 void MySqlDbAdapter::GetTables(Database* db) {
-	if (db){
+	if (db) {
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-		if (dbLayer){
+		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
 			// lading tables for database
 			//TODO:SQL:
@@ -271,4 +271,10 @@ void MySqlDbAdapter::GetTables(Database* db) {
 		}
 	}
 	return;
+}
+wxString MySqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
+	return wxString::Format(wxT("CREATE DATABASE `%s`"), dbName.c_str());
+}
+wxString MySqlDbAdapter::GetDropTableSql(Table* pTab) {
+	return wxString::Format(wxT("DROP TABLE `%s`.`%s`"), pTab->getParentName().c_str(),pTab->getName().c_str());
 }

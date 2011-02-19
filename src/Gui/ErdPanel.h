@@ -31,7 +31,12 @@ public:
 
 
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter);
+	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, Table* pTable);
+	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, xsSerializable* pItems);
 	virtual ~ErdPanel();
+	
+	void Init(wxWindow *parent, IDbAdapter* dbAdapter);
+	
 	wxSFShapeCanvas* getCanvas();
 	
 

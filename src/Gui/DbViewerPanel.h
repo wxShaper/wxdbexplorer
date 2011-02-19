@@ -9,6 +9,7 @@
 #include <wx/wx.h>
 #include <wx/hashmap.h>
 #include <wx/aui/aui.h>
+#include <wx/textdlg.h>
 // xpm icons
 #include "../res/gui/folder.xpm"
 #include "../res/gui/form_blue.xpm"
@@ -27,6 +28,8 @@
 #include "../Main/MySqlDbAdapter.h"
 
 #include "../DbEngine/dbitem.h"
+
+#include "Ids.h"
 
 WX_DECLARE_HASH_MAP( wxString, wxTreeItemId, wxStringHash, wxStringEqual, TableHashMap );
 
@@ -59,6 +62,8 @@ public:
 	virtual void OnToolCloseUI(wxUpdateUIEvent& event);
 
 
+	void OnPopupClick(wxCommandEvent &evt);
+
 
 	void RefreshDbView();
 
@@ -73,6 +78,8 @@ protected:
 	wxAuiNotebook* m_pNotebook;
 
 	TableHashMap m_hashTables;
+	Database* m_pEditedDatabase;
+	DbConnection* m_pEditedConnection;
 };
 
 #endif // DBEXPLORERPANEL_H

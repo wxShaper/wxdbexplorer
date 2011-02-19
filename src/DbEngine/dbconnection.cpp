@@ -29,3 +29,10 @@ void DbConnection::Load()
 			m_pDbAdapter->GetDatabases(this);		
 			}
 }
+void DbConnection::RefreshChildren()
+{
+	GetChildrenList().DeleteContents(true);
+	GetChildrenList().Clear();
+	Load();	
+}
+

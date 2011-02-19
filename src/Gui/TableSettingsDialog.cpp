@@ -54,7 +54,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 		if ((constr)&&(constr->GetName() == name)) {
 			m_comboLocalColumn->Clear();
 			m_pEditedConstraint = constr;
-			m_txConstraintName->SetValue(constr->GetName());
+			m_txConstraintName->SetValue(constr->GetName());
 			m_comboLocalColumn->SetValue(constr->GetLocalColumn());
 			if (m_pTable) {
 				SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();

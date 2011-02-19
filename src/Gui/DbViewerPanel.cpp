@@ -75,7 +75,7 @@ void DbViewerPanel::RefreshDbView() {
 					//wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,pDatabase->getName(),-1,-1, new DbItem(pDatabase,NULL));//new DbDatabase(db->getName()));
 					wxTreeItemId dbID = m_treeDatabases->AppendItem(rootID,pDatabase->getName(),-1,-1, new DbItem(pDatabase));//new DbDatabase(db->getName()));
 					m_treeDatabases->Expand(rootID);
-					wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0);
+					wxTreeItemId idFolder = m_treeDatabases->AppendItem(dbID, wxT("Tables"),0,0,NULL);
 					//m_treeDatabases->Expand(dbID);
 
 					// ----------------------------- load tables ----------------------------------
@@ -170,8 +170,46 @@ void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 	}
 }
 void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
-
-
+	//TODO:LANG:nekolikrat
+	m_pEditedDatabase = NULL;
+	m_pEditedConnection = NULL;
+	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
+	wxMenu menu;
+	int c = 0;
+	if (item) {
+		Database* db = wxDynamicCast(item->GetData(),Database);
+		if (db) { 
+			menu.Append(IDR_DBVIEWER_ADD_TABLE,wxT("Add table"),wxT("Run SQL command for creating Table"));
+			c++;
+			menu.AppendSeparator();
+			menu.Append(IDR_DBVIEWER_ERD_DB, wxT("Create ERD from DB"),wxT("Create ERD diagram from database"));
+			c++;
+			m_pEditedDatabase = db;
+			}
+			
+		DbConnection* con = wxDynamicCast(item->GetData(), DbConnection);
+		if (con){
+			menu.Append(IDR_DBVIEWER_ADD_DATABASE, wxT("Add database"),wxT("Run SQL command for create DB"));
+			c++;
+			
+			m_pEditedConnection = con;
+			}
+		}
+		Table* tab = wxDynamicCast(item->GetData(), Table);
+		if (tab){
+			menu.Append(IDR_DBVIEWER_DROP_TABLE,wxT("Drop table"),wxT("Run SQL command for deleting Table"));
+			c++;
+			menu.AppendSeparator();
+			menu.Append(IDR_DBVIEWER_ERD_TABLE, wxT("Create ERD from Table"),wxT("Create ERD diagram from table"));
+			c++;			
+			}
+		
+		
+	if ( c > 0 ) {
+		menu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&DbViewerPanel::OnPopupClick, NULL, this);
+		PopupMenu(&menu);	
+		}
+			
 
 }
 void DbViewerPanel::OnToolCloseClick(wxCommandEvent& event) {
@@ -183,7 +221,8 @@ void DbViewerPanel::OnToolCloseClick(wxCommandEvent& event) {
 		if (pCon) {
 			wxMessageDialog dlg(this,wxT("Close connection?"),wxT("Close"),wxYES_NO);		
 			if (dlg.ShowModal() == wxID_YES){
-				delete pCon;
+				m_pConnections->GetChildrenList().DeleteContents(true);
+				m_pConnections->GetChildrenList().DeleteObject(pCon);				
 				RefreshDbView();				
 				}
 			}
@@ -199,3 +238,89 @@ void DbViewerPanel::OnToolCloseUI(wxUpdateUIEvent& event) {
 		if (pCon) event.Enable(true);		
 		}
 }
+void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
+{
+	try{
+		switch(evt.GetId()) {
+			case IDR_DBVIEWER_ADD_TABLE: {
+				//TODO:LANG:
+				wxString tabName = wxGetTextFromUser(wxT("Table name"),wxT("New table"),wxT("NewTab"));
+				
+				}
+				break;
+			case IDR_DBVIEWER_ADD_DATABASE: {
+				if (m_pEditedConnection){
+					//TODO:LANG:
+					wxString dbName = wxGetTextFromUser(wxT("Database name"), wxT("Add database"));
+					if (!dbName.IsEmpty()){					
+						DatabaseLayer* pDbLayer = m_pEditedConnection->GetDbAdapter()->GetDatabaseLayer();
+						pDbLayer->RunQuery(m_pEditedConnection->GetDbAdapter()->GetCreateDatabaseSql(dbName));
+						pDbLayer->Close();
+						delete pDbLayer;
+						//TODO:LANG:
+						wxMessageBox(wxT("Database created succesfuly"));
+						
+						m_pEditedConnection->RefreshChildren();
+						RefreshDbView();
+						
+						}		
+					}
+				}
+				break;
+			case IDR_DBVIEWER_ERD_TABLE:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
+					if (pTab){
+							m_pNotebook->AddPage(new ErdPanel(this,pTab->GetDbAdapter(),(Table*) pTab->Clone() ),wxT("ERD diagram"),true);
+						}					
+					}
+				}
+				break;
+			case IDR_DBVIEWER_ERD_DB:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
+					if (pDb){
+							m_pNotebook->AddPage(new ErdPanel(this,pDb->getDbAdapter(),(Database*) pDb->Clone() ),wxT("ERD diagram"),true);
+						}					
+					}
+				}
+				break;
+			case IDR_DBVIEWER_DROP_TABLE:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
+					if (pTab){
+						wxMessageDialog dlg(this, wxString::Format(wxT("Remove table '%s'?"),pTab->getName().c_str()),wxT("Drop table"),wxYES_NO);
+						if (dlg.ShowModal() == wxID_YES){
+							DatabaseLayer* pDbLayer = pTab->GetDbAdapter()->GetDatabaseLayer();
+							pDbLayer->RunQuery(pTab->GetDbAdapter()->GetDropTableSql(pTab));
+							pDbLayer->Close();
+							delete pDbLayer;
+							//TODO:LANG:
+							wxMessageBox(wxT("Table dropped succesfuly"));
+							
+							Database* pDb = wxDynamicCast(pTab->GetParent(), Database);
+							if (pDb) pDb->RefreshChildren();
+							RefreshDbView();						
+							}					
+						}					
+					}
+				}
+				break;
+		}
+	}
+	catch (DatabaseLayerException& e)
+	{
+		wxString errorMessage = wxString::Format(_("Error (%d): %s"), e.GetErrorCode(), e.GetErrorMessage().c_str());
+		wxMessageDialog dlg(this,errorMessage,wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
+		dlg.ShowModal();
+	}
+	catch( ... )
+	{
+		wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
+		dlg.ShowModal();
+	}		
+}
+

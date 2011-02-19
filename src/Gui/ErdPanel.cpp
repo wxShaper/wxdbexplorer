@@ -11,6 +11,50 @@ END_EVENT_TABLE()
 ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
+    Init(parent, dbAdapter);
+
+
+}
+ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdPanel(parent) 
+{
+	m_pErdTable = NULL;
+	m_pDbAdapter = dbAdapter;
+	Init(parent, dbAdapter);
+	if (pTable){
+		ErdTable* pErdTab = new ErdTable(pTable);
+		pErdTab->updateColumns();		
+		pErdTab->Refresh();
+		m_diagramManager.AddShape(pErdTab, NULL, wxPoint( 10,10), sfINITIALIZE, sfDONT_SAVE_STATE);
+		}
+}
+
+ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pItems):_ErdPanel(parent) 
+{
+	m_pErdTable = NULL;
+	m_pDbAdapter = dbAdapter;
+	Init(parent, dbAdapter);
+	int i = 10;
+	SerializableList::compatibility_iterator node = pItems->GetFirstChildNode();
+	while( node ){
+		Table* pTable = wxDynamicCast(node->GetData(), Table);
+		if( pTable ) {
+			ErdTable* pErdTab = new ErdTable(pTable);
+			pErdTab->updateColumns();		
+			pErdTab->Refresh();
+			m_diagramManager.AddShape(pErdTab, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
+			i+= 200;
+			}
+		node = node->GetNext();
+		}	
+}
+
+ErdPanel::~ErdPanel() {
+	// delete
+}
+
+
+void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter)
+{
 	m_pFrameCanvas = new FrameCanvas(&m_diagramManager,dbAdapter,m_wxsfPanel,this, wxID_ANY);
 	m_wxsfSizer->Add(m_pFrameCanvas,  1, wxEXPAND, 2);
 	m_wxsfPanel->Layout();
@@ -23,17 +67,12 @@ ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Database table"));
-	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Line"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Foreign key connection"));
+	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Constraint 1:N"), wxBitmap(link_editor_xpm),wxNullBitmap, wxT("Foreign key connection"));
 	
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->Realize();
-
-
 }
 
-ErdPanel::~ErdPanel() {
-	// delete
-}
 void ErdPanel::OnTool(wxCommandEvent& event) {
 	switch(event.GetId()) {
 	case IDT_ERD_TOOL:
@@ -107,4 +146,7 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event)
 		wxMessageBox(wxString::Format(wxT("The chart has been saved to '%s'."), dlg.GetPath().GetData()), wxT("ShapeFramework"));
 	}
 }
+
+
+
 

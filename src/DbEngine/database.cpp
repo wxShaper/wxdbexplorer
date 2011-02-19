@@ -26,8 +26,12 @@ Database::~Database()
 {
 	//delete this->tables;
 }
-
-
-
-
+void Database::RefreshChildren()
+{
+	GetChildrenList().DeleteContents(true);
+	GetChildrenList().Clear();
+	if (m_pDbAdapter){
+		m_pDbAdapter->GetTables(this);
+	}
+}
 

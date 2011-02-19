@@ -32,7 +32,7 @@ void FrameCanvas::OnConnectionFinished(wxSFLineShape* connection) {
 }
 
 void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
-	wxSFShapeBase* pShape;
+	wxSFShapeBase* pShape = NULL;
 
 	switch(m_pParentPanel->GetToolMode()) {
 
@@ -95,7 +95,7 @@ void FrameCanvas::OnKeyDown(wxKeyEvent& event) {
 }
 
 void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
-	void *data=static_cast<wxMenu *>(evt.GetEventObject())->GetClientData();
+	//void *data=static_cast<wxMenu *>(evt.GetEventObject())->GetClientData();
 	switch(evt.GetId()) {
 	case IDR_POPUP_MI1: {
 		ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
