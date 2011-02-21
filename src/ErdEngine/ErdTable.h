@@ -6,9 +6,11 @@
 #include "wx/wxsf/RoundRectShape.h" // Base class: wxSFRoundRectShape
 #include "wx/wxsf/TextShape.h"
 #include "wx/wxsf/FlexGridShape.h"
+#include "wx/wxsf/DiagramManager.h"
 #include "../DbEngine/table.h"
 #include "../DbEngine/constraint.h"
-
+//#include "../ErdEngine/ErdForeignKey.h"
+#include "../ErdEngine/ErdForeignKey.h"
 #include "Gui/Ids.h"
 #include "Interfaces/IDbType.h"
 
@@ -39,6 +41,7 @@ protected:
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
 	void clearGrid();
+	void clearConnections();
 	void addColumnShape(const wxString& colName, int id);
 };
 

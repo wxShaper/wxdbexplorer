@@ -56,7 +56,7 @@ void ErdTable::Initialize()
 	
 	if (m_pLabel){
 		m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
-        m_pLabel->SetHAlign(wxSFShapeBase::halignCENTER);
+        m_pLabel->SetHAlign(wxSFShapeBase::halignEXPAND);
         m_pLabel->SetVBorder(5);
 		m_pLabel->SetHBorder(5);
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
@@ -107,6 +107,12 @@ void ErdTable::DrawNormal(wxDC& dc)
 void ErdTable::updateColumns()
 {	
 	clearGrid();
+	clearConnections();
+	ShapeList list;
+	if (GetShapeManager()){
+		GetShapeManager()->GetShapes(CLASSINFO(ErdTable), list);
+		}
+	
 	int i = 0;
 	
 	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
@@ -120,7 +126,23 @@ void ErdTable::updateColumns()
 			
 		node = tab->GetFirstChildNode();
 		while( node ){
-			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  addColumnShape(wxString::Format(wxT("key: %s"),((Constraint*) node->GetData())->GetName().c_str()),i++);
+			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) ) {
+				ErdTable* pSecondTab = NULL;
+				Constraint* pConstr = wxDynamicCast(node->GetData(), Constraint);
+				addColumnShape(wxString::Format(wxT("key: %s"),pConstr->GetName().c_str()),i++);
+				
+				ShapeList::compatibility_iterator nodeTab = list.GetFirst();
+				while(nodeTab){
+					ErdTable* pTab = wxDynamicCast(nodeTab->GetData(), ErdTable);
+					if (pTab){
+						if (pTab->getTable()->getName() == pConstr->GetRefTable()) pSecondTab = pTab;						
+						}					
+					nodeTab = nodeTab->GetNext();
+					}			
+				if (pSecondTab){
+						GetShapeManager()->CreateConnection(GetId(), pSecondTab->GetId(), new ErdForeignKey(pConstr));					
+					}			
+				} 
 			node = node->GetNext();
 			}
 	}
@@ -152,7 +174,7 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 		m_pCol->SetId(id + constOffset);
 		if (m_pGrid->AppendToGrid(m_pCol)){
 			m_pCol->SetText( wxString::Format(wxT("%s"), colName.c_str()));			
-			m_pCol->SetHAlign(wxSFShapeBase::halignLEFT);
+			m_pCol->SetHAlign(wxSFShapeBase::halignEXPAND);
 			m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
 			//	m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
 			//m_pLabel->SetHAlign(wxSFShapeBase::halignCENTER);
@@ -161,7 +183,7 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 			m_pCol->GetFont().SetPointSize(9);
 
 			
-			m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT);
+			m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT | wxSFConnectionPoint::cpCENTERRIGHT );
 						
 		}else{			
 			delete m_pCol;
@@ -178,5 +200,21 @@ void ErdTable::addColumn(const wxString& colName, IDbType* type)
 	tab->AddColumn(new Column(colName,wxT("New table"),type));
 }
 
-
+void ErdTable::clearConnections()
+{
+	ShapeList lstShapes;
+	GetShapeManager()->GetAssignedConnections(this,CLASSINFO(ErdForeignKey),lineSTARTING ,lstShapes);
+	
+		// remove all child shapes
+	ShapeList::compatibility_iterator node = lstShapes.GetFirst();
+	while( node ) {
+		ErdForeignKey* key = wxDynamicCast(node->GetData(),ErdForeignKey);		
+		if (key){
+			GetShapeManager()->RemoveShape(key);			
+			}
+		node = node->GetNext();
+		}
+	
+	
+}
 

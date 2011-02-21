@@ -54,7 +54,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 		if ((constr)&&(constr->GetName() == name)) {
 			m_comboLocalColumn->Clear();
 			m_pEditedConstraint = constr;
-			m_txConstraintName->SetValue(constr->GetName());
+				m_txConstraintName->SetValue(constr->GetName());
 			m_comboLocalColumn->SetValue(constr->GetLocalColumn());
 			if (m_pTable) {
 				SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
@@ -65,7 +65,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			}
 			m_radioBox1->Select(constr->GetType());
 			m_comboRefTable->SetValue(constr->GetRefTable());
-
+			m_comboRefColumn->SetValue(constr->GetRefCol());
 
 		}
 
@@ -119,6 +119,16 @@ void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 			pType->SetSize(s);
 		}
 	}
+	if (m_pEditedConstraint){
+		m_pEditedConstraint->SetName(m_txConstraintName->GetValue());
+		m_pEditedConstraint->SetLocalColumn(m_comboLocalColumn->GetValue());
+		if (m_radioBox1->GetSelection() == 0) m_pEditedConstraint->SetType(Constraint::primaryKey);
+		if (m_radioBox1->GetSelection() == 1)  m_pEditedConstraint->SetType(Constraint::foreignKey);		
+		if (m_pEditedConstraint->GetType() == Constraint::foreignKey){
+			m_pEditedConstraint->SetRefTable(m_comboRefTable->GetValue());
+			m_pEditedConstraint->SetRefCol(m_comboRefColumn->GetValue());			
+			}
+		}
 	UpdateView();
 }
 void TableSettings::OnTypeSelect(wxCommandEvent& event) {
@@ -169,6 +179,7 @@ void TableSettings::UpdateView() {
 
 	}
 	m_pEditedColumn = NULL;
+	m_pEditedConstraint = NULL;
 	m_txColName->Clear();
 	m_txSize->Clear();
 	m_comboType->SetValue(wxT(""));

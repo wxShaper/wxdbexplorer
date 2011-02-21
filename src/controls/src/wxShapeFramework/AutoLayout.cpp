@@ -20,8 +20,6 @@
 
 #include <math.h>
 
-#define PI 3.14159265
-
 // constructor and destructor //////////////////////////////////////////////////
 
 wxSFAutoLayout::wxSFAutoLayout()
@@ -218,8 +216,8 @@ void wxSFLayoutCircle::DoLayout(ShapeList& shapes)
 	{
 		wxSFShapeBase *pShape = *it;
 		
-		x = nCenter.x + cos( degree * PI / 180 ) * rx;
-		y = nCenter.y + sin( degree * PI / 180 ) * ry;
+		x = nCenter.x + cos( degree * wxSF::PI / 180 ) * rx;
+		y = nCenter.y + sin( degree * wxSF::PI / 180 ) * ry;
 		degree += step;
 		
 		pShape->MoveTo( x, y );
@@ -274,7 +272,7 @@ void wxSFLayoutVerticalTree::ProcessNode(wxSFShapeBase* node, double y)
 		{
 			for( ShapeList::iterator it = lstNeighbours.begin(); it != lstNeighbours.end(); ++it )
 			{
-				ProcessNode( *it, y + rctBB.GetHeight() + m_VSpace );
+				if( ! (*it)->GetParentShape() )	ProcessNode( *it, y + rctBB.GetHeight() + m_VSpace );
 			}
 		}
 	}
@@ -328,7 +326,7 @@ void wxSFLayoutHorizontalTree::ProcessNode(wxSFShapeBase* node, double x)
 		{
 			for( ShapeList::iterator it = lstNeighbours.begin(); it != lstNeighbours.end(); ++it )
 			{
-				ProcessNode( *it, x + rctBB.GetWidth() + m_HSpace );
+				if( ! (*it)->GetParentShape() )	ProcessNode( *it, x + rctBB.GetWidth() + m_HSpace );
 			}
 		}
 	}

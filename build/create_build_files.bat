@@ -22,7 +22,7 @@ rem ========== MS Visual Studio 2005/2008 project files ==========
 rem premake\premake-win32.exe --target vs2005 --wx-version 28 --unicode --with-wx-shared --shared --no-builtin-wchar
 rem premake\premake-win32.exe --target vs2005 --wx-version 28 --unicode --with-wx-shared --shared
 rem premake\premake-win32.exe --target vs2005 --wx-version 28 --unicode --static-runtime --no-builtin-wchar
-premake\premake-win32.exe --target vs2005 --wx-version 28 --unicode --static-runtime --dbl-sqlite --dbl-mysql --dbl-mysql-headers ""
+premake\premake-win32.exe --target vs2005 --wx-version 28 --unicode --static-runtime --dbl-sqlite --dbl-mysql --dbl-mysql-headers "" -dbl-postgresql --dbl-postgresql-headers ""
 echo done...
 echo.
 
