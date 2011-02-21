@@ -1,9 +1,16 @@
 #include "DbSettingDialog.h"
-#include <wx/dblayer/DatabaseLayer.h>
-#include <wx/dblayer/MysqlDatabaseLayer.h>
-#include <wx/dblayer/SqliteDatabaseLayer.h>
-#include <wx/dblayer/DatabaseErrorCodes.h>
-#include <wx/dblayer/DatabaseLayerException.h>
+#include <wx/dblayer/include/DatabaseLayer.h>
+
+#ifdef DBL_USE_MYSQL
+#include <wx/dblayer/include/MysqlDatabaseLayer.h>
+#endif
+
+#ifdef DBL_USE_SQLITE
+#include <wx/dblayer/include/SqliteDatabaseLayer.h>
+#endif
+
+#include <wx/dblayer/include/DatabaseErrorCodes.h>
+#include <wx/dblayer/include/DatabaseLayerException.h>
 
 DbSettingDialog::DbSettingDialog(DbViewerPanel *parent):_DBSettingsDialog(parent) {
 
@@ -30,6 +37,7 @@ void DbSettingDialog::OnCancelClick(wxCommandEvent& event) {
 	Destroy();
 }
 void DbSettingDialog::OnOkClick(wxCommandEvent& event) {
+#ifdef DBL_USE_MYSQL
 	try
 		{
 		//MysqlDatabaseLayer *DbLayer = new MysqlDatabaseLayer(m_txServer->GetValue(),wxT(""),m_txUserName->GetValue(),m_txPassword->GetValue());
@@ -52,8 +60,13 @@ void DbSettingDialog::OnOkClick(wxCommandEvent& event) {
 		wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
 		dlg.ShowModal();
 	} 
+#else
+	wxMessageBox( wxT("MySQL connection is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
+#endif
 }
+
 void DbSettingDialog::OnSqliteOkClick(wxCommandEvent& event) {
+#ifdef DBL_USE_SQLITE
 	try
 		{
 		
@@ -79,7 +92,11 @@ void DbSettingDialog::OnSqliteOkClick(wxCommandEvent& event) {
 		wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
 		dlg.ShowModal();
 	} 
+#else
+	wxMessageBox( wxT("SQLite connection is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
+#endif
 }
+
 void DbSettingDialog::OnHistoruUI(wxUpdateUIEvent& event) {
 	event.Enable( m_listBox2->GetCount() > 0 );
 }

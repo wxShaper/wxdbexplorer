@@ -6,8 +6,12 @@
 #include "../DbEngine/table.h"
 #include "../DbEngine/database.h"
 #include "../DbEngine/databasecol.h"
-#include <wx/dblayer/SqliteDatabaseLayer.h>
-#include <wx/dblayer/DatabaseLayer.h>
+
+#ifdef DBL_USE_SQLITE
+#include <wx/dblayer/include/SqliteDatabaseLayer.h>
+#endif
+
+#include <wx/dblayer/include/DatabaseLayer.h>
 #include "SqliteType.h"
 
 class SQLiteDbAdapter : public IDbAdapter {

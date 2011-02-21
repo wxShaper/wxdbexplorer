@@ -23,9 +23,13 @@ void MySqlDbAdapter::CloseConnection() {
 }
 
 DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
-	DatabaseLayer* dbLayer;
+	DatabaseLayer* dbLayer = NULL;
+	
+	#ifdef DBL_USE_MYSQL
 	if (!CanConnect())  return new MysqlDatabaseLayer();
 	dbLayer = new MysqlDatabaseLayer(this->m_serverName, wxT(""), this->m_userName, this->m_password);
+	#endif
+	
 	return dbLayer;
 }
 

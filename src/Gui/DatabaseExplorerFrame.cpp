@@ -3,13 +3,17 @@
 #include "../Main/BuildNum.h"
 #include "DbViewerPanel.h"
 
-#include <wx/dblayer/DatabaseLayer.h>
-#include <wx/dblayer/MysqlDatabaseLayer.h>
+#include <wx/dblayer/include/DatabaseLayer.h>
+#ifdef DBL_USE_MYSQL
+#include <wx/dblayer/include/MysqlDatabaseLayer.h>
+#endif
 
 DatabaseExplorerFrame::DatabaseExplorerFrame(wxWindow *parent) : _MainFrame(parent)
 {
+	#ifdef DBL_USE_MYSQL
 	DatabaseLayer *db = new MysqlDatabaseLayer();
 	delete db;
+	#endif
 	
 	m_Manager.SetManagedWindow( this );
 

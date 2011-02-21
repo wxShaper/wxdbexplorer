@@ -1,7 +1,11 @@
 #ifndef MYSQLDBADAPTER_H
 #define MYSQLDBADAPTER_H
-#include <wx/dblayer/MysqlDatabaseLayer.h>
-#include <wx/dblayer/DatabaseLayer.h>
+
+#ifdef DBL_USE_MYSQL
+#include <wx/dblayer/include/MysqlDatabaseLayer.h>
+#endif
+
+#include <wx/dblayer/include/DatabaseLayer.h>
 #include <wx/dynarray.h>
 #include "../Interfaces/IDbAdapter.h" // Base class: IDbAdapter
 #include "../Interfaces/IDbType.h"
@@ -44,7 +48,8 @@ protected:
 	wxString m_serverName;
 	wxString m_userName;
 	wxString m_password;
-	MysqlDatabaseLayer* m_pDbLayer;
+
+	DatabaseLayer* m_pDbLayer;
 };
 
 #endif // MYSQLDBADAPTER_H

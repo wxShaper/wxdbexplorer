@@ -8,7 +8,11 @@
 #include <wx/wxsf/DiagramManager.h>
 #include <wx/hashmap.h>
 #include <wx/clipbrd.h>
+
+#ifdef DBL_MYSQL
 #include "../Main/MySqlDbAdapter.h"
+#endif
+
 #include "../Gui/TableSettingsDialog.h"
 #include "../Interfaces/IDbAdapter.h"
 #include "DnDTableShape.h"

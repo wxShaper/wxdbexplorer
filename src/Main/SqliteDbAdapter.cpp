@@ -16,7 +16,12 @@ SQLiteDbAdapter::~SQLiteDbAdapter() {
 void SQLiteDbAdapter::CloseConnection() {
 }
 DatabaseLayer* SQLiteDbAdapter::GetDatabaseLayer() {
-	DatabaseLayer* pDatabase = new SqliteDatabaseLayer(m_sFileName);
+	DatabaseLayer* pDatabase = NULL;
+	
+	#ifdef DBL_USE_SQLITE
+	pDatabase = new SqliteDatabaseLayer(m_sFileName);
+	#endif
+	
 	return pDatabase;
 }
 /*DatabaseCol* SQLiteDbAdapter::GetDatabases() {

@@ -39,6 +39,12 @@ end
 if( ( target == "vs2003" or target == "vs2005" ) and options["no-builtin-wchar"] ) then
 	table.insert(package.buildoptions, "/Zc:wchar_t-")
 end
+if( options["dbl-sqlite"] ) then
+	table.insert( package.defines, "DBL_USE_SQLITE" )
+end
+if( options["dbl-mysql"] ) then
+	table.insert( package.defines, "DBL_USE_MYSQL" )
+end
 
 -- Set the files to include.
 package.files = { matchrecursive( "*.cpp", "*.h", "*.fbp" ) }
@@ -63,7 +69,14 @@ package.config["Debug"].prebuildcommands = { "python $(ProjectPath)/create_build
 
 -- Set the libraries it links to.
 package.links = { "wxPropGrid", "wxScintilla", "wxShapeFramework" }
-table.insert(package.links, { "wxcode_gtk2_databaselayer_mysql-2.8", "wxcode_gtk2_databaselayer_sqlite-2.8" } )
+if( options["dbl-mysql"] ) then
+	table.insert( package.links, "DatabaseLayerMySQL" )
+end
+if( options["dbl-sqlite"] ) then
+	table.insert( package.links, "DatabaseLayerSQLite" )
+end
+
+-- table.insert(package.links, { "wxcode_gtk2_databaselayer_mysql-2.8", "wxcode_gtk2_databaselayer_sqlite-2.8" } )
 
 -- Setup the output directory options.
 --		Note: Use 'libdir' for "lib" kind only.

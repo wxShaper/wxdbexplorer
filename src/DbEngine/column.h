@@ -1,7 +1,7 @@
 #ifndef COLUMN_H
 #define COLUMN_H
 #include <wx/wx.h>
-#include <wx/dblayer/DatabaseResultSet.h>
+#include <wx/dblayer/include/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "Interfaces/IDbAdapter.h"
 #include "Interfaces/IDbType.h"

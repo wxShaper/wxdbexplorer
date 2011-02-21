@@ -2,11 +2,15 @@
 #define SQLCOMMANDPANEL_H
 
 #include <wx/wx.h>
-#include <wx/dblayer/DatabaseLayerException.h>
+#include <wx/dblayer/include/DatabaseLayerException.h>
 #include "GUI.h" // Base class: _SqlCommandPanel
-#include <wx/dblayer/DatabaseLayer.h>
-#include <wx/dblayer/MysqlDatabaseLayer.h>
-#include <wx/dblayer/DatabaseErrorCodes.h>
+#include <wx/dblayer/include/DatabaseLayer.h>
+
+#ifdef DBL_USE_MYSQL
+#include <wx/dblayer/include/MysqlDatabaseLayer.h>
+#endif
+
+#include <wx/dblayer/include/DatabaseErrorCodes.h>
 #include "Interfaces/IDbAdapter.h"
 
 

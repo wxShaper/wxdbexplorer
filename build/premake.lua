@@ -1,5 +1,8 @@
 project.name = "DatabaseExplorer"
 
+addoption( "dbl-sqlite", "Use SQLite connector" )
+addoption( "dbl-mysql", "Use MySQL connector" )
+
 -- Set common output directory
 if ( ( target == "vs2003" ) or ( target == "vs2005" ) ) then
 	project.bindir = "../bin/vc"
@@ -14,7 +17,14 @@ end
 project.configs = { "Release", "Debug" }
 
 -- Add packages here.
+if( options["dbl-sqlite"] ) then
+	dopackage( "dblayer/sqlite" )
+end
+if( options["dbl-mysql"] ) then
+	dopackage( "dblayer/mysql" )
+end
 dopackage( "propgrid" )
 dopackage( "wxScintilla" )
-dopackage( "wxShapeFramework" )dopackage( "../src" )
+dopackage( "wxShapeFramework" )
+dopackage( "../src" )
 

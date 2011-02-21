@@ -3,8 +3,12 @@
 
 #include "GUI.h" // Base class: _DbExplorerPanel
 // database
-#include <wx/dblayer/DatabaseLayer.h>
-#include <wx/dblayer/MysqlDatabaseLayer.h>
+#include <wx/dblayer/include/DatabaseLayer.h>
+
+#ifdef DBL_USE_MYSQL
+#include <wx/dblayer/include/MysqlDatabaseLayer.h>
+#endif
+
 // wx classes
 #include <wx/wx.h>
 #include <wx/hashmap.h>
@@ -24,7 +28,6 @@
 #include "../DbEngine/table.h"
 #include "../DbEngine/column.h"
 #include "../Interfaces/IDbAdapter.h"
-
 #include "../Main/MySqlDbAdapter.h"
 
 #include "../DbEngine/dbitem.h"

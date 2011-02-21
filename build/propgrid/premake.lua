@@ -9,7 +9,7 @@
 
 -- Initialize wxWigets and other presets
 dofile('../premake/scripts/init.lua')
-wx_custom = "_cd"
+wx_custom = "_dbe"
 
 --******* Initial Setup ************
 --*	Most of the setting are set here.
@@ -22,7 +22,11 @@ targetName = "propgrid"
 -- Set the kind of package you want to create.
 --		Options: exe | winexe | lib | dll
 package.kind = "dll"
-package.bindir = "../../bin/gcc/lib"
+if( windows ) then
+	package.bindir = "../../bin/gcc"
+else
+	package.bindir = "../../bin/gcc/lib"
+end
 -- Set the files to include.
 package.files = { matchfiles( "../../src/controls/src/propgrid/*.cpp", "../../src/controls/include/wx/propgrid/*.h") }
 -- Set the include paths.

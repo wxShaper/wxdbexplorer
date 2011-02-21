@@ -194,7 +194,7 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 			
 			m_pEditedConnection = con;
 			}
-		}
+		
 		Table* tab = wxDynamicCast(item->GetData(), Table);
 		if (tab){
 			menu.Append(IDR_DBVIEWER_DROP_TABLE,wxT("Drop table"),wxT("Run SQL command for deleting Table"));
@@ -202,8 +202,8 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 			menu.AppendSeparator();
 			menu.Append(IDR_DBVIEWER_ERD_TABLE, wxT("Create ERD from Table"),wxT("Create ERD diagram from table"));
 			c++;			
-			}
-		
+		}
+	}
 		
 	if ( c > 0 ) {
 		menu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&DbViewerPanel::OnPopupClick, NULL, this);

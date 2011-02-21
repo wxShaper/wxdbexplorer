@@ -4,8 +4,15 @@
 #include "GUI.h" // Base class: _DBSettingsDialog
 #include <wx/wx.h>
 #include "DbViewerPanel.h"
+
+#ifdef DBL_USE_MYSQL
 #include "../Main/MySqlDbAdapter.h"
+#endif
+
+#ifdef DBL_USE_SQLITE
 #include "../Main/SqliteDbAdapter.h"
+#endif
+
 #include "MysqlConnectionHistory.h"
 
 class DbSettingDialog : public _DBSettingsDialog {

@@ -2,7 +2,7 @@
 #define TABLECOL_H
 #include <wx/wx.h>
 #include <wx/dynarray.h>
-#include <wx/dblayer/DatabaseResultSet.h>
+#include <wx/dblayer/include/DatabaseResultSet.h>
 #include "table.h"
 #include "Interfaces/IDbAdapter.h"
 

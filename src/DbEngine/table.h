@@ -2,7 +2,7 @@
 #define TABLE_H
 
 #include <wx/wx.h>
-#include <wx/dblayer/DatabaseResultSet.h>
+#include <wx/dblayer/include/DatabaseResultSet.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
 #include "column.h"
 #include "constraint.h"

@@ -2,7 +2,7 @@
 #define IDBADAPTER_H
 #include <wx/wx.h>
 #include <wx/dynarray.h>
-#include <wx/dblayer/DatabaseLayer.h>
+#include <wx/dblayer/include/DatabaseLayer.h>
 #include "IDbType.h"
 //#include "columncol.h"
 //#include "tablecol.h"

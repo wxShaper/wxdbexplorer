@@ -4,8 +4,14 @@
 #include "GUI.h" // Base class: _AdapterSelectDlg
 #include <wx/wx.h>
 #include <wx/aui/aui.h>
+
+#ifdef DBL_USE_MYSQL
 #include "../Main/MySqlDbAdapter.h"
+#endif
+
+#ifdef DBL_USE_SQLITE
 #include "../Main/SqliteDbAdapter.h"
+#endif
 
 class AdapterSelectDlg : public _AdapterSelectDlg {
 
