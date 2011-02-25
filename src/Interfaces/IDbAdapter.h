@@ -34,8 +34,9 @@ public:
 	/*! \brief Return wxString with defalut SELECT for defined table and db */
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName) = 0;
 	/*! \brief Return Create table sql statement */
-	virtual wxString GetCreateTableSql(Table* tab, bool dropTable) = 0;
-	
+	virtual wxString GetCreateTableSql(Table* tab, bool dropTable) = 0;	
+	/*! \brief Return Create update table SQL statement for adding constraints */
+	virtual wxString GetAlterTableConstraintSql(Table* tab) = 0;
 	/*! \brief Return Create database SQL statement. */
 	virtual wxString GetCreateDatabaseSql(const wxString& dbName) = 0;
 	/*! \brief Return Drop table SQL statement. */

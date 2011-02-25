@@ -44,6 +44,9 @@ public:
 protected:
 	ErdPanel* m_pParentPanel;
 	IDbAdapter* m_pDbAdapter;
+	
+	wxString m_srcCol;
+	wxString m_dstCol;
 
 };
 

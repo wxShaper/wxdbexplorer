@@ -2,6 +2,7 @@
 XS_IMPLEMENT_CLONABLE_CLASS(Constraint,xsSerializable);
 Constraint::Constraint()
 {
+	InitSerializable();
 }
 Constraint::Constraint(const Constraint& obj):xsSerializable(obj)
 {
@@ -10,7 +11,7 @@ Constraint::Constraint(const Constraint& obj):xsSerializable(obj)
 	m_type = obj.m_type;
 	m_refTable = obj.m_refTable;
 	m_refCol = obj.m_refCol;
-	
+	InitSerializable();
 	
 }
 Constraint::Constraint(const wxString& name, const wxString& localColumn, constraintType type)
@@ -18,8 +19,19 @@ Constraint::Constraint(const wxString& name, const wxString& localColumn, constr
 	m_name = name;
 	m_localColumn = localColumn;
 	m_type = type;
+	InitSerializable();
 }
 Constraint::~Constraint()
 {
 }
+
+void Constraint::InitSerializable()
+{
+	XS_SERIALIZE(m_name, wxT("name"));
+	XS_SERIALIZE(m_localColumn, wxT("localColumn"));
+	XS_SERIALIZE_INT(m_type, wxT("type"));
+	XS_SERIALIZE(m_refTable, wxT("refTable"));
+	XS_SERIALIZE(m_refCol, wxT("refCol"));
+}
+
 

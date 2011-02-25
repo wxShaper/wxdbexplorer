@@ -329,4 +329,39 @@ class _TableSettings : public wxDialog
 	
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class _CreateForeignKey
+///////////////////////////////////////////////////////////////////////////////
+class _CreateForeignKey : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText15;
+		wxTextCtrl* m_txSrcTable;
+		wxStaticText* m_staticText17;
+		wxComboBox* m_cmbSrcCol;
+		wxRadioBox* m_radioBox3;
+		wxStaticText* m_staticText16;
+		wxTextCtrl* m_txDstTable;
+		wxStaticText* m_staticText18;
+		wxComboBox* m_cmbDstCol;
+		
+		
+		wxButton* m_btnCancel;
+		wxButton* m_btnOK;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOKUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_CreateForeignKey( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Create foreign key"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_CreateForeignKey();
+	
+};
+
 #endif //__GUI__

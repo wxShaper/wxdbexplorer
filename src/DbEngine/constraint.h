@@ -21,6 +21,7 @@ public:
 	Constraint(const wxString& name, const wxString& localColumn, constraintType type);
 	virtual ~Constraint();
 
+	
 
 
 	void SetLocalColumn(const wxString & localColumn) {
@@ -60,6 +61,8 @@ protected:
 	wxString m_localColumn;
 	wxString m_refTable;
 	wxString m_refCol;
+	
+	void InitSerializable();
 
 };
 

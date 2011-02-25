@@ -2,7 +2,14 @@
 #define ERDFOREIGNKEY_H
 #include <wx/wx.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
+#include <wx/wxsf/TextShape.h>
+#include <wx/wxsf/CircleArrow.h>
+#include <wx/wxsf/SolidArrow.h>
+
 #include "wx/wxsf/OrthoShape.h" // Base class: wxSFOrthoLineShape
+
+#include "../Gui/NArrow.h"
+#include "../Gui/OneArrow.h"
 #include "DbEngine/constraint.h"
 
 class ErdForeignKey : public wxSFOrthoLineShape {

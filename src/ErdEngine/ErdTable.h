@@ -12,6 +12,7 @@
 //#include "../ErdEngine/ErdForeignKey.h"
 #include "../ErdEngine/ErdForeignKey.h"
 #include "Gui/Ids.h"
+#include "../Gui/NArrow.h"
 #include "Interfaces/IDbType.h"
 
 class ErdTable : public wxSFRoundRectShape {

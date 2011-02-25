@@ -17,11 +17,11 @@ void SQLiteDbAdapter::CloseConnection() {
 }
 DatabaseLayer* SQLiteDbAdapter::GetDatabaseLayer() {
 	DatabaseLayer* pDatabase = NULL;
-	
-	#ifdef DBL_USE_SQLITE
+
+#ifdef DBL_USE_SQLITE
 	pDatabase = new SqliteDatabaseLayer(m_sFileName);
-	#endif
-	
+#endif
+
 	return pDatabase;
 }
 /*DatabaseCol* SQLiteDbAdapter::GetDatabases() {
@@ -176,5 +176,8 @@ wxString SQLiteDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxT("");
 }
 wxString SQLiteDbAdapter::GetDropTableSql(Table* pTab) {
+	return wxT("");
+}
+wxString SQLiteDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	return wxT("");
 }

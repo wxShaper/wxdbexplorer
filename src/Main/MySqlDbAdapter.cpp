@@ -2,7 +2,7 @@
 #include "../DbEngine/dbconnection.h"
 #include "../DbEngine/database.h"
 #include "../DbEngine/table.h"
-
+#include "../DbEngine/constraint.h"
 
 MySqlDbAdapter::MySqlDbAdapter() {
 	this->m_serverName = wxT("");
@@ -24,54 +24,18 @@ void MySqlDbAdapter::CloseConnection() {
 
 DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
 	DatabaseLayer* dbLayer = NULL;
-	
-	#ifdef DBL_USE_MYSQL
+
+#ifdef DBL_USE_MYSQL
 	if (!CanConnect())  return new MysqlDatabaseLayer();
 	dbLayer = new MysqlDatabaseLayer(this->m_serverName, wxT(""), this->m_userName, this->m_password);
-	#endif
-	
+#endif
+
 	return dbLayer;
 }
-
-/*TableCol* MySqlDbAdapter::GetTables(const wxString& dbName) {
-	TableCol* tab = new TableCol(dbName);
-
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (!dbLayer->IsOpen()) return NULL;
-	// lading tables for database
-	//TODO:SQL:
-	DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), dbName.c_str()) );
-	while (tabulky->Next()) {
-		tab->AddTable(new Table(this, tabulky->GetResultString(1), dbName, 0));
-	}
-	dbLayer->CloseResultSet(tabulky);
-	dbLayer->Close();
-	delete dbLayer;
-	return tab;
-}*/
 
 bool MySqlDbAdapter::IsConnected() {
 	return this->m_pDbLayer->IsOpen();
 }
-/*DatabaseCol* MySqlDbAdapter::GetDatabases() {
-	DatabaseCol* col = new DatabaseCol();
-
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-
-	if (!dbLayer->IsOpen()) return NULL;
-	// loading databases
-	//TODO:SQL:
-	DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("SHOW DATABASES"));
-	while (databaze->Next()) {
-		//wxString dbName = databaze->GetResultString(1);
-		col->AddDatabase(new Database(this, databaze->GetResultString(1)));
-	}
-	dbLayer->CloseResultSet(databaze);
-	dbLayer->Close();
-	delete dbLayer;
-	return col;
-}*/
-
 
 wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
@@ -86,8 +50,17 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
 		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
+		
+		Constraint* constr = wxDynamicCast(node->GetData(),Constraint);
+		if (constr){
+			if (constr->GetType() == Constraint::primaryKey) str.append(wxString::Format(wxT("\tPRIMARY KEY (`%s`) \n"), constr->GetLocalColumn().c_str()));			
+			}
+		
 		node = node->GetNext();
-		if (node) str.append(wxT(",\n ")) ;
+		if (node) {
+			if ((wxDynamicCast(node->GetData(),Constraint))||(wxDynamicCast(node->GetData(),Column))) str.append(wxT(",\n ")) ;
+			else str.append(wxT("\n ")) ;
+		}
 		else  str.append(wxT("\n ")) ;
 	}
 
@@ -99,7 +72,7 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 			else  str.append(wxT("\n ")) ;
 		}*/
 
-	str.append(wxT(");\n"));
+	str.append(wxT(") ENGINE=INNODB;\n"));
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
 }
@@ -281,4 +254,23 @@ wxString MySqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 }
 wxString MySqlDbAdapter::GetDropTableSql(Table* pTab) {
 	return wxString::Format(wxT("DROP TABLE `%s`.`%s`"), pTab->getParentName().c_str(),pTab->getName().c_str());
+}
+wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
+	//TODO:SQL:
+	wxString str =  wxString::Format(wxT("-- ---------- CONSTRAINTS FOR TABLE `%s` \n"),tab->getName().c_str());
+	str.append(wxT("-- -------------------------------------------------------------\n"));
+	wxString prefix = wxString::Format(wxT("ALTER TABLE `%s` "),tab->getName().c_str());
+	
+	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
+	while( node ) {
+		Constraint* constr = NULL;
+		constr = wxDynamicCast(node->GetData(), Constraint);
+		if (constr){
+			if (constr->GetType() == Constraint::foreignKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` FOREIGN KEY (`%s`) REFERENCES `%s`(`%s`); \n" ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
+			//if (constr->GetType() == Constraint::primaryKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` PRIMARY KEY (`%s`); \n"), constr->GetName().c_str(), constr->GetLocalColumn().c_str()));
+		} 
+		node = node->GetNext();
+	}
+	str.append(wxT("-- -------------------------------------------------------------\n"));
+	return str;
 }

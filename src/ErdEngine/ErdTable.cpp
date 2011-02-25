@@ -48,7 +48,9 @@ void ErdTable::Initialize()
 	
 	AddConnectionPoint( wxSFConnectionPoint::cpCENTERLEFT );
 	AddConnectionPoint( wxSFConnectionPoint::cpCENTERRIGHT );
-	
+	AcceptConnection(wxT("All"));
+	AcceptTrgNeighbour(wxT("All"));
+	AcceptSrcNeighbour(wxT("All"));
 	
 	m_pLabel = new wxSFTextShape();
 	
@@ -83,6 +85,7 @@ void ErdTable::Initialize()
 		m_pGrid->SetHBorder(2);
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
 		SF_ADD_COMPONENT( m_pGrid, wxT("main_grid") );
+	
 		
 		}
 		

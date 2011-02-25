@@ -718,3 +718,104 @@ _TableSettings::~_TableSettings()
 	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 	
 }
+
+_CreateForeignKey::_CreateForeignKey( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer12;
+	fgSizer12 = new wxFlexGridSizer( 2, 3, 0, 0 );
+	fgSizer12->AddGrowableCol( 0 );
+	fgSizer12->AddGrowableCol( 2 );
+	fgSizer12->AddGrowableRow( 0 );
+	fgSizer12->SetFlexibleDirection( wxBOTH );
+	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer7;
+	sbSizer7 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxEmptyString ), wxVERTICAL );
+	
+	m_staticText15 = new wxStaticText( this, wxID_ANY, wxT("Referencing table:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText15->Wrap( -1 );
+	sbSizer7->Add( m_staticText15, 0, wxALL, 5 );
+	
+	m_txSrcTable = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), wxTE_READONLY );
+	sbSizer7->Add( m_txSrcTable, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText17 = new wxStaticText( this, wxID_ANY, wxT("Column:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText17->Wrap( -1 );
+	sbSizer7->Add( m_staticText17, 0, wxALL, 5 );
+	
+	m_cmbSrcCol = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	sbSizer7->Add( m_cmbSrcCol, 0, wxALL, 5 );
+	
+	fgSizer12->Add( sbSizer7, 1, wxEXPAND|wxTOP|wxBOTTOM|wxLEFT, 5 );
+	
+	wxFlexGridSizer* fgSizer121;
+	fgSizer121 = new wxFlexGridSizer( 2, 2, 0, 0 );
+	fgSizer121->SetFlexibleDirection( wxBOTH );
+	fgSizer121->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxString m_radioBox3Choices[] = { wxT("N :1"), wxT("N : M") };
+	int m_radioBox3NChoices = sizeof( m_radioBox3Choices ) / sizeof( wxString );
+	m_radioBox3 = new wxRadioBox( this, wxID_ANY, wxT("Relation"), wxDefaultPosition, wxDefaultSize, m_radioBox3NChoices, m_radioBox3Choices, 1, wxRA_SPECIFY_COLS );
+	m_radioBox3->SetSelection( 0 );
+	fgSizer121->Add( m_radioBox3, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	
+	fgSizer12->Add( fgSizer121, 1, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* sbSizer8;
+	sbSizer8 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxEmptyString ), wxVERTICAL );
+	
+	m_staticText16 = new wxStaticText( this, wxID_ANY, wxT("Referenced table:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText16->Wrap( -1 );
+	sbSizer8->Add( m_staticText16, 0, wxALL, 5 );
+	
+	m_txDstTable = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), wxTE_READONLY );
+	sbSizer8->Add( m_txDstTable, 1, wxALL|wxEXPAND, 5 );
+	
+	m_staticText18 = new wxStaticText( this, wxID_ANY, wxT("Column:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText18->Wrap( -1 );
+	sbSizer8->Add( m_staticText18, 0, wxALL, 5 );
+	
+	m_cmbDstCol = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	sbSizer8->Add( m_cmbDstCol, 0, wxALL, 5 );
+	
+	fgSizer12->Add( sbSizer8, 1, wxEXPAND|wxTOP|wxBOTTOM|wxRIGHT, 5 );
+	
+	
+	fgSizer12->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer12->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer12;
+	bSizer12 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_btnCancel = new wxButton( this, wxID_ANY, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer12->Add( m_btnCancel, 1, wxALL|wxEXPAND, 5 );
+	
+	m_btnOK = new wxButton( this, wxID_ANY, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer12->Add( m_btnOK, 1, wxALL|wxEXPAND, 5 );
+	
+	fgSizer12->Add( bSizer12, 1, wxEXPAND|wxALIGN_RIGHT, 5 );
+	
+	this->SetSizer( fgSizer12 );
+	this->Layout();
+	fgSizer12->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _CreateForeignKey::OnCancelClick ), NULL, this );
+	m_btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _CreateForeignKey::OnOKClick ), NULL, this );
+	m_btnOK->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _CreateForeignKey::OnOKUI ), NULL, this );
+}
+
+_CreateForeignKey::~_CreateForeignKey()
+{
+	// Disconnect Events
+	m_btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _CreateForeignKey::OnCancelClick ), NULL, this );
+	m_btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _CreateForeignKey::OnOKClick ), NULL, this );
+	m_btnOK->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _CreateForeignKey::OnOKUI ), NULL, this );
+	
+}

@@ -802,7 +802,7 @@ void wxSFShapeCanvas::OnLeftDown(wxMouseEvent& event)
 							{
 								m_pManager->RemoveShape( m_pNewLineShape );
 								m_pNewLineShape = NULL;
-								
+								m_nWorkingMode = modeREADY;
 								SaveCanvasState();
 								return;
 							}

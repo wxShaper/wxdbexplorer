@@ -1,3 +1,4 @@
+#include "../CreateForeignKey.h"
 #include "FrameCanvas.h"
 #include "ErdTable.h"
 
@@ -55,6 +56,11 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 	break;
 	case ErdPanel::modeLine: {
 		if (GetMode() == modeREADY) {
+			
+			wxSFTextShape* pText = wxDynamicCast(GetShapeUnderCursor(),wxSFTextShape);
+			if (pText){
+				m_srcCol = pText->GetText().substr(3);
+				} else m_srcCol = wxT("");			
 			StartInteractiveConnection(CLASSINFO(wxSFOrthoLineShape), event.GetPosition());
 		} else wxSFShapeCanvas::OnLeftDown(event);
 	}
@@ -134,6 +140,7 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 				table->updateColumns();
 			}
 	}
+	wxSFShapeCanvas::OnLeftDoubleClick(event);
 }
 void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped) {
 	ShapeList::compatibility_iterator node = dropped.GetFirst();
@@ -165,7 +172,7 @@ wxString FrameCanvas::GetSqlScript() {
 	ShapeList lstShapes;
 	GetDiagramManager()->GetShapes( CLASSINFO(ErdTable), lstShapes );
 
-	// remove all child shapes
+
 	ShapeList::compatibility_iterator node = lstShapes.GetFirst();
 	while( node ) {
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
@@ -173,11 +180,26 @@ wxString FrameCanvas::GetSqlScript() {
 			retStr.append(m_pDbAdapter->GetCreateTableSql(tab->getTable(),true));
 			node = node->GetNext();
 		}
+	}	
+	node = lstShapes.GetFirst();
+	while( node ) {
+		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
+		if (tab) {
+			retStr.append(m_pDbAdapter->GetAlterTableConstraintSql(tab->getTable()));
+			node = node->GetNext();
+		}
 	}
 	return retStr;
 }
 bool FrameCanvas::OnPreConnectionFinished(wxSFLineShape* connection){
-	wxMessageBox(wxT("hotovo"));
-	return true;
+	wxSFTextShape* pText = wxDynamicCast(GetShapeUnderCursor(), wxSFTextShape);
+	if (pText){
+		m_dstCol = pText->GetText().substr(3);
+		}
+	CreateForeignKey dlg(this, wxDynamicCast(GetDiagramManager()->GetItem(connection->GetSrcShapeId()),ErdTable),wxDynamicCast(GetDiagramManager()->GetItem(connection->GetTrgShapeId()),ErdTable),m_srcCol,m_dstCol );
+	dlg.ShowModal();
+	
+	m_pParentPanel->SetToolMode(ErdPanel::modeDESIGN);
+	return false;
 }
 
