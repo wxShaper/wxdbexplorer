@@ -245,6 +245,10 @@ class _ErdPanel : public wxPanel
 		wxToolBar* m_toolBarErd;
 		wxPanel* m_wxsfPanel;
 		wxBoxSizer* m_wxsfSizer;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnMouseWheel( wxMouseEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		

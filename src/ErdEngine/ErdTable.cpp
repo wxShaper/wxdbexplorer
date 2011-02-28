@@ -46,8 +46,8 @@ void ErdTable::Initialize()
 {
 	SetFill(wxBrush(wxColour(254, 253, 211)));
 	
-	AddConnectionPoint( wxSFConnectionPoint::cpCENTERLEFT );
-	AddConnectionPoint( wxSFConnectionPoint::cpCENTERRIGHT );
+	//AddConnectionPoint( wxSFConnectionPoint::cpCENTERLEFT );
+	//AddConnectionPoint( wxSFConnectionPoint::cpCENTERRIGHT );
 	AcceptConnection(wxT("All"));
 	AcceptTrgNeighbour(wxT("All"));
 	AcceptSrcNeighbour(wxT("All"));
@@ -84,6 +84,7 @@ void ErdTable::Initialize()
 		m_pGrid->SetVBorder(2);
 		m_pGrid->SetHBorder(2);
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
+		m_pGrid->Activate(false);
 		SF_ADD_COMPONENT( m_pGrid, wxT("main_grid") );
 	
 		
@@ -184,7 +185,7 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 			m_pCol->SetVBorder(0);
 			m_pCol->SetHBorder(2);
 			m_pCol->GetFont().SetPointSize(9);
-
+			m_pCol->Activate(false);
 			
 			m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT | wxSFConnectionPoint::cpCENTERRIGHT );
 						

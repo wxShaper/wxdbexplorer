@@ -481,10 +481,16 @@ _ErdPanel::_ErdPanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, const
 	
 	this->SetSizer( fgSizer7 );
 	this->Layout();
+	
+	// Connect Events
+	this->Connect( wxEVT_MOUSEWHEEL, wxMouseEventHandler( _ErdPanel::OnMouseWheel ) );
 }
 
 _ErdPanel::~_ErdPanel()
 {
+	// Disconnect Events
+	this->Disconnect( wxEVT_MOUSEWHEEL, wxMouseEventHandler( _ErdPanel::OnMouseWheel ) );
+	
 }
 
 _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -745,7 +751,7 @@ _CreateForeignKey::_CreateForeignKey( wxWindow* parent, wxWindowID id, const wxS
 	m_staticText17->Wrap( -1 );
 	sbSizer7->Add( m_staticText17, 0, wxALL, 5 );
 	
-	m_cmbSrcCol = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	m_cmbSrcCol = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN|wxCB_READONLY ); 
 	sbSizer7->Add( m_cmbSrcCol, 0, wxALL, 5 );
 	
 	fgSizer12->Add( sbSizer7, 1, wxEXPAND|wxTOP|wxBOTTOM|wxLEFT, 5 );
@@ -777,7 +783,7 @@ _CreateForeignKey::_CreateForeignKey( wxWindow* parent, wxWindowID id, const wxS
 	m_staticText18->Wrap( -1 );
 	sbSizer8->Add( m_staticText18, 0, wxALL, 5 );
 	
-	m_cmbDstCol = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	m_cmbDstCol = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN|wxCB_READONLY ); 
 	sbSizer8->Add( m_cmbDstCol, 0, wxALL, 5 );
 	
 	fgSizer12->Add( sbSizer8, 1, wxEXPAND|wxTOP|wxBOTTOM|wxRIGHT, 5 );

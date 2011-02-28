@@ -58,10 +58,13 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 		
 		node = node->GetNext();
 		if (node) {
-			if ((wxDynamicCast(node->GetData(),Constraint))||(wxDynamicCast(node->GetData(),Column))) str.append(wxT(",\n ")) ;
-			else str.append(wxT("\n ")) ;
+			if (wxDynamicCast(node->GetData(),Column)) str.append(wxT(",\n ")) ;
+			else if (constr = wxDynamicCast(node->GetData(),Constraint)) {
+				if (constr->GetType() == Constraint::primaryKey) str.append(wxT(",\n ")) ;
+				}
+
 		}
-		else  str.append(wxT("\n ")) ;
+		//else  str.append(wxT("\n ")) ;
 	}
 
 	/*	Column* col = tab->GetFristColumn();
@@ -72,7 +75,7 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 			else  str.append(wxT("\n ")) ;
 		}*/
 
-	str.append(wxT(") ENGINE=INNODB;\n"));
+	str.append(wxT("\n) ENGINE=INNODB;\n"));
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
 }
@@ -167,6 +170,23 @@ bool MySqlDbAdapter::GetColumns(Table* pTab) {
 			Column* pCol = new Column(database->GetResultString(1),pTab->getName(), pType);
 			pTab->AddChild(pCol);
 		}
+	}
+	dbLayer->CloseResultSet(database);
+	
+	//TODO:SQL:
+	wxString constrSql = wxT("SELECT K.CONSTRAINT_SCHEMA, K.CONSTRAINT_NAME,K.TABLE_NAME,K.COLUMN_NAME,K.REFERENCED_TABLE_NAME,K.REFERENCED_COLUMN_NAME,R.UPDATE_RULE, R.DELETE_RULE FROM information_schema.KEY_COLUMN_USAGE K LEFT JOIN information_schema.REFERENTIAL_CONSTRAINTS R ON R.CONSTRAINT_NAME = K.CONSTRAINT_NAME WHERE K.CONSTRAINT_SCHEMA = '%s' AND K.TABLE_NAME = '%s'");
+	database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->getParentName().c_str(),pTab->getName().c_str()));
+	while (database->Next()){
+		Constraint* constr = new Constraint();
+		constr->SetName(database->GetResultString(wxT("CONSTRAINT_NAME")));
+		constr->SetLocalColumn(database->GetResultString(wxT("COLUMN_NAME")));
+		constr->SetType(Constraint::primaryKey);
+		if (database->GetResultString(wxT("REFERENCED_TABLE_NAME")) != wxT("") ){
+			constr->SetType(Constraint::foreignKey);
+			constr->SetRefTable(database->GetResultString(wxT("REFERENCED_TABLE_NAME")));
+			constr->SetRefCol(database->GetResultString(wxT("REFERENCED_COLUMN_NAME")));			
+			}
+		pTab->AddChild(constr);
 	}
 	dbLayer->CloseResultSet(database);
 	dbLayer->Close();

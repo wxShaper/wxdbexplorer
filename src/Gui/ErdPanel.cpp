@@ -11,41 +11,47 @@ END_EVENT_TABLE()
 ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
-    Init(parent, dbAdapter);
+	Init(parent, dbAdapter);
 
 
 }
-ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdPanel(parent) 
-{
+ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
 	Init(parent, dbAdapter);
-	if (pTable){
+	if (pTable) {
 		ErdTable* pErdTab = new ErdTable(pTable);
-		pErdTab->updateColumns();		
+		pErdTab->updateColumns();
 		pErdTab->Refresh();
 		m_diagramManager.AddShape(pErdTab, NULL, wxPoint( 10,10), sfINITIALIZE, sfDONT_SAVE_STATE);
-		}
+	}
 }
 
-ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pItems):_ErdPanel(parent) 
-{
+ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pItems):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
 	Init(parent, dbAdapter);
 	int i = 10;
 	SerializableList::compatibility_iterator node = pItems->GetFirstChildNode();
-	while( node ){
+	while( node ) {
 		Table* pTable = wxDynamicCast(node->GetData(), Table);
 		if( pTable ) {
 			ErdTable* pErdTab = new ErdTable(pTable);
-			pErdTab->updateColumns();		
-			pErdTab->Refresh();
 			m_diagramManager.AddShape(pErdTab, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
 			i+= 200;
-			}
+		}
 		node = node->GetNext();
-		}	
+	}
+	
+	ShapeList shList;
+	m_diagramManager.GetShapes(CLASSINFO(ErdTable), shList);
+	ShapeList::compatibility_iterator node2 = shList.GetFirst();
+	while( node2 ) {
+		ErdTable* pErdTable = wxDynamicCast(node2->GetData(),ErdTable);
+		if (pErdTable) pErdTable->updateColumns();
+		node2 = node2->GetNext();
+		}
+	
 }
 
 ErdPanel::~ErdPanel() {
@@ -53,8 +59,7 @@ ErdPanel::~ErdPanel() {
 }
 
 
-void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter)
-{
+void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
 	m_pFrameCanvas = new FrameCanvas(&m_diagramManager,dbAdapter,m_wxsfPanel,this, wxID_ANY);
 	m_wxsfSizer->Add(m_pFrameCanvas,  1, wxEXPAND, 2);
 	m_wxsfPanel->Layout();
@@ -68,7 +73,7 @@ void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter)
 	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Database table"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Constraint 1:N"), wxBitmap(link_editor_xpm),wxNullBitmap, wxT("Foreign key connection"));
-	
+
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->Realize();
 }
@@ -122,27 +127,25 @@ void ErdPanel::OnSave(wxCommandEvent& WXUNUSED(event)) {
 }
 
 
-wxSFShapeCanvas* ErdPanel::getCanvas()
-{	
+wxSFShapeCanvas* ErdPanel::getCanvas() {
 	return m_pFrameCanvas;
 }
 
-void ErdPanel::OnSaveSql(wxCommandEvent& event)
-{
+void ErdPanel::OnSaveSql(wxCommandEvent& event) {
 	wxFileDialog dlg(this, wxT("Save SQL create query..."), wxGetCwd(), wxT(""), wxT("SQL Files (*.sql)|*.sql"), wxSAVE | wxFD_OVERWRITE_PROMPT);
 
 	if(dlg.ShowModal() == wxID_OK) {
 		wxTextFile file(dlg.GetPath());
 		if (!file.Exists()) file.Create();
 		file.Open();
-		if (file.IsOpened()){
+		if (file.IsOpened()) {
 			file.Clear();
 			file.AddLine(wxT("-- SQL script created by DatabaseExplorer "));
 			file.AddLine(wxT(""));
-			file.AddLine(m_pFrameCanvas->GetSqlScript());	
+			file.AddLine(m_pFrameCanvas->GetSqlScript());
 			file.Write();
 			file.Close();
-			}			
+		}
 		wxMessageBox(wxString::Format(wxT("The chart has been saved to '%s'."), dlg.GetPath().GetData()), wxT("ShapeFramework"));
 	}
 }
@@ -150,3 +153,9 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event)
 
 
 
+void ErdPanel::OnMouseWheel(wxMouseEvent& event) {
+	
+	
+	
+	
+}

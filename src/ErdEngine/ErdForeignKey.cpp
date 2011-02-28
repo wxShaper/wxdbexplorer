@@ -21,6 +21,9 @@ ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFOrthoLineShape()
 	
 	AddChild(pLabel);
 
+	RemoveHandle(wxSFShapeHandle::hndLINESTART);
+	RemoveHandle(wxSFShapeHandle::hndLINEEND);
+
 	SetTrgArrow(CLASSINFO(OneArrow));
 	SetSrcArrow(CLASSINFO(NArrow));
 	

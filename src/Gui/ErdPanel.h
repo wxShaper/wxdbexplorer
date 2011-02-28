@@ -5,6 +5,7 @@
 #include <wx/wx.h>
 #include <wx/textfile.h>
 #include "wx/wxsf/wxShapeFramework.h"
+#include "wx/wxsf/ShapeBase.h"
 #include "../ErdEngine/FrameCanvas.h"
 #include "Art.h"
 #include "Ids.h"
@@ -34,18 +35,20 @@ public:
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, Table* pTable);
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, xsSerializable* pItems);
 	virtual ~ErdPanel();
-	
+
 	void Init(wxWindow *parent, IDbAdapter* dbAdapter);
-	
+
+
+
 	wxSFShapeCanvas* getCanvas();
-	
+
 
 
 protected:
 	wxSFDiagramManager m_diagramManager;
 	FrameCanvas* m_pFrameCanvas;
 	ErdTable* m_pErdTable;
-	
+
 	IDbAdapter* m_pDbAdapter;
 
 	MODE m_nToolMode;
@@ -56,6 +59,8 @@ protected:
 	void OnLoad(wxCommandEvent& WXUNUSED(event));
 	void OnSave(wxCommandEvent& WXUNUSED(event));
 	void OnSaveSql(wxCommandEvent& WXUNUSED(event));
+	virtual void OnMouseWheel(wxMouseEvent& event);
+	
 
 	DECLARE_EVENT_TABLE();
 
