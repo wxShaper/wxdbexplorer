@@ -368,4 +368,27 @@ class _CreateForeignKey : public wxDialog
 	
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class _LogDialog
+///////////////////////////////////////////////////////////////////////////////
+class _LogDialog : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxTextCtrl* m_textCtrl11;
+		wxButton* m_button18;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnCloseClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnCloseUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_LogDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Database log"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_LogDialog();
+	
+};
+
 #endif //__GUI__

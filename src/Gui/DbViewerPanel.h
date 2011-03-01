@@ -14,6 +14,8 @@
 #include <wx/hashmap.h>
 #include <wx/aui/aui.h>
 #include <wx/textdlg.h>
+#include <wx/txtstrm.h>
+
 // xpm icons
 #include "../res/gui/folder.xpm"
 #include "../res/gui/form_blue.xpm"
@@ -83,6 +85,9 @@ protected:
 	TableHashMap m_hashTables;
 	Database* m_pEditedDatabase;
 	DbConnection* m_pEditedConnection;
+	
+	
+	bool ImportDb(const wxString& sqlFile, Database* pDb);
 };
 
 #endif // DBEXPLORERPANEL_H

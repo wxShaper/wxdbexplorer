@@ -24,9 +24,6 @@ ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFOrthoLineShape()
 	RemoveHandle(wxSFShapeHandle::hndLINESTART);
 	RemoveHandle(wxSFShapeHandle::hndLINEEND);
 
-	SetTrgArrow(CLASSINFO(OneArrow));
-	SetSrcArrow(CLASSINFO(NArrow));
-	
 	SetDockPoint(INT_MAX);
 	
 	

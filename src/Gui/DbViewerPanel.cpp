@@ -184,6 +184,12 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 			menu.AppendSeparator();
 			menu.Append(IDR_DBVIEWER_ERD_DB, wxT("Create ERD from DB"),wxT("Create ERD diagram from database"));
 			c++;
+			menu.AppendSeparator();
+			menu.Append(IDR_DBVIEWER_IMPORT_DATABASE, wxT("Import database from file"), wxT("Run SQL commands stored in *.sql file"));
+			menu.Append(IDR_DBVIEWER_EXPORT_DATABASE, wxT("Export database to file"), wxT("Export database CREATE SQL statements into *.sql file"));
+			c++;
+
+			c++;
 			m_pEditedDatabase = db;
 			}
 			
@@ -309,6 +315,23 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					}
 				}
 				break;
+			case IDR_DBVIEWER_IMPORT_DATABASE:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
+					if (pDb){				
+						wxFileDialog dlg(this, wxT("Import database from SQL file ..."), wxGetCwd(), wxT(""), wxT("SQL Files (*.sql)|*.sql"), wxOPEN | wxFILE_MUST_EXIST);
+						if(dlg.ShowModal() == wxID_OK) {							
+							ImportDb(dlg.GetPath(), pDb);
+							}				
+						}			
+					}
+				}
+				break;			
+			default:{
+				wxMessageBox(wxT("Sorry, requested feature isn't implemented yet. "),wxT("Sorry"));
+				}
+				break;
 		}
 	}
 	catch (DatabaseLayerException& e)
@@ -322,5 +345,50 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 		wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
 		dlg.ShowModal();
 	}		
+}
+
+bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
+{
+	DatabaseLayer* pDbLayer = NULL;
+	try{
+		pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
+		pDbLayer->BeginTransaction();
+		pDbLayer->RunQuery(wxT(" INSERT INTO `Kozlikova`.`Adresy` (`Jmeno`,`Adresa`) VALUES ('Pavel2','Zlin')"));
+		pDbLayer->RunQuery(wxT(" INSERT INTO `Kozlikova`.`Adresy` (`Jmeno`,`Adresa`) VALUES ('Pavel3','Zlin')"));
+		pDbLayer->RunQuery(wxT(" INSERT INTO `Kozlikova`.`Adresy` (`Jmeno`,`Adresa`) VALUES ('Pavel4','Zlin')"));
+		//pDbLayer->RollBack();	
+		pDbLayer->Commit();
+		pDbLayer->Close();
+		}
+	catch (DatabaseLayerException& e)
+	{
+		if (pDbLayer){
+			pDbLayer->RollBack();
+			pDbLayer->Close();
+			}
+		wxString errorMessage = wxString::Format(_("Error (%d): %s"), e.GetErrorCode(), e.GetErrorMessage().c_str());
+		wxMessageDialog dlg(this,errorMessage,wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
+		dlg.ShowModal();
+	}
+	catch( ... )
+	{
+		if (pDbLayer){
+			pDbLayer->RollBack();
+			pDbLayer->Close();
+			}
+		wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
+		dlg.ShowModal();
+	}	
+	
+	/*wxFileInputStream input(sqlFile);
+	wxTextInputStream text( input );	
+	text.SetStringSeparators(wxT(";"));
+	
+	while (!input.Eof()){
+		
+		
+		
+		}*/
+		return false;
 }
 

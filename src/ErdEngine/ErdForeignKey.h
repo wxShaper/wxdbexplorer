@@ -18,6 +18,9 @@ public:
 	ErdForeignKey();
 	ErdForeignKey(const ErdForeignKey& obj);
 	ErdForeignKey(Constraint* pConstraint);
+	
+	
+	
 	virtual ~ErdForeignKey();
 
 protected:

@@ -825,3 +825,47 @@ _CreateForeignKey::~_CreateForeignKey()
 	m_btnOK->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _CreateForeignKey::OnOKUI ), NULL, this );
 	
 }
+
+_LogDialog::_LogDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer13;
+	fgSizer13 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer13->SetFlexibleDirection( wxBOTH );
+	fgSizer13->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer9;
+	sbSizer9 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Log") ), wxVERTICAL );
+	
+	m_textCtrl11 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,400 ), wxTE_MULTILINE|wxTE_READONLY );
+	sbSizer9->Add( m_textCtrl11, 0, wxALL, 5 );
+	
+	fgSizer13->Add( sbSizer9, 1, wxEXPAND|wxALL, 5 );
+	
+	wxBoxSizer* bSizer13;
+	bSizer13 = new wxBoxSizer( wxVERTICAL );
+	
+	m_button18 = new wxButton( this, wxID_ANY, wxT("Close"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer13->Add( m_button18, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	fgSizer13->Add( bSizer13, 1, wxEXPAND|wxBOTTOM, 5 );
+	
+	this->SetSizer( fgSizer13 );
+	this->Layout();
+	fgSizer13->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_button18->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _LogDialog::OnCloseClick ), NULL, this );
+	m_button18->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _LogDialog::OnCloseUI ), NULL, this );
+}
+
+_LogDialog::~_LogDialog()
+{
+	// Disconnect Events
+	m_button18->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _LogDialog::OnCloseClick ), NULL, this );
+	m_button18->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _LogDialog::OnCloseUI ), NULL, this );
+	
+}
