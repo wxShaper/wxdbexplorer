@@ -838,7 +838,7 @@ _LogDialog::_LogDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	wxStaticBoxSizer* sbSizer9;
 	sbSizer9 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Log") ), wxVERTICAL );
 	
-	m_textCtrl11 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,400 ), wxTE_MULTILINE|wxTE_READONLY );
+	m_textCtrl11 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 600,400 ), wxTE_MULTILINE|wxTE_READONLY );
 	sbSizer9->Add( m_textCtrl11, 0, wxALL, 5 );
 	
 	fgSizer13->Add( sbSizer9, 1, wxEXPAND|wxALL, 5 );

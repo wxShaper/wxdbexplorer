@@ -31,6 +31,8 @@ public:
 	virtual bool GetColumns(Table* pTab) = 0;
 	
 	
+	/*! \brief Return wxString with USE DB statement for dbName */
+	virtual wxString GetUseDb(const wxString& dbName) = 0;
 	/*! \brief Return wxString with defalut SELECT for defined table and db */
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName) = 0;
 	/*! \brief Return Create table sql statement */
@@ -41,7 +43,8 @@ public:
 	virtual wxString GetCreateDatabaseSql(const wxString& dbName) = 0;
 	/*! \brief Return Drop table SQL statement. */
 	virtual wxString GetDropTableSql(Table* pTab) = 0;
-	
+	/*! \brief Return Drop database SQL statement. */
+	virtual wxString GetDropDatabaseSql(Database* pDb) = 0;	
 
 	virtual void CloseConnection() = 0;
 	

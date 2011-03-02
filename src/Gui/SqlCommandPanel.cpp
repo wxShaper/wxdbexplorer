@@ -4,7 +4,7 @@
 #include "SqlCommandPanel.h"
 #include "DatabaseExplorerFrame.h"
 
-SQLCommandPanel::SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  wxString& dbName, wxString& dbTable) : _SqlCommandPanel(parent)
+SQLCommandPanel::SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  const wxString& dbName, const wxString& dbTable) : _SqlCommandPanel(parent)
 {
 	DatabaseExplorerFrame::InitStyledTextCtrl( m_scintillaSQL );
 	m_pDbAdapter = dbAdapter;
@@ -14,8 +14,10 @@ SQLCommandPanel::SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  wxStri
 	//TODO:SQL:
 	//m_scintillaSQL->AddText(wxT("-- selected database ") + m_dbName);
 	m_scintillaSQL->AddText(wxString::Format(wxT(" -- selected database %s\n"), m_dbName.c_str()));
-	m_scintillaSQL->AddText(m_pDbAdapter->GetDefaultSelect(m_dbName, m_dbTable));
-	ExecuteSql();
+	if (!dbTable.IsEmpty()){
+		m_scintillaSQL->AddText(m_pDbAdapter->GetDefaultSelect(m_dbName, m_dbTable));
+		ExecuteSql();	
+	}
 }
 
 SQLCommandPanel::~SQLCommandPanel()
@@ -43,6 +45,7 @@ void SQLCommandPanel::ExecuteSql()
 			//TODO:SQL:
 			//m_pDbLayer->RunQuery(wxT("USE ")+ m_dbName);
 			try {
+				m_pDbLayer->RunQuery(m_pDbAdapter->GetUseDb(m_dbName));
 				// run query
 				DatabaseResultSet* pResultSet = m_pDbLayer->RunQueryWithResults(this->m_scintillaSQL->GetText());
 				// clear variables

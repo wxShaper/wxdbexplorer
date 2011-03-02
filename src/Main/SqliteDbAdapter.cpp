@@ -181,3 +181,9 @@ wxString SQLiteDbAdapter::GetDropTableSql(Table* pTab) {
 wxString SQLiteDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	return wxT("");
 }
+wxString SQLiteDbAdapter::GetDropDatabaseSql(Database* pDb) {
+	return wxT("");
+}
+wxString SQLiteDbAdapter::GetUseDb(const wxString& dbName) {
+	return wxT("");
+}

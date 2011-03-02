@@ -18,7 +18,7 @@ class SQLCommandPanel : public _SqlCommandPanel
 {
 
 public:
-	SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  wxString& dbName, wxString& dbTable);
+	SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter, const wxString& dbName,const wxString& dbTable);
 	virtual ~SQLCommandPanel();
 	virtual void OnExecuteClick(wxCommandEvent& event);
 	virtual void OnScintilaKeyDown(wxKeyEvent& event);

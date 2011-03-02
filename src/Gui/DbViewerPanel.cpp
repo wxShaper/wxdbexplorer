@@ -4,6 +4,7 @@
 #include "ErdPanel.h"
 #include "AdapterSelectDlg.h"
 
+#include <wx/wfstream.h>
 #include <wx/propgrid/propgrid.h>
 #include <wx/imaglist.h>
 DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewerPanel(parent) {
@@ -34,7 +35,15 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 			wxString dbName = tab->getParentName();
 			wxString dbTable = tab->getName();
 			m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter(),dbName,dbTable),dbName,true);			
-			}		
+			}	
+		if (Database* db = wxDynamicCast(item->GetData(), Database)){
+			wxMouseState cState = wxGetMouseState();
+			if( cState.ControlDown() ){
+				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,db->getDbAdapter(),db),db->getName(),true);
+			}else{
+				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,db->getDbAdapter(),db->getName(),wxT("")),db->getName(),true);	
+				}
+			}	
 		}
 	
 	
@@ -47,6 +56,18 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 	}*/
 }
 void DbViewerPanel::OnRefreshClick(wxCommandEvent& event) {
+	
+	DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+	if (data){
+		DbConnection* pCon = wxDynamicCast(data->GetData(), DbConnection);
+		if (pCon) pCon->RefreshChildren();
+		Database* pDb = wxDynamicCast(data->GetData(),Database);
+		if (pDb) pDb->RefreshChildren();
+		Table* pTab = wxDynamicCast(data->GetData(), Table);
+		if (pTab) pTab->RefreshChildren();
+		
+		}
+	
 	RefreshDbView();
 }
 void DbViewerPanel::RefreshDbView() {
@@ -180,6 +201,7 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 		Database* db = wxDynamicCast(item->GetData(),Database);
 		if (db) { 
 			menu.Append(IDR_DBVIEWER_ADD_TABLE,wxT("Add table"),wxT("Run SQL command for creating Table"));
+			menu.Append(IDR_DBVIEWER_DROP_DATABASE, wxT("Drop database"), wxT("Run SQL command for deleting Database"));
 			c++;
 			menu.AppendSeparator();
 			menu.Append(IDR_DBVIEWER_ERD_DB, wxT("Create ERD from DB"),wxT("Create ERD diagram from database"));
@@ -196,6 +218,7 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 		DbConnection* con = wxDynamicCast(item->GetData(), DbConnection);
 		if (con){
 			menu.Append(IDR_DBVIEWER_ADD_DATABASE, wxT("Add database"),wxT("Run SQL command for create DB"));
+			
 			c++;
 			
 			m_pEditedConnection = con;
@@ -270,6 +293,28 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 						RefreshDbView();
 						
 						}		
+					}
+				}
+				break;
+			case IDR_DBVIEWER_DROP_DATABASE:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
+					if (pDb){
+						wxMessageDialog dlg(this, wxString::Format(wxT("Remove database '%s'?"),pDb->getName().c_str()),wxT("Drop database"),wxYES_NO);
+						if (dlg.ShowModal() == wxID_YES){
+							DatabaseLayer* pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
+							pDbLayer->RunQuery(pDb->getDbAdapter()->GetDropDatabaseSql(pDb));
+							pDbLayer->Close();
+							delete pDbLayer;
+							//TODO:LANG:
+							wxMessageBox(wxT("Database dropped succesfuly"));
+							
+							DbConnection* pCon = wxDynamicCast(pDb->GetParent(), DbConnection);
+							if (pCon) pCon->RefreshChildren();
+							RefreshDbView();	
+							}						
+						}			
 					}
 				}
 				break;
@@ -350,13 +395,33 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 {
 	DatabaseLayer* pDbLayer = NULL;
+	LogDialog dialog(this);
+	dialog.Show();
+	
 	try{
+		wxFileInputStream input(sqlFile);
+		wxTextInputStream text( input );	
+		text.SetStringSeparators(wxT(";"));
+		wxString command = wxT("");
 		pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
 		pDbLayer->BeginTransaction();
-		pDbLayer->RunQuery(wxT(" INSERT INTO `Kozlikova`.`Adresy` (`Jmeno`,`Adresa`) VALUES ('Pavel2','Zlin')"));
-		pDbLayer->RunQuery(wxT(" INSERT INTO `Kozlikova`.`Adresy` (`Jmeno`,`Adresa`) VALUES ('Pavel3','Zlin')"));
-		pDbLayer->RunQuery(wxT(" INSERT INTO `Kozlikova`.`Adresy` (`Jmeno`,`Adresa`) VALUES ('Pavel4','Zlin')"));
-		//pDbLayer->RollBack();	
+		pDbLayer->RunQuery(wxString::Format(wxT("USE %s"), pDb->getName().c_str()));
+	
+		while (!input.Eof()){
+			wxString line = text.ReadLine();			
+			//dialog.AppendText(line);
+			int index = line.Find(wxT("--"));
+			if (index != wxNOT_FOUND) line = line.Mid(0,index);
+			command.append(line);
+			if (line.Find(wxT(";")) != wxNOT_FOUND){
+				dialog.AppendSeparator();
+				dialog.AppendComment(wxT("Run SQL command:"));
+				dialog.AppendText(command);		
+				pDbLayer->RunQuery(command);
+				dialog.AppendComment(wxT("Succesful!"));			
+				command.clear();				
+				} 	
+			}	
 		pDbLayer->Commit();
 		pDbLayer->Close();
 		}
@@ -367,6 +432,9 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 			pDbLayer->Close();
 			}
 		wxString errorMessage = wxString::Format(_("Error (%d): %s"), e.GetErrorCode(), e.GetErrorMessage().c_str());
+		
+		dialog.AppendComment(wxT("Fail!"));
+		dialog.AppendComment(errorMessage);		
 		wxMessageDialog dlg(this,errorMessage,wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
 		dlg.ShowModal();
 	}
@@ -379,16 +447,10 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 		wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
 		dlg.ShowModal();
 	}	
-	
-	/*wxFileInputStream input(sqlFile);
-	wxTextInputStream text( input );	
-	text.SetStringSeparators(wxT(";"));
-	
-	while (!input.Eof()){
-		
-		
-		
-		}*/
-		return false;
+	dialog.EnableClose(true);
+	dialog.ShowModal();
+
+
+	return false;
 }
 

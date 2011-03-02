@@ -31,8 +31,8 @@
 #include "../DbEngine/column.h"
 #include "../Interfaces/IDbAdapter.h"
 #include "../Main/MySqlDbAdapter.h"
-
 #include "../DbEngine/dbitem.h"
+#include "../Gui/LogDialog.h"
 
 #include "Ids.h"
 

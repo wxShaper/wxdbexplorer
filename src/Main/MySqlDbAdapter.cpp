@@ -50,18 +50,18 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
 		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
-		
+
 		Constraint* constr = wxDynamicCast(node->GetData(),Constraint);
-		if (constr){
-			if (constr->GetType() == Constraint::primaryKey) str.append(wxString::Format(wxT("\tPRIMARY KEY (`%s`) \n"), constr->GetLocalColumn().c_str()));			
-			}
-		
+		if (constr) {
+			if (constr->GetType() == Constraint::primaryKey) str.append(wxString::Format(wxT("\tPRIMARY KEY (`%s`) \n"), constr->GetLocalColumn().c_str()));
+		}
+
 		node = node->GetNext();
 		if (node) {
 			if (wxDynamicCast(node->GetData(),Column)) str.append(wxT(",\n ")) ;
 			else if (constr = wxDynamicCast(node->GetData(),Constraint)) {
 				if (constr->GetType() == Constraint::primaryKey) str.append(wxT(",\n ")) ;
-				}
+			}
 
 		}
 		//else  str.append(wxT("\n ")) ;
@@ -172,20 +172,20 @@ bool MySqlDbAdapter::GetColumns(Table* pTab) {
 		}
 	}
 	dbLayer->CloseResultSet(database);
-	
+
 	//TODO:SQL:
-	wxString constrSql = wxT("SELECT K.CONSTRAINT_SCHEMA, K.CONSTRAINT_NAME,K.TABLE_NAME,K.COLUMN_NAME,K.REFERENCED_TABLE_NAME,K.REFERENCED_COLUMN_NAME,R.UPDATE_RULE, R.DELETE_RULE FROM information_schema.KEY_COLUMN_USAGE K LEFT JOIN information_schema.REFERENTIAL_CONSTRAINTS R ON R.CONSTRAINT_NAME = K.CONSTRAINT_NAME WHERE K.CONSTRAINT_SCHEMA = '%s' AND K.TABLE_NAME = '%s'");
+	wxString constrSql = wxT("SELECT K.CONSTRAINT_SCHEMA, K.CONSTRAINT_NAME,K.TABLE_NAME,K.COLUMN_NAME,K.REFERENCED_TABLE_NAME,K.REFERENCED_COLUMN_NAME,R.UPDATE_RULE, R.DELETE_RULE FROM information_schema.KEY_COLUMN_USAGE K LEFT JOIN information_schema.REFERENTIAL_CONSTRAINTS R ON R.CONSTRAINT_NAME = K.CONSTRAINT_NAME AND K.CONSTRAINT_SCHEMA = R.CONSTRAINT_SCHEMA WHERE K.CONSTRAINT_SCHEMA = '%s' AND K.TABLE_NAME = '%s'");
 	database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->getParentName().c_str(),pTab->getName().c_str()));
-	while (database->Next()){
+	while (database->Next()) {
 		Constraint* constr = new Constraint();
 		constr->SetName(database->GetResultString(wxT("CONSTRAINT_NAME")));
 		constr->SetLocalColumn(database->GetResultString(wxT("COLUMN_NAME")));
 		constr->SetType(Constraint::primaryKey);
-		if (database->GetResultString(wxT("REFERENCED_TABLE_NAME")) != wxT("") ){
+		if (database->GetResultString(wxT("REFERENCED_TABLE_NAME")) != wxT("") ) {
 			constr->SetType(Constraint::foreignKey);
 			constr->SetRefTable(database->GetResultString(wxT("REFERENCED_TABLE_NAME")));
-			constr->SetRefCol(database->GetResultString(wxT("REFERENCED_COLUMN_NAME")));			
-			}
+			constr->SetRefCol(database->GetResultString(wxT("REFERENCED_COLUMN_NAME")));
+		}
 		pTab->AddChild(constr);
 	}
 	dbLayer->CloseResultSet(database);
@@ -280,17 +280,23 @@ wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	wxString str =  wxString::Format(wxT("-- ---------- CONSTRAINTS FOR TABLE `%s` \n"),tab->getName().c_str());
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	wxString prefix = wxString::Format(wxT("ALTER TABLE `%s` "),tab->getName().c_str());
-	
+
 	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 	while( node ) {
 		Constraint* constr = NULL;
 		constr = wxDynamicCast(node->GetData(), Constraint);
-		if (constr){
+		if (constr) {
 			if (constr->GetType() == Constraint::foreignKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` FOREIGN KEY (`%s`) REFERENCES `%s`(`%s`); \n" ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
 			//if (constr->GetType() == Constraint::primaryKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` PRIMARY KEY (`%s`); \n"), constr->GetName().c_str(), constr->GetLocalColumn().c_str()));
-		} 
+		}
 		node = node->GetNext();
 	}
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
+}
+wxString MySqlDbAdapter::GetDropDatabaseSql(Database* pDb) {
+	return wxString::Format(wxT("DROP DATABASE `%s`"),pDb->getName().c_str());
+}
+wxString MySqlDbAdapter::GetUseDb(const wxString& dbName) {
+	return wxString::Format(wxT("USE `%s`"),dbName.c_str());
 }

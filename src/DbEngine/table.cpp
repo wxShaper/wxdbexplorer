@@ -46,4 +46,11 @@ void Table::initSerializable()
 	XS_SERIALIZE(m_lstChildItems,wxT("columns"));
 
 }
-
+void Table::RefreshChildren()
+{
+	GetChildrenList().DeleteContents(true);
+	GetChildrenList().Clear();
+	if (m_pDbAdapter){
+		m_pDbAdapter->GetColumns(this);
+	}
+}

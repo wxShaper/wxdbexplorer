@@ -32,7 +32,7 @@ public:
 	wxString getName() { return this->m_name; }
 	// nazev rodicovskeho prvku - databaze
 	wxString getParentName() { return this->m_parentName; }
-	
+	void RefreshChildren();
 	void setName(const wxString& name) ;
 	
 	// pocet radku

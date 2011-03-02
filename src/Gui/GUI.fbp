@@ -8535,7 +8535,7 @@
                                 <property name="resize">Resizable</property>
                                 <property name="row"></property>
                                 <property name="show">1</property>
-                                <property name="size">300,400</property>
+                                <property name="size">600,400</property>
                                 <property name="style">wxTE_MULTILINE|wxTE_READONLY</property>
                                 <property name="subclass"></property>
                                 <property name="toolbar_pane">0</property>

@@ -1,4 +1,4 @@
-#include "../CreateForeignKey.h"
+#include "../Gui/CreateForeignKey.h"
 #include "FrameCanvas.h"
 #include "ErdTable.h"
 

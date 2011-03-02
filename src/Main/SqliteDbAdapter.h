@@ -36,11 +36,14 @@ public:
 	virtual bool CanConnect();
 	virtual bool IsConnected();
 
+	virtual wxString GetUseDb(const wxString& dbName);
+
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
 	virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
 	virtual wxString GetAlterTableConstraintSql(Table* tab);
 	virtual wxString GetCreateDatabaseSql(const wxString& dbName);
 	virtual wxString GetDropTableSql(Table* pTab);
+	virtual wxString GetDropDatabaseSql(Database* pDb);
 
 
 protected:

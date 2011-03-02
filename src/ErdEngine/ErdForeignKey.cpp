@@ -21,8 +21,8 @@ ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFOrthoLineShape()
 	
 	AddChild(pLabel);
 
-	RemoveHandle(wxSFShapeHandle::hndLINESTART);
-	RemoveHandle(wxSFShapeHandle::hndLINEEND);
+	//RemoveHandle(wxSFShapeHandle::hndLINESTART);
+	//RemoveHandle(wxSFShapeHandle::hndLINEEND);
 
 	SetDockPoint(INT_MAX);
 	

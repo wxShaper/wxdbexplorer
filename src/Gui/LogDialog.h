@@ -17,6 +17,7 @@ public:
 	void EnableClose(bool enable){ m_canClose = enable; }
 	void Clear();
 	void AppendText(const wxString& txt);
+	void AppendComment(const wxString& txt);
 	void AppendSeparator();
 	
 protected:
