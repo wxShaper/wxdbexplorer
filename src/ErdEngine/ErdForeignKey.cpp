@@ -18,11 +18,17 @@ ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFOrthoLineShape()
 	pLabel->SetHAlign(halignCENTER);
 	pLabel->SetFill(*wxWHITE_BRUSH);
 	pLabel->SetStyle(sfsLOCK_CHILDREN | sfsPARENT_CHANGE);
+	pLabel->RemoveStyle(sfsPARENT_CHANGE);
+	pLabel->RemoveStyle(sfsSHOW_HANDLES);
 	
 	AddChild(pLabel);
 
-	//RemoveHandle(wxSFShapeHandle::hndLINESTART);
-	//RemoveHandle(wxSFShapeHandle::hndLINEEND);
+
+	SetTrgArrow(CLASSINFO(OneArrow));
+	SetSrcArrow(CLASSINFO(NArrow));
+	
+	RemoveHandle(wxSFShapeHandle::hndLINESTART);
+	RemoveHandle(wxSFShapeHandle::hndLINEEND);
 
 	SetDockPoint(INT_MAX);
 	

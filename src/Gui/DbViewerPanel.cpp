@@ -36,6 +36,11 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 			wxString dbTable = tab->getName();
 			m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter(),dbName,dbTable),dbName,true);			
 			}	
+		if (View* pView = wxDynamicCast(item->GetData(), View)){
+			m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,pView->GetDbAdapter(),pView->GetParentName(),pView->GetName()),pView->GetParentName(),true);
+			}
+	
+		
 		if (Database* db = wxDynamicCast(item->GetData(), Database)){
 			wxMouseState cState = wxGetMouseState();
 			if( cState.ControlDown() ){
@@ -110,6 +115,23 @@ void DbViewerPanel::RefreshDbView() {
 						tabNode = tabNode->GetNext();
 					}
 					// ----------------------------------------------------------------------------
+					
+					
+					idFolder = m_treeDatabases->AppendItem(dbID, wxT("Views"),0,0,NULL);
+					//m_treeDatabases->Expand(dbID);
+
+					// ----------------------------- load tables ----------------------------------
+					tabNode = pDatabase->GetFirstChildNode();
+					while(tabNode) {
+						View* pView = wxDynamicCast(tabNode->GetData(),View);
+						if (pView) {
+							//wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pTable->getName(),1,-1,new DbItem(NULL,pTable)); //NULL);
+							wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pView->GetName(),1,-1,new DbItem(pView)); //NULL);
+						}
+						tabNode = tabNode->GetNext();
+					}
+					// ----------------------------------------------------------------------------							
+					
 				}
 				dbNode = dbNode->GetNext();
 			}

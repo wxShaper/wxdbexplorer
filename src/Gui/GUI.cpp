@@ -633,19 +633,38 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_radioBox1->SetSelection( 0 );
 	bSizer11->Add( m_radioBox1, 0, wxALL|wxEXPAND, 5 );
 	
+	wxGridBagSizer* gbSizer2;
+	gbSizer2 = new wxGridBagSizer( 0, 0 );
+	gbSizer2->SetFlexibleDirection( wxBOTH );
+	gbSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
 	m_staticText13 = new wxStaticText( m_pageConstraint, wxID_ANY, wxT("Reference table:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText13->Wrap( -1 );
-	bSizer11->Add( m_staticText13, 0, wxALL, 5 );
+	gbSizer2->Add( m_staticText13, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_comboRefTable = new wxComboBox( m_pageConstraint, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY ); 
-	bSizer11->Add( m_comboRefTable, 0, wxALL|wxALIGN_RIGHT, 5 );
+	gbSizer2->Add( m_comboRefTable, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticText14 = new wxStaticText( m_pageConstraint, wxID_ANY, wxT("Reference column:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText14->Wrap( -1 );
-	bSizer11->Add( m_staticText14, 0, wxALL, 5 );
+	gbSizer2->Add( m_staticText14, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_comboRefColumn = new wxComboBox( m_pageConstraint, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_READONLY ); 
-	bSizer11->Add( m_comboRefColumn, 0, wxALL|wxALIGN_RIGHT, 5 );
+	gbSizer2->Add( m_comboRefColumn, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	
+	wxString m_radioOnDeleteChoices[] = { wxT("restrict"), wxT("cascade"), wxT("set null"), wxT("no action") };
+	int m_radioOnDeleteNChoices = sizeof( m_radioOnDeleteChoices ) / sizeof( wxString );
+	m_radioOnDelete = new wxRadioBox( m_pageConstraint, wxID_ANY, wxT("OnDelete"), wxDefaultPosition, wxDefaultSize, m_radioOnDeleteNChoices, m_radioOnDeleteChoices, 1, wxRA_SPECIFY_COLS );
+	m_radioOnDelete->SetSelection( 0 );
+	gbSizer2->Add( m_radioOnDelete, wxGBPosition( 0, 1 ), wxGBSpan( 4, 1 ), wxALL|wxEXPAND, 5 );
+	
+	wxString m_radioOnUpdateChoices[] = { wxT("restrict"), wxT("cascade"), wxT("set null"), wxT("no action") };
+	int m_radioOnUpdateNChoices = sizeof( m_radioOnUpdateChoices ) / sizeof( wxString );
+	m_radioOnUpdate = new wxRadioBox( m_pageConstraint, wxID_ON_UPDATE, wxT("OnUpdate"), wxDefaultPosition, wxDefaultSize, m_radioOnUpdateNChoices, m_radioOnUpdateChoices, 1, wxRA_SPECIFY_COLS );
+	m_radioOnUpdate->SetSelection( 0 );
+	gbSizer2->Add( m_radioOnUpdate, wxGBPosition( 0, 2 ), wxGBSpan( 4, 1 ), wxALL|wxEXPAND|wxALIGN_RIGHT, 5 );
+	
+	bSizer11->Add( gbSizer2, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_pageConstraint->SetSizer( bSizer11 );
 	m_pageConstraint->Layout();
@@ -696,6 +715,8 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_comboRefTable->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnRefTabChange ), NULL, this );
 	m_comboRefTable->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefTabUI ), NULL, this );
 	m_comboRefColumn->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefColUI ), NULL, this );
+	m_radioOnDelete->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnDeleteUI ), NULL, this );
+	m_radioOnUpdate->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUpdateUI ), NULL, this );
 	m_sdbSizer2OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 }
 
@@ -721,6 +742,8 @@ _TableSettings::~_TableSettings()
 	m_comboRefTable->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnRefTabChange ), NULL, this );
 	m_comboRefTable->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefTabUI ), NULL, this );
 	m_comboRefColumn->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefColUI ), NULL, this );
+	m_radioOnDelete->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnDeleteUI ), NULL, this );
+	m_radioOnUpdate->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUpdateUI ), NULL, this );
 	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 	
 }
@@ -756,18 +779,32 @@ _CreateForeignKey::_CreateForeignKey( wxWindow* parent, wxWindowID id, const wxS
 	
 	fgSizer12->Add( sbSizer7, 1, wxEXPAND|wxTOP|wxBOTTOM|wxLEFT, 5 );
 	
-	wxFlexGridSizer* fgSizer121;
-	fgSizer121 = new wxFlexGridSizer( 2, 2, 0, 0 );
-	fgSizer121->SetFlexibleDirection( wxBOTH );
-	fgSizer121->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxGridBagSizer* gbSizer1;
+	gbSizer1 = new wxGridBagSizer( 0, 0 );
+	gbSizer1->AddGrowableCol( 0 );
+	gbSizer1->AddGrowableRow( 0 );
+	gbSizer1->SetFlexibleDirection( wxVERTICAL );
+	gbSizer1->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	wxString m_radioBox3Choices[] = { wxT("N :1"), wxT("N : M") };
 	int m_radioBox3NChoices = sizeof( m_radioBox3Choices ) / sizeof( wxString );
-	m_radioBox3 = new wxRadioBox( this, wxID_ANY, wxT("Relation"), wxDefaultPosition, wxDefaultSize, m_radioBox3NChoices, m_radioBox3Choices, 1, wxRA_SPECIFY_COLS );
+	m_radioBox3 = new wxRadioBox( this, wxID_ANY, wxT("Relation"), wxDefaultPosition, wxDefaultSize, m_radioBox3NChoices, m_radioBox3Choices, 1, wxRA_SPECIFY_ROWS );
 	m_radioBox3->SetSelection( 0 );
-	fgSizer121->Add( m_radioBox3, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	gbSizer1->Add( m_radioBox3, wxGBPosition( 0, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	fgSizer12->Add( fgSizer121, 1, wxEXPAND, 5 );
+	wxString m_radioOnDeleteChoices[] = { wxT("restrickt"), wxT("cascade"), wxT("set null"), wxT("no action") };
+	int m_radioOnDeleteNChoices = sizeof( m_radioOnDeleteChoices ) / sizeof( wxString );
+	m_radioOnDelete = new wxRadioBox( this, wxID_ANY, wxT("OnDelete"), wxPoint( -1,-1 ), wxDefaultSize, m_radioOnDeleteNChoices, m_radioOnDeleteChoices, 1, wxRA_SPECIFY_COLS );
+	m_radioOnDelete->SetSelection( 0 );
+	gbSizer1->Add( m_radioOnDelete, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	
+	wxString m_radiOnUpdateChoices[] = { wxT("restrickt"), wxT("cascade"), wxT("set null"), wxT("no action") };
+	int m_radiOnUpdateNChoices = sizeof( m_radiOnUpdateChoices ) / sizeof( wxString );
+	m_radiOnUpdate = new wxRadioBox( this, wxID_ANY, wxT("OnUpdate"), wxDefaultPosition, wxDefaultSize, m_radiOnUpdateNChoices, m_radiOnUpdateChoices, 1, wxRA_SPECIFY_COLS );
+	m_radiOnUpdate->SetSelection( 0 );
+	gbSizer1->Add( m_radiOnUpdate, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	
+	fgSizer12->Add( gbSizer1, 1, wxEXPAND, 5 );
 	
 	wxStaticBoxSizer* sbSizer8;
 	sbSizer8 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxEmptyString ), wxVERTICAL );
@@ -777,7 +814,7 @@ _CreateForeignKey::_CreateForeignKey( wxWindow* parent, wxWindowID id, const wxS
 	sbSizer8->Add( m_staticText16, 0, wxALL, 5 );
 	
 	m_txDstTable = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), wxTE_READONLY );
-	sbSizer8->Add( m_txDstTable, 1, wxALL|wxEXPAND, 5 );
+	sbSizer8->Add( m_txDstTable, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticText18 = new wxStaticText( this, wxID_ANY, wxT("Column:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText18->Wrap( -1 );

@@ -11,14 +11,18 @@ Constraint::Constraint(const Constraint& obj):xsSerializable(obj)
 	m_type = obj.m_type;
 	m_refTable = obj.m_refTable;
 	m_refCol = obj.m_refCol;
+	m_onDelete = obj.m_onDelete;
+	m_onUpdate = obj.m_onUpdate;
 	InitSerializable();
 	
 }
-Constraint::Constraint(const wxString& name, const wxString& localColumn, constraintType type)
+Constraint::Constraint(const wxString& name, const wxString& localColumn, constraintType type, constraintAction onDelete, constraintAction onUpdate)
 {
 	m_name = name;
 	m_localColumn = localColumn;
 	m_type = type;
+	m_onDelete = onDelete;
+	m_onUpdate = onUpdate;
 	InitSerializable();
 }
 Constraint::~Constraint()
@@ -32,6 +36,9 @@ void Constraint::InitSerializable()
 	XS_SERIALIZE_INT(m_type, wxT("type"));
 	XS_SERIALIZE(m_refTable, wxT("refTable"));
 	XS_SERIALIZE(m_refCol, wxT("refCol"));
+	XS_SERIALIZE_INT(m_onDelete,wxT("onDelete"));
+	XS_SERIALIZE_INT(m_onUpdate,wxT("onUpdate"));
+	
 }
 
 

@@ -19,6 +19,7 @@ Database::Database(IDbAdapter* dbAdapter,const wxString& dbName)
 	if (dbAdapter){
 		m_pDbAdapter = dbAdapter;
 		m_pDbAdapter->GetTables(this);
+		m_pDbAdapter->GetViews(this);
 	}
 	//this->tables = dbAdapter->GetTables(dbName);
 }

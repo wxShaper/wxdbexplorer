@@ -8,20 +8,26 @@
 
 class Constraint : public xsSerializable {
 
-public: 
+public:
 	enum constraintType {
 		primaryKey,
 		foreignKey
-	}; 
-	
-	
+	};
+
+	enum constraintAction {
+		restrict,
+		cascade,
+		setNull,
+		noAction
+	};
+
 	XS_DECLARE_CLONABLE_CLASS(Constraint);
 	Constraint();
 	Constraint(const Constraint& obj);
-	Constraint(const wxString& name, const wxString& localColumn, constraintType type);
+	Constraint(const wxString& name, const wxString& localColumn, constraintType type, constraintAction onDelete, constraintAction onUpdate);
 	virtual ~Constraint();
 
-	
+
 
 
 	void SetLocalColumn(const wxString & localColumn) {
@@ -39,6 +45,18 @@ public:
 	void SetType(const constraintType & type) {
 		this->m_type = type;
 	}
+	void SetOnDelete(const constraintAction & onDelete) {
+		this->m_onDelete = onDelete;
+	}
+	void SetOnUpdate(const constraintAction & onUpdate) {
+		this->m_onUpdate = onUpdate;
+	}
+	const constraintAction & GetOnDelete() const {
+		return m_onDelete;
+	}
+	const constraintAction & GetOnUpdate() const {
+		return m_onUpdate;
+	}
 	const wxString & GetLocalColumn() const {
 		return m_localColumn;
 	}
@@ -54,14 +72,17 @@ public:
 	const constraintType & GetType() const {
 		return m_type;
 	}
-	
+
 protected:
 	constraintType m_type;
 	wxString m_name;
 	wxString m_localColumn;
 	wxString m_refTable;
 	wxString m_refCol;
-	
+	constraintAction m_onDelete;
+	constraintAction m_onUpdate;
+
+
 	void InitSerializable();
 
 };

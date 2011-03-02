@@ -40,6 +40,7 @@
 #include <wx/combobox.h>
 #include <wx/checkbox.h>
 #include <wx/radiobox.h>
+#include <wx/gbsizer.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -54,6 +55,7 @@
 #define wxID_PAGE_TYPE 1008
 #define wxID_TX_SIZE 1009
 #define wxID_PAGE_CONSTRAINT 1010
+#define wxID_ON_UPDATE 1011
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -300,6 +302,8 @@ class _TableSettings : public wxDialog
 		wxComboBox* m_comboRefTable;
 		wxStaticText* m_staticText14;
 		wxComboBox* m_comboRefColumn;
+		wxRadioBox* m_radioOnDelete;
+		wxRadioBox* m_radioOnUpdate;
 		wxStdDialogButtonSizer* m_sdbSizer2;
 		wxButton* m_sdbSizer2OK;
 		
@@ -323,6 +327,8 @@ class _TableSettings : public wxDialog
 		virtual void OnRefTabChange( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRefTabUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnRefColUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnDeleteUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -346,6 +352,8 @@ class _CreateForeignKey : public wxDialog
 		wxStaticText* m_staticText17;
 		wxComboBox* m_cmbSrcCol;
 		wxRadioBox* m_radioBox3;
+		wxRadioBox* m_radioOnDelete;
+		wxRadioBox* m_radiOnUpdate;
 		wxStaticText* m_staticText16;
 		wxTextCtrl* m_txDstTable;
 		wxStaticText* m_staticText18;

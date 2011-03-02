@@ -3,6 +3,7 @@
 #include "../DbEngine/database.h"
 #include "../DbEngine/table.h"
 #include "../DbEngine/constraint.h"
+#include "../DbEngine/view.h"
 
 MySqlDbAdapter::MySqlDbAdapter() {
 	this->m_serverName = wxT("");
@@ -185,6 +186,20 @@ bool MySqlDbAdapter::GetColumns(Table* pTab) {
 			constr->SetType(Constraint::foreignKey);
 			constr->SetRefTable(database->GetResultString(wxT("REFERENCED_TABLE_NAME")));
 			constr->SetRefCol(database->GetResultString(wxT("REFERENCED_COLUMN_NAME")));
+
+			wxString onDelete = database->GetResultString(wxT("UPDATE_RULE"));
+			if (onDelete == wxT("RESTRICT")) constr->SetOnUpdate(Constraint::restrict);
+			if (onDelete == wxT("CASCADE")) constr->SetOnUpdate(Constraint::cascade);
+			if (onDelete == wxT("SET NULL")) constr->SetOnUpdate(Constraint::setNull);
+			if (onDelete == wxT("NO ACTION")) constr->SetOnUpdate(Constraint::noAction);
+
+			wxString onUpdate = database->GetResultString(wxT("DELETE_RULE"));
+			if (onUpdate == wxT("RESTRICT")) constr->SetOnDelete(Constraint::restrict);
+			if (onUpdate == wxT("CASCADE")) constr->SetOnDelete(Constraint::cascade);
+			if (onUpdate == wxT("SET NULL")) constr->SetOnDelete(Constraint::setNull);
+			if (onUpdate == wxT("NO ACTION")) constr->SetOnDelete(Constraint::noAction);
+
+
 		}
 		pTab->AddChild(constr);
 	}
@@ -258,9 +273,12 @@ void MySqlDbAdapter::GetTables(Database* db) {
 			if (!dbLayer->IsOpen()) return;
 			// lading tables for database
 			//TODO:SQL:
-			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
+			
+			//DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
+			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->getName().c_str()) );
+			
 			while (tabulky->Next()) {
-				db->AddChild(new Table(this,  tabulky->GetResultString(1), db->getName(),0));
+				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->getName(),0));
 			}
 			dbLayer->CloseResultSet(tabulky);
 			dbLayer->Close();
@@ -286,9 +304,43 @@ wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 		Constraint* constr = NULL;
 		constr = wxDynamicCast(node->GetData(), Constraint);
 		if (constr) {
-			if (constr->GetType() == Constraint::foreignKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` FOREIGN KEY (`%s`) REFERENCES `%s`(`%s`); \n" ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
-			//if (constr->GetType() == Constraint::primaryKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` PRIMARY KEY (`%s`); \n"), constr->GetName().c_str(), constr->GetLocalColumn().c_str()));
-		}
+			if (constr->GetType() == Constraint::foreignKey) {
+				str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` FOREIGN KEY (`%s`) REFERENCES `%s`(`%s`) " ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
+				str.append(wxT("ON UPDATE "));
+				switch(constr->GetOnUpdate()) {
+				case Constraint::restrict:
+					str.append(wxT("RESTRICT "));
+					break;
+				case Constraint::cascade:
+					str.append(wxT("CASCADE "));
+					break;
+				case Constraint::setNull:
+					str.append(wxT("SET NULL "));
+					break;
+				case Constraint::noAction:
+					str.append(wxT("NO ACTION "));
+					break;
+				}
+				str.append(wxT("ON DELETE "));
+				switch(constr->GetOnDelete()) {
+				case Constraint::restrict:
+					str.append(wxT("RESTRICT "));
+					break;
+				case Constraint::cascade:
+					str.append(wxT("CASCADE "));
+					break;
+				case Constraint::setNull:
+					str.append(wxT("SET NULL "));
+					break;
+				case Constraint::noAction:
+					str.append(wxT("NO ACTION "));
+					break;
+				}
+				str.append(wxT("; \n"));
+			}
+		}//if (constr->GetType() == Constraint::primaryKey) str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` PRIMARY KEY (`%s`); \n"), constr->GetName().c_str(), constr->GetLocalColumn().c_str()));
+
+
 		node = node->GetNext();
 	}
 	str.append(wxT("-- -------------------------------------------------------------\n"));
@@ -299,4 +351,19 @@ wxString MySqlDbAdapter::GetDropDatabaseSql(Database* pDb) {
 }
 wxString MySqlDbAdapter::GetUseDb(const wxString& dbName) {
 	return wxString::Format(wxT("USE `%s`"),dbName.c_str());
+}
+void MySqlDbAdapter::GetViews(Database* db) {
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+
+	if (!dbLayer->IsOpen()) return;
+	// loading columns
+	//TODO:SQL:
+	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`VIEWS` WHERE TABLE_SCHEMA = '%s'"),db->getName().c_str()));
+	while (database->Next()) {
+		View* pView = new View(this,database->GetResultString(wxT("TABLE_NAME")),db->getName(),database->GetResultString(wxT("VIEW_DEFINITION")));
+		db->AddChild(pView);
+	}
+	dbLayer->CloseResultSet(database);	
+	
+	
 }

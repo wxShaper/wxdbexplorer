@@ -26,7 +26,10 @@ public:
 
 	/*! \brief Function connect tables to the Database */
 	virtual void GetTables(Database* db) = 0;
-
+	
+	/*! \brief Function connect views to the Database */
+	virtual void GetViews(Database* db) = 0;
+	
 	/*! \brief Function connect columns to the Table */
 	virtual bool GetColumns(Table* pTab) = 0;
 	

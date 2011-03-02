@@ -42,6 +42,9 @@ public:
 	virtual void OnRefColUI(wxUpdateUIEvent& event);
 	virtual void OnRefTabChange(wxCommandEvent& event);
 	virtual void OnRefTabUI(wxUpdateUIEvent& event);
+	virtual void OnDeleteUI(wxUpdateUIEvent& event);
+	virtual void OnUpdateUI(wxUpdateUIEvent& event);
+
 
 
 	virtual void OnNotebookUI(wxUpdateUIEvent& event);

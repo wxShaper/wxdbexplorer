@@ -54,7 +54,8 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 		if ((constr)&&(constr->GetName() == name)) {
 			m_comboLocalColumn->Clear();
 			m_pEditedConstraint = constr;
-				m_txConstraintName->SetValue(constr->GetName());
+
+			m_txConstraintName->SetValue(constr->GetName());
 			m_comboLocalColumn->SetValue(constr->GetLocalColumn());
 			if (m_pTable) {
 				SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
@@ -66,6 +67,8 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			m_radioBox1->Select(constr->GetType());
 			m_comboRefTable->SetValue(constr->GetRefTable());
 			m_comboRefColumn->SetValue(constr->GetRefCol());
+			m_radioOnDelete->Select(constr->GetOnDelete());
+			m_radioOnUpdate->Select(constr->GetOnUpdate());
 
 		}
 
@@ -119,16 +122,18 @@ void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 			pType->SetSize(s);
 		}
 	}
-	if (m_pEditedConstraint){
+	if (m_pEditedConstraint) {
 		m_pEditedConstraint->SetName(m_txConstraintName->GetValue());
 		m_pEditedConstraint->SetLocalColumn(m_comboLocalColumn->GetValue());
 		if (m_radioBox1->GetSelection() == 0) m_pEditedConstraint->SetType(Constraint::primaryKey);
-		if (m_radioBox1->GetSelection() == 1)  m_pEditedConstraint->SetType(Constraint::foreignKey);		
-		if (m_pEditedConstraint->GetType() == Constraint::foreignKey){
+		if (m_radioBox1->GetSelection() == 1)  m_pEditedConstraint->SetType(Constraint::foreignKey);
+		if (m_pEditedConstraint->GetType() == Constraint::foreignKey) {
 			m_pEditedConstraint->SetRefTable(m_comboRefTable->GetValue());
-			m_pEditedConstraint->SetRefCol(m_comboRefColumn->GetValue());			
-			}
+			m_pEditedConstraint->SetRefCol(m_comboRefColumn->GetValue());
+			m_pEditedConstraint->SetOnUpdate((Constraint::constraintAction) m_radioOnUpdate->GetSelection());
+			m_pEditedConstraint->SetOnDelete((Constraint::constraintAction) m_radioOnDelete->GetSelection());
 		}
+	}
 	UpdateView();
 }
 void TableSettings::OnTypeSelect(wxCommandEvent& event) {
@@ -143,20 +148,20 @@ void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 	m_pDiagramManager = pManager;
 	if (m_pTable) {
 		m_txTableName->SetValue(tab->getName());
-		if (pManager){
+		if (pManager) {
 			ShapeList lstShapes;
 			pManager->GetShapes( CLASSINFO(ErdTable), lstShapes );
 			ShapeList::compatibility_iterator it = lstShapes.GetFirst();
-			while( it ){
+			while( it ) {
 				ErdTable* pTab = wxDynamicCast(it->GetData(),ErdTable);
-				if (pTab){					
-					if (m_pTable->getName() != pTab->getTable()->getName()){
+				if (pTab) {
+					if (m_pTable->getName() != pTab->getTable()->getName()) {
 						m_comboRefTable->AppendString(pTab->getTable()->getName());
 					}
 				}
 				it = it->GetNext();
 			}
-		
+
 		}
 	}
 	UpdateView();
@@ -247,10 +252,10 @@ void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
 		if ((col)&&(col->getName() == name)) {
 			constr = NULL;
 			break;
-			} else col = NULL;
+		} else col = NULL;
 		if ((constr)&&(constr->GetName() == name)) break;
-			else constr = NULL;
-		
+		else constr = NULL;
+
 		node = node->GetNext();
 	}
 	if (col) m_pTable->GetParentManager()->RemoveItem(col);
@@ -258,7 +263,7 @@ void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
 	UpdateView();
 }
 void TableSettings::OnNewConstrainClick(wxCommandEvent& event) {
-	Constraint* pConst = new Constraint(wxString::Format(wxT("PK_%s"),m_pTable->getName().c_str()), wxT(""), Constraint::primaryKey);
+	Constraint* pConst = new Constraint(wxString::Format(wxT("PK_%s"),m_pTable->getName().c_str()), wxT(""), Constraint::primaryKey, Constraint::restrict, Constraint::restrict);
 	if (pConst) m_pTable->AddConstraint(pConst);
 	UpdateView();
 }
@@ -283,40 +288,47 @@ void TableSettings::OnRefTabChange(wxCommandEvent& event) {
 	Table* pTab = NULL;
 	m_comboRefColumn->Clear();
 	m_comboRefColumn->SetValue(wxT(""));
-	if (m_pDiagramManager){
-			ShapeList lstShapes;
-			m_pDiagramManager->GetShapes( CLASSINFO(ErdTable), lstShapes );
-			ShapeList::compatibility_iterator it = lstShapes.GetFirst();
-			while( it ){
-				pErdTab = wxDynamicCast(it->GetData(),ErdTable);
-				if (pErdTab){					
-					if (pErdTab->getTable()->getName() == m_comboRefTable->GetValue()){
+	if (m_pDiagramManager) {
+		ShapeList lstShapes;
+		m_pDiagramManager->GetShapes( CLASSINFO(ErdTable), lstShapes );
+		ShapeList::compatibility_iterator it = lstShapes.GetFirst();
+		while( it ) {
+			pErdTab = wxDynamicCast(it->GetData(),ErdTable);
+			if (pErdTab) {
+				if (pErdTab->getTable()->getName() == m_comboRefTable->GetValue()) {
 					pTab = pErdTab->getTable();
-						
-					}
+
 				}
-				it = it->GetNext();
-			}		
+			}
+			it = it->GetNext();
 		}
-	if (pTab){
+	}
+	if (pTab) {
 		SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
 		while( node ) {
 			Column* col = wxDynamicCast(node->GetData(),Column);
-			if (col){
-				m_comboRefColumn->AppendString(col->getName());				
+			if (col) {
+				m_comboRefColumn->AppendString(col->getName());
 			}
-			node = node->GetNext();	
-		}		
-	}	
+			node = node->GetNext();
+		}
+	}
 }
 
 void TableSettings::OnRefTabUI(wxUpdateUIEvent& event) {
 	event.Enable(m_radioBox1->GetSelection() == 1);
 }
 void TableSettings::OnNotebookUI(wxUpdateUIEvent& event) {
-	if (m_pEditedConstraint){
-			m_notebook3->SetSelection(1);
-		}else{
-			m_notebook3->SetSelection(0);			
-			}
+	if (m_pEditedConstraint) {
+		m_notebook3->SetSelection(1);
+	} else {
+		m_notebook3->SetSelection(0);
+	}
+}
+void TableSettings::OnDeleteUI(wxUpdateUIEvent& event) {
+	event.Enable(m_radioBox1->GetSelection() == 1);
+}
+
+void TableSettings::OnUpdateUI(wxUpdateUIEvent& event) {
+	event.Enable(m_radioBox1->GetSelection() == 1);
 }

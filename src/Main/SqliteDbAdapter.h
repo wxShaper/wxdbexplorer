@@ -26,6 +26,7 @@ public:
 	virtual void GetDatabases(DbConnection* dbCon);
 	virtual void GetTables(Database* db);
 	virtual bool GetColumns(Table* pTab);
+	virtual void GetViews(Database* db);
 
 
 
