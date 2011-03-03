@@ -399,4 +399,29 @@ class _LogDialog : public wxDialog
 	
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class _ViewSettings
+///////////////////////////////////////////////////////////////////////////////
+class _ViewSettings : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText19;
+		wxTextCtrl* m_txName;
+		wxStaticLine* m_staticline2;
+		wxScintilla* m_scintilla2;
+		wxButton* m_btnOK;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_ViewSettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("View settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_ViewSettings();
+	
+};
+
 #endif //__GUI__

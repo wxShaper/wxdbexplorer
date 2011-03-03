@@ -906,3 +906,94 @@ _LogDialog::~_LogDialog()
 	m_button18->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _LogDialog::OnCloseUI ), NULL, this );
 	
 }
+
+_ViewSettings::_ViewSettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxBoxSizer* bSizer15;
+	bSizer15 = new wxBoxSizer( wxVERTICAL );
+	
+	wxStaticBoxSizer* sbSizer12;
+	sbSizer12 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxEmptyString ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer14;
+	fgSizer14 = new wxFlexGridSizer( 3, 1, 0, 0 );
+	fgSizer14->SetFlexibleDirection( wxBOTH );
+	fgSizer14->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxBoxSizer* bSizer14;
+	bSizer14 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText19 = new wxStaticText( this, wxID_ANY, wxT("View name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText19->Wrap( -1 );
+	bSizer14->Add( m_staticText19, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txName = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer14->Add( m_txName, 1, wxALL, 5 );
+	
+	fgSizer14->Add( bSizer14, 1, wxEXPAND, 5 );
+	
+	m_staticline2 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	fgSizer14->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+	
+	m_scintilla2 = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( 700,300 ), 0, wxEmptyString );
+	m_scintilla2->SetUseTabs( true );
+	m_scintilla2->SetTabWidth( 4 );
+	m_scintilla2->SetIndent( 4 );
+	m_scintilla2->SetTabIndents( true );
+	m_scintilla2->SetBackSpaceUnIndents( true );
+	m_scintilla2->SetViewEOL( false );
+	m_scintilla2->SetViewWhiteSpace( false );
+	m_scintilla2->SetMarginWidth( 2, 0 );
+	m_scintilla2->SetIndentationGuides( true );
+	m_scintilla2->SetMarginType( 1, wxSCI_MARGIN_SYMBOL );
+	m_scintilla2->SetMarginMask( 1, wxSCI_MASK_FOLDERS );
+	m_scintilla2->SetMarginWidth( 1, 16);
+	m_scintilla2->SetMarginSensitive( 1, true );
+	m_scintilla2->SetProperty( wxT("fold"), wxT("1") );
+	m_scintilla2->SetFoldFlags( wxSCI_FOLDFLAG_LINEBEFORE_CONTRACTED | wxSCI_FOLDFLAG_LINEAFTER_CONTRACTED );
+	m_scintilla2->SetMarginType( 0, wxSCI_MARGIN_NUMBER );
+	m_scintilla2->SetMarginWidth( 0, m_scintilla2->TextWidth( wxSCI_STYLE_LINENUMBER, wxT("_99999") ) );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDER, wxSCI_MARK_BOXPLUS );
+	m_scintilla2->MarkerSetBackground( wxSCI_MARKNUM_FOLDER, wxColour( wxT("BLACK") ) );
+	m_scintilla2->MarkerSetForeground( wxSCI_MARKNUM_FOLDER, wxColour( wxT("WHITE") ) );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDEROPEN, wxSCI_MARK_BOXMINUS );
+	m_scintilla2->MarkerSetBackground( wxSCI_MARKNUM_FOLDEROPEN, wxColour( wxT("BLACK") ) );
+	m_scintilla2->MarkerSetForeground( wxSCI_MARKNUM_FOLDEROPEN, wxColour( wxT("WHITE") ) );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDERSUB, wxSCI_MARK_EMPTY );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDEREND, wxSCI_MARK_BOXPLUS );
+	m_scintilla2->MarkerSetBackground( wxSCI_MARKNUM_FOLDEREND, wxColour( wxT("BLACK") ) );
+	m_scintilla2->MarkerSetForeground( wxSCI_MARKNUM_FOLDEREND, wxColour( wxT("WHITE") ) );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDEROPENMID, wxSCI_MARK_BOXMINUS );
+	m_scintilla2->MarkerSetBackground( wxSCI_MARKNUM_FOLDEROPENMID, wxColour( wxT("BLACK") ) );
+	m_scintilla2->MarkerSetForeground( wxSCI_MARKNUM_FOLDEROPENMID, wxColour( wxT("WHITE") ) );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDERMIDTAIL, wxSCI_MARK_EMPTY );
+	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDERTAIL, wxSCI_MARK_EMPTY );
+	m_scintilla2->SetSelBackground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHT ) );
+	m_scintilla2->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
+	fgSizer14->Add( m_scintilla2, 1, wxEXPAND | wxALL, 5 );
+	
+	m_btnOK = new wxButton( this, wxID_OK, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer14->Add( m_btnOK, 0, wxALL|wxALIGN_RIGHT, 5 );
+	
+	sbSizer12->Add( fgSizer14, 1, wxEXPAND, 5 );
+	
+	bSizer15->Add( sbSizer12, 1, wxEXPAND|wxALL, 5 );
+	
+	this->SetSizer( bSizer15 );
+	this->Layout();
+	bSizer15->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ViewSettings::OnOKClick ), NULL, this );
+}
+
+_ViewSettings::~_ViewSettings()
+{
+	// Disconnect Events
+	m_btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ViewSettings::OnOKClick ), NULL, this );
+	
+}

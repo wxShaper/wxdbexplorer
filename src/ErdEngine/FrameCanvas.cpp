@@ -1,6 +1,7 @@
 #include "../Gui/CreateForeignKey.h"
 #include "FrameCanvas.h"
 #include "ErdTable.h"
+#include "ErdView.h"
 
 
 // definice konstanty uzivatelského datového typu pro DnD
@@ -65,6 +66,24 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 		} else wxSFShapeCanvas::OnLeftDown(event);
 	}
 	break;
+	
+	case ErdPanel::modeVIEW: {
+		pShape = GetDiagramManager()->AddShape(new ErdView(), NULL, event.GetPosition(), sfINITIALIZE, sfDONT_SAVE_STATE);
+		if (pShape) {
+			pShape->AcceptConnection(wxT("All"));
+			pShape->AcceptSrcNeighbour(wxT("All"));
+			pShape->AcceptTrgNeighbour(wxT("All"));
+			
+			View* view = new View();
+			view->SetName(wxT("New view"));
+			view->SetSelect(wxT("SELECT * FROM table"));
+			pShape->SetUserData(view);
+			((ErdView*)pShape)->UpdateView();
+			pShape->Refresh();
+			}
+		}
+		break;
+	
 	default:
 
 		// do default actions
@@ -139,28 +158,45 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 				settingDialog.ShowModal();
 				table->updateColumns();
 			}
+		ErdView* view = wxDynamicCast(sp->GetGrandParentShape(), ErdView);
+		if (view){
+			if (view->GetView()){
+				ViewSettings settingDialog(this,m_pDbAdapter);
+				settingDialog.SetView(view->GetView(),(wxSFDiagramManager*) view->GetParentManager() );
+				settingDialog.ShowModal();
+				view->UpdateView();
+				}			
+			}
 	}
 	wxSFShapeCanvas::OnLeftDoubleClick(event);
 }
 void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped) {
 	ShapeList::compatibility_iterator node = dropped.GetFirst();
 	dndTableShape* dndTab = NULL;
+	wxSFShapeBase* pShape = NULL;
 	while( node ) {
 		dndTab = wxDynamicCast(node->GetData(),dndTableShape);
 		node = node->GetNext();
 	}
 	if (dndTab) {
-		ErdTable* table = new ErdTable((Table* ) dndTab->GetUserData());
+		if (dndTab->GetUserData()->IsKindOf(CLASSINFO(Table))){
+			pShape = GetDiagramManager()->AddShape(new ErdTable((Table* ) dndTab->GetUserData()), NULL, wxPoint( x,y), sfINITIALIZE, sfDONT_SAVE_STATE);
+			}
+		if (dndTab->GetUserData()->IsKindOf(CLASSINFO(View))){
+			pShape = GetDiagramManager()->AddShape(new ErdView((View* ) dndTab->GetUserData()), NULL, wxPoint( x,y), sfINITIALIZE, sfDONT_SAVE_STATE);
+			}
 
-		wxSFShapeBase* pShape = GetDiagramManager()->AddShape(table, NULL, wxPoint( x,y), sfINITIALIZE, sfDONT_SAVE_STATE);
+
+		
 		//pShape = GetDiagramManager()->AddShape(CLASSINFO(wxSFRoundRectShape), event.GetPosition(), sfDONT_SAVE_STATE);
 		if (pShape) {
 			pShape->AcceptConnection(wxT("All"));
 			pShape->AcceptSrcNeighbour(wxT("All"));
 			pShape->AcceptTrgNeighbour(wxT("All"));
-			((ErdTable*)pShape)->updateColumns();
 			pShape->Update();
 		}
+		if (pShape->IsKindOf(CLASSINFO(ErdTable)))	((ErdTable*)pShape)->updateColumns();
+		if (pShape->IsKindOf(CLASSINFO(ErdView)))	((ErdView*)pShape)->UpdateView();
 
 		dndTab->SetUserData(NULL);
 		GetDiagramManager()->RemoveShape(dndTab);
@@ -171,23 +207,33 @@ wxString FrameCanvas::GetSqlScript() {
 
 	ShapeList lstShapes;
 	GetDiagramManager()->GetShapes( CLASSINFO(ErdTable), lstShapes );
-
-
 	ShapeList::compatibility_iterator node = lstShapes.GetFirst();
 	while( node ) {
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
 		if (tab) {
 			retStr.append(m_pDbAdapter->GetCreateTableSql(tab->getTable(),true));
-			node = node->GetNext();
 		}
+		node = node->GetNext();
 	}	
+	lstShapes.Clear();
+	GetDiagramManager()->GetShapes( CLASSINFO(ErdView), lstShapes );
+	node = lstShapes.GetFirst();
+	while( node ) {
+		ErdView* view = wxDynamicCast(node->GetData(),ErdView);
+		if (view) {
+			retStr.append(m_pDbAdapter->GetCreateViewSql(view->GetView(),true));
+		}
+		node = node->GetNext();
+	}	
+	lstShapes.Clear();
+	GetDiagramManager()->GetShapes( CLASSINFO(ErdTable), lstShapes );
 	node = lstShapes.GetFirst();
 	while( node ) {
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
 		if (tab) {
 			retStr.append(m_pDbAdapter->GetAlterTableConstraintSql(tab->getTable()));
-			node = node->GetNext();
 		}
+		node = node->GetNext();
 	}
 	return retStr;
 }

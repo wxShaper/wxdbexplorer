@@ -15,3 +15,8 @@ dndTableShape::dndTableShape()
 {
 }
 
+dndTableShape::dndTableShape(xsSerializable* pData):wxSFShapeBase()
+{
+	SetUserData(pData);
+}
+

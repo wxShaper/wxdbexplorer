@@ -4,6 +4,7 @@
 #include "../res/elements/Bound.xpm"
 #include "../res/elements/Tool.xpm"
 #include "../res/gui/Grid.xpm"
+#include "../res/gui/GridView.xpm"
 #include "../res/gui/filesave.xpm"
 #include "../res/gui/filesavesql.xpm"
 #include "../res/gui/fileopen.xpm"

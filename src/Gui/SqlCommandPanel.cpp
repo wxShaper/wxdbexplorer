@@ -4,6 +4,8 @@
 #include "SqlCommandPanel.h"
 #include "DatabaseExplorerFrame.h"
 
+
+
 SQLCommandPanel::SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  const wxString& dbName, const wxString& dbTable) : _SqlCommandPanel(parent)
 {
 	DatabaseExplorerFrame::InitStyledTextCtrl( m_scintillaSQL );
@@ -143,3 +145,4 @@ void SQLCommandPanel::OnSaveClick(wxCommandEvent& event)
 			}
 		}
 }
+

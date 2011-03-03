@@ -273,10 +273,10 @@ void MySqlDbAdapter::GetTables(Database* db) {
 			if (!dbLayer->IsOpen()) return;
 			// lading tables for database
 			//TODO:SQL:
-			
+
 			//DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
 			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->getName().c_str()) );
-			
+
 			while (tabulky->Next()) {
 				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->getName(),0));
 			}
@@ -363,7 +363,18 @@ void MySqlDbAdapter::GetViews(Database* db) {
 		View* pView = new View(this,database->GetResultString(wxT("TABLE_NAME")),db->getName(),database->GetResultString(wxT("VIEW_DEFINITION")));
 		db->AddChild(pView);
 	}
-	dbLayer->CloseResultSet(database);	
-	
-	
+	dbLayer->CloseResultSet(database);
+
+
+}
+wxString MySqlDbAdapter::GetCreateViewSql(View* view, bool dropView) {
+	wxString str = wxT("");
+	if (view){
+		if (dropView){
+			str.append(wxString::Format(wxT("DROP VIEW IF EXISTS `%s`;\n"),view->GetName().c_str()));
+			}			
+		str.append(wxString::Format(wxT("CREATE VIEW `%s` AS %s ;\n"),view->GetName().c_str(), view->GetSelect().c_str()));
+	}
+	str.append(wxT("-- -------------------------------------------------------------\n"));
+	return str;
 }

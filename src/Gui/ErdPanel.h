@@ -10,15 +10,18 @@
 #include "Art.h"
 #include "Ids.h"
 #include "../ErdEngine/ErdTable.h"
+#include "../ErdEngine/ErdView.h"
 #include "../Interfaces/IDbAdapter.h"
+#include "dbeclasstype.h"
 
 class FrameCanvas;
 class ErdPanel : public _ErdPanel {
 public:
-
+	DECLARE_DYNAMIC_CLASS(ErdPanel)
 	enum MODE {
 		modeDESIGN,
 		modeTABLE,
+		modeVIEW,
 		modeLine
 	};
 
@@ -30,7 +33,7 @@ public:
 		m_nToolMode = m;
 	}
 
-
+	ErdPanel();
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter);
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, Table* pTable);
 	ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, xsSerializable* pItems);

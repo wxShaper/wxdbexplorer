@@ -11,6 +11,7 @@ AdapterSelectDlg::~AdapterSelectDlg() {
 void AdapterSelectDlg::OnMysqlClick(wxCommandEvent& event) {
 #ifdef DBL_USE_MYSQL
 	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new MySqlDbAdapter()),wxT("MySQL ERD diagram"));
+	Destroy();
 #else
 	wxMessageBox( wxT("MySQL ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
 #endif
@@ -18,6 +19,7 @@ void AdapterSelectDlg::OnMysqlClick(wxCommandEvent& event) {
 void AdapterSelectDlg::OnSqliteClick(wxCommandEvent& event) {
 #ifdef DBL_USE_SQLITE
 	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new SQLiteDbAdapter()),wxT("SQLite ERD diagram"));
+	Destroy();
 #else
 	wxMessageBox( wxT("SQLite ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
 #endif

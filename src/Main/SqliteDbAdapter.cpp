@@ -189,3 +189,6 @@ wxString SQLiteDbAdapter::GetUseDb(const wxString& dbName) {
 }
 void SQLiteDbAdapter::GetViews(Database* db) {
 }
+wxString SQLiteDbAdapter::GetCreateViewSql(View* view, bool dropView) {
+	return wxT("");
+}

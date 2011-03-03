@@ -14,6 +14,7 @@
 #endif
 
 #include "../Gui/TableSettingsDialog.h"
+#include "../Gui/ViewSettings.h"
 #include "../Interfaces/IDbAdapter.h"
 #include "DnDTableShape.h"
 

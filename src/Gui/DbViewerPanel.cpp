@@ -193,21 +193,31 @@ void DbViewerPanel::OnERDClick(wxCommandEvent& event) {
 void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 	ShapeList lstDnD;
 	lstDnD.DeleteContents(true);
-
-
 	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
 	
 	
 	if (item != NULL) {
-		Table* table = wxDynamicCast(item->GetData(),Table);
-		if (table){
-			if (m_pNotebook->GetSelection()!= wxNOT_FOUND) {
-				table = (Table*) table->Clone();
-				wxSFShapeBase *pShape = new dndTableShape(table);
-				lstDnD.Append(pShape);
-				ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);
-				panel->getCanvas()->DoDragDrop(lstDnD);
-				}				
+		if  (m_pNotebook->GetSelection() != wxNOT_FOUND){
+			if (m_pNotebook->GetPage(m_pNotebook->GetSelection())->IsKindOf(CLASSINFO(ErdPanel))){
+				
+				Table* table = wxDynamicCast(item->GetData(),Table);
+				if (table){
+					table = (Table*) table->Clone();
+					wxSFShapeBase *pShape = new dndTableShape(table);
+					lstDnD.Append(pShape);
+					ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);
+					panel->getCanvas()->DoDragDrop(lstDnD);
+					}	
+					
+				View* view = wxDynamicCast(item->GetData(),View);
+				if (view){
+					view = (View*) view->Clone();
+					wxSFShapeBase *pShape = new dndTableShape(view);
+					lstDnD.Append(pShape);
+					ErdPanel* panel = wxDynamicCast(m_pNotebook->GetPage(m_pNotebook->GetSelection()), ErdPanel);
+					panel->getCanvas()->DoDragDrop(lstDnD);
+					}						
+				}		
 			}
 		//delete pShape;
 	}
@@ -309,7 +319,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 						pDbLayer->Close();
 						delete pDbLayer;
 						//TODO:LANG:
-						wxMessageBox(wxT("Database created succesfuly"));
+						wxMessageBox(wxT("Database created successfully"));
 						
 						m_pEditedConnection->RefreshChildren();
 						RefreshDbView();
@@ -330,7 +340,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 							pDbLayer->Close();
 							delete pDbLayer;
 							//TODO:LANG:
-							wxMessageBox(wxT("Database dropped succesfuly"));
+							wxMessageBox(wxT("Database dropped successfully"));
 							
 							DbConnection* pCon = wxDynamicCast(pDb->GetParent(), DbConnection);
 							if (pCon) pCon->RefreshChildren();
@@ -372,7 +382,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 							pDbLayer->Close();
 							delete pDbLayer;
 							//TODO:LANG:
-							wxMessageBox(wxT("Table dropped succesfuly"));
+							wxMessageBox(wxT("Table dropped successfully"));
 							
 							Database* pDb = wxDynamicCast(pTab->GetParent(), Database);
 							if (pDb) pDb->RefreshChildren();
@@ -391,8 +401,10 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 						if(dlg.ShowModal() == wxID_OK) {							
 							ImportDb(dlg.GetPath(), pDb);
 							}				
-						}			
+						pDb->RefreshChildren();
+						}							
 					}
+					RefreshDbView();
 				}
 				break;			
 			default:{
@@ -440,7 +452,7 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 				dialog.AppendComment(wxT("Run SQL command:"));
 				dialog.AppendText(command);		
 				pDbLayer->RunQuery(command);
-				dialog.AppendComment(wxT("Succesful!"));			
+				dialog.AppendComment(wxT("Successful!"));			
 				command.clear();				
 				} 	
 			}	

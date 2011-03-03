@@ -33,6 +33,7 @@ void Database::RefreshChildren()
 	GetChildrenList().Clear();
 	if (m_pDbAdapter){
 		m_pDbAdapter->GetTables(this);
+		m_pDbAdapter->GetViews(this);
 	}
 }
 

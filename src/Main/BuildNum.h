@@ -1,3 +1,3 @@
-#define deBUILD_NUMBER 568
+#define deBUILD_NUMBER 641
 #define deSVN_REVISION wxT("$Rev$")
 

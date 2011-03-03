@@ -1,4 +1,6 @@
 #include "ErdPanel.h"
+IMPLEMENT_DYNAMIC_CLASS(ErdPanel,_ErdPanel)
+
 
 BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_MENU(wxID_OPEN, ErdPanel::OnLoad)
@@ -8,7 +10,7 @@ BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_UPDATE_UI_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnToolUpdate)
 END_EVENT_TABLE()
 
-ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent) {
+ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent){
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
 	Init(parent, dbAdapter);
@@ -40,6 +42,13 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pIte
 			m_diagramManager.AddShape(pErdTab, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
 			i+= 200;
 		}
+		View* pView = wxDynamicCast(node->GetData(),View);
+		if (pView){
+			ErdView* pErdView = new ErdView(pView);
+			m_diagramManager.AddShape(pErdView, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
+			i+= 200;
+			pErdView->UpdateView();
+			}
 		node = node->GetNext();
 	}
 	
@@ -72,6 +81,7 @@ void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Database table"));
+	m_toolBarErd->AddRadioTool(IDT_ERD_VIEW, wxT("View"), wxBitmap(GridView_xpm),wxNullBitmap, wxT("Database view"));	
 	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Constraint 1:N"), wxBitmap(link_editor_xpm),wxNullBitmap, wxT("Foreign key connection"));
 
 	m_toolBarErd->AddSeparator();
@@ -88,7 +98,13 @@ void ErdPanel::OnTool(wxCommandEvent& event) {
 		break;
 	case IDT_ERD_LINE:
 		m_nToolMode = modeLine;
+		break;
+	case IDT_ERD_VIEW:
+		m_nToolMode = modeVIEW;
+		break;
 	}
+	
+	
 
 }
 void ErdPanel::OnToolUpdate(wxUpdateUIEvent& event) {
@@ -101,6 +117,10 @@ void ErdPanel::OnToolUpdate(wxUpdateUIEvent& event) {
 		break;
 	case IDT_ERD_LINE:
 		event.Check(m_nToolMode == modeLine);
+		break;
+	case IDT_ERD_VIEW:
+		event.Check(m_nToolMode == modeVIEW);
+		break;
 	default:
 		event.Skip();
 		break;
@@ -153,9 +173,13 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event) {
 
 
 
-void ErdPanel::OnMouseWheel(wxMouseEvent& event) {
-	
-	
-	
-	
+void ErdPanel::OnMouseWheel(wxMouseEvent& event) {	
+	if (event.ControlDown()){
+		
+		
+		}	
 }
+ErdPanel::ErdPanel():_ErdPanel(NULL)
+{
+}
+

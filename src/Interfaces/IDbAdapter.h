@@ -10,6 +10,7 @@
 class DbConnection;
 class Database;
 class Table;
+class View;
 
 class IDbAdapter {
 
@@ -40,6 +41,8 @@ public:
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName) = 0;
 	/*! \brief Return Create table sql statement */
 	virtual wxString GetCreateTableSql(Table* tab, bool dropTable) = 0;	
+	/*! \brief Return Create view sql statement */
+	virtual wxString GetCreateViewSql(View* view, bool dropView) = 0;		
 	/*! \brief Return Create update table SQL statement for adding constraints */
 	virtual wxString GetAlterTableConstraintSql(Table* tab) = 0;
 	/*! \brief Return Create database SQL statement. */
