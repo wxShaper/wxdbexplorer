@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include "../Interfaces/IDbAdapter.h"
 #include "../DbEngine/table.h"
+#include "../DbEngine/view.h"
 #include "../DbEngine/database.h"
 #include "../DbEngine/databasecol.h"
 

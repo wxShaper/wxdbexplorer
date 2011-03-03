@@ -24,23 +24,7 @@ DatabaseLayer* SQLiteDbAdapter::GetDatabaseLayer() {
 
 	return pDatabase;
 }
-/*DatabaseCol* SQLiteDbAdapter::GetDatabases() {
-	//DatabaseCol* col = new DatabaseCol();
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (!dbLayer->IsOpen()) return NULL;
 
-	// loading databases
-	//TODO:SQL:
-	DatabaseResultSet *databaze = dbLayer->RunQueryWithResults(wxT("PRAGMA database_list;"));
-	while (databaze->Next()) {
-		//col->AddDatabase(new Database(this, databaze->GetResultString(2)));
-	}
-	dbLayer->CloseResultSet(databaze);
-	dbLayer->Close();
-	delete dbLayer;
-//	return col;
-
-}*/
 IDbType* SQLiteDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	IDbType* type = NULL;
 	if (typeName == wxT("NULL")) {
@@ -67,35 +51,19 @@ wxArrayString* SQLiteDbAdapter::GetDbTypes() {
 	pNames->Add(wxT("BLOB"));
 	return pNames;
 }
-/*TableCol* SQLiteDbAdapter::GetTables(const wxString& dbName) {
-	TableCol* tab = new TableCol(dbName);
 
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-	if (!dbLayer->IsOpen()) return NULL;
-	// lading tables for database
-	//TODO:SQL:
-	DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='table'"), dbName.c_str()) );
-	while (tabulky->Next()) {
-		tab->AddTable(new Table(this, tabulky->GetResultString(2), dbName, 0));
-	}
-	dbLayer->CloseResultSet(tabulky);
-	dbLayer->Close();
-	delete dbLayer;
-	return tab;
-
-}*/
 bool SQLiteDbAdapter::IsConnected() {
 }
 wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	return wxString::Format(wxT("SELECT * FROM '%s'.'%s';"),dbName.c_str(),tableName.c_str());
 }
 bool SQLiteDbAdapter::GetColumns(Table* pTab) {
-
+	int i = 0;
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return NULL;
 		// loading columns
-		//TODO:SQL:
+		//TODO:SQL:	
 		DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("PRAGMA table_info('%s')"),pTab->getName().c_str()));
 		while (database->Next()) {
 			IDbType* pType = GetDbTypeByName(database->GetResultString(3));
@@ -103,9 +71,45 @@ bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 				pType->SetNotNull(database->GetResultInt(4) == 1);
 				Column* pCol = new Column(database->GetResultString(2),pTab->getName(), pType);
 				pTab->AddChild(pCol);
+				if (database->GetResultInt(6) == 1){
+					Constraint* constr = new Constraint();
+					constr->SetName(wxString::Format(wxT("PK_%s"), pTab->getName().c_str()));
+					constr->SetLocalColumn(pCol->getName());
+					constr->SetType(Constraint::primaryKey);
+					pTab->AddChild(constr);
+					}
+			
 			}
+			
 		}
 		dbLayer->CloseResultSet(database);
+		
+		database = dbLayer->RunQueryWithResults(wxString::Format(wxT("PRAGMA foreign_key_list('%s')"),pTab->getName().c_str()));
+		while (database->Next()) {
+			Constraint* constr = new Constraint();
+			constr->SetName(wxString::Format(wxT("FK_%s_%i"), pTab->getName().c_str(), i++));
+			constr->SetLocalColumn(database->GetResultString(4));
+			constr->SetType(Constraint::foreignKey);
+			constr->SetRefTable(database->GetResultString(3));
+			constr->SetRefCol(database->GetResultString(5));
+
+			wxString onDelete = database->GetResultString(6);
+			if (onDelete == wxT("RESTRICT")) constr->SetOnUpdate(Constraint::restrict);
+			if (onDelete == wxT("CASCADE")) constr->SetOnUpdate(Constraint::cascade);
+			if (onDelete == wxT("SET NULL")) constr->SetOnUpdate(Constraint::setNull);
+			if (onDelete == wxT("NO ACTION")) constr->SetOnUpdate(Constraint::noAction);
+
+			wxString onUpdate = database->GetResultString(7);
+			if (onUpdate == wxT("RESTRICT")) constr->SetOnDelete(Constraint::restrict);
+			if (onUpdate == wxT("CASCADE")) constr->SetOnDelete(Constraint::cascade);
+			if (onUpdate == wxT("SET NULL")) constr->SetOnDelete(Constraint::setNull);
+			if (onUpdate == wxT("NO ACTION")) constr->SetOnDelete(Constraint::noAction);
+
+			
+			pTab->AddChild(constr);
+		}
+		dbLayer->CloseResultSet(database);			
+		
 		dbLayer->Close();
 		delete dbLayer;
 
@@ -115,8 +119,8 @@ bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 wxString SQLiteDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
 	wxString str = wxT("");
-	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s`; \n"),tab->getName().c_str());
-	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
+	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS '%s'; \n"),tab->getName().c_str());
+	str.append(wxString::Format(wxT("CREATE TABLE '%s' (\n"),tab->getName().c_str()));
 
 
 
@@ -125,11 +129,41 @@ wxString SQLiteDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
 		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
+		
 		node = node->GetNext();
-		if (node) str.append(wxT(",\n ")) ;
-		else  str.append(wxT("\n ")) ;
+		if (node) {
+			Column* pc =wxDynamicCast(node->GetData(),Column);
+			if (pc) str.append(wxT(",\n ")) ;
+		}
 	}
+	
+	
+	
+	bool start = true;
+	node = tab->GetFirstChildNode();
+	while( node ) {
+		Constraint* constr = wxDynamicCast(node->GetData(),Constraint);
+		if (constr) {
+			if (start){
+				//str.append(wxT(",\n "));
+				start = false;				
+				}
+			if (constr->GetType() == Constraint::primaryKey) str.append(wxString::Format(wxT("\tPRIMARY KEY ('%s')"), constr->GetLocalColumn().c_str()));
+			if (constr->GetType() == Constraint::foreignKey) str.append(wxString::Format(wxT("\tFOREIGN KEY('%s') REFERENCES %s('%s')"), constr->GetLocalColumn().c_str(),constr->GetRefTable().c_str(),constr->GetRefCol().c_str()));
 
+		}
+
+		node = node->GetNext();
+		if (node) {
+			constr = wxDynamicCast(node->GetData(),Constraint);
+			if (constr) {
+				str.append(wxT(",\n ")) ;
+			}		
+		}
+	}	
+	
+	
+	
 	str.append(wxT(");\n"));
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
@@ -167,6 +201,18 @@ void SQLiteDbAdapter::GetTables(Database* db) {
 			db->AddChild(new Table(this, tabulky->GetResultString(2), db->getName(), 0));
 		}
 		dbLayer->CloseResultSet(tabulky);
+		
+		
+		tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='view'"), db->getName().c_str()) );
+		while (tabulky->Next()) {
+			wxString select = tabulky->GetResultString(5);
+			select = select.Mid(select.Find(wxT("SELECT")));
+			db->AddChild(new View(this, tabulky->GetResultString(2), db->getName(),select));
+		}
+		dbLayer->CloseResultSet(tabulky);		
+		
+		
+		
 		dbLayer->Close();
 		delete dbLayer;
 	}
@@ -176,7 +222,7 @@ wxString SQLiteDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxT("");
 }
 wxString SQLiteDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxT("");
+	return wxString::Format(wxT("DROP TABLE '%s'.'%s'"), pTab->getParentName().c_str(), pTab->getName().c_str());
 }
 wxString SQLiteDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	return wxT("");
@@ -190,5 +236,13 @@ wxString SQLiteDbAdapter::GetUseDb(const wxString& dbName) {
 void SQLiteDbAdapter::GetViews(Database* db) {
 }
 wxString SQLiteDbAdapter::GetCreateViewSql(View* view, bool dropView) {
-	return wxT("");
+	wxString str = wxT("");
+	if (view){
+		if (dropView){
+			str.append(wxString::Format(wxT("DROP VIEW IF EXISTS `%s`;\n"),view->GetName().c_str()));
+			}			
+		str.append(wxString::Format(wxT("CREATE VIEW `%s` AS %s ;\n"),view->GetName().c_str(), view->GetSelect().c_str()));
+	}
+	str.append(wxT("-- -------------------------------------------------------------\n"));
+	return str;
 }

@@ -67,14 +67,25 @@ _ThumbPane::~_ThumbPane()
 _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style ) : wxPanel( parent, id, pos, size, style )
 {
 	wxFlexGridSizer* fgSizer3;
-	fgSizer3 = new wxFlexGridSizer( 3, 1, 0, 0 );
+	fgSizer3 = new wxFlexGridSizer( 1, 1, 0, 0 );
 	fgSizer3->AddGrowableCol( 0 );
 	fgSizer3->AddGrowableRow( 0 );
 	fgSizer3->AddGrowableRow( 2 );
 	fgSizer3->SetFlexibleDirection( wxBOTH );
 	fgSizer3->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_scintillaSQL = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0, wxEmptyString );
+	m_splitter1 = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D|wxSP_LIVE_UPDATE );
+	m_splitter1->Connect( wxEVT_IDLE, wxIdleEventHandler( _SqlCommandPanel::m_splitter1OnIdle ), NULL, this );
+	
+	m_panel13 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer14;
+	fgSizer14 = new wxFlexGridSizer( 1, 1, 0, 0 );
+	fgSizer14->AddGrowableCol( 0 );
+	fgSizer14->AddGrowableRow( 0 );
+	fgSizer14->SetFlexibleDirection( wxBOTH );
+	fgSizer14->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_scintillaSQL = new wxScintilla( m_panel13, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0, wxEmptyString );
 	m_scintillaSQL->SetUseTabs( true );
 	m_scintillaSQL->SetTabWidth( 4 );
 	m_scintillaSQL->SetIndent( 4 );
@@ -111,9 +122,20 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_scintillaSQL->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
 	m_scintillaSQL->SetMinSize( wxSize( -1,150 ) );
 	
-	fgSizer3->Add( m_scintillaSQL, 1, wxEXPAND, 5 );
+	fgSizer14->Add( m_scintillaSQL, 1, wxEXPAND, 5 );
 	
-	m_panel3 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTAB_TRAVERSAL );
+	m_panel13->SetSizer( fgSizer14 );
+	m_panel13->Layout();
+	fgSizer14->Fit( m_panel13 );
+	m_panel14 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer15;
+	fgSizer15 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer15->AddGrowableCol( 0 );
+	fgSizer15->AddGrowableRow( 1 );
+	fgSizer15->SetFlexibleDirection( wxBOTH );
+	fgSizer15->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_panel3 = new wxPanel( m_panel14, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer7;
 	fgSizer7 = new wxFlexGridSizer( 1, 4, 0, 0 );
 	fgSizer7->AddGrowableCol( 1 );
@@ -136,9 +158,9 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_panel3->SetSizer( fgSizer7 );
 	m_panel3->Layout();
 	fgSizer7->Fit( m_panel3 );
-	fgSizer3->Add( m_panel3, 0, wxEXPAND, 5 );
+	fgSizer15->Add( m_panel3, 1, wxEXPAND, 5 );
 	
-	m_gridTable = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	m_gridTable = new wxGrid( m_panel14, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	
 	// Grid
 	m_gridTable->CreateGrid( 5, 5 );
@@ -154,6 +176,11 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_gridTable->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
 	
 	// Rows
+	m_gridTable->SetRowSize( 0, 25 );
+	m_gridTable->SetRowSize( 1, 25 );
+	m_gridTable->SetRowSize( 2, 25 );
+	m_gridTable->SetRowSize( 3, 26 );
+	m_gridTable->SetRowSize( 4, 25 );
 	m_gridTable->EnableDragRowSize( true );
 	m_gridTable->SetRowLabelSize( 80 );
 	m_gridTable->SetRowLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
@@ -162,7 +189,13 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	
 	// Cell Defaults
 	m_gridTable->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
-	fgSizer3->Add( m_gridTable, 1, wxEXPAND, 5 );
+	fgSizer15->Add( m_gridTable, 1, wxEXPAND, 5 );
+	
+	m_panel14->SetSizer( fgSizer15 );
+	m_panel14->Layout();
+	fgSizer15->Fit( m_panel14 );
+	m_splitter1->SplitHorizontally( m_panel13, m_panel14, 264 );
+	fgSizer3->Add( m_splitter1, 1, wxEXPAND, 5 );
 	
 	this->SetSizer( fgSizer3 );
 	this->Layout();

@@ -315,15 +315,21 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					wxString dbName = wxGetTextFromUser(wxT("Database name"), wxT("Add database"));
 					if (!dbName.IsEmpty()){					
 						DatabaseLayer* pDbLayer = m_pEditedConnection->GetDbAdapter()->GetDatabaseLayer();
-						pDbLayer->RunQuery(m_pEditedConnection->GetDbAdapter()->GetCreateDatabaseSql(dbName));
-						pDbLayer->Close();
-						delete pDbLayer;
-						//TODO:LANG:
-						wxMessageBox(wxT("Database created successfully"));
+						wxString sql = m_pEditedConnection->GetDbAdapter()->GetCreateDatabaseSql(dbName);
+						if (!sql.empty()){
 						
-						m_pEditedConnection->RefreshChildren();
-						RefreshDbView();
-						
+							pDbLayer->RunQuery(sql);
+							pDbLayer->Close();
+							delete pDbLayer;
+							//TODO:LANG:
+							wxMessageBox(wxT("Database created successfully"));
+							
+							m_pEditedConnection->RefreshChildren();
+							RefreshDbView();
+						}else{
+							wxMessageDialog dlg(this, wxT("Can't create new db in this database engine!"), wxT("Error"),wxOK|wxICON_ERROR);
+							dlg.ShowModal();							
+							}	
 						}		
 					}
 				}
@@ -333,19 +339,22 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
-						wxMessageDialog dlg(this, wxString::Format(wxT("Remove database '%s'?"),pDb->getName().c_str()),wxT("Drop database"),wxYES_NO);
-						if (dlg.ShowModal() == wxID_YES){
-							DatabaseLayer* pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
-							pDbLayer->RunQuery(pDb->getDbAdapter()->GetDropDatabaseSql(pDb));
-							pDbLayer->Close();
-							delete pDbLayer;
-							//TODO:LANG:
-							wxMessageBox(wxT("Database dropped successfully"));
-							
-							DbConnection* pCon = wxDynamicCast(pDb->GetParent(), DbConnection);
-							if (pCon) pCon->RefreshChildren();
-							RefreshDbView();	
-							}						
+						wxString dropSQL = pDb->getDbAdapter()->GetDropDatabaseSql(pDb);
+						if (!dropSQL.IsEmpty()){						
+							wxMessageDialog dlg(this, wxString::Format(wxT("Remove database '%s'?"),pDb->getName().c_str()),wxT("Drop database"),wxYES_NO);
+							if (dlg.ShowModal() == wxID_YES){
+								DatabaseLayer* pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
+								pDbLayer->RunQuery(dropSQL);
+								pDbLayer->Close();
+								delete pDbLayer;
+								//TODO:LANG:
+								wxMessageBox(wxT("Database dropped successfully"));
+								
+								DbConnection* pCon = wxDynamicCast(pDb->GetParent(), DbConnection);
+								if (pCon) pCon->RefreshChildren();
+								RefreshDbView();	
+								}	
+							}					
 						}			
 					}
 				}
@@ -439,7 +448,9 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 		wxString command = wxT("");
 		pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
 		pDbLayer->BeginTransaction();
-		pDbLayer->RunQuery(wxString::Format(wxT("USE %s"), pDb->getName().c_str()));
+		
+		wxString useSql = pDb->getDbAdapter()->GetUseDb(pDb->getName());
+		if (!useSql.IsEmpty()) pDbLayer->RunQuery(wxString::Format(wxT("USE %s"), pDb->getName().c_str()));
 	
 		while (!input.Eof()){
 			wxString line = text.ReadLine();			

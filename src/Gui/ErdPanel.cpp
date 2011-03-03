@@ -174,10 +174,7 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event) {
 
 
 void ErdPanel::OnMouseWheel(wxMouseEvent& event) {	
-	if (event.ControlDown()){
-		
-		
-		}	
+
 }
 ErdPanel::ErdPanel():_ErdPanel(NULL)
 {

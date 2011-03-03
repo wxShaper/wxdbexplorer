@@ -28,6 +28,7 @@
 #include <wx/button.h>
 #include <wx/stattext.h>
 #include <wx/grid.h>
+#include <wx/splitter.h>
 #include <wx/dialog.h>
 #include <wx/toolbar.h>
 #include <wx/treectrl.h>
@@ -108,7 +109,10 @@ class _SqlCommandPanel : public wxPanel
 	private:
 	
 	protected:
+		wxSplitterWindow* m_splitter1;
+		wxPanel* m_panel13;
 		wxScintilla* m_scintillaSQL;
+		wxPanel* m_panel14;
 		wxPanel* m_panel3;
 		wxButton* m_btnExecute;
 		wxStaticText* m_labelStatus;
@@ -127,6 +131,12 @@ class _SqlCommandPanel : public wxPanel
 		
 		_SqlCommandPanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,480 ), long style = wxTAB_TRAVERSAL ); 
 		~_SqlCommandPanel();
+		
+		void m_splitter1OnIdle( wxIdleEvent& )
+		{
+			m_splitter1->SetSashPosition( 264 );
+			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _SqlCommandPanel::m_splitter1OnIdle ), NULL, this );
+		}
 	
 };
 
