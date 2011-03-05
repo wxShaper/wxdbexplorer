@@ -61,9 +61,7 @@ protected:
 	void OnToolUpdate(wxUpdateUIEvent& event);
 	void OnLoad(wxCommandEvent& WXUNUSED(event));
 	void OnSave(wxCommandEvent& WXUNUSED(event));
-	void OnSaveSql(wxCommandEvent& WXUNUSED(event));
-	virtual void OnMouseWheel(wxMouseEvent& event);
-	
+	void OnSaveSql(wxCommandEvent& WXUNUSED(event));	
 
 	DECLARE_EVENT_TABLE();
 

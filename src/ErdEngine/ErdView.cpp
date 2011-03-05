@@ -18,7 +18,6 @@ ErdView::ErdView(const ErdView& obj):wxSFRoundRectShape(obj)
 	if (m_pLabel){
 		m_pLabel->SetStyle(sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 		SF_ADD_COMPONENT( m_pLabel, wxT("title") );	
-		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));	
 		}
 }
 
@@ -43,57 +42,63 @@ void ErdView::DrawHighlighted(wxDC& dc)
 
 void ErdView::Initialize()
 {
-	SetFill(wxBrush(wxColour(216, 227,230)));
 	AcceptConnection(wxT("All"));
 	AcceptTrgNeighbour(wxT("All"));
 	AcceptSrcNeighbour(wxT("All"));
 	
+	AddStyle( sfsLOCK_CHILDREN );
+	AddStyle( sfsSHOW_SHADOW );
+	
+	SetBorder( wxPen( wxColour(220, 219, 140), 2, wxSOLID ) );
+	SetFill( wxBrush( wxColour(255, 250, 200) ) );
+	
 	m_pLabel = new wxSFTextShape();
 	if (m_pLabel) {
-		m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
-        m_pLabel->SetHAlign(wxSFShapeBase::halignEXPAND);
-        m_pLabel->SetVBorder(5);
-		m_pLabel->SetHBorder(5);
+		m_pLabel->SetVAlign( wxSFShapeBase::valignTOP );
+        m_pLabel->SetHAlign( wxSFShapeBase::halignCENTER );
+        m_pLabel->SetVBorder( 5 );
+		m_pLabel->SetHBorder( 5 );
+		m_pLabel->GetFont().SetPointSize( 10 );
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
 		m_pLabel->SetText(wxT("Table name"));
 		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
-
-		//XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
 		
         SF_ADD_COMPONENT( m_pLabel, wxT("title") );		
-		
-		}
+	}
+	
 	m_pGrid = new wxSFFlexGridShape();
 	if (m_pGrid){
-		//XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
-		
-				// set grid
-		m_pGrid->SetRelativePosition( 20, 30 );
+		// set grid
+		m_pGrid->SetRelativePosition( 0, 30 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
 		m_pGrid->SetFill( *wxTRANSPARENT_BRUSH );
 		m_pGrid->SetBorder( *wxTRANSPARENT_PEN );
 		
-		m_pGrid->SetHAlign( wxSFShapeBase::halignEXPAND );
+		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
 		m_pGrid->SetCellSpace( 1 );
-		m_pGrid->SetVBorder(2);
-		m_pGrid->SetHBorder(2);
+		m_pGrid->SetVBorder( 5 );
+		m_pGrid->SetHBorder( 5 );
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
-		m_pGrid->Activate(false);
-		
+		m_pGrid->Activate( false );
 		
         SF_ADD_COMPONENT( m_pGrid, wxT("SelectGrid") );		
-
-		
-		}
+	}
 }
 
-void ErdView::UpdateView()
+void ErdView::updateView()
 {
-	m_pGrid->GetChildrenList().DeleteContents(true);
-	m_pGrid->GetChildrenList().Clear();
+	/*SerializableList::compatibility_iterator node;
+	while( node = m_pGrid->GetFirstChildNode() )
+	{
+		GetParentManager()->RemoveItem( node->GetData() );
+	}*/
+	m_pGrid->RemoveChildren();
+	m_pGrid->ClearGrid();
+	m_pGrid->SetDimensions( 1, 1 );	
+
 	View* pView = wxDynamicCast(GetUserData(), View);
 	if (pView){
 		m_pLabel->SetText(pView->GetName());
@@ -109,17 +114,13 @@ void ErdView::UpdateView()
 				if (pView->GetSelect().length()>100){					
 					m_pCol->SetText(wxString::Format(wxT("%s  ...\n\t... %s"), pView->GetSelect().Mid(0,50).c_str(), pView->GetSelect().Right(50).c_str()));
 					}else m_pCol->SetText( pView->GetSelect() );			
-				m_pCol->SetHAlign(wxSFShapeBase::halignEXPAND);
-				m_pCol->SetVAlign(wxSFShapeBase::valignEXPAND);
-				//	m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
-				//m_pLabel->SetHAlign(wxSFShapeBase::halignCENTER);
+				m_pCol->SetHAlign(wxSFShapeBase::halignCENTER);
+				m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
 				m_pCol->SetVBorder(0);
-				m_pCol->SetHBorder(2);
-				m_pCol->GetFont().SetPointSize(9);
+				m_pCol->SetHBorder(0);
+				m_pCol->GetFont().SetPointSize(8);
 				m_pCol->Activate(false);
 				
-				//m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT | wxSFConnectionPoint::cpCENTERRIGHT );
-							
 			}else{			
 				delete m_pCol;
 				m_pCol = NULL;			
@@ -131,14 +132,7 @@ void ErdView::UpdateView()
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-	m_pLabel->Update();
+	m_pGrid->Update();
 	Update();
 	Refresh();
 }

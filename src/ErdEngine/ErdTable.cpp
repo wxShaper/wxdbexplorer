@@ -9,37 +9,27 @@ ErdTable::ErdTable():wxSFRoundRectShape()
 	/*Table* tab = new Table();
 	tab->setName(wxT("New table"));
 	SetUserData(tab);*/
-//	m_pTable = new Table();
-//	m_pTable->setName(wxT("New table"));
-	
-//	XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pTable, wxT("Table"));
+
 	Initialize();
 }
 ErdTable::ErdTable(Table* tab):wxSFRoundRectShape()
 {
 	SetUserData(tab);
-//	m_pTable = tab;
-//	XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pTable, wxT("Table"));
 	Initialize();
 }
 
 ErdTable::ErdTable(const ErdTable& obj):wxSFRoundRectShape(obj)
 {
-	//m_pTable = (Table*) obj.m_pTable->Clone();
-	//XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pTable, wxT("Table"));
-	
+
 	m_pLabel = (wxSFTextShape*) obj.m_pLabel->Clone();
 	if (m_pLabel){
 		m_pLabel->SetStyle(sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 		SF_ADD_COMPONENT( m_pLabel, wxT("title") );	
-		XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));	
 		}
 
 }
 ErdTable::~ErdTable()
 {
-	//delete m_pTable;
-	//delete m_pLabel;
 }
 
 void ErdTable::Initialize()
@@ -52,27 +42,32 @@ void ErdTable::Initialize()
 	AcceptTrgNeighbour(wxT("All"));
 	AcceptSrcNeighbour(wxT("All"));
 	
+	AddStyle( sfsLOCK_CHILDREN );
+	AddStyle( sfsSHOW_SHADOW );
+	
+	SetBorder( wxPen( wxColour(70, 125, 170), 2, wxSOLID ) );
+	SetFill( wxBrush( wxColour(210, 225, 245) ) );
+	
 	m_pLabel = new wxSFTextShape();
 	
 	m_pGrid = new wxSFFlexGridShape();
 	
-	if (m_pLabel){
+	if (m_pLabel && m_pGrid){
 		m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
-        m_pLabel->SetHAlign(wxSFShapeBase::halignEXPAND);
+        m_pLabel->SetHAlign(wxSFShapeBase::halignCENTER);
         m_pLabel->SetVBorder(5);
 		m_pLabel->SetHBorder(5);
+		
+		m_pLabel->GetFont().SetPointSize( 10 );
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
 		m_pLabel->SetText(wxT("Table name"));
 		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 
-		//XS_SERIALIZE_DYNAMIC_OBJECT_NO_CREATE(m_pLabel, wxT("TableNameLabel"));
-		
         SF_ADD_COMPONENT( m_pLabel, wxT("title") );		
 		
-		
 		// set grid
-		m_pGrid->SetRelativePosition( 20, 30 );
+		m_pGrid->SetRelativePosition( 0, 30 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
@@ -81,27 +76,25 @@ void ErdTable::Initialize()
 		
 		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
 		m_pGrid->SetCellSpace( 1 );
-		m_pGrid->SetVBorder(2);
-		m_pGrid->SetHBorder(2);
+		m_pGrid->SetVBorder( 5 );
+		m_pGrid->SetHBorder( 5 );
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
-		m_pGrid->Activate(false);
+		m_pGrid->Activate( false );
+		
 		SF_ADD_COMPONENT( m_pGrid, wxT("main_grid") );
-	
-		
-		}
-		
-		
+	}
 }
-
 
 void ErdTable::DrawHighlighted(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHighlighted(dc);
 }
+
 void ErdTable::DrawHover(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHover(dc);
 }
+
 void ErdTable::DrawNormal(wxDC& dc)
 {
 
@@ -152,17 +145,17 @@ void ErdTable::updateColumns()
 	}
 	
 	m_pGrid->Update();
-	m_pLabel->Update();
 	Update();
 	Refresh();
 }
 void ErdTable::clearGrid()
 {
-	SerializableList::compatibility_iterator node;
+	/*SerializableList::compatibility_iterator node;
 	while( node = m_pGrid->GetFirstChildNode() )
 	{
 		GetParentManager()->RemoveItem( node->GetData() );
-	}
+	}*/
+	m_pGrid->RemoveChildren();
 	// re-initialize grid control
 	m_pGrid->ClearGrid();
 	m_pGrid->SetDimensions( 1, 1 );	
@@ -178,17 +171,13 @@ void ErdTable::addColumnShape(const wxString& colName, int id)
 		m_pCol->SetId(id + constOffset);
 		if (m_pGrid->AppendToGrid(m_pCol)){
 			m_pCol->SetText( wxString::Format(wxT("%s"), colName.c_str()));			
-			m_pCol->SetHAlign(wxSFShapeBase::halignEXPAND);
+			m_pCol->SetHAlign(wxSFShapeBase::halignLEFT);
 			m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
-			//	m_pLabel->SetVAlign(wxSFShapeBase::valignTOP);
-			//m_pLabel->SetHAlign(wxSFShapeBase::halignCENTER);
 			m_pCol->SetVBorder(0);
-			m_pCol->SetHBorder(2);
-			m_pCol->GetFont().SetPointSize(9);
+			m_pCol->SetHBorder(0);
+			m_pCol->GetFont().SetPointSize(8);
 			m_pCol->Activate(false);
 			
-			m_pCol->SetCustomDockPoint(wxSFConnectionPoint::cpCENTERLEFT | wxSFConnectionPoint::cpCENTERRIGHT );
-						
 		}else{			
 			delete m_pCol;
 			m_pCol = NULL;			

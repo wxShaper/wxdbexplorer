@@ -6,22 +6,22 @@
 #include <wx/wxsf/CircleArrow.h>
 #include <wx/wxsf/SolidArrow.h>
 
-#include "wx/wxsf/OrthoShape.h" // Base class: wxSFOrthoLineShape
+#include "wx/wxsf/RoundOrthoShape.h" // Base class: wxSFOrthoLineShape
 
 #include "../Gui/NArrow.h"
 #include "../Gui/OneArrow.h"
 #include "DbEngine/constraint.h"
 
-class ErdForeignKey : public wxSFOrthoLineShape {
+class ErdForeignKey : public wxSFRoundOrthoLineShape {
 public:
 	XS_DECLARE_CLONABLE_CLASS(ErdForeignKey);	
 	ErdForeignKey();
 	ErdForeignKey(const ErdForeignKey& obj);
 	ErdForeignKey(Constraint* pConstraint);
-	
-	
-	
+
 	virtual ~ErdForeignKey();
+	
+	virtual void OnHandle(wxSFShapeHandle &handle);
 
 protected:
 	Constraint* m_pConstraint;

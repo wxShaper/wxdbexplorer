@@ -23,9 +23,9 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdP
 	Init(parent, dbAdapter);
 	if (pTable) {
 		ErdTable* pErdTab = new ErdTable(pTable);
-		pErdTab->updateColumns();
-		pErdTab->Refresh();
 		m_diagramManager.AddShape(pErdTab, NULL, wxPoint( 10,10), sfINITIALIZE, sfDONT_SAVE_STATE);
+		pErdTab->updateColumns();
+		pErdTab->Update();
 	}
 }
 
@@ -47,7 +47,7 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pIte
 			ErdView* pErdView = new ErdView(pView);
 			m_diagramManager.AddShape(pErdView, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
 			i+= 200;
-			pErdView->UpdateView();
+			pErdView->updateView();
 			}
 		node = node->GetNext();
 	}
@@ -103,10 +103,8 @@ void ErdPanel::OnTool(wxCommandEvent& event) {
 		m_nToolMode = modeVIEW;
 		break;
 	}
-	
-	
-
 }
+
 void ErdPanel::OnToolUpdate(wxUpdateUIEvent& event) {
 	switch(event.GetId()) {
 	case IDT_ERD_TOOL:
@@ -170,12 +168,6 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event) {
 	}
 }
 
-
-
-
-void ErdPanel::OnMouseWheel(wxMouseEvent& event) {	
-
-}
 ErdPanel::ErdPanel():_ErdPanel(NULL)
 {
 }

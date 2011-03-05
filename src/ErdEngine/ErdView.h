@@ -22,8 +22,8 @@ public:
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
 	
-	View* GetView() { return (View*) this->GetUserData(); }
-	void UpdateView();
+	View* getView() { return (View*) this->GetUserData(); }
+	void updateView();
 protected:
 	void Initialize();
 	

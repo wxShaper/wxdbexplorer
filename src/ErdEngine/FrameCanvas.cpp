@@ -11,18 +11,25 @@ FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWi
 	wxSFShapeCanvas(manager,parent,id, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL | wxSTATIC_BORDER) {
 	m_pParentPanel = (ErdPanel*) parentPanel;
 
-
-
 	m_pDbAdapter = dbAdapter;
+
+	AddStyle(sfsGRADIENT_BACKGROUND);
+	SetGradientFrom( wxColour(230, 230, 230) );
+	SetGradientTo( wxColour(255, 255, 255) );
+	
+	SetHoverColour( wxColour(200, 200, 200) );
 
 	AddStyle(sfsGRID_USE);
 	AddStyle(sfsGRID_SHOW);
+	SetGridLineMult( 10 );
+	SetGridStyle( wxSHORT_DASH );
+	
+	AddStyle(sfsPROCESS_MOUSEWHEEL);
+	SetMinScale(0.2);
+	SetMaxScale(2);
 
 	GetDiagramManager()->ClearAcceptedShapes();
-	GetDiagramManager()->AcceptShape(wxT("All"));
-	
-	
-
+	GetDiagramManager()->AcceptShape(wxT("All"));	
 }
 
 FrameCanvas::~FrameCanvas() {
@@ -80,7 +87,8 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 			view->SetName(wxT("New view"));
 			view->SetSelect(wxT("SELECT * FROM table"));
 			pShape->SetUserData(view);
-			((ErdView*)pShape)->UpdateView();
+			((ErdView*)pShape)->updateView();
+			pShape->Update();
 			pShape->Refresh();
 			}
 		}
@@ -162,11 +170,11 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 			}
 		ErdView* view = wxDynamicCast(sp->GetGrandParentShape(), ErdView);
 		if (view){
-			if (view->GetView()){
+			if (view->getView()){
 				ViewSettings settingDialog(this,m_pDbAdapter);
-				settingDialog.SetView(view->GetView(),(wxSFDiagramManager*) view->GetParentManager() );
+				settingDialog.SetView(view->getView(),(wxSFDiagramManager*) view->GetParentManager() );
 				settingDialog.ShowModal();
-				view->UpdateView();
+				view->updateView();
 				}			
 			}
 	}
@@ -198,7 +206,7 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 			pShape->Update();
 		}
 		if (pShape->IsKindOf(CLASSINFO(ErdTable)))	((ErdTable*)pShape)->updateColumns();
-		if (pShape->IsKindOf(CLASSINFO(ErdView)))	((ErdView*)pShape)->UpdateView();
+		if (pShape->IsKindOf(CLASSINFO(ErdView)))	((ErdView*)pShape)->updateView();
 
 		dndTab->SetUserData(NULL);
 		GetDiagramManager()->RemoveShape(dndTab);
@@ -223,7 +231,7 @@ wxString FrameCanvas::GetSqlScript() {
 	while( node ) {
 		ErdView* view = wxDynamicCast(node->GetData(),ErdView);
 		if (view) {
-			retStr.append(m_pDbAdapter->GetCreateViewSql(view->GetView(),true));
+			retStr.append(m_pDbAdapter->GetCreateViewSql(view->getView(),true));
 		}
 		node = node->GetNext();
 	}	
@@ -244,8 +252,14 @@ bool FrameCanvas::OnPreConnectionFinished(wxSFLineShape* connection){
 	if (pText){
 		m_dstCol = pText->GetText().substr(3);
 		}
-	CreateForeignKey dlg(this, wxDynamicCast(GetDiagramManager()->GetItem(connection->GetSrcShapeId()),ErdTable),wxDynamicCast(GetDiagramManager()->GetItem(connection->GetTrgShapeId()),ErdTable),m_srcCol,m_dstCol );
-	dlg.ShowModal();
+		
+	ErdTable *pSrcT = wxDynamicCast(GetDiagramManager()->GetItem(connection->GetSrcShapeId()),ErdTable);
+	ErdTable *pTrgT = wxDynamicCast(GetDiagramManager()->GetItem(connection->GetTrgShapeId()),ErdTable);
+	if( pSrcT && pTrgT )
+	{
+		CreateForeignKey dlg(this, pSrcT, pTrgT, m_srcCol, m_dstCol );
+		dlg.ShowModal();
+	}
 	
 	m_pParentPanel->SetToolMode(ErdPanel::modeDESIGN);
 	return false;

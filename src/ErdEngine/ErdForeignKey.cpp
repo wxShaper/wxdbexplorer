@@ -1,45 +1,54 @@
 #include "ErdForeignKey.h"
 
-XS_IMPLEMENT_CLONABLE_CLASS(ErdForeignKey,wxSFOrthoLineShape);
+XS_IMPLEMENT_CLONABLE_CLASS(ErdForeignKey,wxSFRoundOrthoLineShape);
 
-ErdForeignKey::ErdForeignKey():wxSFOrthoLineShape()
+ErdForeignKey::ErdForeignKey():wxSFRoundOrthoLineShape()
 {
 	m_pConstraint = NULL;
 }
 
-ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFOrthoLineShape()
+ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFRoundOrthoLineShape()
 {
 	m_pConstraint = pConstraint;
 	wxSFTextShape* pLabel = new wxSFTextShape();
-	pLabel->GetFont().SetPointSize(10);
-	//pLabel->SetFont(pLabel->GetFont().SetPixelSize(20));
-	pLabel->SetText(pConstraint->GetName());
-	pLabel->SetVAlign(valignMIDDLE);
-	pLabel->SetHAlign(halignCENTER);
-	pLabel->SetFill(*wxWHITE_BRUSH);
-	pLabel->SetStyle(sfsLOCK_CHILDREN | sfsPARENT_CHANGE);
-	pLabel->RemoveStyle(sfsPARENT_CHANGE);
-	pLabel->RemoveStyle(sfsSHOW_HANDLES);
 	
-	AddChild(pLabel);
+	if( pLabel )
+	{
+		pLabel->GetFont().SetPointSize(8);
+		pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
+		pLabel->SetText(pConstraint->GetName());
+		pLabel->SetVAlign(valignMIDDLE);
+		pLabel->SetHAlign(halignCENTER);
+		pLabel->SetFill(*wxTRANSPARENT_BRUSH);
+		pLabel->SetStyle(sfsLOCK_CHILDREN | sfsPARENT_CHANGE);
+		pLabel->RemoveStyle(sfsPARENT_CHANGE);
+		pLabel->RemoveStyle(sfsSHOW_HANDLES);
+		
+		AddChild(pLabel);
+	}
 
 	SetTrgArrow(CLASSINFO(OneArrow));
 	SetSrcArrow(CLASSINFO(NArrow));
-	
-	RemoveHandle(wxSFShapeHandle::hndLINESTART);
-	RemoveHandle(wxSFShapeHandle::hndLINEEND);
 
-	SetDockPoint(INT_MAX);
-	
-	
+	SetDockPoint(sfdvLINESHAPE_DOCKPOINT_CENTER);
 }
 
-ErdForeignKey::ErdForeignKey(const ErdForeignKey& obj):wxSFOrthoLineShape(obj)
+ErdForeignKey::ErdForeignKey(const ErdForeignKey& obj):wxSFRoundOrthoLineShape(obj)
 {
 	m_pConstraint = obj.m_pConstraint;
 }
+
 ErdForeignKey::~ErdForeignKey()
 {
 }
 
+void ErdForeignKey::OnHandle(wxSFShapeHandle& handle)
+{
+	// skip starting and ending handle
+	if( handle.GetType() != wxSFShapeHandle::hndLINESTART &&
+		handle.GetType() != wxSFShapeHandle::hndLINEEND )
+		{
+			wxSFRoundOrthoLineShape::OnHandle( handle );
+		}
+}
