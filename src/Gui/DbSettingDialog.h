@@ -13,7 +13,12 @@
 #include "../Main/SqliteDbAdapter.h"
 #endif
 
+#ifdef DBL_USE_POSTGRES
+#include "../Main/PostgreSqlDbAdapter.h"
+#endif
+
 #include "MysqlConnectionHistory.h"
+#include "PostgresConnectionHistory.h"s
 
 class DbSettingDialog : public _DBSettingsDialog {
 
@@ -22,6 +27,8 @@ public:
 	virtual ~DbSettingDialog();
 
 protected:
+
+
 	virtual void OnCancelClick(wxCommandEvent& event);
 	virtual void OnOkClick(wxCommandEvent& event);
 	virtual void OnSqliteOkClick(wxCommandEvent& event);
@@ -34,11 +41,26 @@ protected:
 	virtual void OnSaveUI(wxUpdateUIEvent& event);
 	virtual void OnOKUI(wxUpdateUIEvent& event);
 
+
+	virtual void OnPgCancelClick(wxCommandEvent& event);
+	virtual void OnPgOkClick(wxCommandEvent& event);
+	virtual void OnPgRemoveClick(wxCommandEvent& event);
+	virtual void OnPgSaveClick(wxCommandEvent& event);
+	virtual void OnPgHistoryClick(wxCommandEvent& event);
+	virtual void OnPgHistoryDClick(wxCommandEvent& event);
+	virtual void OnPgOKUI(wxUpdateUIEvent& event);
+	virtual void OnPgRmoveUI(wxUpdateUIEvent& event);
+	virtual void OnPgSaveUI(wxUpdateUIEvent& event);
+
+
+
+
 	void LoadHistory();
 
 
 	DbViewerPanel *m_pParent;
 	MysqlConnectionHistory *m_pHistory;
+	PostgresConnectionHistory *m_pPgHistory;
 };
 
 #endif // DBSETTINGDIALOG_H

@@ -254,7 +254,18 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
 	
 	m_notebook2 = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-	m_panel2 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panel19 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer18;
+	fgSizer18 = new wxFlexGridSizer( 1, 1, 0, 0 );
+	fgSizer18->AddGrowableCol( 0 );
+	fgSizer18->AddGrowableRow( 0 );
+	fgSizer18->SetFlexibleDirection( wxBOTH );
+	fgSizer18->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_splitter2 = new wxSplitterWindow( m_panel19, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
+	m_splitter2->Connect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitter2OnIdle ), NULL, this );
+	
+	m_panel2 = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 	
@@ -275,7 +286,19 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	m_panel2->SetSizer( bSizer4 );
 	m_panel2->Layout();
 	bSizer4->Fit( m_panel2 );
-	m_notebook2->AddPage( m_panel2, wxT("Databases"), false );
+	m_panel18 = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_thmSizer = new wxBoxSizer( wxVERTICAL );
+	
+	m_panel18->SetSizer( m_thmSizer );
+	m_panel18->Layout();
+	m_thmSizer->Fit( m_panel18 );
+	m_splitter2->SplitHorizontally( m_panel2, m_panel18, 306 );
+	fgSizer18->Add( m_splitter2, 1, wxEXPAND, 5 );
+	
+	m_panel19->SetSizer( fgSizer18 );
+	m_panel19->Layout();
+	fgSizer18->Fit( m_panel19 );
+	m_notebook2->AddPage( m_panel19, wxT("a page"), false );
 	
 	bSizer2->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	
@@ -322,6 +345,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_MySqlPanel = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer3;
 	fgSizer3 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer3->AddGrowableRow( 2 );
 	fgSizer3->SetFlexibleDirection( wxBOTH );
 	fgSizer3->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -446,7 +470,92 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_Sqlite->SetSizer( fgSizer31 );
 	m_Sqlite->Layout();
 	fgSizer31->Fit( m_Sqlite );
-	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), true );
+	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), false );
+	m_PostgrePanel = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer32;
+	fgSizer32 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer32->SetFlexibleDirection( wxBOTH );
+	fgSizer32->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer32;
+	sbSizer32 = new wxStaticBoxSizer( new wxStaticBox( m_PostgrePanel, wxID_ANY, wxEmptyString ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer42;
+	fgSizer42 = new wxFlexGridSizer( 2, 2, 0, 0 );
+	fgSizer42->AddGrowableCol( 1 );
+	fgSizer42->SetFlexibleDirection( wxBOTH );
+	fgSizer42->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText101 = new wxStaticText( m_PostgrePanel, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText101->Wrap( -1 );
+	fgSizer42->Add( m_staticText101, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txPgName = new wxTextCtrl( m_PostgrePanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer42->Add( m_txPgName, 1, wxALL|wxEXPAND, 5 );
+	
+	m_staticText12 = new wxStaticText( m_PostgrePanel, wxID_ANY, wxT("Server:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText12->Wrap( -1 );
+	fgSizer42->Add( m_staticText12, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txPgServer = new wxTextCtrl( m_PostgrePanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	fgSizer42->Add( m_txPgServer, 1, wxALL|wxEXPAND, 5 );
+	
+	m_staticText21 = new wxStaticText( m_PostgrePanel, wxID_ANY, wxT("User name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText21->Wrap( -1 );
+	fgSizer42->Add( m_staticText21, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txPgUserName = new wxTextCtrl( m_PostgrePanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), 0 );
+	fgSizer42->Add( m_txPgUserName, 1, wxALL|wxEXPAND, 5 );
+	
+	m_staticText31 = new wxStaticText( m_PostgrePanel, wxID_ANY, wxT("Password:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	fgSizer42->Add( m_staticText31, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txPgPassword = new wxTextCtrl( m_PostgrePanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), wxTE_PASSWORD );
+	fgSizer42->Add( m_txPgPassword, 0, wxALL|wxEXPAND, 5 );
+	
+	m_staticText24 = new wxStaticText( m_PostgrePanel, wxID_ANY, wxT("Default database:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText24->Wrap( -1 );
+	fgSizer42->Add( m_staticText24, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txPgDatabase = new wxTextCtrl( m_PostgrePanel, wxID_ANY, wxT("postgres"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer42->Add( m_txPgDatabase, 1, wxALL|wxEXPAND, 5 );
+	
+	sbSizer32->Add( fgSizer42, 1, wxEXPAND, 5 );
+	
+	fgSizer32->Add( sbSizer32, 1, wxEXPAND|wxTOP|wxRIGHT|wxLEFT, 5 );
+	
+	wxStaticBoxSizer* sbSizer42;
+	sbSizer42 = new wxStaticBoxSizer( new wxStaticBox( m_PostgrePanel, wxID_ANY, wxEmptyString ), wxVERTICAL );
+	
+	wxBoxSizer* bSizer82;
+	bSizer82 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_btnPgOK = new wxButton( m_PostgrePanel, wxID_PG_OK, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer82->Add( m_btnPgOK, 1, wxALL, 5 );
+	
+	m_btnPgCancel = new wxButton( m_PostgrePanel, wxID_PG_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer82->Add( m_btnPgCancel, 1, wxALL, 5 );
+	
+	m_btnPgSave = new wxButton( m_PostgrePanel, wxID_PG_SAVE, wxT("Save"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_btnPgSave->SetToolTip( wxT("Invalide value in \"Name\".") );
+	
+	bSizer82->Add( m_btnPgSave, 1, wxALL, 5 );
+	
+	m_btnPgRemove = new wxButton( m_PostgrePanel, wxID_PG_REMOVE, wxT("Remove"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer82->Add( m_btnPgRemove, 1, wxALL, 5 );
+	
+	sbSizer42->Add( bSizer82, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	fgSizer32->Add( sbSizer42, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT, 5 );
+	
+	m_listBoxPg = new wxListBox( m_PostgrePanel, wxID_PG_LIST, wxDefaultPosition, wxSize( -1,100 ), 0, NULL, 0 ); 
+	fgSizer32->Add( m_listBoxPg, 1, wxALL|wxEXPAND, 5 );
+	
+	m_PostgrePanel->SetSizer( fgSizer32 );
+	m_PostgrePanel->Layout();
+	fgSizer32->Fit( m_PostgrePanel );
+	m_notebook2->AddPage( m_PostgrePanel, wxT("PostgreSQL"), true );
 	
 	bSizer4->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	
@@ -469,6 +578,16 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_listBox2->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnHistoruUI ), NULL, this );
 	m_btnOKSqlite->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnSqliteOkClick ), NULL, this );
 	m_btnCancel1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnCancelClick ), NULL, this );
+	m_btnPgOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgOkClick ), NULL, this );
+	m_btnPgOK->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgOKUI ), NULL, this );
+	m_btnPgCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgCancelClick ), NULL, this );
+	m_btnPgSave->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgSaveClick ), NULL, this );
+	m_btnPgSave->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgSaveUI ), NULL, this );
+	m_btnPgRemove->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgRemoveClick ), NULL, this );
+	m_btnPgRemove->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgRmoveUI ), NULL, this );
+	m_listBoxPg->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _DBSettingsDialog::OnPgHistoryClick ), NULL, this );
+	m_listBoxPg->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgHistoryDClick ), NULL, this );
+	m_listBoxPg->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnHistoruUI ), NULL, this );
 }
 
 _DBSettingsDialog::~_DBSettingsDialog()
@@ -486,6 +605,16 @@ _DBSettingsDialog::~_DBSettingsDialog()
 	m_listBox2->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnHistoruUI ), NULL, this );
 	m_btnOKSqlite->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnSqliteOkClick ), NULL, this );
 	m_btnCancel1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnCancelClick ), NULL, this );
+	m_btnPgOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgOkClick ), NULL, this );
+	m_btnPgOK->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgOKUI ), NULL, this );
+	m_btnPgCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgCancelClick ), NULL, this );
+	m_btnPgSave->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgSaveClick ), NULL, this );
+	m_btnPgSave->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgSaveUI ), NULL, this );
+	m_btnPgRemove->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgRemoveClick ), NULL, this );
+	m_btnPgRemove->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgRmoveUI ), NULL, this );
+	m_listBoxPg->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( _DBSettingsDialog::OnPgHistoryClick ), NULL, this );
+	m_listBoxPg->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgHistoryDClick ), NULL, this );
+	m_listBoxPg->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnHistoruUI ), NULL, this );
 	
 }
 

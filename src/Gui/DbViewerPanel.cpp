@@ -7,10 +7,24 @@
 #include <wx/wfstream.h>
 #include <wx/propgrid/propgrid.h>
 #include <wx/imaglist.h>
+
+
+
+
 DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewerPanel(parent) {
 	m_pNotebook = notebook;
 	m_pDbAdapter = NULL;
 	m_pConnections = new xsSerializable();
+	
+	m_pThumbnail = new wxSFThumbnail(this);
+	m_thmSizer->Add(m_pThumbnail, 1, wxEXPAND, 0);
+	m_thmSizer->Layout();
+	Layout();
+	
+	
+	m_pNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED,wxAuiNotebookEventHandler(DbViewerPanel::OnPageChange), NULL, this);
+	
+	
 }
 
 DbViewerPanel::~DbViewerPanel() {
@@ -497,5 +511,13 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 
 
 	return false;
+}
+
+void DbViewerPanel::OnPageChange(wxAuiNotebookEvent& event)
+{
+	//m_pThumbnail->SetCanvas( ( udDiagramCanvas* )m_auintbDesignArea->GetPage(event.GetSelection()) );
+	ErdPanel* pPanel = NULL;
+	pPanel = wxDynamicCast(m_pNotebook->GetPage(event.GetSelection()),ErdPanel);
+	if (pPanel) m_pThumbnail->SetCanvas(pPanel->getCanvas());
 }
 

@@ -50,13 +50,18 @@
 #define wxID_TOOL_REFRESH 1002
 #define wxID_TOOL_ERD 1003
 #define wxID_Sqlite_OK 1004
-#define wxID_NEW_COL 1005
-#define wxID_NEW_CONSTRAIN 1006
-#define wxID_DEL 1007
-#define wxID_PAGE_TYPE 1008
-#define wxID_TX_SIZE 1009
-#define wxID_PAGE_CONSTRAINT 1010
-#define wxID_ON_UPDATE 1011
+#define wxID_PG_OK 1005
+#define wxID_PG_CANCEL 1006
+#define wxID_PG_SAVE 1007
+#define wxID_PG_REMOVE 1008
+#define wxID_PG_LIST 1009
+#define wxID_NEW_COL 1010
+#define wxID_NEW_CONSTRAIN 1011
+#define wxID_DEL 1012
+#define wxID_PAGE_TYPE 1013
+#define wxID_TX_SIZE 1014
+#define wxID_PAGE_CONSTRAINT 1015
+#define wxID_ON_UPDATE 1016
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -172,9 +177,13 @@ class _DbViewerPanel : public wxPanel
 	
 	protected:
 		wxNotebook* m_notebook2;
+		wxPanel* m_panel19;
+		wxSplitterWindow* m_splitter2;
 		wxPanel* m_panel2;
 		wxToolBar* m_toolBar1;
 		wxTreeCtrl* m_treeDatabases;
+		wxPanel* m_panel18;
+		wxBoxSizer* m_thmSizer;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnConncectClick( wxCommandEvent& event ) { event.Skip(); }
@@ -193,6 +202,12 @@ class _DbViewerPanel : public wxPanel
 		
 		_DbViewerPanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,500 ), long style = wxTAB_TRAVERSAL ); 
 		~_DbViewerPanel();
+		
+		void m_splitter2OnIdle( wxIdleEvent& )
+		{
+			m_splitter2->SetSashPosition( 306 );
+			m_splitter2->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitter2OnIdle ), NULL, this );
+		}
 	
 };
 
@@ -224,6 +239,22 @@ class _DBSettingsDialog : public wxDialog
 		wxFilePickerCtrl* m_filePickerSqlite;
 		wxButton* m_btnOKSqlite;
 		wxButton* m_btnCancel1;
+		wxPanel* m_PostgrePanel;
+		wxStaticText* m_staticText101;
+		wxTextCtrl* m_txPgName;
+		wxStaticText* m_staticText12;
+		wxTextCtrl* m_txPgServer;
+		wxStaticText* m_staticText21;
+		wxTextCtrl* m_txPgUserName;
+		wxStaticText* m_staticText31;
+		wxTextCtrl* m_txPgPassword;
+		wxStaticText* m_staticText24;
+		wxTextCtrl* m_txPgDatabase;
+		wxButton* m_btnPgOK;
+		wxButton* m_btnPgCancel;
+		wxButton* m_btnPgSave;
+		wxButton* m_btnPgRemove;
+		wxListBox* m_listBoxPg;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOkClick( wxCommandEvent& event ) { event.Skip(); }
@@ -237,6 +268,15 @@ class _DBSettingsDialog : public wxDialog
 		virtual void OnHistoryDClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnHistoruUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnSqliteOkClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgOkClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgOKUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnPgCancelClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgSaveClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgSaveUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnPgRemoveClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgRmoveUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnPgHistoryClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgHistoryDClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

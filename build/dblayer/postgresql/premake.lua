@@ -21,7 +21,7 @@ addoption( "dbl-postgresql-libs", "PostgreSQL library files path" )
 -- Set the name of your package.
 package.name = "DatabaseLayerPostgreSQL"
 -- Set this if you want a different name for your target than the package's name.
-targetName = "dblayer_mysql"
+targetName = "dblayer_postgresql"
 -- Set the kind of package you want to create.
 --		Options: exe | winexe | lib | dll
 package.kind = "dll"

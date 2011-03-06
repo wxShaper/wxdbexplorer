@@ -9,6 +9,8 @@
 #include <wx/dblayer/include/MysqlDatabaseLayer.h>
 #endif
 
+#include <wx/wxsf/Thumbnail.h>
+
 // wx classes
 #include <wx/wx.h>
 #include <wx/hashmap.h>
@@ -67,6 +69,7 @@ public:
 	virtual void OnToolCloseClick(wxCommandEvent& event);
 	virtual void OnToolCloseUI(wxUpdateUIEvent& event);
 
+	void OnPageChange(wxAuiNotebookEvent& event);
 
 	void OnPopupClick(wxCommandEvent &evt);
 
@@ -86,7 +89,7 @@ protected:
 	TableHashMap m_hashTables;
 	Database* m_pEditedDatabase;
 	DbConnection* m_pEditedConnection;
-	
+	wxSFThumbnail* m_pThumbnail;
 	
 	bool ImportDb(const wxString& sqlFile, Database* pDb);
 };
