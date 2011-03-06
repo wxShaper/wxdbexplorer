@@ -18,9 +18,6 @@
 #include <wx/textdlg.h>
 #include <wx/txtstrm.h>
 
-// xpm icons
-#include "../res/gui/folder.xpm"
-#include "../res/gui/form_blue.xpm"
 // other
 #include "../Interfaces/IDbItem.h"
 

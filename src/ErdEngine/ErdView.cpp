@@ -1,4 +1,7 @@
 #include "ErdView.h"
+#include "wx/wxsf/CommonFcn.h"
+
+using namespace wxSFCommonFcn;
 
 XS_IMPLEMENT_CLONABLE_CLASS(ErdView,wxSFRoundRectShape);
 
@@ -6,6 +9,7 @@ ErdView::ErdView():wxSFRoundRectShape()
 {
 	Initialize();
 }
+
 ErdView::ErdView(View* pView):wxSFRoundRectShape()
 {
 	SetUserData(pView);
@@ -28,17 +32,28 @@ ErdView::~ErdView()
 void ErdView::DrawHover(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHover(dc);
+	drawDetails(dc);
 }
 void ErdView::DrawNormal(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawNormal(dc);
+	drawDetails(dc);
 }
 
 void ErdView::DrawHighlighted(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHighlighted(dc);
+	drawDetails(dc);
 }
 
+void ErdView::drawDetails(wxDC& dc)
+{
+	dc.SetPen( *wxWHITE_PEN );
+	dc.SetBrush( *wxWHITE_BRUSH );
+	
+	dc.DrawRectangle( Conv2Point(GetAbsolutePosition() + wxRealPoint(1, m_nRadius - 2)),
+					  Conv2Size(m_nRectSize - wxRealPoint(2, 2*m_nRadius - 4)) );
+}
 
 void ErdView::Initialize()
 {
@@ -49,16 +64,16 @@ void ErdView::Initialize()
 	AddStyle( sfsLOCK_CHILDREN );
 	AddStyle( sfsSHOW_SHADOW );
 	
-	SetBorder( wxPen( wxColour(220, 219, 140), 2, wxSOLID ) );
+	SetBorder( wxPen( wxColour(220, 219, 140), 1, wxSOLID ) );
 	SetFill( wxBrush( wxColour(255, 250, 200) ) );
 	
 	m_pLabel = new wxSFTextShape();
 	if (m_pLabel) {
 		m_pLabel->SetVAlign( wxSFShapeBase::valignTOP );
         m_pLabel->SetHAlign( wxSFShapeBase::halignCENTER );
-        m_pLabel->SetVBorder( 5 );
+        m_pLabel->SetVBorder( 3 );
 		m_pLabel->SetHBorder( 5 );
-		m_pLabel->GetFont().SetPointSize( 10 );
+		m_pLabel->GetFont().SetPointSize( 9 );
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
 		m_pLabel->SetText(wxT("Table name"));
@@ -70,7 +85,7 @@ void ErdView::Initialize()
 	m_pGrid = new wxSFFlexGridShape();
 	if (m_pGrid){
 		// set grid
-		m_pGrid->SetRelativePosition( 0, 30 );
+		m_pGrid->SetRelativePosition( 0, 25 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
@@ -79,7 +94,7 @@ void ErdView::Initialize()
 		
 		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
 		m_pGrid->SetCellSpace( 1 );
-		m_pGrid->SetVBorder( 5 );
+		m_pGrid->SetVBorder( 15 );
 		m_pGrid->SetHBorder( 5 );
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
 		m_pGrid->Activate( false );

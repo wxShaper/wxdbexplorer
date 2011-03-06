@@ -9,12 +9,17 @@ enum APPIDS
     // tool ErdPanel IDs
     //---------------------------------------------------------------//
 	IDS_ERD_SAVE_SQL,
+	IDS_ERD_SAVE_BMP,
 	IDT_ERD_FIRST,
     IDT_ERD_TOOL,
 	IDT_ERD_TABLE,
 	IDT_ERD_VIEW,
 	IDT_ERD_LINE,
 	IDT_ERD_LAST,
+	IDT_ERD_ALIGN_CIRCLE,
+	IDT_ERD_ALIGN_MESH,
+	IDT_ERD_ALIGN_VTREE,
+	IDT_ERD_ALIGN_HTREE,
 	
 	IDR_POPUP_MI1,
 	IDR_POPUP_MI2,

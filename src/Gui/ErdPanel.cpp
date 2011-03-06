@@ -79,12 +79,25 @@ void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
 	m_toolBarErd->AddTool(wxID_SAVE, wxT("Save"), wxBitmap(filesave_xpm),  wxT("Save diagram"));
 	m_toolBarErd->AddTool(IDS_ERD_SAVE_SQL, wxT("Save SQL"), wxBitmap(filesavesql_xpm),wxT("Save SQL"));
 	m_toolBarErd->AddSeparator();
-	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
-	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(Grid_xpm),wxNullBitmap, wxT("Database table"));
-	m_toolBarErd->AddRadioTool(IDT_ERD_VIEW, wxT("View"), wxBitmap(GridView_xpm),wxNullBitmap, wxT("Database view"));	
-	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Constraint 1:N"), wxBitmap(link_editor_xpm),wxNullBitmap, wxT("Foreign key connection"));
-
+	m_toolBarErd->AddTool(wxID_PRINT, wxT("Print"), wxBitmap(fileprint_xpm),  wxT("Print diagram"));
+	m_toolBarErd->AddTool(wxID_PREVIEW, wxT("Preview"), wxBitmap(filepreview_xpm),  wxT("Print preview"));
 	m_toolBarErd->AddSeparator();
+	m_toolBarErd->AddTool(wxID_COPY, wxT("Copy"), wxBitmap(editcopy_xpm),  wxT("Copy item"));
+	m_toolBarErd->AddTool(wxID_CUT, wxT("Cut"), wxBitmap(editcut_xpm),  wxT("Cut item"));
+	m_toolBarErd->AddTool(wxID_PASTE, wxT("Paste"), wxBitmap(editpaste_xpm),  wxT("Paste item"));
+	m_toolBarErd->AddSeparator();
+	m_toolBarErd->AddTool(wxID_UNDO, wxT("Undo"), wxBitmap(undo_xpm),  wxT("Undo"));
+	m_toolBarErd->AddTool(wxID_REDO, wxT("Redo"), wxBitmap(redo_xpm),  wxT("Redo"));
+	m_toolBarErd->AddSeparator();
+	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
+	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(form_blue_xpm),wxNullBitmap, wxT("Database table"));
+	m_toolBarErd->AddRadioTool(IDT_ERD_VIEW, wxT("View"), wxBitmap(form_yellow_xpm),wxNullBitmap, wxT("Database view"));	
+	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Constraint 1:N"), wxBitmap(link_editor_xpm),wxNullBitmap, wxT("Foreign key connection"));
+	m_toolBarErd->AddSeparator();
+	m_toolBarErd->AddTool(IDT_ERD_ALIGN_CIRCLE, wxT("Align into circle"), wxBitmap(AlignCircle_xpm),  wxT("Align into circle"));
+	m_toolBarErd->AddTool(IDT_ERD_ALIGN_MESH, wxT("Align into mesh"), wxBitmap(AlignMesh_xpm),  wxT("Align into mesh"));
+	m_toolBarErd->AddTool(IDT_ERD_ALIGN_VTREE, wxT("Align into vertical tree"), wxBitmap(AlignVTree_xpm),  wxT("Align into vertical tree"));
+	m_toolBarErd->AddTool(IDT_ERD_ALIGN_HTREE, wxT("Align into horizontal tree"), wxBitmap(AlignHTree_xpm),  wxT("Align into horizontal tree"));
 	m_toolBarErd->Realize();
 }
 

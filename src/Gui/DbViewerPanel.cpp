@@ -8,23 +8,17 @@
 #include <wx/propgrid/propgrid.h>
 #include <wx/imaglist.h>
 
-
-
-
 DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewerPanel(parent) {
 	m_pNotebook = notebook;
 	m_pDbAdapter = NULL;
 	m_pConnections = new xsSerializable();
 	
-	m_pThumbnail = new wxSFThumbnail(this);
+	m_pThumbnail = new wxSFThumbnail(m_panelThumb);
 	m_thmSizer->Add(m_pThumbnail, 1, wxEXPAND, 0);
 	m_thmSizer->Layout();
 	Layout();
 	
-	
 	m_pNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED,wxAuiNotebookEventHandler(DbViewerPanel::OnPageChange), NULL, this);
-	
-	
 }
 
 DbViewerPanel::~DbViewerPanel() {
@@ -96,6 +90,7 @@ void DbViewerPanel::RefreshDbView() {
 	wxImageList *pImageList = new wxImageList(16,16,true,3);
 	pImageList->Add(wxIcon(folder_xpm));						// folder icon
 	pImageList->Add(wxIcon(form_blue_xpm));						// table icon
+	pImageList->Add(wxIcon(form_yellow_xpm));						// view icon
 	m_treeDatabases->SetImageList(pImageList);
 
 	wxTreeItemId totalRootID = m_treeDatabases->AddRoot(wxString::Format(wxT("Databases")),-1);
@@ -134,13 +129,13 @@ void DbViewerPanel::RefreshDbView() {
 					idFolder = m_treeDatabases->AppendItem(dbID, wxT("Views"),0,0,NULL);
 					//m_treeDatabases->Expand(dbID);
 
-					// ----------------------------- load tables ----------------------------------
+					// ----------------------------- load views ----------------------------------
 					tabNode = pDatabase->GetFirstChildNode();
 					while(tabNode) {
 						View* pView = wxDynamicCast(tabNode->GetData(),View);
 						if (pView) {
 							//wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pTable->getName(),1,-1,new DbItem(NULL,pTable)); //NULL);
-							wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pView->GetName(),1,-1,new DbItem(pView)); //NULL);
+							wxTreeItemId tabID = m_treeDatabases->AppendItem(idFolder,pView->GetName(),2,-1,new DbItem(pView)); //NULL);
 						}
 						tabNode = tabNode->GetNext();
 					}

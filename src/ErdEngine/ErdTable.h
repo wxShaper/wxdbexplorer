@@ -41,6 +41,9 @@ protected:
 	virtual void DrawHighlighted(wxDC& dc);
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
+	
+	void drawDetails(wxDC& dc);
+	
 	void clearGrid();
 	void clearConnections();
 	void addColumnShape(const wxString& colName, int id);

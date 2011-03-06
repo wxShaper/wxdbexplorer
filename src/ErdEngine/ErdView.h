@@ -17,15 +17,17 @@ public:
 	ErdView(const ErdView& obj);
 	ErdView(View* pView);
 	virtual ~ErdView();
-
-	virtual void DrawHighlighted(wxDC& dc);
-	virtual void DrawHover(wxDC& dc);
-	virtual void DrawNormal(wxDC& dc);
 	
 	View* getView() { return (View*) this->GetUserData(); }
 	void updateView();
 protected:
 	void Initialize();
+	
+	virtual void DrawHighlighted(wxDC& dc);
+	virtual void DrawHover(wxDC& dc);
+	virtual void DrawNormal(wxDC& dc);
+	
+	void drawDetails(wxDC& dc);
 	
 	wxSFTextShape *m_pLabel;
 	wxSFTextShape *m_pSelect;

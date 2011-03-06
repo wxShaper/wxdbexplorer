@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Nov 29 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -179,10 +179,10 @@ class _DbViewerPanel : public wxPanel
 		wxNotebook* m_notebook2;
 		wxPanel* m_panel19;
 		wxSplitterWindow* m_splitter2;
-		wxPanel* m_panel2;
+		wxPanel* m_panelData;
 		wxToolBar* m_toolBar1;
 		wxTreeCtrl* m_treeDatabases;
-		wxPanel* m_panel18;
+		wxPanel* m_panelThumb;
 		wxBoxSizer* m_thmSizer;
 		
 		// Virtual event handlers, overide them in your derived class
@@ -205,7 +205,7 @@ class _DbViewerPanel : public wxPanel
 		
 		void m_splitter2OnIdle( wxIdleEvent& )
 		{
-			m_splitter2->SetSashPosition( 306 );
+			m_splitter2->SetSashPosition( 305 );
 			m_splitter2->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitter2OnIdle ), NULL, this );
 		}
 	

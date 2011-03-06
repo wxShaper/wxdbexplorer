@@ -11,7 +11,6 @@
 #include "../Interfaces/IDbType.h"
 #include "MySqlType.h"
 
-
 class MySqlDbAdapter : public IDbAdapter {
 
 public:
@@ -19,19 +18,15 @@ public:
 	MySqlDbAdapter(const wxString& serverName, const wxString& userName, const wxString& password);
 	~MySqlDbAdapter();
 
-
-
 	virtual bool GetColumns(Table* pTab);
 	virtual void GetDatabases(DbConnection* dbCon);
 	virtual void GetTables(Database* db);
 	virtual void GetViews(Database* db);
 
-
 	virtual bool CanConnect();
 	virtual bool IsConnected();
 	virtual void CloseConnection();
 	virtual DatabaseLayer* GetDatabaseLayer();
-
 
 	virtual wxString GetUseDb(const wxString& dbName);
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
@@ -41,9 +36,7 @@ public:
 	virtual wxString GetCreateDatabaseSql(const wxString& dbName);
 	virtual wxString GetDropTableSql(Table* pTab);
 	virtual wxString GetDropDatabaseSql(Database* pDb);
-
-
-
+	
 	virtual IDbType* GetDbTypeByName(const wxString& typeName);
 	virtual wxArrayString* GetDbTypes();
 

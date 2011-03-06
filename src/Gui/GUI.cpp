@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Nov 29 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -7,9 +7,9 @@
 
 #include "GUI.h"
 
-#include "../res/elements/Bound.xpm"
+#include "../res/gui/Grid.xpm"
+#include "../res/gui/database.xpm"
 #include "../res/gui/delete.xpm"
-#include "../res/gui/fileopen.xpm"
 #include "../res/gui/refresh.xpm"
 
 ///////////////////////////////////////////////////////////////////////////
@@ -265,34 +265,34 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	m_splitter2 = new wxSplitterWindow( m_panel19, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
 	m_splitter2->Connect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitter2OnIdle ), NULL, this );
 	
-	m_panel2 = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panelData = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 	
-	m_toolBar1 = new wxToolBar( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL ); 
-	m_toolBar1->AddTool( wxID_CONNECT, wxT("Open connection"), wxBitmap( fileopen_xpm ), wxNullBitmap, wxITEM_NORMAL, wxT("Open new connection"), wxT("Open new connection"), NULL ); 
+	m_toolBar1 = new wxToolBar( m_panelData, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL ); 
+	m_toolBar1->AddTool( wxID_CONNECT, wxT("Open connection"), wxBitmap( database_xpm ), wxNullBitmap, wxITEM_NORMAL, wxT("Open new connection"), wxT("Open new connection"), NULL ); 
 	m_toolBar1->AddTool( wxID_CLOSE_CONNECTION, wxT("tool"), wxBitmap( delete_xpm ), wxNullBitmap, wxITEM_NORMAL, wxT("Close selected connection"), wxT("Close selected connection"), NULL ); 
 	m_toolBar1->AddTool( wxID_TOOL_REFRESH, wxT("tool"), wxBitmap( refresh_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL ); 
-	m_toolBar1->AddTool( wxID_TOOL_ERD, wxT("ERD"), wxBitmap( Bound_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL ); 
+	m_toolBar1->AddTool( wxID_TOOL_ERD, wxT("ERD"), wxBitmap( Grid_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxEmptyString, NULL ); 
 	m_toolBar1->Realize(); 
 	
 	bSizer4->Add( m_toolBar1, 0, wxEXPAND, 5 );
 	
-	m_treeDatabases = new wxTreeCtrl( m_panel2, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT|wxTR_LINES_AT_ROOT );
+	m_treeDatabases = new wxTreeCtrl( m_panelData, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT|wxTR_LINES_AT_ROOT );
 	m_treeDatabases->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 90, false, wxEmptyString ) );
 	
 	bSizer4->Add( m_treeDatabases, 1, wxEXPAND, 5 );
 	
-	m_panel2->SetSizer( bSizer4 );
-	m_panel2->Layout();
-	bSizer4->Fit( m_panel2 );
-	m_panel18 = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panelData->SetSizer( bSizer4 );
+	m_panelData->Layout();
+	bSizer4->Fit( m_panelData );
+	m_panelThumb = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	m_thmSizer = new wxBoxSizer( wxVERTICAL );
 	
-	m_panel18->SetSizer( m_thmSizer );
-	m_panel18->Layout();
-	m_thmSizer->Fit( m_panel18 );
-	m_splitter2->SplitHorizontally( m_panel2, m_panel18, 306 );
+	m_panelThumb->SetSizer( m_thmSizer );
+	m_panelThumb->Layout();
+	m_thmSizer->Fit( m_panelThumb );
+	m_splitter2->SplitHorizontally( m_panelData, m_panelThumb, 305 );
 	fgSizer18->Add( m_splitter2, 1, wxEXPAND, 5 );
 	
 	m_panel19->SetSizer( fgSizer18 );
