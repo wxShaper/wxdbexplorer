@@ -298,7 +298,7 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	m_panel19->SetSizer( fgSizer18 );
 	m_panel19->Layout();
 	fgSizer18->Fit( m_panel19 );
-	m_notebook2->AddPage( m_panel19, wxT("a page"), false );
+	m_notebook2->AddPage( m_panel19, wxT("Databases"), false );
 	
 	bSizer2->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	

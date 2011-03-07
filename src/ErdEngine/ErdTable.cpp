@@ -1,5 +1,6 @@
 #include "ErdTable.h"
 #include "wx/wxsf/CommonFcn.h"
+#include "wx/wxsf/ShapeCanvas.h"
 
 #include <wx/recguard.h>
 
@@ -149,10 +150,10 @@ void ErdTable::updateColumns()
 						if (pTab->getTable()->getName() == pConstr->GetRefTable()) pSecondTab = pTab;						
 						}					
 					nodeTab = nodeTab->GetNext();
-					}			
+					}	
 				if (pSecondTab){
-						GetShapeManager()->CreateConnection(GetId(), pSecondTab->GetId(), new ErdForeignKey(pConstr));					
-					}			
+						GetShapeManager()->CreateConnection(GetId(), pSecondTab->GetId(), new ErdForeignKey(pConstr), sfDONT_SAVE_STATE);					
+					}
 				} 
 			node = node->GetNext();
 			}
@@ -212,10 +213,8 @@ void ErdTable::clearConnections()
 		ErdForeignKey* key = wxDynamicCast(node->GetData(),ErdForeignKey);		
 		if (key){
 			GetShapeManager()->RemoveShape(key);		
-			node = lstShapes.GetFirst();
 			}
-			else
-				node = node->GetNext();
+			node = node->GetNext();
 		}
 }
 

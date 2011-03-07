@@ -41,7 +41,7 @@ public:
 
 	void Init(wxWindow *parent, IDbAdapter* dbAdapter);
 
-	wxSFShapeCanvas* getCanvas();
+	wxSFShapeCanvas* getCanvas() {return (wxSFShapeCanvas*)m_pFrameCanvas;}
 
 protected:
 	wxSFDiagramManager m_diagramManager;

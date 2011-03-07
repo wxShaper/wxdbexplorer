@@ -2,10 +2,10 @@
 IMPLEMENT_DYNAMIC_CLASS(ErdPanel,_ErdPanel)
 
 BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
-	EVT_MENU(wxID_OPEN, ErdPanel::OnLoad)
-	EVT_MENU(wxID_SAVE, ErdPanel::OnSave)
-	EVT_MENU(IDS_ERD_SAVE_SQL, ErdPanel::OnSaveSql)
-	EVT_MENU(IDS_ERD_SAVE_BMP, ErdPanel::OnSaveImg)
+	EVT_TOOL(wxID_OPEN, ErdPanel::OnLoad)
+	EVT_TOOL(wxID_SAVE, ErdPanel::OnSave)
+	EVT_TOOL(IDS_ERD_SAVE_SQL, ErdPanel::OnSaveSql)
+	EVT_TOOL(IDS_ERD_SAVE_BMP, ErdPanel::OnSaveImg)
 	EVT_TOOL(IDT_ERD_ZOOM100, ErdPanel::OnZoom100)
 	EVT_TOOL(IDT_ERD_ZOOMALL, ErdPanel::OnZoomAll)
 	EVT_TOOL(wxID_PRINT, ErdPanel::OnPrint)
@@ -158,6 +158,7 @@ void ErdPanel::OnLoad(wxCommandEvent& WXUNUSED(event)) {
 
 	if(dlg.ShowModal() == wxID_OK) {
 		m_pFrameCanvas->LoadCanvas(dlg.GetPath());
+		m_pFrameCanvas->UpdateERD();
 	}
 }
 
@@ -169,11 +170,6 @@ void ErdPanel::OnSave(wxCommandEvent& WXUNUSED(event)) {
 
 		wxMessageBox(wxString::Format(wxT("The chart has been saved to '%s'."), dlg.GetPath().GetData()), wxT("ShapeFramework"));
 	}
-}
-
-
-wxSFShapeCanvas* ErdPanel::getCanvas() {
-	return m_pFrameCanvas;
 }
 
 void ErdPanel::OnSaveSql(wxCommandEvent& event) {

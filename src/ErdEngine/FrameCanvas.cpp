@@ -232,9 +232,6 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 			pShape = GetDiagramManager()->AddShape(new ErdView((View* ) dndTab->GetUserData()), NULL, wxPoint( x,y), sfINITIALIZE, sfDONT_SAVE_STATE);
 			}
 
-
-		
-		//pShape = GetDiagramManager()->AddShape(CLASSINFO(wxSFRoundRectShape), event.GetPosition(), sfDONT_SAVE_STATE);
 		if (pShape) {
 			pShape->AcceptConnection(wxT("All"));
 			pShape->AcceptSrcNeighbour(wxT("All"));

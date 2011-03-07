@@ -163,6 +163,7 @@ void ErdView::Update()
 	}
 	
 	updateView();
+	
 	FitToChildren();
 	wxSFRoundRectShape::Update();
 }
