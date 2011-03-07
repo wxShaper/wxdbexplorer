@@ -18,7 +18,7 @@
 #endif
 
 #include "MysqlConnectionHistory.h"
-#include "PostgresConnectionHistory.h"s
+#include "PostgresConnectionHistory.h"
 
 class DbSettingDialog : public _DBSettingsDialog {
 

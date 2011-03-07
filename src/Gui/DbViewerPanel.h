@@ -66,6 +66,7 @@ public:
 	virtual void OnToolCloseClick(wxCommandEvent& event);
 	virtual void OnToolCloseUI(wxUpdateUIEvent& event);
 
+	void OnPageChanging(wxAuiNotebookEvent& event);
 	void OnPageChange(wxAuiNotebookEvent& event);
 
 	void OnPopupClick(wxCommandEvent &evt);

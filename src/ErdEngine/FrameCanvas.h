@@ -32,15 +32,13 @@ public:
 	virtual void OnRightDown(wxMouseEvent& event);
 	virtual void OnLeftDown(wxMouseEvent& event);
 	virtual void OnLeftDoubleClick(wxMouseEvent& event);
-
 	virtual bool OnPreConnectionFinished(wxSFLineShape* connection);
-
-
 	virtual void OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped);
 
 	void OnPopupClick(wxCommandEvent &evt);
 
 	wxString GetSqlScript();
+	void UpdateERD();
 
 protected:
 	ErdPanel* m_pParentPanel;

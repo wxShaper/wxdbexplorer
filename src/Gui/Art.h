@@ -24,5 +24,9 @@
 #include "../res/gui/AlignMesh.xpm"
 #include "../res/gui/AlignVTree.xpm"
 #include "../res/gui/AlignHTree.xpm"
+#include "../res/gui/Zoom100.xpm"
+#include "../res/gui/ZoomAll.xpm"
+#include "../res/gui/export-sql.xpm"
+#include "../res/gui/export-img.xpm"
 
 #endif // ART_H_INCLUDED

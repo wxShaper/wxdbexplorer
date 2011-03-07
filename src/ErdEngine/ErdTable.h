@@ -26,7 +26,8 @@ public:
 	
 	virtual ~ErdTable();
 	
-	void updateColumns();
+	virtual void Update();
+
 	void addColumn(const wxString& colName, IDbType* type);
 	Table* getTable() { return (Table*) this->GetUserData(); }
 
@@ -42,6 +43,7 @@ protected:
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
 	
+	void updateColumns();
 	void drawDetails(wxDC& dc);
 	
 	void clearGrid();

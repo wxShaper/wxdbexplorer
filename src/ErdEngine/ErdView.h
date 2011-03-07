@@ -19,7 +19,9 @@ public:
 	virtual ~ErdView();
 	
 	View* getView() { return (View*) this->GetUserData(); }
-	void updateView();
+	
+	virtual void Update();
+	
 protected:
 	void Initialize();
 	
@@ -28,6 +30,7 @@ protected:
 	virtual void DrawNormal(wxDC& dc);
 	
 	void drawDetails(wxDC& dc);
+	void updateView();
 	
 	wxSFTextShape *m_pLabel;
 	wxSFTextShape *m_pSelect;

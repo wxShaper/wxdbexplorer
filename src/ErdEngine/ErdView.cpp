@@ -1,6 +1,8 @@
 #include "ErdView.h"
 #include "wx/wxsf/CommonFcn.h"
 
+#include <wx/recguard.h>
+
 using namespace wxSFCommonFcn;
 
 XS_IMPLEMENT_CLONABLE_CLASS(ErdView,wxSFRoundRectShape);
@@ -148,8 +150,19 @@ void ErdView::updateView()
 		
 		
 	m_pGrid->Update();
-	Update();
-	Refresh();
 }
 
-
+void ErdView::Update()
+{
+	static wxRecursionGuardFlag s_flag;
+	wxRecursionGuard guard(s_flag);
+	if ( guard.IsInside() )
+	{
+		// don't allow reentrancy
+		return;
+	}
+	
+	updateView();
+	FitToChildren();
+	wxSFRoundRectShape::Update();
+}

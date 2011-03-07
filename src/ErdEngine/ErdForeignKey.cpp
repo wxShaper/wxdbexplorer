@@ -5,6 +5,8 @@ XS_IMPLEMENT_CLONABLE_CLASS(ErdForeignKey,wxSFRoundOrthoLineShape);
 ErdForeignKey::ErdForeignKey():wxSFRoundOrthoLineShape()
 {
 	m_pConstraint = NULL;
+	
+	EnableSerialization( false );
 }
 
 ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFRoundOrthoLineShape()
@@ -32,6 +34,8 @@ ErdForeignKey::ErdForeignKey(Constraint* pConstraint):wxSFRoundOrthoLineShape()
 	SetSrcArrow(CLASSINFO(NArrow));
 
 	SetDockPoint(sfdvLINESHAPE_DOCKPOINT_CENTER);
+	
+	EnableSerialization( false );
 }
 
 ErdForeignKey::ErdForeignKey(const ErdForeignKey& obj):wxSFRoundOrthoLineShape(obj)

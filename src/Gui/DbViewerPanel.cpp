@@ -18,6 +18,7 @@ DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewe
 	m_thmSizer->Layout();
 	Layout();
 	
+	m_pNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGING,wxAuiNotebookEventHandler(DbViewerPanel::OnPageChanging), NULL, this);
 	m_pNotebook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED,wxAuiNotebookEventHandler(DbViewerPanel::OnPageChange), NULL, this);
 }
 
@@ -302,12 +303,16 @@ void DbViewerPanel::OnToolCloseClick(wxCommandEvent& event) {
 void DbViewerPanel::OnToolCloseUI(wxUpdateUIEvent& event) {	
 	event.Enable(false);
 	// getting selected item data
-	DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
-	if (data){
-		DbConnection* pCon = wxDynamicCast(data->GetData(), DbConnection);
-		if (pCon) event.Enable(true);		
+	wxTreeItemId treeId = m_treeDatabases->GetSelection();
+	if( treeId.IsOk() ) {
+		DbItem* data = (DbItem*) m_treeDatabases->GetItemData( treeId );
+		if (data){
+			DbConnection* pCon = wxDynamicCast(data->GetData(), DbConnection);
+			if (pCon) event.Enable(true);		
+			}
 		}
 }
+
 void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 {
 	try{
@@ -510,9 +515,15 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 
 void DbViewerPanel::OnPageChange(wxAuiNotebookEvent& event)
 {
-	//m_pThumbnail->SetCanvas( ( udDiagramCanvas* )m_auintbDesignArea->GetPage(event.GetSelection()) );
-	ErdPanel* pPanel = NULL;
-	pPanel = wxDynamicCast(m_pNotebook->GetPage(event.GetSelection()),ErdPanel);
-	if (pPanel) m_pThumbnail->SetCanvas(pPanel->getCanvas());
-}
+	ErdPanel* pPanel = wxDynamicCast(m_pNotebook->GetPage(event.GetSelection()),ErdPanel);
+	if (pPanel)	m_pThumbnail->SetCanvas(pPanel->getCanvas());
 
+	event.Skip();
+}		 
+
+void DbViewerPanel::OnPageChanging(wxAuiNotebookEvent& event)
+{
+	m_pThumbnail->SetCanvas(NULL);
+	
+	event.Skip();
+}

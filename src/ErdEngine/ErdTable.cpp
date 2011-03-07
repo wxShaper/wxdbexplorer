@@ -1,6 +1,8 @@
 #include "ErdTable.h"
 #include "wx/wxsf/CommonFcn.h"
 
+#include <wx/recguard.h>
+
 using namespace wxSFCommonFcn;
 
 #define constOffset MAX_ID
@@ -116,6 +118,7 @@ void ErdTable::updateColumns()
 {	
 	clearGrid();
 	clearConnections();
+	
 	ShapeList list;
 	if (GetShapeManager()){
 		GetShapeManager()->GetShapes(CLASSINFO(ErdTable), list);
@@ -156,16 +159,10 @@ void ErdTable::updateColumns()
 	}
 	
 	m_pGrid->Update();
-	Update();
-	Refresh();
 }
+
 void ErdTable::clearGrid()
 {
-	/*SerializableList::compatibility_iterator node;
-	while( node = m_pGrid->GetFirstChildNode() )
-	{
-		GetParentManager()->RemoveItem( node->GetData() );
-	}*/
 	m_pGrid->RemoveChildren();
 	// re-initialize grid control
 	m_pGrid->ClearGrid();
@@ -209,13 +206,31 @@ void ErdTable::clearConnections()
 	ShapeList lstShapes;
 	GetShapeManager()->GetAssignedConnections(this,CLASSINFO(ErdForeignKey),lineSTARTING ,lstShapes);
 	
-		// remove all child shapes
+	// remove all child shapes
 	ShapeList::compatibility_iterator node = lstShapes.GetFirst();
 	while( node ) {
 		ErdForeignKey* key = wxDynamicCast(node->GetData(),ErdForeignKey);		
 		if (key){
-			GetShapeManager()->RemoveShape(key);			
+			GetShapeManager()->RemoveShape(key);		
+			node = lstShapes.GetFirst();
 			}
-		node = node->GetNext();
+			else
+				node = node->GetNext();
 		}
+}
+
+void ErdTable::Update()
+{
+	static wxRecursionGuardFlag s_flag;
+	wxRecursionGuard guard(s_flag);
+	if ( guard.IsInside() )
+	{
+		// don't allow reentrancy
+		return;
+	}
+		
+	updateColumns();
+	
+	FitToChildren();
+	wxSFRoundRectShape::Update();
 }

@@ -29,8 +29,9 @@ CreateForeignKey::~CreateForeignKey()
 
 void CreateForeignKey::OnCancelClick(wxCommandEvent& event)
 {
-	Destroy();
+	EndModal(wxID_CANCEL);
 }
+
 void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 {
 	wxString srcColName;
@@ -47,7 +48,8 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		pConstr->SetRefTable(m_txDstTable->GetValue());
 		pConstr->SetType(Constraint::foreignKey);
 		pTable->AddChild(pConstr);
-		m_pSrcTable->updateColumns();
+		m_pSrcTable->Update();
+		m_pSrcTable->Refresh();
 		}	
 
 	if (m_radioBox3->GetSelection() == 1){
@@ -113,13 +115,13 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		
 		ErdTable* newErdTable = (ErdTable*) m_pSrcTable->GetShapeManager()->AddShape(new ErdTable(), NULL, wxPoint(x,y), true);
 		newErdTable->SetUserData(newTab);
-		newErdTable->updateColumns();
+		newErdTable->Update();
+		newErdTable->Refresh();
 		}
 		
-		
-		
-		Destroy();
+		EndModal(wxID_OK);
 }
+
 void CreateForeignKey::OnOKUI(wxUpdateUIEvent& event)
 {
 	event.Enable(false);

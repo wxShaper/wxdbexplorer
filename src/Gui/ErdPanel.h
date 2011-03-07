@@ -41,11 +41,7 @@ public:
 
 	void Init(wxWindow *parent, IDbAdapter* dbAdapter);
 
-
-
 	wxSFShapeCanvas* getCanvas();
-
-
 
 protected:
 	wxSFDiagramManager m_diagramManager;
@@ -62,6 +58,25 @@ protected:
 	void OnLoad(wxCommandEvent& WXUNUSED(event));
 	void OnSave(wxCommandEvent& WXUNUSED(event));
 	void OnSaveSql(wxCommandEvent& WXUNUSED(event));	
+	void OnSaveImg(wxCommandEvent& WXUNUSED(event));	
+	void OnZoom100(wxCommandEvent& WXUNUSED(event));
+	void OnZoomAll(wxCommandEvent& WXUNUSED(event));
+	void OnPrint(wxCommandEvent& WXUNUSED(event));
+	void OnPreview(wxCommandEvent& WXUNUSED(event));
+	void OnCopy(wxCommandEvent& WXUNUSED(event));
+	void OnCut(wxCommandEvent& WXUNUSED(event));
+	void OnPaste(wxCommandEvent& WXUNUSED(event));
+	void OnUpdateCopy(wxUpdateUIEvent& event);
+	void OnUpdateCut(wxUpdateUIEvent& event);
+	void OnUpdatePaste(wxUpdateUIEvent& event);
+	void OnUndo(wxCommandEvent& WXUNUSED(event));
+	void OnRedo(wxCommandEvent& WXUNUSED(event));
+	void OnUpdateUndo(wxUpdateUIEvent& event);
+	void OnUpdateRedo(wxUpdateUIEvent& event);
+	void OnAlignCircle(wxCommandEvent& WXUNUSED(event));
+	void OnAlignMesh(wxCommandEvent& WXUNUSED(event));
+	void OnAlignVTree(wxCommandEvent& WXUNUSED(event));
+	void OnAlignHTree(wxCommandEvent& WXUNUSED(event));
 
 	DECLARE_EVENT_TABLE();
 
