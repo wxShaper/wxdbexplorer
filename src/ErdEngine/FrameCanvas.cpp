@@ -143,6 +143,8 @@ void FrameCanvas::OnRightDown(wxMouseEvent& event) {
 			mnu.Append(IDR_POPUP_MI1, 	wxT("Add column"));
 			mnu.Append(IDR_POPUP_MI2, 	wxT("Add create sql to clippoard"));
 			mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
+			mnu.AppendSeparator();
+			mnu.Append(IDR_POPUP_MI3, wxT("Create view for table"));
 			PopupMenu(&mnu);
 		}
 	}
@@ -183,6 +185,23 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 		}
 	}
 	break;
+	case IDR_POPUP_MI3:{
+		ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
+		if (table){
+			Table* pTab = table->getTable();
+			wxPoint point(round(table->GetAbsolutePosition().x), round(table->GetAbsolutePosition().y));
+			point.x = table->GetRectSize().x + 10;
+			ErdView* pView =  (ErdView*) GetDiagramManager()->AddShape(new ErdView(), NULL, point, sfINITIALIZE, sfDONT_SAVE_STATE);
+			if (pView){
+				View* view = new View();
+				view->SetName(pTab->getName()+wxT("VW"));
+				view->SetParentName(pTab->getParentName());
+				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->getParentName(),pTab->getName()));
+				pView->SetUserData(view);
+				pView->Update();
+				}
+			}
+		}
 	}
 }
 
