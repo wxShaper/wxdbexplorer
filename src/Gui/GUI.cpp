@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 29 2010)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -292,7 +292,7 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	m_panelThumb->SetSizer( m_thmSizer );
 	m_panelThumb->Layout();
 	m_thmSizer->Fit( m_panelThumb );
-	m_splitter2->SplitHorizontally( m_panelData, m_panelThumb, 305 );
+	m_splitter2->SplitHorizontally( m_panelData, m_panelThumb, 400 );
 	fgSizer18->Add( m_splitter2, 1, wxEXPAND, 5 );
 	
 	m_panel19->SetSizer( fgSizer18 );

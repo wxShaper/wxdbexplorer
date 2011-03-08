@@ -28,7 +28,7 @@ public:
 
 	IDbAdapter* getDbAdapter() { return this->m_pDbAdapter; }
 	// nazev databáze
-	wxString getName() { return this->m_name; }
+	wxString GetName() { return this->m_name; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
 	//TableCol *tables;

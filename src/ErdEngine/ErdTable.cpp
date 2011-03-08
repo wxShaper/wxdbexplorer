@@ -129,10 +129,10 @@ void ErdTable::UpdateColumns()
 	
 	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
 	if (tab){		
-		m_pLabel->SetText(tab->getName());
+		m_pLabel->SetText(tab->GetName());
 		SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 		while( node ){
-			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  AddColumnShape(wxString::Format(wxT("col: %s"),((Column*) node->GetData())->getName().c_str()),i++);
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  AddColumnShape(wxString::Format(wxT("col: %s"),((Column*) node->GetData())->GetName().c_str()),i++);
 			node = node->GetNext();
 			}		
 			
@@ -147,7 +147,7 @@ void ErdTable::UpdateColumns()
 				while(nodeTab){
 					ErdTable* pTab = wxDynamicCast(nodeTab->GetData(), ErdTable);
 					if (pTab){
-						if (pTab->GetTable()->getName() == pConstr->GetRefTable()) pSecondTab = pTab;						
+						if (pTab->GetTable()->GetName() == pConstr->GetRefTable()) pSecondTab = pTab;						
 						}					
 					nodeTab = nodeTab->GetNext();
 					}	

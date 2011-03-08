@@ -41,8 +41,8 @@ bool MySqlDbAdapter::IsConnected() {
 wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
 	wxString str = wxT("");
-	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s`; \n"),tab->getName().c_str());
-	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
+	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s` CASCADE; \n"),tab->GetName().c_str());
+	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->GetName().c_str()));
 
 
 
@@ -50,7 +50,7 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	while( node ) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
-		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
+		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->GetName().c_str(), col->getPType()->ReturnSql().c_str()));
 
 		Constraint* constr = wxDynamicCast(node->GetData(),Constraint);
 		if (constr) {
@@ -164,11 +164,11 @@ bool MySqlDbAdapter::GetColumns(Table* pTab) {
 	if (!dbLayer->IsOpen()) return NULL;
 	// loading columns
 	//TODO:SQL:
-	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),pTab->getName().c_str()));
+	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),pTab->GetName().c_str()));
 	while (database->Next()) {
 		IDbType* pType = parseTypeString(database->GetResultString(2));
 		if (pType) {
-			Column* pCol = new Column(database->GetResultString(1),pTab->getName(), pType);
+			Column* pCol = new Column(database->GetResultString(1),pTab->GetName(), pType);
 			pTab->AddChild(pCol);
 		}
 	}
@@ -176,7 +176,7 @@ bool MySqlDbAdapter::GetColumns(Table* pTab) {
 
 	//TODO:SQL:
 	wxString constrSql = wxT("SELECT K.CONSTRAINT_SCHEMA, K.CONSTRAINT_NAME,K.TABLE_NAME,K.COLUMN_NAME,K.REFERENCED_TABLE_NAME,K.REFERENCED_COLUMN_NAME,R.UPDATE_RULE, R.DELETE_RULE FROM information_schema.KEY_COLUMN_USAGE K LEFT JOIN information_schema.REFERENTIAL_CONSTRAINTS R ON R.CONSTRAINT_NAME = K.CONSTRAINT_NAME AND K.CONSTRAINT_SCHEMA = R.CONSTRAINT_SCHEMA WHERE K.CONSTRAINT_SCHEMA = '%s' AND K.TABLE_NAME = '%s'");
-	database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->getParentName().c_str(),pTab->getName().c_str()));
+	database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->getParentName().c_str(),pTab->GetName().c_str()));
 	while (database->Next()) {
 		Constraint* constr = new Constraint();
 		constr->SetName(database->GetResultString(wxT("CONSTRAINT_NAME")));
@@ -275,10 +275,10 @@ void MySqlDbAdapter::GetTables(Database* db) {
 			//TODO:SQL:
 
 			//DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
-			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->getName().c_str()) );
+			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->GetName().c_str()) );
 
 			while (tabulky->Next()) {
-				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->getName(),0));
+				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),0));
 			}
 			dbLayer->CloseResultSet(tabulky);
 			dbLayer->Close();
@@ -291,13 +291,13 @@ wxString MySqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxString::Format(wxT("CREATE DATABASE `%s`"), dbName.c_str());
 }
 wxString MySqlDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxString::Format(wxT("DROP TABLE `%s`.`%s`"), pTab->getParentName().c_str(),pTab->getName().c_str());
+	return wxString::Format(wxT("DROP TABLE `%s`.`%s`"), pTab->getParentName().c_str(),pTab->GetName().c_str());
 }
 wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	//TODO:SQL:
-	wxString str =  wxString::Format(wxT("-- ---------- CONSTRAINTS FOR TABLE `%s` \n"),tab->getName().c_str());
+	wxString str =  wxString::Format(wxT("-- ---------- CONSTRAINTS FOR TABLE `%s` \n"),tab->GetName().c_str());
 	str.append(wxT("-- -------------------------------------------------------------\n"));
-	wxString prefix = wxString::Format(wxT("ALTER TABLE `%s` "),tab->getName().c_str());
+	wxString prefix = wxString::Format(wxT("ALTER TABLE `%s` "),tab->GetName().c_str());
 
 	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 	while( node ) {
@@ -347,7 +347,7 @@ wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	return str;
 }
 wxString MySqlDbAdapter::GetDropDatabaseSql(Database* pDb) {
-	return wxString::Format(wxT("DROP DATABASE `%s`"),pDb->getName().c_str());
+	return wxString::Format(wxT("DROP DATABASE `%s`"),pDb->GetName().c_str());
 }
 wxString MySqlDbAdapter::GetUseDb(const wxString& dbName) {
 	return wxString::Format(wxT("USE `%s`"),dbName.c_str());
@@ -358,9 +358,9 @@ void MySqlDbAdapter::GetViews(Database* db) {
 	if (!dbLayer->IsOpen()) return;
 	// loading columns
 	//TODO:SQL:
-	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`VIEWS` WHERE TABLE_SCHEMA = '%s'"),db->getName().c_str()));
+	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`VIEWS` WHERE TABLE_SCHEMA = '%s'"),db->GetName().c_str()));
 	while (database->Next()) {
-		View* pView = new View(this,database->GetResultString(wxT("TABLE_NAME")),db->getName(),database->GetResultString(wxT("VIEW_DEFINITION")));
+		View* pView = new View(this,database->GetResultString(wxT("TABLE_NAME")),db->GetName(),database->GetResultString(wxT("VIEW_DEFINITION")));
 		db->AddChild(pView);
 	}
 	dbLayer->CloseResultSet(database);

@@ -9,16 +9,16 @@ CreateForeignKey::CreateForeignKey(wxWindow* parent, ErdTable* pSourceTable, Erd
 	
 	m_cmbDstCol->SetValue(dstColName);
 	m_cmbSrcCol->SetValue(srcColName);
-	m_txSrcTable->SetValue(pSourceTable->GetTable()->getName());
-	m_txDstTable->SetValue(pDestTable->GetTable()->getName());	
+	m_txSrcTable->SetValue(pSourceTable->GetTable()->GetName());
+	m_txDstTable->SetValue(pDestTable->GetTable()->GetName());	
 	SerializableList::compatibility_iterator node = pSourceTable->GetTable()->GetFirstChildNode();
 	while( node ) {
-		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_cmbSrcCol->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_cmbSrcCol->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->GetName().c_str()));
 		node = node->GetNext();
 	}
 	node = pDestTable->GetTable()->GetFirstChildNode();
 	while( node ) {
-		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_cmbDstCol->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_cmbDstCol->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->GetName().c_str()));
 		node = node->GetNext();
 	}
 }
@@ -42,7 +42,7 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 	if (m_radioRelation->GetSelection() == 0){
 		Table* pTable = m_pSrcTable->GetTable();		
 		Constraint* pConstr = new Constraint();
-		pConstr->SetName(wxString::Format(wxT("FK_%s_%s"), pTable->getName().c_str(),m_pDstTable->GetTable()->getName().c_str()));
+		pConstr->SetName(wxString::Format(wxT("FK_%s_%s"), pTable->GetName().c_str(),m_pDstTable->GetTable()->GetName().c_str()));
 		pConstr->SetLocalColumn(m_cmbSrcCol->GetValue());
 		pConstr->SetRefCol(m_cmbDstCol->GetValue());
 		pConstr->SetRefTable(m_txDstTable->GetValue());
@@ -63,16 +63,16 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
  		//wxString sr2 = pDstTable->getName();
 		//Table* newTab = new Table();//new Table(pSrcTable->GetDbAdapter(),wxString::Format(wxT("FKT_%s_%s"),pSrcTable->getName().c_str(),pDstTable->getName().c_str() ), wxT(""),0);
 		Table* newTab = new Table();
-		newTab->setName(wxString::Format(wxT("FKT_%s_%s"),pSrcTable->getName().c_str(),pDstTable->getName().c_str() ));
+		newTab->setName(wxString::Format(wxT("FKT_%s_%s"),pSrcTable->GetName().c_str(),pDstTable->GetName().c_str() ));
 		// Copy selected columns --------------------------------------------------------
 		SerializableList::compatibility_iterator node = pSrcTable->GetFirstChildNode();
 		while( node ) {
 			if( node->GetData()->IsKindOf( CLASSINFO(Column)) ){
 				Column* col = wxDynamicCast(node->GetData(), Column);
-				if (col->getName() == m_cmbSrcCol->GetValue()) {
+				if (col->GetName() == m_cmbSrcCol->GetValue()) {
 					Column* colNew = (Column*) col->Clone();
-					srcColName = col->getName();
-					srcLocColName = wxString::Format(wxT("%s_%s"), pSrcTable->getName().c_str(), col->getName().c_str());
+					srcColName = col->GetName();
+					srcLocColName = wxString::Format(wxT("%s_%s"), pSrcTable->GetName().c_str(), col->GetName().c_str());
 					colNew->setName(srcLocColName);
 					newTab->AddChild(colNew);	
 					}			
@@ -84,10 +84,10 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		while( node ) {
 			if( node->GetData()->IsKindOf( CLASSINFO(Column)) ){
 				Column* col = wxDynamicCast(node->GetData(), Column);
-				if (col->getName() == m_cmbDstCol->GetValue()) {
+				if (col->GetName() == m_cmbDstCol->GetValue()) {
 					Column* colNew = (Column*) col->Clone();
-					dstColName = col->getName();
-					dstLocColName = wxString::Format(wxT("%s_%s"), pDstTable->getName().c_str(), col->getName().c_str());
+					dstColName = col->GetName();
+					dstLocColName = wxString::Format(wxT("%s_%s"), pDstTable->GetName().c_str(), col->GetName().c_str());
 					colNew->setName(dstLocColName);
 					newTab->AddChild(colNew);	
 					}			
@@ -96,9 +96,9 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		}
 		// create constraints ------------------------------------------------------------
 		Constraint* pCSrc = new Constraint();
-		pCSrc->SetName(wxString::Format(wxT("FK_%s_%s"),newTab->getName().c_str(), pSrcTable->getName().c_str()));
+		pCSrc->SetName(wxString::Format(wxT("FK_%s_%s"),newTab->GetName().c_str(), pSrcTable->GetName().c_str()));
 		pCSrc->SetLocalColumn(srcLocColName);
-		pCSrc->SetRefTable(pSrcTable->getName());
+		pCSrc->SetRefTable(pSrcTable->GetName());
 		pCSrc->SetRefCol(srcColName);
 		pCSrc->SetType(Constraint::foreignKey);
 		pCSrc->SetOnDelete((Constraint::constraintAction) m_radioOnDelete->GetSelection());
@@ -106,9 +106,9 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		newTab->AddChild(pCSrc);		
 		
 		Constraint* pCDest = new Constraint();
-		pCDest->SetName(wxString::Format(wxT("FK_%s_%s"),newTab->getName().c_str(), pDstTable->getName().c_str()));
+		pCDest->SetName(wxString::Format(wxT("FK_%s_%s"),newTab->GetName().c_str(), pDstTable->GetName().c_str()));
 		pCDest->SetLocalColumn(dstLocColName);
-		pCDest->SetRefTable(pDstTable->getName());
+		pCDest->SetRefTable(pDstTable->GetName());
 		pCDest->SetRefCol(dstColName);
 		pCDest->SetType(Constraint::foreignKey);
 		pCDest->SetOnDelete((Constraint::constraintAction) m_radioOnDelete->GetSelection());

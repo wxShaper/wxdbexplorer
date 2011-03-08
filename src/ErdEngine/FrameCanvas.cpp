@@ -5,9 +5,6 @@
 #include "ErdView.h"
 
 
-// definice konstanty uzivatelského datového typu pro DnD
-static const wxChar *dropTableFormatID = wxT("dropTableFormat");
-
 FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWindow* parent, wxPanel* parentPanel, wxWindowID id):
 	wxSFShapeCanvas(manager,parent,id, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL | wxSTATIC_BORDER) {
 	m_pParentPanel = (ErdPanel*) parentPanel;
@@ -62,7 +59,7 @@ void FrameCanvas::UpdateERD()
 }
 
 void FrameCanvas::OnConnectionFinished(wxSFLineShape* connection) {
-	wxMessageBox(wxT("hotovo2"));
+	//wxMessageBox(wxT("hotovo2"));
 	m_pParentPanel->SetToolMode(ErdPanel::modeDESIGN);
 	
 	return;
@@ -198,9 +195,9 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 			ErdView* pView =  (ErdView*) GetDiagramManager()->AddShape(new ErdView(), NULL, point, sfINITIALIZE, sfDONT_SAVE_STATE);
 			if (pView){
 				View* view = new View();
-				view->SetName(pTab->getName()+wxT("VW"));
+				view->SetName(pTab->GetName()+wxT("VW"));
 				view->SetParentName(pTab->getParentName());
-				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->getParentName(),pTab->getName()));
+				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->getParentName(),pTab->GetName()));
 				pView->SetUserData(view);
 				pView->UpdateView();
 				pView->Refresh();

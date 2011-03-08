@@ -29,7 +29,7 @@ public:
 	Table(IDbAdapter* dbAdapter,const wxString& tableName, const wxString& parentName, int rowCount);
 	virtual ~Table();
 	// nazev tabulky
-	wxString getName() { return this->m_name; }
+	wxString GetName() { return this->m_name; }
 	// nazev rodicovskeho prvku - databaze
 	wxString getParentName() { return this->m_parentName; }
 	void RefreshChildren();

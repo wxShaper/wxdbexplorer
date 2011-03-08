@@ -32,7 +32,7 @@ public:
 	
 	
 	// nazev sloupecku
-	wxString getName() { return this->m_name; }
+	wxString GetName() { return this->m_name; }
 	void setName(const wxString& name) { this->m_name = name; }
 	// nazev rodicovskeho prvku - tabulky nebo view
 	wxString getParentName() { return this->m_parentName; }

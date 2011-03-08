@@ -42,8 +42,8 @@ bool PostgreSqlDbAdapter::IsConnected() {
 wxString PostgreSqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
 	wxString str = wxT("");
-/*	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s`; \n"),tab->getName().c_str());
-	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->getName().c_str()));
+	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS %s CASCADE; \n"),tab->GetName().c_str());
+	str.append(wxString::Format(wxT("CREATE TABLE %s (\n"),tab->GetName().c_str()));
 
 
 
@@ -51,11 +51,11 @@ wxString PostgreSqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	while( node ) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
-		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->getName().c_str(), col->getPType()->ReturnSql().c_str()));
+		if(col)	str.append(wxString::Format(wxT("\t%s %s"),col->GetName().c_str(), col->getPType()->ReturnSql().c_str()));
 
 		Constraint* constr = wxDynamicCast(node->GetData(),Constraint);
 		if (constr) {
-			if (constr->GetType() == Constraint::primaryKey) str.append(wxString::Format(wxT("\tPRIMARY KEY (`%s`) \n"), constr->GetLocalColumn().c_str()));
+			if (constr->GetType() == Constraint::primaryKey) str.append(wxString::Format(wxT("\tCONSTRAINT %s PRIMARY KEY (%s) \n"),constr->GetName().c_str(), constr->GetLocalColumn().c_str()));
 		}
 
 		node = node->GetNext();
@@ -77,7 +77,7 @@ wxString PostgreSqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 			else  str.append(wxT("\n ")) ;
 		}*/
 
-	str.append(wxT("\n) ENGINE=INNODB;\n"));
+	str.append(wxT("\n);\n"));
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
 }
@@ -85,77 +85,179 @@ wxString PostgreSqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 
 IDbType* PostgreSqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	IDbType* type = NULL;
-	if (typeName == wxT("INT")) {
-		type = new MySqlType(wxT("INT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	} else if (typeName == wxT("VARCHAR")) {
-		type = new MySqlType(wxT("VARCHAR"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	} else if (typeName == wxT("DOUBLE")) {
-		type = new MySqlType(wxT("DOUBLE"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	} else if (typeName == wxT("FLOAT")) {
-		type = new MySqlType(wxT("FLOAT"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL );
-	} else if (typeName == wxT("DECIMAL")) {
-		type = new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	}  else if (typeName == wxT("BOOL")) {
-		type = new MySqlType(wxT("BOOL"), 0);
-	} else if (typeName == wxT("DATETIME")) {
-		type = new MySqlType(wxT("DATETIME"), IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL);
-	} else if (typeName == wxT("TINYINT")) {
-		type = new MySqlType(wxT("TINYINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	} else if (typeName == wxT("BIGINT")) {
-		type = new MySqlType(wxT("BIGINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	}  else if (typeName == wxT("SMALLINT")) {
-		type = new MySqlType(wxT("SMALLINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	} else if (typeName == wxT("CHAR")) {
-		type = new MySqlType(wxT("CHAR"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	} else if (typeName == wxT("TIMESTAMP")) {
-		type = new MySqlType(wxT("TIMESTAMP"), 0);
-	} else if (typeName == wxT("ENUM")) {
-		type = new MySqlType(wxT("ENUM"), 0);
-	} else if (typeName == wxT("SET")) {
-		type = new MySqlType(wxT("SET"), 0);
-	} else if (typeName == wxT("LONGBLOB")) {
-		type = new MySqlType(wxT("LONGBLOB"), 0);
-	} else if (typeName == wxT("BLOB")) {
-		type = new MySqlType(wxT("BLOB"), 0);
-	} else if (typeName == wxT("MEDIUMTEXT")) {
-		type = new MySqlType(wxT("MEDIUMTEXT"), IDbType::dbtNOT_NULL);
-	} else if (typeName == wxT("TEXT")) {
-		type = new MySqlType(wxT("TEXT"), 0);
-	} else if (typeName == wxT("LONGTEXT")) {
-		type = new MySqlType(wxT("LONGTEXT"), 0);
+	// numeric types
+	if (typeName == wxT("SMALLINT")) {
+		type = new PostgreSqlType(wxT("SMALLINT"), IDbType::dbtNOT_NULL  );
+	} else if (typeName == wxT("INTEGER")) {
+		type = new PostgreSqlType(wxT("INTEGER"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("BIGINT")) {
+		type = new PostgreSqlType(wxT("BIGINT"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("DECIMAL")) {
+		type = new PostgreSqlType(wxT("DECIMAL"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	}else if (typeName == wxT("NUMERIC")) {
+		type = new PostgreSqlType(wxT("NUMERIC"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	}else if (typeName == wxT("REAL")) {
+		type = new PostgreSqlType(wxT("REAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	}else if (typeName == wxT("DOUBLE PRECISION")) {
+		type = new PostgreSqlType(wxT("DOUBLE PRECISION"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	}else if (typeName == wxT("SERIAL")) {
+		type = new PostgreSqlType(wxT("SERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	}else if (typeName == wxT("BIGSERIAL")) {
+		type = new PostgreSqlType(wxT("BIGSERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	
+	// Monetary types
+	}else if (typeName == wxT("CHARACTER VARYING")) {
+		type = new PostgreSqlType(wxT("CHARACTER VARYING"),IDbType::dbtNOT_NULL| IDbType::dbtSIZE);
+	// Character types
+	}else if (typeName == wxT("VARCHAR")) {
+		type = new PostgreSqlType(wxT("VARCHAR"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+	}else if (typeName == wxT("CHARACTER")) {
+		type = new PostgreSqlType(wxT("CHARACTER"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+	}else if (typeName == wxT("CHAR")) {
+		type = new PostgreSqlType(wxT("CHAR"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+	}else if (typeName == wxT("TEXT")) {
+		type = new PostgreSqlType(wxT("TEXT"),IDbType::dbtNOT_NULL );
+	
+	// Binary types
+	}else if (typeName == wxT("BYTEA")) {
+		type = new PostgreSqlType(wxT("BYTEA"),IDbType::dbtNOT_NULL);
+	
+	// Date/Time types
+	}else if (typeName == wxT("TIMESTAMP")) {
+		type = new PostgreSqlType(wxT("TIMESTAMP"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+	}else if (typeName == wxT("DATE")) {
+		type = new PostgreSqlType(wxT("DATE"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("TIME")) {
+		type = new PostgreSqlType(wxT("TIME"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+	}else if (typeName == wxT("INTERVAL")) {
+		type = new PostgreSqlType(wxT("INTERVAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+	
+	// Boolean types
+	}else if (typeName == wxT("BOOLEAN")) {
+		type = new PostgreSqlType(wxT("BOOLEAN"),IDbType::dbtNOT_NULL );
+	
+	// Geometric types
+	}else if (typeName == wxT("POINT")) {
+		type = new PostgreSqlType(wxT("POINT"),IDbType::dbtNOT_NULL  );
+	}else if (typeName == wxT("LINE")) {
+		type = new PostgreSqlType(wxT("LINE"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("LSEG")) {
+		type = new PostgreSqlType(wxT("LSEG"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("BOX")) {
+		type = new PostgreSqlType(wxT("BOX"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("PATH")) {
+		type = new PostgreSqlType(wxT("PATH"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("POLYGON")) {
+		type = new PostgreSqlType(wxT("POLYGON"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("CIRCLE")) {
+		type = new PostgreSqlType(wxT("CIRCLE"),IDbType::dbtNOT_NULL );
+	
+	// Network address types
+	}else if (typeName == wxT("CIDR")) {
+		type = new PostgreSqlType(wxT("CIDR"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("INET")) {
+		type = new PostgreSqlType(wxT("INET"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("MACADDR")) {
+		type = new PostgreSqlType(wxT("MACADDR"),IDbType::dbtNOT_NULL );
+	
+	// Bit String types 
+	}else if (typeName == wxT("BIT")) {
+		type = new PostgreSqlType(wxT("BIT"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+	}else if (typeName == wxT("BIT VARYING")) {
+		type = new PostgreSqlType(wxT("BIT VARYING"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+	
+	// UUID type
+	}else if (typeName == wxT("UUID")) {
+		type = new PostgreSqlType(wxT("UUID"),IDbType::dbtNOT_NULL );
+	
+	// XML type
+	}else if (typeName == wxT("XML")) {
+		type = new PostgreSqlType(wxT("XML"),IDbType::dbtNOT_NULL );
+	
+	// Other types
+	}else if (typeName == wxT("OID")) {
+		type = new PostgreSqlType(wxT("OID"),IDbType::dbtNOT_NULL);
+	}else if (typeName == wxT("XID")) {
+		type = new PostgreSqlType(wxT("XID"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("ARRAY")) {
+		type = new PostgreSqlType(wxT("ARRAY"),IDbType::dbtNOT_NULL );
+	}else if (typeName == wxT("REGPROX")) {
+		type = new PostgreSqlType(wxT("REGPROX"),IDbType::dbtNOT_NULL );
 	}
+	
 	wxASSERT(type);
 	return type;
 }
 
 wxArrayString* PostgreSqlDbAdapter::GetDbTypes() {
 	wxArrayString* pNames = new wxArrayString();
-	pNames->Add(wxT("INT"));
-	pNames->Add(wxT("SMALLINT"));
-	pNames->Add(wxT("BIGINT"));
-	pNames->Add(wxT("TINYINT"));
-	pNames->Add(wxT("VARCHAR"));
-	pNames->Add(wxT("DOUBLE"));
-	pNames->Add(wxT("FLOAT"));
-	pNames->Add(wxT("DECIMAL"));
-	pNames->Add(wxT("BOOL"));
-	pNames->Add(wxT("DATETIME"));
-	pNames->Add(wxT("CHAR"));
-	pNames->Add(wxT("TIMESTAMP"));
-	pNames->Add(wxT("ENUM"));
-	pNames->Add(wxT("SET"));
-	pNames->Add(wxT("LONGBLOB"));
-	pNames->Add(wxT("BLOB"));
-	pNames->Add(wxT("MEDIUMTEXT"));
-	pNames->Add(wxT("TEXT"));
-	pNames->Add(wxT("LONGTEXT"));
 
+	pNames->Add(wxT("SMALLINT"));
+	pNames->Add(wxT("INTEGER")) ;
+	pNames->Add(wxT("BIGINT")) ;
+	pNames->Add(wxT("DECIMAL"));
+	pNames->Add(wxT("NUMERIC"));
+	pNames->Add(wxT("REAL")) ;
+	pNames->Add(wxT("DOUBLE PRECISION")) ;
+	pNames->Add(wxT("SERIAL")) ;
+	pNames->Add(wxT("BIGSERIAL")) ;
+	
+	// Monetary types
+	pNames->Add(wxT("CHARACTER VARYING")) ;
+	// Character types
+	pNames->Add(wxT("VARCHAR")) ;
+	pNames->Add(wxT("CHARACTER")) ;
+	pNames->Add(wxT("CHAR"));
+	pNames->Add(wxT("TEXT")) ;
+	
+	// Binary types
+	pNames->Add(wxT("BYTEA")) ;
+	
+	// Date/Time types
+	pNames->Add(wxT("TIMESTAMP")) ;
+	pNames->Add(wxT("DATE"));
+	pNames->Add(wxT("TIME")) ;
+	pNames->Add(wxT("INTERVAL"));
+	
+	// Boolean types
+	pNames->Add(wxT("BOOLEAN"));
+	
+	// Geometric types
+	pNames->Add(wxT("POINT")) ;
+	pNames->Add(wxT("LINE")) ;
+	pNames->Add(wxT("LSEG")) ;
+	pNames->Add(wxT("BOX")) ;
+	pNames->Add(wxT("PATH")) ;
+	pNames->Add(wxT("POLYGON"));
+	pNames->Add(wxT("CIRCLE")) ;
+	
+	// Network address types
+	pNames->Add(wxT("CIDR"));
+	pNames->Add(wxT("INET"));
+	pNames->Add(wxT("MACADDR")) ;
+	
+	// Bit String types 
+	pNames->Add(wxT("BIT"));
+	pNames->Add(wxT("BIT VARYING")) ;
+	
+	// UUID type
+	pNames->Add(wxT("UUID")) ;
+	
+	// XML type
+	pNames->Add(wxT("XML")) ;
+	
+	// OTHER TYPES
+	pNames->Add(wxT("OID")) ;
+	pNames->Add(wxT("XID")) ;
+	pNames->Add(wxT("ARRAY")) ;
+	pNames->Add(wxT("REGPROX")) ;
+	
 
 	return pNames;
 }
 wxString PostgreSqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	//TODO:SQL:
-	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s`"), dbName.c_str(), tableName.c_str());
+	wxString ret = wxString::Format(wxT("SELECT * FROM %s"), tableName.c_str());
 	return ret;
 }
 
@@ -168,7 +270,7 @@ bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 		// loading columns
 		//TODO:SQL:
 		//DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),pTab->getName().c_str()));
-		DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.columns WHERE table_name = '%s'"),pTab->getName().c_str()));
+		DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.columns WHERE table_name = '%s'"),pTab->GetName().c_str()));
 		
 		
 		while (database->Next()) {
@@ -177,48 +279,61 @@ bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 				pType->SetSize(database->GetResultInt(wxT("numeric_precision")));
 				pType->SetSize2(database->GetResultInt(wxT("numeric_precision_radix")));
 				pType->SetNotNull(database->GetResultString(wxT("is_nullable")) == wxT("NO"));				
-				Column* pCol = new Column(database->GetResultString(wxT("column_name")),pTab->getName(), pType);
+				Column* pCol = new Column(database->GetResultString(wxT("column_name")),pTab->GetName(), pType);
 				pTab->AddChild(pCol);
 			}
 		}
 		dbLayer->CloseResultSet(database);
-/*
+
+
+
+//wxT("SELECT tc.constraint_name, tc.constraint_type, tc.table_name, kcu.column_name, tc.is_deferrable, tc.initially_deferred, rc.match_option AS match_type, rc.update_rule AS on_update, rc.delete_rule AS on_delete, ccu.table_name AS references_table, ccu.column_name AS references_field FROM information_schema.table_constraints tc LEFT JOIN information_schema.key_column_usage kcu ON tc.constraint_catalog = kcu.constraint_catalog AND tc.constraint_schema = kcu.constraint_schema AND tc.constraint_name = kcu.constraint_name LEFT JOIN information_schema.referential_constraints rc ON tc.constraint_catalog = rc.constraint_catalog AND tc.constraint_schema = rc.constraint_schema AND tc.constraint_name = rc.constraint_name LEFT JOIN information_schema.constraint_column_usage ccu ON rc.unique_constraint_catalog = ccu.constraint_catalog AND rc.unique_constraint_schema = ccu.constraint_schema AND rc.unique_constraint_name = ccu.constraint_name WHERE tc.table_name = '%s'");
+
+
+
 		//TODO:SQL:
-		wxString constrSql = wxT("SELECT K.CONSTRAINT_SCHEMA, K.CONSTRAINT_NAME,K.TABLE_NAME,K.COLUMN_NAME,K.REFERENCED_TABLE_NAME,K.REFERENCED_COLUMN_NAME,R.UPDATE_RULE, R.DELETE_RULE FROM information_schema.KEY_COLUMN_USAGE K LEFT JOIN information_schema.REFERENTIAL_CONSTRAINTS R ON R.CONSTRAINT_NAME = K.CONSTRAINT_NAME AND K.CONSTRAINT_SCHEMA = R.CONSTRAINT_SCHEMA WHERE K.CONSTRAINT_SCHEMA = '%s' AND K.TABLE_NAME = '%s'");
-		database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->getParentName().c_str(),pTab->getName().c_str()));
+		wxString constrSql = wxT("SELECT tc.constraint_name, tc.constraint_type, tc.table_name, kcu.column_name, tc.is_deferrable, tc.initially_deferred, rc.match_option AS match_type, rc.update_rule AS on_update, rc.delete_rule AS on_delete, ccu.table_name AS references_table, ccu.column_name AS references_field FROM information_schema.table_constraints tc LEFT JOIN information_schema.key_column_usage kcu ON tc.constraint_catalog = kcu.constraint_catalog AND tc.constraint_schema = kcu.constraint_schema AND tc.constraint_name = kcu.constraint_name LEFT JOIN information_schema.referential_constraints rc ON tc.constraint_catalog = rc.constraint_catalog AND tc.constraint_schema = rc.constraint_schema AND tc.constraint_name = rc.constraint_name LEFT JOIN information_schema.constraint_column_usage ccu ON rc.unique_constraint_catalog = ccu.constraint_catalog AND rc.unique_constraint_schema = ccu.constraint_schema AND rc.unique_constraint_name = ccu.constraint_name WHERE tc.table_name = '%s'");
+		
+		database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->GetName().c_str()));
 		while (database->Next()) {
-			Constraint* constr = new Constraint();
-			constr->SetName(database->GetResultString(wxT("CONSTRAINT_NAME")));
-			constr->SetLocalColumn(database->GetResultString(wxT("COLUMN_NAME")));
-			constr->SetType(Constraint::primaryKey);
-			if (database->GetResultString(wxT("REFERENCED_TABLE_NAME")) != wxT("") ) {
-				constr->SetType(Constraint::foreignKey);
-				constr->SetRefTable(database->GetResultString(wxT("REFERENCED_TABLE_NAME")));
-				constr->SetRefCol(database->GetResultString(wxT("REFERENCED_COLUMN_NAME")));
+			if ((database->GetResultString(wxT("constraint_type")) == wxT("PRIMARY KEY"))||(database->GetResultString(wxT("constraint_type")) == wxT("FOREIGN KEY"))){			
+				Constraint* constr = new Constraint();
+				constr->SetName(database->GetResultString(wxT("constraint_name")));
+				constr->SetLocalColumn(database->GetResultString(wxT("column_name")));
+				constr->SetType(Constraint::primaryKey);
+				if (database->GetResultString(wxT("references_table")) != wxT("") ) {
+					constr->SetType(Constraint::foreignKey);
+					constr->SetRefTable(database->GetResultString(wxT("references_table")));
+					constr->SetRefCol(database->GetResultString(wxT("references_field")));
 
-				wxString onDelete = database->GetResultString(wxT("UPDATE_RULE"));
-				if (onDelete == wxT("RESTRICT")) constr->SetOnUpdate(Constraint::restrict);
-				if (onDelete == wxT("CASCADE")) constr->SetOnUpdate(Constraint::cascade);
-				if (onDelete == wxT("SET NULL")) constr->SetOnUpdate(Constraint::setNull);
-				if (onDelete == wxT("NO ACTION")) constr->SetOnUpdate(Constraint::noAction);
+					wxString onDelete = database->GetResultString(wxT("on_update"));
+					if (onDelete == wxT("RESTRICT")) constr->SetOnUpdate(Constraint::restrict);
+					if (onDelete == wxT("CASCADE")) constr->SetOnUpdate(Constraint::cascade);
+					if (onDelete == wxT("SET NULL")) constr->SetOnUpdate(Constraint::setNull);
+					if (onDelete == wxT("NO ACTION")) constr->SetOnUpdate(Constraint::noAction);
 
-				wxString onUpdate = database->GetResultString(wxT("DELETE_RULE"));
-				if (onUpdate == wxT("RESTRICT")) constr->SetOnDelete(Constraint::restrict);
-				if (onUpdate == wxT("CASCADE")) constr->SetOnDelete(Constraint::cascade);
-				if (onUpdate == wxT("SET NULL")) constr->SetOnDelete(Constraint::setNull);
-				if (onUpdate == wxT("NO ACTION")) constr->SetOnDelete(Constraint::noAction);
+					wxString onUpdate = database->GetResultString(wxT("on_delete"));
+					if (onUpdate == wxT("RESTRICT")) constr->SetOnDelete(Constraint::restrict);
+					if (onUpdate == wxT("CASCADE")) constr->SetOnDelete(Constraint::cascade);
+					if (onUpdate == wxT("SET NULL")) constr->SetOnDelete(Constraint::setNull);
+					if (onUpdate == wxT("NO ACTION")) constr->SetOnDelete(Constraint::noAction);
 
 
-			}
-			pTab->AddChild(constr);
-		}*/
-		//dbLayer->CloseResultSet(database);
+					}
+				pTab->AddChild(constr);
+				}
+		}
+		dbLayer->CloseResultSet(database);
 		dbLayer->Close();
 		delete dbLayer;
 	}
 	return true;
 }
 IDbType* PostgreSqlDbAdapter::parseTypeString(const wxString& typeString) {
+	wxString text = typeString.Upper().Trim();
+	IDbType* type = this->GetDbTypeByName(text);
+	
+	
 	/*
 	
 	wxString text   = typeString.Upper().Trim();
@@ -253,8 +368,8 @@ IDbType* PostgreSqlDbAdapter::parseTypeString(const wxString& typeString) {
 		}
 	}
 	 */
-	//return type;
-	return new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+	return type;
+	//return new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
 }
 
 bool PostgreSqlDbAdapter::CanConnect() {
@@ -282,7 +397,7 @@ void PostgreSqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 
 void PostgreSqlDbAdapter::GetTables(Database* db) {
 	if (db) {
-		SetDatabase(db->getName());
+		SetDatabase(db->GetName());
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
@@ -294,7 +409,7 @@ void PostgreSqlDbAdapter::GetTables(Database* db) {
 			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'")) );
 
 			while (tabulky->Next()) {
-				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->getName(),0));
+				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),0));
 			}
 			dbLayer->CloseResultSet(tabulky);
 			dbLayer->Close();
@@ -304,16 +419,16 @@ void PostgreSqlDbAdapter::GetTables(Database* db) {
 	return;
 }
 wxString PostgreSqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
-	return wxString::Format(wxT("CREATE DATABASE `%s`"), dbName.c_str());
+	return wxString::Format(wxT("CREATE DATABASE %s"), dbName.c_str());
 }
 wxString PostgreSqlDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxString::Format(wxT("DROP TABLE `%s`.`%s`"), pTab->getParentName().c_str(),pTab->getName().c_str());
+	return wxString::Format(wxT("DROP TABLE %s"), pTab->getParentName().c_str(),pTab->GetName().c_str());
 }
 wxString PostgreSqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	//TODO:SQL:
-	wxString str =  wxString::Format(wxT("-- ---------- CONSTRAINTS FOR TABLE `%s` \n"),tab->getName().c_str());
+	wxString str =  wxString::Format(wxT("-- ---------- CONSTRAINTS FOR TABLE %s \n"),tab->GetName().c_str());
 	str.append(wxT("-- -------------------------------------------------------------\n"));
-	wxString prefix = wxString::Format(wxT("ALTER TABLE `%s` "),tab->getName().c_str());
+	wxString prefix = wxString::Format(wxT("ALTER TABLE %s "),tab->GetName().c_str());
 
 	SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 	while( node ) {
@@ -321,7 +436,7 @@ wxString PostgreSqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 		constr = wxDynamicCast(node->GetData(), Constraint);
 		if (constr) {
 			if (constr->GetType() == Constraint::foreignKey) {
-				str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` FOREIGN KEY (`%s`) REFERENCES `%s`(`%s`) " ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
+				str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT %s FOREIGN KEY (%s) REFERENCES %s(%s) " ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
 				str.append(wxT("ON UPDATE "));
 				switch(constr->GetOnUpdate()) {
 				case Constraint::restrict:
@@ -363,14 +478,14 @@ wxString PostgreSqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	return str;
 }
 wxString PostgreSqlDbAdapter::GetDropDatabaseSql(Database* pDb) {
-	return wxString::Format(wxT("DROP DATABASE `%s`"),pDb->getName().c_str());
+	return wxString::Format(wxT("DROP DATABASE %s"),pDb->GetName().c_str());
 }
 wxString PostgreSqlDbAdapter::GetUseDb(const wxString& dbName) {
-	return wxString::Format(wxT("USE `%s`"),dbName.c_str());
+	return wxT("");
 }
 void PostgreSqlDbAdapter::GetViews(Database* db) {
 	if (db) {
-		SetDatabase(db->getName());
+		SetDatabase(db->GetName());
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
@@ -382,7 +497,7 @@ void PostgreSqlDbAdapter::GetViews(Database* db) {
 			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM pg_views WHERE schemaname = 'public'")) );
 
 			while (tabulky->Next()) {
-				db->AddChild(new View(this,  tabulky->GetResultString(wxT("viewname")),db->getName(), tabulky->GetResultString(wxT("definition"))));
+				db->AddChild(new View(this,  tabulky->GetResultString(wxT("viewname")),db->GetName(), tabulky->GetResultString(wxT("definition"))));
 			}
 			dbLayer->CloseResultSet(tabulky);
 			dbLayer->Close();
@@ -411,9 +526,9 @@ wxString PostgreSqlDbAdapter::GetCreateViewSql(View* view, bool dropView) {
 	wxString str = wxT("");
 	if (view){
 		if (dropView){
-			str.append(wxString::Format(wxT("DROP VIEW IF EXISTS `%s`;\n"),view->GetName().c_str()));
+			str.append(wxString::Format(wxT("DROP VIEW IF EXISTS %s;\n"),view->GetName().c_str()));
 			}			
-		str.append(wxString::Format(wxT("CREATE VIEW `%s` AS %s ;\n"),view->GetName().c_str(), view->GetSelect().c_str()));
+		str.append(wxString::Format(wxT("CREATE VIEW %s AS %s ;\n"),view->GetName().c_str(), view->GetSelect().c_str()));
 	}
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;

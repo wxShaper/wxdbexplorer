@@ -38,10 +38,9 @@ PostgreSqlType::~PostgreSqlType() {
 wxString PostgreSqlType::ReturnSql() {
 	wxString sql;
 	sql = wxString::Format(wxT(" %s"), m_typeName.c_str());
-	if ((m_dbtPropertyFlags & dbtSIZE)&&(m_dbtPropertyFlags & dbtSIZE_TWO)) sql.append(wxString::Format(wxT("(%li,%li)"),m_size, m_size2));
-	else if (m_dbtPropertyFlags & dbtSIZE) sql.append(wxString::Format(wxT("(%li)"),m_size));
+	if ((m_dbtPropertyFlags & dbtSIZE)&&(m_dbtPropertyFlags & dbtSIZE_TWO)&&(m_size > 0)&&(m_size2>0)) sql.append(wxString::Format(wxT("(%li,%li)"),m_size, m_size2));
+	else if ((m_dbtPropertyFlags & dbtSIZE)&&(m_size > 0 )) sql.append(wxString::Format(wxT("(%li)"),m_size));
 	if ((m_dbtPropertyFlags & dbtNOT_NULL) && m_notNull) sql.append(wxT(" NOT NULL"));
-	if ((m_dbtPropertyFlags & dbtAUTO_INCREMENT) && m_autoIncrement) sql.append(wxT(" AUTO_INCREMENT"));
 	return sql;
 }
 

@@ -9,7 +9,7 @@
 #include <wx/dynarray.h>
 #include "../Interfaces/IDbAdapter.h" // Base class: IDbAdapter
 #include "../Interfaces/IDbType.h"
-#include "MySqlType.h"
+#include "PostgreSqlType.h"
 
 
 class PostgreSqlDbAdapter : public IDbAdapter {

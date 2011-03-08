@@ -39,9 +39,9 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
 
-		if ((col)&&(col->getName() == name)) {
+		if ((col)&&(col->GetName() == name)) {
 			m_pEditedColumn = col;
-			m_txColName->SetValue(col->getName());
+			m_txColName->SetValue(col->GetName());
 
 			IDbType* type = col->getPType();
 			if (type) {
@@ -65,7 +65,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			if (m_pTable) {
 				SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
 				while( node ) {
-					if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_comboLocalColumn->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
+					if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_comboLocalColumn->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->GetName().c_str()));
 					node = node->GetNext();
 				}
 			}
@@ -103,7 +103,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 }
 
 void TableSettings::OnNewColumnClick(wxCommandEvent& event) {
-	Column* pCol = new Column(wxT("New col"),m_pTable->getName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()));
+	Column* pCol = new Column(wxT("New col"),m_pTable->GetName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()));
 	if (pCol) m_pTable->AddColumn(pCol);
 	UpdateView();
 }
@@ -154,7 +154,7 @@ void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 	m_pTable = tab;
 	m_pDiagramManager = pManager;
 	if (m_pTable) {
-		m_txTableName->SetValue(tab->getName());
+		m_txTableName->SetValue(tab->GetName());
 		if (pManager) {
 			ShapeList lstShapes;
 			pManager->GetShapes( CLASSINFO(ErdTable), lstShapes );
@@ -162,8 +162,8 @@ void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 			while( it ) {
 				ErdTable* pTab = wxDynamicCast(it->GetData(),ErdTable);
 				if (pTab) {
-					if (m_pTable->getName() != pTab->GetTable()->getName()) {
-						m_comboRefTable->AppendString(pTab->GetTable()->getName());
+					if (m_pTable->GetName() != pTab->GetTable()->GetName()) {
+						m_comboRefTable->AppendString(pTab->GetTable()->GetName());
 					}
 				}
 				it = it->GetNext();
@@ -182,7 +182,7 @@ void TableSettings::UpdateView() {
 
 		SerializableList::compatibility_iterator node = m_pTable->GetFirstChildNode();
 		while( node ) {
-			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_listColumns->AppendString(wxString::Format(wxT("col:%s"),((Column*) node->GetData())->getName().c_str()));
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_listColumns->AppendString(wxString::Format(wxT("col:%s"),((Column*) node->GetData())->GetName().c_str()));
 			node = node->GetNext();
 		}
 		node = m_pTable->GetFirstChildNode();
@@ -260,7 +260,7 @@ void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  col = (Column*) node->GetData();
 		if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) )  constr = (Constraint*) node->GetData();
 
-		if ((col)&&(col->getName() == name)) {
+		if ((col)&&(col->GetName() == name)) {
 			constr = NULL;
 			break;
 		} else col = NULL;
@@ -275,7 +275,7 @@ void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
 }
 
 void TableSettings::OnNewConstrainClick(wxCommandEvent& event) {
-	Constraint* pConst = new Constraint(wxString::Format(wxT("PK_%s"),m_pTable->getName().c_str()), wxT(""), Constraint::primaryKey, Constraint::restrict, Constraint::restrict);
+	Constraint* pConst = new Constraint(wxString::Format(wxT("PK_%s"),m_pTable->GetName().c_str()), wxT(""), Constraint::primaryKey, Constraint::restrict, Constraint::restrict);
 	if (pConst) m_pTable->AddConstraint(pConst);
 	UpdateView();
 }
@@ -307,7 +307,7 @@ void TableSettings::OnRefTabChange(wxCommandEvent& event) {
 		while( it ) {
 			pErdTab = wxDynamicCast(it->GetData(),ErdTable);
 			if (pErdTab) {
-				if (pErdTab->GetTable()->getName() == m_comboRefTable->GetValue()) {
+				if (pErdTab->GetTable()->GetName() == m_comboRefTable->GetValue()) {
 					pTab = pErdTab->GetTable();
 
 				}
@@ -320,7 +320,7 @@ void TableSettings::OnRefTabChange(wxCommandEvent& event) {
 		while( node ) {
 			Column* col = wxDynamicCast(node->GetData(),Column);
 			if (col) {
-				m_comboRefColumn->AppendString(col->getName());
+				m_comboRefColumn->AppendString(col->GetName());
 			}
 			node = node->GetNext();
 		}
