@@ -292,7 +292,7 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	m_panelThumb->SetSizer( m_thmSizer );
 	m_panelThumb->Layout();
 	m_thmSizer->Fit( m_panelThumb );
-	m_splitter2->SplitHorizontally( m_panelData, m_panelThumb, 400 );
+	m_splitter2->SplitHorizontally( m_panelData, m_panelThumb, 305 );
 	fgSizer18->Add( m_splitter2, 1, wxEXPAND, 5 );
 	
 	m_panel19->SetSizer( fgSizer18 );
@@ -771,7 +771,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_pageType->SetSizer( bSizer7 );
 	m_pageType->Layout();
 	bSizer7->Fit( m_pageType );
-	m_notebook3->AddPage( m_pageType, wxT("Column"), false );
+	m_notebook3->AddPage( m_pageType, wxT("Column"), true );
 	m_pageConstraint = new wxPanel( m_notebook3, wxID_PAGE_CONSTRAINT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer11;
 	bSizer11 = new wxBoxSizer( wxVERTICAL );
@@ -832,7 +832,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_pageConstraint->SetSizer( bSizer11 );
 	m_pageConstraint->Layout();
 	bSizer11->Fit( m_pageConstraint );
-	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), true );
+	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), false );
 	
 	bSizer18->Add( m_notebook3, 1, wxEXPAND | wxALL, 5 );
 	

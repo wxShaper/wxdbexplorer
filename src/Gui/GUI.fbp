@@ -7485,14 +7485,13 @@
                                                         <object class="notebookpage" expanded="0">
                                                             <property name="bitmap"></property>
                                                             <property name="label">Column</property>
-                                                            <property name="select">0</property>
+                                                            <property name="select">1</property>
                                                             <object class="wxPanel" expanded="0">
                                                                 <property name="BottomDockable">1</property>
                                                                 <property name="LeftDockable">1</property>
                                                                 <property name="RightDockable">1</property>
                                                                 <property name="TopDockable">1</property>
                                                                 <property name="aui_name"></property>
-                                                                <property name="best_size"></property>
                                                                 <property name="bg"></property>
                                                                 <property name="caption"></property>
                                                                 <property name="caption_visible">1</property>
@@ -7512,10 +7511,8 @@
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_PAGE_TYPE</property>
                                                                 <property name="layer"></property>
-                                                                <property name="max_size"></property>
                                                                 <property name="maximize_button">0</property>
                                                                 <property name="maximum_size"></property>
-                                                                <property name="min_size"></property>
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
@@ -9018,7 +9015,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9038,11 +9034,9 @@
                                                                             <property name="hidden">0</property>
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
                                                                             <property name="maxlength">0</property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9109,7 +9103,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9130,10 +9123,8 @@
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="label">Type:</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9367,7 +9358,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9387,11 +9377,9 @@
                                                                             <property name="hidden">0</property>
                                                                             <property name="id">wxID_TX_SIZE</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
                                                                             <property name="maxlength">0</property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9543,7 +9531,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9565,10 +9552,8 @@
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="label">Not null</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9631,7 +9616,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9653,10 +9637,8 @@
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="label">Unique</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9719,7 +9701,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9741,10 +9722,8 @@
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="label">Auto increment</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9803,14 +9782,13 @@
                                                         <object class="notebookpage" expanded="0">
                                                             <property name="bitmap"></property>
                                                             <property name="label">Constraint</property>
-                                                            <property name="select">1</property>
+                                                            <property name="select">0</property>
                                                             <object class="wxPanel" expanded="0">
                                                                 <property name="BottomDockable">1</property>
                                                                 <property name="LeftDockable">1</property>
                                                                 <property name="RightDockable">1</property>
                                                                 <property name="TopDockable">1</property>
                                                                 <property name="aui_name"></property>
-                                                                <property name="best_size"></property>
                                                                 <property name="bg"></property>
                                                                 <property name="caption"></property>
                                                                 <property name="caption_visible">1</property>
@@ -9830,10 +9808,8 @@
                                                                 <property name="hidden">0</property>
                                                                 <property name="id">wxID_PAGE_CONSTRAINT</property>
                                                                 <property name="layer"></property>
-                                                                <property name="max_size"></property>
                                                                 <property name="maximize_button">0</property>
                                                                 <property name="maximum_size"></property>
-                                                                <property name="min_size"></property>
                                                                 <property name="minimize_button">0</property>
                                                                 <property name="minimum_size"></property>
                                                                 <property name="moveable">1</property>
@@ -9897,7 +9873,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -9918,10 +9893,8 @@
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="label">Name:</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -9984,7 +9957,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -10004,11 +9976,9 @@
                                                                             <property name="hidden">0</property>
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
                                                                             <property name="maxlength">0</property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -10179,10 +10149,8 @@
                                                                             <property name="hidden">0</property>
                                                                             <property name="id">wxID_ANY</property>
                                                                             <property name="layer"></property>
-                                                                            <property name="max_size"></property>
                                                                             <property name="maximize_button">0</property>
                                                                             <property name="maximum_size"></property>
-                                                                            <property name="min_size"></property>
                                                                             <property name="minimize_button">0</property>
                                                                             <property name="minimum_size"></property>
                                                                             <property name="moveable">1</property>
@@ -10248,7 +10216,6 @@
                                                                             <property name="RightDockable">1</property>
                                                                             <property name="TopDockable">1</property>
                                                                             <property name="aui_name"></property>
-                                                                            <property name="best_size"></property>
                                                                             <property name="bg"></property>
                                                                             <property name="caption"></property>
                                                                             <property name="caption_visible">1</property>
@@ -10354,7 +10321,6 @@
                                                                                     <property name="RightDockable">1</property>
                                                                                     <property name="TopDockable">1</property>
                                                                                     <property name="aui_name"></property>
-                                                                                    <property name="best_size"></property>
                                                                                     <property name="bg"></property>
                                                                                     <property name="caption"></property>
                                                                                     <property name="caption_visible">1</property>
@@ -10375,10 +10341,8 @@
                                                                                     <property name="id">wxID_ANY</property>
                                                                                     <property name="label">Reference table:</property>
                                                                                     <property name="layer"></property>
-                                                                                    <property name="max_size"></property>
                                                                                     <property name="maximize_button">0</property>
                                                                                     <property name="maximum_size"></property>
-                                                                                    <property name="min_size"></property>
                                                                                     <property name="minimize_button">0</property>
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="moveable">1</property>
@@ -10444,7 +10408,6 @@
                                                                                     <property name="RightDockable">1</property>
                                                                                     <property name="TopDockable">1</property>
                                                                                     <property name="aui_name"></property>
-                                                                                    <property name="best_size"></property>
                                                                                     <property name="bg"></property>
                                                                                     <property name="caption"></property>
                                                                                     <property name="caption_visible">1</property>
@@ -10465,10 +10428,8 @@
                                                                                     <property name="hidden">0</property>
                                                                                     <property name="id">wxID_ANY</property>
                                                                                     <property name="layer"></property>
-                                                                                    <property name="max_size"></property>
                                                                                     <property name="maximize_button">0</property>
                                                                                     <property name="maximum_size"></property>
-                                                                                    <property name="min_size"></property>
                                                                                     <property name="minimize_button">0</property>
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="moveable">1</property>
@@ -10537,7 +10498,6 @@
                                                                                     <property name="RightDockable">1</property>
                                                                                     <property name="TopDockable">1</property>
                                                                                     <property name="aui_name"></property>
-                                                                                    <property name="best_size"></property>
                                                                                     <property name="bg"></property>
                                                                                     <property name="caption"></property>
                                                                                     <property name="caption_visible">1</property>
@@ -10558,10 +10518,8 @@
                                                                                     <property name="id">wxID_ANY</property>
                                                                                     <property name="label">Reference column:</property>
                                                                                     <property name="layer"></property>
-                                                                                    <property name="max_size"></property>
                                                                                     <property name="maximize_button">0</property>
                                                                                     <property name="maximum_size"></property>
-                                                                                    <property name="min_size"></property>
                                                                                     <property name="minimize_button">0</property>
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="moveable">1</property>
@@ -10627,7 +10585,6 @@
                                                                                     <property name="RightDockable">1</property>
                                                                                     <property name="TopDockable">1</property>
                                                                                     <property name="aui_name"></property>
-                                                                                    <property name="best_size"></property>
                                                                                     <property name="bg"></property>
                                                                                     <property name="caption"></property>
                                                                                     <property name="caption_visible">1</property>
@@ -10648,10 +10605,8 @@
                                                                                     <property name="hidden">0</property>
                                                                                     <property name="id">wxID_ANY</property>
                                                                                     <property name="layer"></property>
-                                                                                    <property name="max_size"></property>
                                                                                     <property name="maximize_button">0</property>
                                                                                     <property name="maximum_size"></property>
-                                                                                    <property name="min_size"></property>
                                                                                     <property name="minimize_button">0</property>
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="moveable">1</property>
@@ -10720,7 +10675,6 @@
                                                                                     <property name="RightDockable">1</property>
                                                                                     <property name="TopDockable">1</property>
                                                                                     <property name="aui_name"></property>
-                                                                                    <property name="best_size"></property>
                                                                                     <property name="bg"></property>
                                                                                     <property name="caption"></property>
                                                                                     <property name="caption_visible">1</property>
@@ -10743,10 +10697,8 @@
                                                                                     <property name="label">OnDelete</property>
                                                                                     <property name="layer"></property>
                                                                                     <property name="majorDimension">1</property>
-                                                                                    <property name="max_size"></property>
                                                                                     <property name="maximize_button">0</property>
                                                                                     <property name="maximum_size"></property>
-                                                                                    <property name="min_size"></property>
                                                                                     <property name="minimize_button">0</property>
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="moveable">1</property>
@@ -10813,7 +10765,6 @@
                                                                                     <property name="RightDockable">1</property>
                                                                                     <property name="TopDockable">1</property>
                                                                                     <property name="aui_name"></property>
-                                                                                    <property name="best_size"></property>
                                                                                     <property name="bg"></property>
                                                                                     <property name="caption"></property>
                                                                                     <property name="caption_visible">1</property>
@@ -10836,10 +10787,8 @@
                                                                                     <property name="label">OnUpdate</property>
                                                                                     <property name="layer"></property>
                                                                                     <property name="majorDimension">1</property>
-                                                                                    <property name="max_size"></property>
                                                                                     <property name="maximize_button">0</property>
                                                                                     <property name="maximum_size"></property>
-                                                                                    <property name="min_size"></property>
                                                                                     <property name="minimize_button">0</property>
                                                                                     <property name="minimum_size"></property>
                                                                                     <property name="moveable">1</property>
@@ -10910,7 +10859,6 @@
                                                         <property name="RightDockable">1</property>
                                                         <property name="TopDockable">1</property>
                                                         <property name="aui_name"></property>
-                                                        <property name="best_size"></property>
                                                         <property name="bg"></property>
                                                         <property name="caption"></property>
                                                         <property name="caption_visible">1</property>
@@ -10932,10 +10880,8 @@
                                                         <property name="id">wxID_SAVE</property>
                                                         <property name="label">Save</property>
                                                         <property name="layer"></property>
-                                                        <property name="max_size"></property>
                                                         <property name="maximize_button">0</property>
                                                         <property name="maximum_size"></property>
-                                                        <property name="min_size"></property>
                                                         <property name="minimize_button">0</property>
                                                         <property name="minimum_size"></property>
                                                         <property name="moveable">1</property>
