@@ -39,8 +39,6 @@ void ErdTable::Initialize()
 {
 	SetFill(wxBrush(wxColour(254, 253, 211)));
 	
-	//AddConnectionPoint( wxSFConnectionPoint::cpCENTERLEFT );
-	//AddConnectionPoint( wxSFConnectionPoint::cpCENTERRIGHT );
 	AcceptConnection(wxT("All"));
 	AcceptTrgNeighbour(wxT("All"));
 	AcceptSrcNeighbour(wxT("All"));
@@ -65,22 +63,21 @@ void ErdTable::Initialize()
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
 		m_pLabel->SetText(wxT("Table name"));
-		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
+		m_pLabel->SetStyle( sfsHOVERING | sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsEMIT_EVENTS |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION );
 
         SF_ADD_COMPONENT( m_pLabel, wxT("title") );		
 		
 		// set grid
-		m_pGrid->SetRelativePosition( 0, 25 );
+		m_pGrid->SetRelativePosition( 0, 20 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
 		m_pGrid->SetFill( *wxTRANSPARENT_BRUSH );
-		m_pGrid->SetBorder( *wxTRANSPARENT_PEN );
+		m_pGrid->SetBorder( *wxTRANSPARENT_PEN);
 		
 		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
-		m_pGrid->SetCellSpace( 1 );
-		m_pGrid->SetVBorder( 15 );
-		m_pGrid->SetHBorder( 5 );
+		m_pGrid->SetVBorder( 20 );
+		m_pGrid->SetHBorder( 10 );
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
 		m_pGrid->Activate( false );
 		
@@ -91,10 +88,10 @@ void ErdTable::Initialize()
 void ErdTable::DrawHighlighted(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHighlighted(dc);
-	drawDetails(dc);
+	DrawDetails(dc);
 }
 
-void ErdTable::drawDetails(wxDC& dc)
+void ErdTable::DrawDetails(wxDC& dc)
 {
 	dc.SetPen( *wxWHITE_PEN );
 	dc.SetBrush( *wxWHITE_BRUSH );
@@ -106,19 +103,21 @@ void ErdTable::drawDetails(wxDC& dc)
 void ErdTable::DrawHover(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHover(dc);
-	drawDetails(dc);
+	DrawDetails(dc);
 }
 
 void ErdTable::DrawNormal(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawNormal(dc);
-	drawDetails(dc);
+	DrawDetails(dc);
 }
 
-void ErdTable::updateColumns()
+void ErdTable::UpdateColumns()
 {	
-	clearGrid();
-	clearConnections();
+	ClearGrid();
+	ClearConnections();
+	
+	SetRectSize(GetRectSize().x, 0);
 	
 	ShapeList list;
 	if (GetShapeManager()){
@@ -132,7 +131,7 @@ void ErdTable::updateColumns()
 		m_pLabel->SetText(tab->getName());
 		SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 		while( node ){
-			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  addColumnShape(wxString::Format(wxT("col: %s"),((Column*) node->GetData())->getName().c_str()),i++);
+			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  AddColumnShape(wxString::Format(wxT("col: %s"),((Column*) node->GetData())->getName().c_str()),i++);
 			node = node->GetNext();
 			}		
 			
@@ -141,13 +140,13 @@ void ErdTable::updateColumns()
 			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) ) {
 				ErdTable* pSecondTab = NULL;
 				Constraint* pConstr = wxDynamicCast(node->GetData(), Constraint);
-				addColumnShape(wxString::Format(wxT("key: %s"),pConstr->GetName().c_str()),i++);
+				AddColumnShape(wxString::Format(wxT("key: %s"),pConstr->GetName().c_str()),i++);
 				
 				ShapeList::compatibility_iterator nodeTab = list.GetFirst();
 				while(nodeTab){
 					ErdTable* pTab = wxDynamicCast(nodeTab->GetData(), ErdTable);
 					if (pTab){
-						if (pTab->getTable()->getName() == pConstr->GetRefTable()) pSecondTab = pTab;						
+						if (pTab->GetTable()->getName() == pConstr->GetRefTable()) pSecondTab = pTab;						
 						}					
 					nodeTab = nodeTab->GetNext();
 					}	
@@ -160,49 +159,48 @@ void ErdTable::updateColumns()
 	}
 	
 	m_pGrid->Update();
+	Update();
 }
 
-void ErdTable::clearGrid()
+void ErdTable::ClearGrid()
 {
 	m_pGrid->RemoveChildren();
 	// re-initialize grid control
 	m_pGrid->ClearGrid();
 	m_pGrid->SetDimensions( 1, 1 );	
-	m_pGrid->Update();
+	m_pGrid->SetCellSpace( 2 );
 	Refresh();
 }
 
-void ErdTable::addColumnShape(const wxString& colName, int id)
+void ErdTable::AddColumnShape(const wxString& colName, int id)
 {
 	wxSFTextShape* m_pCol = new wxSFTextShape();
 	if (m_pCol){	
-		m_pCol->SetStyle(sfsHOVERING |sfsEMIT_EVENTS| sfsALWAYS_INSIDE | sfsSIZE_CHANGE | sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION );
+		m_pCol->SetStyle(sfsALWAYS_INSIDE | sfsPROCESS_DEL | sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION);
 		m_pCol->SetId(id + constOffset);
 		if (m_pGrid->AppendToGrid(m_pCol)){
+			m_pCol->GetFont().SetPointSize(8);
 			m_pCol->SetText( wxString::Format(wxT("%s"), colName.c_str()));			
 			m_pCol->SetHAlign(wxSFShapeBase::halignLEFT);
 			m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
 			m_pCol->SetVBorder(0);
 			m_pCol->SetHBorder(0);
-			m_pCol->GetFont().SetPointSize(8);
 			m_pCol->Activate(false);
 			
 		}else{			
 			delete m_pCol;
 			m_pCol = NULL;			
-			m_pGrid->Update();
-			
-			}
 		}
+	}
 }
 
-void ErdTable::addColumn(const wxString& colName, IDbType* type)
+void ErdTable::AddColumn(const wxString& colName, IDbType* type)
 {
 	Table* tab = (Table*) wxDynamicCast(GetUserData(),Table);
 	tab->AddColumn(new Column(colName,wxT("New table"),type));
 }
 
-void ErdTable::clearConnections()
+void ErdTable::ClearConnections()
 {
 	ShapeList lstShapes;
 	GetShapeManager()->GetAssignedConnections(this,CLASSINFO(ErdForeignKey),lineSTARTING ,lstShapes);
@@ -216,20 +214,4 @@ void ErdTable::clearConnections()
 			}
 			node = node->GetNext();
 		}
-}
-
-void ErdTable::Update()
-{
-	static wxRecursionGuardFlag s_flag;
-	wxRecursionGuard guard(s_flag);
-	if ( guard.IsInside() )
-	{
-		// don't allow reentrancy
-		return;
-	}
-		
-	updateColumns();
-	
-	FitToChildren();
-	wxSFRoundRectShape::Update();
 }

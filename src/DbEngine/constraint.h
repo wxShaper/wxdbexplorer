@@ -39,7 +39,7 @@ public:
 	void SetRefTable(const wxString & refTable) {
 		this->m_refTable = refTable;
 	}
-	void SetType(const constraintType & type) {
+	void SetType(constraintType type) {
 		this->m_type = type;
 	}
 	void SetOnDelete(constraintAction onDelete) {
@@ -66,7 +66,7 @@ public:
 	const wxString & GetRefTable() const {
 		return m_refTable;
 	}
-	const constraintType & GetType() const {
+	constraintType GetType() const {
 		return m_type;
 	}
 
@@ -79,9 +79,7 @@ protected:
 	constraintAction m_onDelete;
 	constraintAction m_onUpdate;
 
-
 	void InitSerializable();
-
 };
 
 #endif // CONSTRAINT_H

@@ -954,23 +954,23 @@ _CreateForeignKey::_CreateForeignKey( wxWindow* parent, wxWindowID id, const wxS
 	gbSizer1->SetFlexibleDirection( wxVERTICAL );
 	gbSizer1->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	wxString m_radioBox3Choices[] = { wxT("N :1"), wxT("N : M") };
-	int m_radioBox3NChoices = sizeof( m_radioBox3Choices ) / sizeof( wxString );
-	m_radioBox3 = new wxRadioBox( this, wxID_ANY, wxT("Relation"), wxDefaultPosition, wxDefaultSize, m_radioBox3NChoices, m_radioBox3Choices, 1, wxRA_SPECIFY_ROWS );
-	m_radioBox3->SetSelection( 0 );
-	gbSizer1->Add( m_radioBox3, wxGBPosition( 0, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
+	wxString m_radioRelationChoices[] = { wxT("N :1"), wxT("N : M") };
+	int m_radioRelationNChoices = sizeof( m_radioRelationChoices ) / sizeof( wxString );
+	m_radioRelation = new wxRadioBox( this, wxID_ANY, wxT("Relation"), wxDefaultPosition, wxDefaultSize, m_radioRelationNChoices, m_radioRelationChoices, 1, wxRA_SPECIFY_ROWS );
+	m_radioRelation->SetSelection( 0 );
+	gbSizer1->Add( m_radioRelation, wxGBPosition( 0, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	wxString m_radioOnDeleteChoices[] = { wxT("restrickt"), wxT("cascade"), wxT("set null"), wxT("no action") };
+	wxString m_radioOnDeleteChoices[] = { wxT("restrict"), wxT("cascade"), wxT("set null"), wxT("no action") };
 	int m_radioOnDeleteNChoices = sizeof( m_radioOnDeleteChoices ) / sizeof( wxString );
 	m_radioOnDelete = new wxRadioBox( this, wxID_ANY, wxT("OnDelete"), wxPoint( -1,-1 ), wxDefaultSize, m_radioOnDeleteNChoices, m_radioOnDeleteChoices, 1, wxRA_SPECIFY_COLS );
 	m_radioOnDelete->SetSelection( 0 );
 	gbSizer1->Add( m_radioOnDelete, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	wxString m_radiOnUpdateChoices[] = { wxT("restrickt"), wxT("cascade"), wxT("set null"), wxT("no action") };
-	int m_radiOnUpdateNChoices = sizeof( m_radiOnUpdateChoices ) / sizeof( wxString );
-	m_radiOnUpdate = new wxRadioBox( this, wxID_ANY, wxT("OnUpdate"), wxDefaultPosition, wxDefaultSize, m_radiOnUpdateNChoices, m_radiOnUpdateChoices, 1, wxRA_SPECIFY_COLS );
-	m_radiOnUpdate->SetSelection( 0 );
-	gbSizer1->Add( m_radiOnUpdate, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	wxString m_radioOnUpdateChoices[] = { wxT("restrict"), wxT("cascade"), wxT("set null"), wxT("no action") };
+	int m_radioOnUpdateNChoices = sizeof( m_radioOnUpdateChoices ) / sizeof( wxString );
+	m_radioOnUpdate = new wxRadioBox( this, wxID_ANY, wxT("OnUpdate"), wxDefaultPosition, wxDefaultSize, m_radioOnUpdateNChoices, m_radioOnUpdateChoices, 1, wxRA_SPECIFY_COLS );
+	m_radioOnUpdate->SetSelection( 0 );
+	gbSizer1->Add( m_radioOnUpdate, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	fgSizer12->Add( gbSizer1, 1, wxEXPAND, 5 );
 	

@@ -9,14 +9,14 @@ CreateForeignKey::CreateForeignKey(wxWindow* parent, ErdTable* pSourceTable, Erd
 	
 	m_cmbDstCol->SetValue(dstColName);
 	m_cmbSrcCol->SetValue(srcColName);
-	m_txSrcTable->SetValue(pSourceTable->getTable()->getName());
-	m_txDstTable->SetValue(pDestTable->getTable()->getName());	
-	SerializableList::compatibility_iterator node = pSourceTable->getTable()->GetFirstChildNode();
+	m_txSrcTable->SetValue(pSourceTable->GetTable()->getName());
+	m_txDstTable->SetValue(pDestTable->GetTable()->getName());	
+	SerializableList::compatibility_iterator node = pSourceTable->GetTable()->GetFirstChildNode();
 	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_cmbSrcCol->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
 		node = node->GetNext();
 	}
-	node = pDestTable->getTable()->GetFirstChildNode();
+	node = pDestTable->GetTable()->GetFirstChildNode();
 	while( node ) {
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  m_cmbDstCol->AppendString(wxString::Format(wxT("%s"),((Column*) node->GetData())->getName().c_str()));
 		node = node->GetNext();
@@ -39,23 +39,25 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 	wxString dstColName;
 	wxString dstLocColName;
 	
-	if (m_radioBox3->GetSelection() == 0){
-		Table* pTable = m_pSrcTable->getTable();		
+	if (m_radioRelation->GetSelection() == 0){
+		Table* pTable = m_pSrcTable->GetTable();		
 		Constraint* pConstr = new Constraint();
-		pConstr->SetName(wxString::Format(wxT("FK_%s_%s"), pTable->getName().c_str(),m_pDstTable->getTable()->getName().c_str()));
+		pConstr->SetName(wxString::Format(wxT("FK_%s_%s"), pTable->getName().c_str(),m_pDstTable->GetTable()->getName().c_str()));
 		pConstr->SetLocalColumn(m_cmbSrcCol->GetValue());
 		pConstr->SetRefCol(m_cmbDstCol->GetValue());
 		pConstr->SetRefTable(m_txDstTable->GetValue());
 		pConstr->SetType(Constraint::foreignKey);
+		pConstr->SetOnDelete((Constraint::constraintAction) m_radioOnDelete->GetSelection());
+		pConstr->SetOnUpdate((Constraint::constraintAction) m_radioOnUpdate->GetSelection());
 		pTable->AddChild(pConstr);
-		m_pSrcTable->Update();
+		m_pSrcTable->UpdateColumns();
 		m_pSrcTable->Refresh();
-		}	
+	}	
 
-	if (m_radioBox3->GetSelection() == 1){
+	if (m_radioRelation->GetSelection() == 1){
 		// Get old tables   -------------------------------------------------------------
-		Table* pSrcTable = m_pSrcTable->getTable();	
-		Table* pDstTable = m_pDstTable->getTable();	
+		Table* pSrcTable = m_pSrcTable->GetTable();	
+		Table* pDstTable = m_pDstTable->GetTable();	
 		// Create new table -------------------------------------------------------------
 		//wxString sr1 = pSrcTable->getName();
  		//wxString sr2 = pDstTable->getName();
@@ -99,6 +101,8 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		pCSrc->SetRefTable(pSrcTable->getName());
 		pCSrc->SetRefCol(srcColName);
 		pCSrc->SetType(Constraint::foreignKey);
+		pCSrc->SetOnDelete((Constraint::constraintAction) m_radioOnDelete->GetSelection());
+		pCSrc->SetOnUpdate((Constraint::constraintAction) m_radioOnUpdate->GetSelection());
 		newTab->AddChild(pCSrc);		
 		
 		Constraint* pCDest = new Constraint();
@@ -107,6 +111,8 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		pCDest->SetRefTable(pDstTable->getName());
 		pCDest->SetRefCol(dstColName);
 		pCDest->SetType(Constraint::foreignKey);
+		pCDest->SetOnDelete((Constraint::constraintAction) m_radioOnDelete->GetSelection());
+		pCDest->SetOnUpdate((Constraint::constraintAction) m_radioOnUpdate->GetSelection());
 		newTab->AddChild(pCDest);			
 		
 		
@@ -115,11 +121,11 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 		
 		ErdTable* newErdTable = (ErdTable*) m_pSrcTable->GetShapeManager()->AddShape(new ErdTable(), NULL, wxPoint(x,y), true);
 		newErdTable->SetUserData(newTab);
-		newErdTable->Update();
+		newErdTable->UpdateColumns();
 		newErdTable->Refresh();
-		}
+	}
 		
-		EndModal(wxID_OK);
+	EndModal(wxID_OK);
 }
 
 void CreateForeignKey::OnOKUI(wxUpdateUIEvent& event)

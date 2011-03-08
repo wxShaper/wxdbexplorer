@@ -26,29 +26,26 @@ public:
 	
 	virtual ~ErdTable();
 	
-	virtual void Update();
-
-	void addColumn(const wxString& colName, IDbType* type);
-	Table* getTable() { return (Table*) this->GetUserData(); }
+	void AddColumn(const wxString& colName, IDbType* type);
+	void UpdateColumns();
+	
+	Table* GetTable() { return (Table*) this->GetUserData(); }
 
 protected:
 	void Initialize();
 	
 	wxSFTextShape *m_pLabel;
-	//Table* m_pTable;
-	
 	wxSFFlexGridShape* m_pGrid;
 	
 	virtual void DrawHighlighted(wxDC& dc);
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
 	
-	void updateColumns();
-	void drawDetails(wxDC& dc);
+	void DrawDetails(wxDC& dc);
 	
-	void clearGrid();
-	void clearConnections();
-	void addColumnShape(const wxString& colName, int id);
+	void ClearGrid();
+	void ClearConnections();
+	void AddColumnShape(const wxString& colName, int id);
 };
 
 #endif // ERDTABLE_H

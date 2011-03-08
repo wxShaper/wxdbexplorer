@@ -162,8 +162,8 @@ void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 			while( it ) {
 				ErdTable* pTab = wxDynamicCast(it->GetData(),ErdTable);
 				if (pTab) {
-					if (m_pTable->getName() != pTab->getTable()->getName()) {
-						m_comboRefTable->AppendString(pTab->getTable()->getName());
+					if (m_pTable->getName() != pTab->GetTable()->getName()) {
+						m_comboRefTable->AppendString(pTab->GetTable()->getName());
 					}
 				}
 				it = it->GetNext();
@@ -307,8 +307,8 @@ void TableSettings::OnRefTabChange(wxCommandEvent& event) {
 		while( it ) {
 			pErdTab = wxDynamicCast(it->GetData(),ErdTable);
 			if (pErdTab) {
-				if (pErdTab->getTable()->getName() == m_comboRefTable->GetValue()) {
-					pTab = pErdTab->getTable();
+				if (pErdTab->GetTable()->getName() == m_comboRefTable->GetValue()) {
+					pTab = pErdTab->GetTable();
 
 				}
 			}

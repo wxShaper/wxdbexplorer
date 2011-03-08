@@ -47,12 +47,10 @@ ErdForeignKey::~ErdForeignKey()
 {
 }
 
-void ErdForeignKey::OnHandle(wxSFShapeHandle& handle)
+void ErdForeignKey::CreateHandles()
 {
-	// skip starting and ending handle
-	if( handle.GetType() != wxSFShapeHandle::hndLINESTART &&
-		handle.GetType() != wxSFShapeHandle::hndLINEEND )
-		{
-			wxSFRoundOrthoLineShape::OnHandle( handle );
-		}
+	wxSFRoundOrthoLineShape::CreateHandles();
+	
+	RemoveHandle( wxSFShapeHandle::hndLINESTART );
+	RemoveHandle( wxSFShapeHandle::hndLINEEND );
 }

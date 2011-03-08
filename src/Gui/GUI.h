@@ -401,9 +401,9 @@ class _CreateForeignKey : public wxDialog
 		wxTextCtrl* m_txSrcTable;
 		wxStaticText* m_staticText17;
 		wxComboBox* m_cmbSrcCol;
-		wxRadioBox* m_radioBox3;
+		wxRadioBox* m_radioRelation;
 		wxRadioBox* m_radioOnDelete;
-		wxRadioBox* m_radiOnUpdate;
+		wxRadioBox* m_radioOnUpdate;
 		wxStaticText* m_staticText16;
 		wxTextCtrl* m_txDstTable;
 		wxStaticText* m_staticText18;

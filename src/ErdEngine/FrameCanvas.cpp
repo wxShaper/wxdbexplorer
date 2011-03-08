@@ -45,11 +45,16 @@ void FrameCanvas::UpdateERD()
 {
 	ShapeList lstShapes;
 	GetDiagramManager()->GetShapes( CLASSINFO(ErdTable), lstShapes );
-	GetDiagramManager()->GetShapes( CLASSINFO(ErdView), lstShapes );
-	
 	for( ShapeList::iterator it = lstShapes.begin(); it != lstShapes.end(); ++it )
 	{
-		(*it)->Update();
+		((ErdTable*)*it)->UpdateColumns();
+	}
+	
+	lstShapes.Clear();
+	GetDiagramManager()->GetShapes( CLASSINFO(ErdView), lstShapes );
+	for( ShapeList::iterator it = lstShapes.begin(); it != lstShapes.end(); ++it )
+	{
+		((ErdView*)*it)->UpdateView();
 	}
 	
 	UpdateVirtualSize();
@@ -80,8 +85,7 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 			tab->setName(wxT("New table"));
 			pShape->SetUserData(tab);
 
-			//((ErdTable*)pShape)->updateColumns();
-			pShape->Update();
+			((ErdTable*)pShape)->UpdateColumns();
 			pShape->Refresh();
 			
 			SaveCanvasState();
@@ -111,7 +115,8 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 			view->SetName(wxT("New view"));
 			view->SetSelect(wxT("SELECT * FROM table"));
 			pShape->SetUserData(view);
-			pShape->Update();
+
+			((ErdView*)pShape)->UpdateView();
 			pShape->Refresh();
 			
 			SaveCanvasState();
@@ -163,9 +168,9 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 	case IDR_POPUP_MI1: {
 		ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
 		if (table) {
-			table->addColumn(wxT("NewCol"),m_pDbAdapter->GetDbTypeByName(wxT("VARCHAR")));
-			table->addColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));
-			table->Update();
+			table->AddColumn(wxT("NewCol"),m_pDbAdapter->GetDbTypeByName(wxT("VARCHAR")));
+			table->AddColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));
+			table->UpdateColumns();
 			table->Refresh();
 			SaveCanvasState();
 		}
@@ -178,16 +183,16 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 				//TODO:LANG:
 				wxMessageDialog dlg(this,wxT("Add drop table statement?"),wxT("Drop table"),wxYES_NO);
 				bool dropTable = (dlg.ShowModal() == wxID_YES);
-				wxTheClipboard->SetData(new wxTextDataObject(m_pDbAdapter->GetCreateTableSql(table->getTable(), dropTable)));
-				wxTheClipboard->Close();
+				wxTheClipboard->SetData(new wxTextDataObject(m_pDbAdapter->GetCreateTableSql(table->GetTable(), dropTable)));
 			}
+			wxTheClipboard->Close();
 		}
 	}
 	break;
 	case IDR_POPUP_MI3:{
 		ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
 		if (table){
-			Table* pTab = table->getTable();
+			Table* pTab = table->GetTable();
 			wxPoint point(round(table->GetAbsolutePosition().x), round(table->GetAbsolutePosition().y));
 			point.x = table->GetRectSize().x + 10;
 			ErdView* pView =  (ErdView*) GetDiagramManager()->AddShape(new ErdView(), NULL, point, sfINITIALIZE, sfDONT_SAVE_STATE);
@@ -197,7 +202,7 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 				view->SetParentName(pTab->getParentName());
 				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->getParentName(),pTab->getName()));
 				pView->SetUserData(view);
-				pView->Update();
+				pView->UpdateView();
 				pView->Refresh();
 				SaveCanvasState();
 				}
@@ -211,22 +216,22 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 	if (sp) {
 		ErdTable* table = wxDynamicCast(sp->GetGrandParentShape(),ErdTable);
 		if (table) {
-			if (table->getTable() ) {
+			if (table->GetTable() ) {
 				TableSettings settingDialog(wxGetApp().GetTopWindow(), m_pDbAdapter);
-				settingDialog.SetTable(table->getTable(),(wxSFDiagramManager*) table->GetParentManager());
+				settingDialog.SetTable(table->GetTable(),(wxSFDiagramManager*) table->GetParentManager());
 				settingDialog.ShowModal();
-				table->Update();
+				table->UpdateColumns();
 				table->Refresh();
 				SaveCanvasState();
 			}
 		}
 		ErdView* view = wxDynamicCast(sp->GetGrandParentShape(), ErdView);
 		if (view){
-			if (view->getView()) {
+			if (view->GetView()) {
 				ViewSettings settingDialog(wxGetApp().GetTopWindow(),m_pDbAdapter);
-				settingDialog.SetView(view->getView(),(wxSFDiagramManager*) view->GetParentManager() );
+				settingDialog.SetView(view->GetView(),(wxSFDiagramManager*) view->GetParentManager() );
 				settingDialog.ShowModal();
-				view->Update();
+				view->UpdateView();
 				view->Refresh();
 				SaveCanvasState();
 			}
@@ -256,7 +261,7 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 			pShape->AcceptConnection(wxT("All"));
 			pShape->AcceptSrcNeighbour(wxT("All"));
 			pShape->AcceptTrgNeighbour(wxT("All"));
-			pShape->Update();
+			//pShape->Update();
 			
 			SaveCanvasState();
 		}
@@ -266,9 +271,10 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 	}
 	else
 	{
-		UpdateERD();
 		SaveCanvasState();
 	}
+	
+	UpdateERD();
 }
 
 wxString FrameCanvas::GetSqlScript() {
@@ -280,7 +286,7 @@ wxString FrameCanvas::GetSqlScript() {
 	while( node ) {
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
 		if (tab) {
-			retStr.append(m_pDbAdapter->GetCreateTableSql(tab->getTable(),true));
+			retStr.append(m_pDbAdapter->GetCreateTableSql(tab->GetTable(),true));
 		}
 		node = node->GetNext();
 	}	
@@ -290,7 +296,7 @@ wxString FrameCanvas::GetSqlScript() {
 	while( node ) {
 		ErdView* view = wxDynamicCast(node->GetData(),ErdView);
 		if (view) {
-			retStr.append(m_pDbAdapter->GetCreateViewSql(view->getView(),true));
+			retStr.append(m_pDbAdapter->GetCreateViewSql(view->GetView(),true));
 		}
 		node = node->GetNext();
 	}	
@@ -300,7 +306,7 @@ wxString FrameCanvas::GetSqlScript() {
 	while( node ) {
 		ErdTable* tab = wxDynamicCast(node->GetData(),ErdTable);
 		if (tab) {
-			retStr.append(m_pDbAdapter->GetAlterTableConstraintSql(tab->getTable()));
+			retStr.append(m_pDbAdapter->GetAlterTableConstraintSql(tab->GetTable()));
 		}
 		node = node->GetNext();
 	}

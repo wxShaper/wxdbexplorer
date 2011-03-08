@@ -34,21 +34,21 @@ ErdView::~ErdView()
 void ErdView::DrawHover(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHover(dc);
-	drawDetails(dc);
+	DrawDetails(dc);
 }
 void ErdView::DrawNormal(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawNormal(dc);
-	drawDetails(dc);
+	DrawDetails(dc);
 }
 
 void ErdView::DrawHighlighted(wxDC& dc)
 {
 	wxSFRoundRectShape::DrawHighlighted(dc);
-	drawDetails(dc);
+	DrawDetails(dc);
 }
 
-void ErdView::drawDetails(wxDC& dc)
+void ErdView::DrawDetails(wxDC& dc)
 {
 	dc.SetPen( *wxWHITE_PEN );
 	dc.SetBrush( *wxWHITE_BRUSH );
@@ -87,7 +87,7 @@ void ErdView::Initialize()
 	m_pGrid = new wxSFFlexGridShape();
 	if (m_pGrid){
 		// set grid
-		m_pGrid->SetRelativePosition( 0, 25 );
+		m_pGrid->SetRelativePosition( 0, 20 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
@@ -96,8 +96,8 @@ void ErdView::Initialize()
 		
 		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
 		m_pGrid->SetCellSpace( 1 );
-		m_pGrid->SetVBorder( 15 );
-		m_pGrid->SetHBorder( 5 );
+		m_pGrid->SetVBorder( 20 );
+		m_pGrid->SetHBorder( 10 );
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
 		m_pGrid->Activate( false );
 		
@@ -105,29 +105,24 @@ void ErdView::Initialize()
 	}
 }
 
-void ErdView::updateView()
+void ErdView::UpdateView()
 {
-	/*SerializableList::compatibility_iterator node;
-	while( node = m_pGrid->GetFirstChildNode() )
-	{
-		GetParentManager()->RemoveItem( node->GetData() );
-	}*/
 	m_pGrid->RemoveChildren();
 	m_pGrid->ClearGrid();
 	m_pGrid->SetDimensions( 1, 1 );	
 
+	SetRectSize(GetRectSize().x, 0);
+
 	View* pView = wxDynamicCast(GetUserData(), View);
 	if (pView){
 		m_pLabel->SetText(pView->GetName());
-		//m_pSelect->SetText(pView->GetSelect());		
-		
 
 		wxSFTextShape* m_pCol = new wxSFTextShape();
 		if (m_pCol){	
-			m_pCol->SetStyle(sfsHOVERING |sfsEMIT_EVENTS| sfsALWAYS_INSIDE | sfsSIZE_CHANGE | sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION );
+			m_pCol->SetStyle( sfsALWAYS_INSIDE | sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION );
 			//m_pCol->SetId(1);
 			if (m_pGrid->AppendToGrid(m_pCol)){
-				
+				m_pCol->GetFont().SetPointSize(8);
 				if (pView->GetSelect().length()>100){					
 					m_pCol->SetText(wxString::Format(wxT("%s  ...\n\t... %s"), pView->GetSelect().Mid(0,50).c_str(), pView->GetSelect().Right(50).c_str()));
 					}else m_pCol->SetText( pView->GetSelect() );			
@@ -135,35 +130,15 @@ void ErdView::updateView()
 				m_pCol->SetVAlign(wxSFShapeBase::valignMIDDLE);
 				m_pCol->SetVBorder(0);
 				m_pCol->SetHBorder(0);
-				m_pCol->GetFont().SetPointSize(8);
 				m_pCol->Activate(false);
 				
 			}else{			
 				delete m_pCol;
-				m_pCol = NULL;			
-				m_pGrid->Update();
-				
-				}
-			}	
-		
-		}
-		
+				m_pCol = NULL;
+			}
+		}	
+	}
 		
 	m_pGrid->Update();
-}
-
-void ErdView::Update()
-{
-	static wxRecursionGuardFlag s_flag;
-	wxRecursionGuard guard(s_flag);
-	if ( guard.IsInside() )
-	{
-		// don't allow reentrancy
-		return;
-	}
-	
-	updateView();
-	
-	FitToChildren();
-	wxSFRoundRectShape::Update();
+	Update();
 }

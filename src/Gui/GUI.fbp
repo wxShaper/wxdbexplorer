@@ -9812,7 +9812,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -9908,7 +9908,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxFlexGridSizer" expanded="0">
+            <object class="wxFlexGridSizer" expanded="1">
                 <property name="cols">3</property>
                 <property name="flexible_direction">wxBOTH</property>
                 <property name="growablecols">0,2</property>
@@ -10347,7 +10347,7 @@
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">m_radioBox3</property>
+                                <property name="name">m_radioRelation</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -10415,7 +10415,7 @@
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
                                 <property name="center_pane">0</property>
-                                <property name="choices">&quot;restrickt&quot; &quot;cascade&quot; &quot;set null&quot; &quot;no action&quot;</property>
+                                <property name="choices">&quot;restrict&quot; &quot;cascade&quot; &quot;set null&quot; &quot;no action&quot;</property>
                                 <property name="close_button">1</property>
                                 <property name="context_help"></property>
                                 <property name="context_menu">1</property>
@@ -10508,7 +10508,7 @@
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
                                 <property name="center_pane">0</property>
-                                <property name="choices">&quot;restrickt&quot; &quot;cascade&quot; &quot;set null&quot; &quot;no action&quot;</property>
+                                <property name="choices">&quot;restrict&quot; &quot;cascade&quot; &quot;set null&quot; &quot;no action&quot;</property>
                                 <property name="close_button">1</property>
                                 <property name="context_help"></property>
                                 <property name="context_menu">1</property>
@@ -10533,7 +10533,7 @@
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">m_radiOnUpdate</property>
+                                <property name="name">m_radioOnUpdate</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>

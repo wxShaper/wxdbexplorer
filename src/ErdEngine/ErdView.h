@@ -18,9 +18,9 @@ public:
 	ErdView(View* pView);
 	virtual ~ErdView();
 	
-	View* getView() { return (View*) this->GetUserData(); }
+	View* GetView() { return (View*) this->GetUserData(); }
 	
-	virtual void Update();
+	void UpdateView();
 	
 protected:
 	void Initialize();
@@ -29,8 +29,7 @@ protected:
 	virtual void DrawHover(wxDC& dc);
 	virtual void DrawNormal(wxDC& dc);
 	
-	void drawDetails(wxDC& dc);
-	void updateView();
+	void DrawDetails(wxDC& dc);
 	
 	wxSFTextShape *m_pLabel;
 	wxSFTextShape *m_pSelect;

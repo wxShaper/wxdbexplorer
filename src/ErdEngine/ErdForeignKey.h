@@ -21,7 +21,7 @@ public:
 
 	virtual ~ErdForeignKey();
 	
-	virtual void OnHandle(wxSFShapeHandle &handle);
+	virtual void CreateHandles();
 
 protected:
 	Constraint* m_pConstraint;

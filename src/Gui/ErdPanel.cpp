@@ -45,7 +45,7 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdP
 	if (pTable) {
 		ErdTable* pErdTab = new ErdTable(pTable);
 		m_diagramManager.AddShape(pErdTab, NULL, wxPoint( 10,10), sfINITIALIZE, sfDONT_SAVE_STATE);
-		pErdTab->Update();
+		pErdTab->UpdateColumns();
 	}
 }
 
@@ -61,14 +61,14 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pIte
 			ErdTable* pErdTab = new ErdTable(pTable);
 			m_diagramManager.AddShape(pErdTab, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
 			i+= 200;
-			pErdTab->Update();
+			pErdTab->UpdateColumns();
 		}
 		View* pView = wxDynamicCast(node->GetData(),View);
 		if (pView){
 			ErdView* pErdView = new ErdView(pView);
 			m_diagramManager.AddShape(pErdView, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
 			i+= 200;
-			pErdView->Update();
+			pErdView->UpdateView();
 			}
 		node = node->GetNext();
 	}
