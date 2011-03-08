@@ -66,7 +66,7 @@ public:
 	virtual void OnToolCloseClick(wxCommandEvent& event);
 	virtual void OnToolCloseUI(wxUpdateUIEvent& event);
 
-	void OnPageChanging(wxAuiNotebookEvent& event);
+	void OnPageClose(wxAuiNotebookEvent& event);
 	void OnPageChange(wxAuiNotebookEvent& event);
 
 	void OnPopupClick(wxCommandEvent &evt);
@@ -76,6 +76,12 @@ public:
 
 protected:
 
+	enum PanelType
+	{
+		Sql,
+		Erd
+	};
+	
 	xsSerializable* m_pConnections;
 
 	IDbAdapter* m_pDbAdapter;
@@ -90,6 +96,9 @@ protected:
 	wxSFThumbnail* m_pThumbnail;
 	
 	bool ImportDb(const wxString& sqlFile, Database* pDb);
+	wxString CreatePanelName(Table* t, PanelType type);
+	wxString CreatePanelName(View* v, PanelType type);
+	wxString CreatePanelName(Database* d, PanelType type);
 };
 
 #endif // DBEXPLORERPANEL_H

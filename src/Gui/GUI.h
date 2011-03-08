@@ -328,7 +328,6 @@ class _TableSettings : public wxDialog
 		wxButton* m_button8;
 		wxButton* m_button15;
 		wxButton* m_button10;
-		wxButton* m_button9;
 		wxStaticLine* m_staticline2;
 		wxNotebook* m_notebook3;
 		wxPanel* m_pageType;
@@ -354,6 +353,7 @@ class _TableSettings : public wxDialog
 		wxComboBox* m_comboRefColumn;
 		wxRadioBox* m_radioOnDelete;
 		wxRadioBox* m_radioOnUpdate;
+		wxButton* m_button9;
 		wxStdDialogButtonSizer* m_sdbSizer2;
 		wxButton* m_sdbSizer2OK;
 		
@@ -362,7 +362,6 @@ class _TableSettings : public wxDialog
 		virtual void OnNewColumnClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNewConstrainClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDeleteColumn( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnSaveColumnClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNotebookUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnPageTypeUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnColNameUI( wxUpdateUIEvent& event ) { event.Skip(); }
@@ -379,6 +378,7 @@ class _TableSettings : public wxDialog
 		virtual void OnRefColUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnDeleteUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnSaveColumnClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -444,7 +444,7 @@ class _LogDialog : public wxDialog
 	
 	public:
 		
-		_LogDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Database log"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		_LogDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Database log"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,460 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxRESIZE_BORDER ); 
 		~_LogDialog();
 	
 };
@@ -469,7 +469,7 @@ class _ViewSettings : public wxDialog
 	
 	public:
 		
-		_ViewSettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("View settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		_ViewSettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("View settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 650,450 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~_ViewSettings();
 	
 };

@@ -6,6 +6,8 @@ TableSettings::TableSettings(wxWindow* parent,IDbAdapter* pDbAdapter, wxWindowID
 	m_pEditedColumn = NULL;
 	m_pEditedConstraint = NULL;
 	m_txSize->SetValidator(wxTextValidator(wxFILTER_NUMERIC));
+	
+	m_fUpdating = false;
 
 	m_pDbAdapter = pDbAdapter;
 
@@ -23,6 +25,9 @@ TableSettings::~TableSettings() {
 }
 
 void TableSettings::OnListBoxClick(wxCommandEvent& event) {
+	
+	if( m_fUpdating ) return;
+	
 	wxString name = m_listColumns->GetStringSelection().substr(4);
 	Column* col = NULL;
 	Constraint* constr = NULL;
@@ -75,8 +80,6 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 		node = node->GetNext();
 	}
 
-
-
 	/*
 	Column* col = wxDynamicCast(m_pTable->GetFristColumn(),Column);
 	while(col){
@@ -98,15 +101,18 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 		col = wxDynamicCast(col->GetSibbling(CLASSINFO(Column)),Column);
 	}*/
 }
+
 void TableSettings::OnNewColumnClick(wxCommandEvent& event) {
 	Column* pCol = new Column(wxT("New col"),m_pTable->getName(),m_pDbAdapter->GetDbTypeByName(m_pDbAdapter->GetDbTypes()->Last()));
 	if (pCol) m_pTable->AddColumn(pCol);
 	UpdateView();
 }
+
 void TableSettings::OnOKClick(wxCommandEvent& event) {
 	m_pTable->setName(m_txTableName->GetValue());
 	Close();
 }
+
 void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 	if (m_pEditedColumn) {
 		m_pEditedColumn->setName(m_txColName->GetValue());
@@ -136,6 +142,7 @@ void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 	}
 	UpdateView();
 }
+
 void TableSettings::OnTypeSelect(wxCommandEvent& event) {
 	IDbType* pType = m_pDbAdapter->GetDbTypeByName(m_comboType->GetValue());
 	if (pType) {
@@ -168,6 +175,8 @@ void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 }
 
 void TableSettings::UpdateView() {
+	m_fUpdating = true;
+	
 	m_listColumns->Clear();
 	if (m_pTable) {
 
@@ -192,6 +201,8 @@ void TableSettings::UpdateView() {
 	m_chNotNull->SetValue(false);
 	m_chPrimary->SetValue(false);
 	m_checkBox3->SetValue(false);
+	
+	m_fUpdating = false;
 }
 
 void TableSettings::OnAutoIncrementUI(wxUpdateUIEvent& event) {
@@ -258,10 +269,11 @@ void TableSettings::OnDeleteColumn(wxCommandEvent& event) {
 
 		node = node->GetNext();
 	}
-	if (col) m_pTable->GetParentManager()->RemoveItem(col);
-	if (constr) m_pTable->GetParentManager()->RemoveItem(constr);
+	if (col) m_pTable->RemoveChild(col);
+	if (constr) m_pTable->RemoveChild(constr);
 	UpdateView();
 }
+
 void TableSettings::OnNewConstrainClick(wxCommandEvent& event) {
 	Constraint* pConst = new Constraint(wxString::Format(wxT("PK_%s"),m_pTable->getName().c_str()), wxT(""), Constraint::primaryKey, Constraint::restrict, Constraint::restrict);
 	if (pConst) m_pTable->AddConstraint(pConst);
@@ -318,6 +330,7 @@ void TableSettings::OnRefTabChange(wxCommandEvent& event) {
 void TableSettings::OnRefTabUI(wxUpdateUIEvent& event) {
 	event.Enable(m_radioBox1->GetSelection() == 1);
 }
+
 void TableSettings::OnNotebookUI(wxUpdateUIEvent& event) {
 	if (m_pEditedConstraint) {
 		m_notebook3->SetSelection(1);
@@ -325,6 +338,7 @@ void TableSettings::OnNotebookUI(wxUpdateUIEvent& event) {
 		m_notebook3->SetSelection(0);
 	}
 }
+
 void TableSettings::OnDeleteUI(wxUpdateUIEvent& event) {
 	event.Enable(m_radioBox1->GetSelection() == 1);
 }

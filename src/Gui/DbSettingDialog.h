@@ -52,11 +52,7 @@ protected:
 	virtual void OnPgRmoveUI(wxUpdateUIEvent& event);
 	virtual void OnPgSaveUI(wxUpdateUIEvent& event);
 
-
-
-
 	void LoadHistory();
-
 
 	DbViewerPanel *m_pParent;
 	MysqlConnectionHistory *m_pHistory;

@@ -45,12 +45,10 @@ public:
 	virtual void OnDeleteUI(wxUpdateUIEvent& event);
 	virtual void OnUpdateUI(wxUpdateUIEvent& event);
 
-
-
 	virtual void OnNotebookUI(wxUpdateUIEvent& event);
 
-
 protected:
+	bool m_fUpdating;
 	Table* m_pTable;
 	Column* m_pEditedColumn;
 	Constraint* m_pEditedConstraint;

@@ -420,7 +420,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_MySqlPanel->SetSizer( fgSizer3 );
 	m_MySqlPanel->Layout();
 	fgSizer3->Fit( m_MySqlPanel );
-	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), false );
+	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), true );
 	m_Sqlite = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer31;
 	fgSizer31 = new wxFlexGridSizer( 2, 1, 0, 0 );
@@ -555,7 +555,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_PostgrePanel->SetSizer( fgSizer32 );
 	m_PostgrePanel->Layout();
 	fgSizer32->Fit( m_PostgrePanel );
-	m_notebook2->AddPage( m_PostgrePanel, wxT("PostgreSQL"), true );
+	m_notebook2->AddPage( m_PostgrePanel, wxT("PostgreSQL"), false );
 	
 	bSizer4->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	
@@ -694,11 +694,12 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_panel13 = new wxPanel( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer11;
 	fgSizer11 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer11->AddGrowableRow( 0 );
 	fgSizer11->SetFlexibleDirection( wxBOTH );
 	fgSizer11->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_listColumns = new wxListBox( m_panel13, wxID_ANY, wxDefaultPosition, wxSize( 200,300 ), 0, NULL, 0 ); 
-	fgSizer11->Add( m_listColumns, 1, wxALL|wxEXPAND, 5 );
+	m_listColumns = new wxListBox( m_panel13, wxID_ANY, wxDefaultPosition, wxSize( 200,-1 ), 0, NULL, 0 ); 
+	fgSizer11->Add( m_listColumns, 1, wxEXPAND|wxTOP|wxRIGHT|wxLEFT, 5 );
 	
 	m_panel14 = new wxPanel( m_panel13, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer8;
@@ -713,21 +714,21 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_button10 = new wxButton( m_panel14, wxID_DEL, wxT("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer8->Add( m_button10, 0, wxALL, 5 );
 	
-	m_button9 = new wxButton( m_panel14, wxID_SAVE, wxT("Save"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer8->Add( m_button9, 1, wxALL, 5 );
-	
 	m_panel14->SetSizer( bSizer8 );
 	m_panel14->Layout();
 	bSizer8->Fit( m_panel14 );
-	fgSizer11->Add( m_panel14, 1, wxEXPAND|wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	fgSizer11->Add( m_panel14, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxRIGHT|wxLEFT, 5 );
 	
 	m_panel13->SetSizer( fgSizer11 );
 	m_panel13->Layout();
 	fgSizer11->Fit( m_panel13 );
-	sbSizer6->Add( m_panel13, 1, wxEXPAND | wxALL, 5 );
+	sbSizer6->Add( m_panel13, 1, wxEXPAND|wxTOP|wxBOTTOM|wxLEFT, 5 );
 	
 	m_staticline2 = new wxStaticLine( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	sbSizer6->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+	
+	wxBoxSizer* bSizer18;
+	bSizer18 = new wxBoxSizer( wxVERTICAL );
 	
 	m_notebook3 = new wxNotebook( m_panel9, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	m_pageType = new wxPanel( m_notebook3, wxID_PAGE_TYPE, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
@@ -833,7 +834,12 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	bSizer11->Fit( m_pageConstraint );
 	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), true );
 	
-	sbSizer6->Add( m_notebook3, 1, wxEXPAND | wxALL, 5 );
+	bSizer18->Add( m_notebook3, 1, wxEXPAND | wxALL, 5 );
+	
+	m_button9 = new wxButton( m_panel9, wxID_SAVE, wxT("Save"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer18->Add( m_button9, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	sbSizer6->Add( bSizer18, 0, 0, 5 );
 	
 	m_panel9->SetSizer( sbSizer6 );
 	m_panel9->Layout();
@@ -862,7 +868,6 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_button8->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
 	m_button15->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewConstrainClick ), NULL, this );
 	m_button10->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnDeleteColumn ), NULL, this );
-	m_button9->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
 	m_notebook3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotebookUI ), NULL, this );
 	m_pageType->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageTypeUI ), NULL, this );
 	m_txColName->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
@@ -879,6 +884,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_comboRefColumn->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefColUI ), NULL, this );
 	m_radioOnDelete->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnDeleteUI ), NULL, this );
 	m_radioOnUpdate->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUpdateUI ), NULL, this );
+	m_button9->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
 	m_sdbSizer2OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 }
 
@@ -889,7 +895,6 @@ _TableSettings::~_TableSettings()
 	m_button8->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewColumnClick ), NULL, this );
 	m_button15->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnNewConstrainClick ), NULL, this );
 	m_button10->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnDeleteColumn ), NULL, this );
-	m_button9->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
 	m_notebook3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotebookUI ), NULL, this );
 	m_pageType->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageTypeUI ), NULL, this );
 	m_txColName->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColNameUI ), NULL, this );
@@ -906,6 +911,7 @@ _TableSettings::~_TableSettings()
 	m_comboRefColumn->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnRefColUI ), NULL, this );
 	m_radioOnDelete->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnDeleteUI ), NULL, this );
 	m_radioOnUpdate->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUpdateUI ), NULL, this );
+	m_button9->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnSaveColumnClick ), NULL, this );
 	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _TableSettings::OnOKClick ), NULL, this );
 	
 }
@@ -1027,18 +1033,23 @@ _CreateForeignKey::~_CreateForeignKey()
 
 _LogDialog::_LogDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( 640,460 ), wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer13;
 	fgSizer13 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer13->AddGrowableCol( 0 );
+	fgSizer13->AddGrowableRow( 0 );
 	fgSizer13->SetFlexibleDirection( wxBOTH );
 	fgSizer13->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
+	fgSizer13->SetMinSize( wxSize( 635,430 ) ); 
 	wxStaticBoxSizer* sbSizer9;
 	sbSizer9 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Log") ), wxVERTICAL );
 	
-	m_textCtrl11 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 600,400 ), wxTE_MULTILINE|wxTE_READONLY );
-	sbSizer9->Add( m_textCtrl11, 0, wxALL, 5 );
+	m_textCtrl11 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 600,350 ), wxTE_MULTILINE|wxTE_READONLY );
+	m_textCtrl11->SetMinSize( wxSize( 600,350 ) );
+	
+	sbSizer9->Add( m_textCtrl11, 1, wxALL|wxEXPAND, 5 );
 	
 	fgSizer13->Add( sbSizer9, 1, wxEXPAND|wxALL, 5 );
 	
@@ -1052,7 +1063,6 @@ _LogDialog::_LogDialog( wxWindow* parent, wxWindowID id, const wxString& title, 
 	
 	this->SetSizer( fgSizer13 );
 	this->Layout();
-	fgSizer13->Fit( this );
 	
 	this->Centre( wxBOTH );
 	
@@ -1071,16 +1081,19 @@ _LogDialog::~_LogDialog()
 
 _ViewSettings::_ViewSettings( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( 650,450 ), wxDefaultSize );
 	
 	wxBoxSizer* bSizer15;
 	bSizer15 = new wxBoxSizer( wxVERTICAL );
 	
+	bSizer15->SetMinSize( wxSize( 650,420 ) ); 
 	wxStaticBoxSizer* sbSizer12;
 	sbSizer12 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxEmptyString ), wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer14;
 	fgSizer14 = new wxFlexGridSizer( 3, 1, 0, 0 );
+	fgSizer14->AddGrowableCol( 0 );
+	fgSizer14->AddGrowableRow( 2 );
 	fgSizer14->SetFlexibleDirection( wxBOTH );
 	fgSizer14->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -1099,7 +1112,7 @@ _ViewSettings::_ViewSettings( wxWindow* parent, wxWindowID id, const wxString& t
 	m_staticline2 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	fgSizer14->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
 	
-	m_scintilla2 = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( 700,300 ), 0, wxEmptyString );
+	m_scintilla2 = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( -1,300 ), 0, wxEmptyString );
 	m_scintilla2->SetUseTabs( true );
 	m_scintilla2->SetTabWidth( 4 );
 	m_scintilla2->SetIndent( 4 );
@@ -1134,6 +1147,8 @@ _ViewSettings::_ViewSettings( wxWindow* parent, wxWindowID id, const wxString& t
 	m_scintilla2->MarkerDefine( wxSCI_MARKNUM_FOLDERTAIL, wxSCI_MARK_EMPTY );
 	m_scintilla2->SetSelBackground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHT ) );
 	m_scintilla2->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
+	m_scintilla2->SetMinSize( wxSize( -1,300 ) );
+	
 	fgSizer14->Add( m_scintilla2, 1, wxEXPAND | wxALL, 5 );
 	
 	m_btnOK = new wxButton( this, wxID_OK, wxT("OK"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1145,7 +1160,6 @@ _ViewSettings::_ViewSettings( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	this->SetSizer( bSizer15 );
 	this->Layout();
-	bSizer15->Fit( this );
 	
 	this->Centre( wxBOTH );
 	

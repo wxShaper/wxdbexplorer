@@ -27,9 +27,6 @@ public:
 	Constraint(const wxString& name, const wxString& localColumn, constraintType type, constraintAction onDelete, constraintAction onUpdate);
 	virtual ~Constraint();
 
-
-
-
 	void SetLocalColumn(const wxString & localColumn) {
 		this->m_localColumn = localColumn;
 	}
@@ -45,16 +42,16 @@ public:
 	void SetType(const constraintType & type) {
 		this->m_type = type;
 	}
-	void SetOnDelete(const constraintAction & onDelete) {
+	void SetOnDelete(constraintAction onDelete) {
 		this->m_onDelete = onDelete;
 	}
-	void SetOnUpdate(const constraintAction & onUpdate) {
+	void SetOnUpdate(constraintAction onUpdate) {
 		this->m_onUpdate = onUpdate;
 	}
-	const constraintAction & GetOnDelete() const {
+	constraintAction GetOnDelete() const {
 		return m_onDelete;
 	}
-	const constraintAction & GetOnUpdate() const {
+	constraintAction GetOnUpdate() const {
 		return m_onUpdate;
 	}
 	const wxString & GetLocalColumn() const {

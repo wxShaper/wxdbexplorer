@@ -27,7 +27,7 @@ DatabaseExplorerFrame::DatabaseExplorerFrame(wxWindow *parent) : _MainFrame(pare
 
 	
 	m_Manager.AddPane(m_pNotebook, wxAuiPaneInfo().DestroyOnClose(false).
-	                   Name(wxT("sql_command_panel")).Caption(wxT("SQL Command")).
+	                   Name(wxT("sql_command_panel")).Caption(wxT("Explorer")).
 	                   BestSize(wxSize(400,400)).MinSize(wxSize(400,400)).
 					   CloseButton(false).
 	                   Center() );
@@ -36,6 +36,8 @@ DatabaseExplorerFrame::DatabaseExplorerFrame(wxWindow *parent) : _MainFrame(pare
 	m_Manager.GetArtProvider()->SetMetric(wxAUI_DOCKART_PANE_BORDER_SIZE, 0);
 	m_Manager.GetArtProvider()->SetMetric(wxAUI_DOCKART_SASH_SIZE, 4);
 
+	Maximize();
+	
 	m_Manager.Update();
 }
 

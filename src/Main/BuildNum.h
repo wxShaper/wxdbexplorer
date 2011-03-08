@@ -1,7 +1,3 @@
-<<<<<<< .mine
-#define deBUILD_NUMBER 770
-=======
-#define deBUILD_NUMBER 784
->>>>>>> .r68
+#define deBUILD_NUMBER 41
 #define deSVN_REVISION wxT("$Rev$")
 

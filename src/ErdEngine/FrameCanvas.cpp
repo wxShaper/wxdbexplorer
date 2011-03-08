@@ -1,4 +1,5 @@
-#include "../Gui/CreateForeignKey.h"
+#include "Gui/CreateForeignKey.h"
+#include "Main/DatabaseExplorerApp.h"
 #include "FrameCanvas.h"
 #include "ErdTable.h"
 #include "ErdView.h"
@@ -164,10 +165,8 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 		if (table) {
 			table->addColumn(wxT("NewCol"),m_pDbAdapter->GetDbTypeByName(wxT("VARCHAR")));
 			table->addColumn(wxT("NewColInt"),m_pDbAdapter->GetDbTypeByName(wxT("INT")));
-			//table->updateColumns();
 			table->Update();
 			table->Refresh();
-			
 			SaveCanvasState();
 		}
 	}
@@ -199,6 +198,8 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->getParentName(),pTab->getName()));
 				pView->SetUserData(view);
 				pView->Update();
+				pView->Refresh();
+				SaveCanvasState();
 				}
 			}
 		}
@@ -211,7 +212,7 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 		ErdTable* table = wxDynamicCast(sp->GetGrandParentShape(),ErdTable);
 		if (table) {
 			if (table->getTable() ) {
-				TableSettings settingDialog(this, m_pDbAdapter);
+				TableSettings settingDialog(wxGetApp().GetTopWindow(), m_pDbAdapter);
 				settingDialog.SetTable(table->getTable(),(wxSFDiagramManager*) table->GetParentManager());
 				settingDialog.ShowModal();
 				table->Update();
@@ -222,7 +223,7 @@ void FrameCanvas::OnLeftDoubleClick(wxMouseEvent& event) {
 		ErdView* view = wxDynamicCast(sp->GetGrandParentShape(), ErdView);
 		if (view){
 			if (view->getView()) {
-				ViewSettings settingDialog(this,m_pDbAdapter);
+				ViewSettings settingDialog(wxGetApp().GetTopWindow(),m_pDbAdapter);
 				settingDialog.SetView(view->getView(),(wxSFDiagramManager*) view->GetParentManager() );
 				settingDialog.ShowModal();
 				view->Update();
@@ -259,8 +260,6 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 			
 			SaveCanvasState();
 		}
-		//if (pShape->IsKindOf(CLASSINFO(ErdTable)))	((ErdTable*)pShape)->updateColumns);
-		//if (pShape->IsKindOf(CLASSINFO(ErdView)))	((ErdView*)pShape)->updateView();
 
 		dndTab->SetUserData(NULL);
 		GetDiagramManager()->RemoveShape(dndTab);
@@ -318,7 +317,7 @@ bool FrameCanvas::OnPreConnectionFinished(wxSFLineShape* connection){
 	ErdTable *pTrgT = wxDynamicCast(GetDiagramManager()->GetItem(connection->GetTrgShapeId()),ErdTable);
 	if( pSrcT && pTrgT )
 	{
-		CreateForeignKey dlg(this, pSrcT, pTrgT, m_srcCol, m_dstCol );
+		CreateForeignKey dlg(wxGetApp().GetTopWindow(), pSrcT, pTrgT, m_srcCol, m_dstCol);
 		dlg.ShowModal();
 	}
 	

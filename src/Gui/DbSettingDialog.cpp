@@ -1,4 +1,6 @@
 #include "DbSettingDialog.h"
+#include "Main/DatabaseExplorerApp.h"
+
 #include <wx/dblayer/include/DatabaseLayer.h>
 
 #ifdef DBL_USE_MYSQL
@@ -12,7 +14,7 @@
 #include <wx/dblayer/include/DatabaseErrorCodes.h>
 #include <wx/dblayer/include/DatabaseLayerException.h>
 
-DbSettingDialog::DbSettingDialog(DbViewerPanel *parent):_DBSettingsDialog(parent) {
+DbSettingDialog::DbSettingDialog(DbViewerPanel *parent):_DBSettingsDialog( wxGetApp().GetTopWindow() ) {
 
 	m_pParent = parent;
 	LoadHistory();
