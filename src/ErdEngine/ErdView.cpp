@@ -53,7 +53,7 @@ void ErdView::DrawDetails(wxDC& dc)
 	dc.SetPen( *wxWHITE_PEN );
 	dc.SetBrush( *wxWHITE_BRUSH );
 	
-	dc.DrawRectangle( Conv2Point(GetAbsolutePosition() + wxRealPoint(1, m_nRadius - 2)),
+	dc.DrawRectangle( Conv2Point(GetAbsolutePosition() + wxRealPoint(1, m_nRadius)),
 					  Conv2Size(m_nRectSize - wxRealPoint(2, 2*m_nRadius - 4)) );
 }
 
@@ -69,13 +69,15 @@ void ErdView::Initialize()
 	SetBorder( wxPen( wxColour(220, 219, 140), 1, wxSOLID ) );
 	SetFill( wxBrush( wxColour(255, 250, 200) ) );
 	
+	SetRadius(15);
+	
 	m_pLabel = new wxSFTextShape();
 	if (m_pLabel) {
 		m_pLabel->SetVAlign( wxSFShapeBase::valignTOP );
         m_pLabel->SetHAlign( wxSFShapeBase::halignCENTER );
-        m_pLabel->SetVBorder( 3 );
+        m_pLabel->SetVBorder( 1 );
 		m_pLabel->SetHBorder( 5 );
-		m_pLabel->GetFont().SetPointSize( 9 );
+		m_pLabel->GetFont().SetPointSize( 8 );
 		m_pLabel->GetFont().SetWeight(wxFONTWEIGHT_BOLD);
 
 		m_pLabel->SetText(wxT("Table name"));
@@ -87,7 +89,7 @@ void ErdView::Initialize()
 	m_pGrid = new wxSFFlexGridShape();
 	if (m_pGrid){
 		// set grid
-		m_pGrid->SetRelativePosition( 0, 20 );
+		m_pGrid->SetRelativePosition( 0, 17 );
 		m_pGrid->SetStyle( sfsALWAYS_INSIDE | sfsPROCESS_DEL |sfsPROPAGATE_DRAGGING | sfsPROPAGATE_SELECTION  );
 		m_pGrid->SetDimensions( 1, 1 );
 		
@@ -96,7 +98,7 @@ void ErdView::Initialize()
 		
 		m_pGrid->SetHAlign( wxSFShapeBase::halignLEFT );
 		m_pGrid->SetCellSpace( 1 );
-		m_pGrid->SetVBorder( 20 );
+		m_pGrid->SetVBorder( 13 );
 		m_pGrid->SetHBorder( 10 );
 		m_pGrid->AcceptChild( wxT("wxSFTextShape") );
 		m_pGrid->Activate( false );
