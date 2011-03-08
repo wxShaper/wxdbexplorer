@@ -79,7 +79,7 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 			pShape->AcceptTrgNeighbour(wxT("All"));
 
 			Table* tab = new Table();
-			tab->setName(wxT("New table"));
+			tab->SetName(wxT("New table"));
 			pShape->SetUserData(tab);
 
 			((ErdTable*)pShape)->UpdateColumns();
@@ -196,8 +196,8 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 			if (pView){
 				View* view = new View();
 				view->SetName(pTab->GetName()+wxT("VW"));
-				view->SetParentName(pTab->getParentName());
-				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->getParentName(),pTab->GetName()));
+				view->SetParentName(pTab->GetParentName());
+				view->SetSelect(m_pDbAdapter->GetDefaultSelect(pTab->GetParentName(),pTab->GetName()));
 				pView->SetUserData(view);
 				pView->UpdateView();
 				pView->Refresh();

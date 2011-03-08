@@ -26,7 +26,7 @@ public:
 	virtual ~Database();
 	void RefreshChildren();
 
-	IDbAdapter* getDbAdapter() { return this->m_pDbAdapter; }
+	IDbAdapter* GetDbAdapter() { return this->m_pDbAdapter; }
 	// nazev databáze
 	wxString GetName() { return this->m_name; }
 	// priznak isSaved

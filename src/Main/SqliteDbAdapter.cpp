@@ -128,7 +128,7 @@ wxString SQLiteDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	while( node ) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
-		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->GetName().c_str(), col->getPType()->ReturnSql().c_str()));
+		if(col)	str.append(wxString::Format(wxT("\t`%s` %s"),col->GetName().c_str(), col->GetPType()->ReturnSql().c_str()));
 		
 		node = node->GetNext();
 		if (node) {
@@ -222,7 +222,7 @@ wxString SQLiteDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxT("");
 }
 wxString SQLiteDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxString::Format(wxT("DROP TABLE '%s'.'%s'"), pTab->getParentName().c_str(), pTab->GetName().c_str());
+	return wxString::Format(wxT("DROP TABLE '%s'.'%s'"), pTab->GetParentName().c_str(), pTab->GetName().c_str());
 }
 wxString SQLiteDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	return wxT("");

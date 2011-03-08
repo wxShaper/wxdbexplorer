@@ -63,7 +63,7 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
  		//wxString sr2 = pDstTable->getName();
 		//Table* newTab = new Table();//new Table(pSrcTable->GetDbAdapter(),wxString::Format(wxT("FKT_%s_%s"),pSrcTable->getName().c_str(),pDstTable->getName().c_str() ), wxT(""),0);
 		Table* newTab = new Table();
-		newTab->setName(wxString::Format(wxT("FKT_%s_%s"),pSrcTable->GetName().c_str(),pDstTable->GetName().c_str() ));
+		newTab->SetName(wxString::Format(wxT("FKT_%s_%s"),pSrcTable->GetName().c_str(),pDstTable->GetName().c_str() ));
 		// Copy selected columns --------------------------------------------------------
 		SerializableList::compatibility_iterator node = pSrcTable->GetFirstChildNode();
 		while( node ) {
@@ -73,7 +73,7 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 					Column* colNew = (Column*) col->Clone();
 					srcColName = col->GetName();
 					srcLocColName = wxString::Format(wxT("%s_%s"), pSrcTable->GetName().c_str(), col->GetName().c_str());
-					colNew->setName(srcLocColName);
+					colNew->SetName(srcLocColName);
 					newTab->AddChild(colNew);	
 					}			
 				} 
@@ -88,7 +88,7 @@ void CreateForeignKey::OnOKClick(wxCommandEvent& event)
 					Column* colNew = (Column*) col->Clone();
 					dstColName = col->GetName();
 					dstLocColName = wxString::Format(wxT("%s_%s"), pDstTable->GetName().c_str(), col->GetName().c_str());
-					colNew->setName(dstLocColName);
+					colNew->SetName(dstLocColName);
 					newTab->AddChild(colNew);	
 					}			
 				} 

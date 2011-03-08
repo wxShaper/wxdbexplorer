@@ -33,15 +33,15 @@ public:
 	
 	// nazev sloupecku
 	wxString GetName() { return this->m_name; }
-	void setName(const wxString& name) { this->m_name = name; }
+	void SetName(const wxString& name) { this->m_name = name; }
 	// nazev rodicovskeho prvku - tabulky nebo view
-	wxString getParentName() { return this->m_parentName; }
+	wxString GetParentName() { return this->m_parentName; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
 	
 	// typ
-	IDbType* getPType(){ return this->m_pType; }
-	void setPType(IDbType* pType ) { delete this->m_pType; this->m_pType = pType; }
+	IDbType* GetPType(){ return this->m_pType; }
+	void SetPType(IDbType* pType ) { delete this->m_pType; this->m_pType = pType; }
 	
 	// funkce pro editaci sloupecku - nastuvje prizna isSaved na false
 	void Edit(wxString& name,

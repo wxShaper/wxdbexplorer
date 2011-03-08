@@ -51,7 +51,7 @@ wxString PostgreSqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	while( node ) {
 		Column* col = NULL;
 		if( node->GetData()->IsKindOf( CLASSINFO(Column)) ) col = (Column*) node->GetData();
-		if(col)	str.append(wxString::Format(wxT("\t%s %s"),col->GetName().c_str(), col->getPType()->ReturnSql().c_str()));
+		if(col)	str.append(wxString::Format(wxT("\t%s %s"),col->GetName().c_str(), col->GetPType()->ReturnSql().c_str()));
 
 		Constraint* constr = wxDynamicCast(node->GetData(),Constraint);
 		if (constr) {
@@ -263,7 +263,7 @@ wxString PostgreSqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxS
 
 bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 	if (pTab){	
-		SetDatabase(pTab->getParentName());
+		SetDatabase(pTab->GetParentName());
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
 
 		if (!dbLayer->IsOpen()) return NULL;
@@ -422,7 +422,7 @@ wxString PostgreSqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxString::Format(wxT("CREATE DATABASE %s"), dbName.c_str());
 }
 wxString PostgreSqlDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxString::Format(wxT("DROP TABLE %s"), pTab->getParentName().c_str(),pTab->GetName().c_str());
+	return wxString::Format(wxT("DROP TABLE %s"), pTab->GetParentName().c_str(),pTab->GetName().c_str());
 }
 wxString PostgreSqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	//TODO:SQL:

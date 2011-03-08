@@ -48,7 +48,7 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,tab->GetDbAdapter(),(Table*)tab->Clone()), CreatePanelName(tab, DbViewerPanel::Erd), true);
 			}
 			else
-				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter(),tab->getParentName(),tab->GetName()), CreatePanelName(tab, DbViewerPanel::Sql),true);			
+				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter(),tab->GetParentName(),tab->GetName()), CreatePanelName(tab, DbViewerPanel::Sql),true);			
 			}	
 			
 		if (View* pView = wxDynamicCast(item->GetData(), View)){
@@ -57,9 +57,9 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event) {
 		
 		if (Database* db = wxDynamicCast(item->GetData(), Database)){
 			if( cState.ControlDown() ){
-				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,db->getDbAdapter(),(Database*)db->Clone()), CreatePanelName(db, DbViewerPanel::Erd),true);
+				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,db->GetDbAdapter(),(Database*)db->Clone()), CreatePanelName(db, DbViewerPanel::Erd),true);
 			}else{
-				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,db->getDbAdapter(),db->GetName(),wxT("")), CreatePanelName(db, DbViewerPanel::Sql),true);	
+				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,db->GetDbAdapter(),db->GetName(),wxT("")), CreatePanelName(db, DbViewerPanel::Sql),true);	
 				}
 			}	
 		}
@@ -357,11 +357,11 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
-						wxString dropSQL = pDb->getDbAdapter()->GetDropDatabaseSql(pDb);
+						wxString dropSQL = pDb->GetDbAdapter()->GetDropDatabaseSql(pDb);
 						if (!dropSQL.IsEmpty()){						
 							wxMessageDialog dlg(this, wxString::Format(wxT("Remove database '%s'?"),pDb->GetName().c_str()),wxT("Drop database"),wxYES_NO);
 							if (dlg.ShowModal() == wxID_YES){
-								DatabaseLayer* pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
+								DatabaseLayer* pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer();
 								pDbLayer->RunQuery(dropSQL);
 								pDbLayer->Close();
 								delete pDbLayer;
@@ -392,7 +392,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
-							m_pNotebook->AddPage(new ErdPanel(this,pDb->getDbAdapter(),(Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
+							m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter(),(Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
 						}					
 					}
 				}
@@ -464,10 +464,10 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 		wxTextInputStream text( input );	
 		text.SetStringSeparators(wxT(";"));
 		wxString command = wxT("");
-		pDbLayer = pDb->getDbAdapter()->GetDatabaseLayer();
+		pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer();
 		pDbLayer->BeginTransaction();
 		
-		wxString useSql = pDb->getDbAdapter()->GetUseDb(pDb->GetName());
+		wxString useSql = pDb->GetDbAdapter()->GetUseDb(pDb->GetName());
 		if (!useSql.IsEmpty()) pDbLayer->RunQuery(wxString::Format(wxT("USE %s"), pDb->GetName().c_str()));
 	
 		while (!input.Eof()){
@@ -544,10 +544,10 @@ wxString DbViewerPanel::CreatePanelName(Database* d, PanelType type)
 wxString DbViewerPanel::CreatePanelName(Table* t, PanelType type)
 {
 	if( type == DbViewerPanel::Sql ) {
-		return wxT("SQL [") + t->getParentName() + wxT(":") + t->GetName() + wxT("]");
+		return wxT("SQL [") + t->GetParentName() + wxT(":") + t->GetName() + wxT("]");
 	}
 	else
-		return wxT("ERD [") + t->getParentName() + wxT(":") + t->GetName() +  wxT("]");
+		return wxT("ERD [") + t->GetParentName() + wxT(":") + t->GetName() +  wxT("]");
 }
 
 wxString DbViewerPanel::CreatePanelName(View* v, PanelType type)

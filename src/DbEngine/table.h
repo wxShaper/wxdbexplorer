@@ -31,12 +31,12 @@ public:
 	// nazev tabulky
 	wxString GetName() { return this->m_name; }
 	// nazev rodicovskeho prvku - databaze
-	wxString getParentName() { return this->m_parentName; }
+	wxString GetParentName() { return this->m_parentName; }
 	void RefreshChildren();
-	void setName(const wxString& name) ;
+	void SetName(const wxString& name) ;
 	
 	// pocet radku
-	int getRowCount() { return this->m_rowCount; }
+	int GetRowCount() { return this->m_rowCount; }
 	// priznak isSaved
 	bool IsSaved() { return this->m_isSaved; }
 	//ColumnCol *columns;

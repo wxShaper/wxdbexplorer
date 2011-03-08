@@ -43,7 +43,7 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			m_pEditedColumn = col;
 			m_txColName->SetValue(col->GetName());
 
-			IDbType* type = col->getPType();
+			IDbType* type = col->GetPType();
 			if (type) {
 				m_comboType->SetValue(type->GetTypeName());
 				m_txSize->SetValue(wxString::Format(wxT("%li"),type->GetSize()));
@@ -109,14 +109,14 @@ void TableSettings::OnNewColumnClick(wxCommandEvent& event) {
 }
 
 void TableSettings::OnOKClick(wxCommandEvent& event) {
-	m_pTable->setName(m_txTableName->GetValue());
+	m_pTable->SetName(m_txTableName->GetValue());
 	Close();
 }
 
 void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 	if (m_pEditedColumn) {
-		m_pEditedColumn->setName(m_txColName->GetValue());
-		IDbType* pType = m_pEditedColumn->getPType();
+		m_pEditedColumn->SetName(m_txColName->GetValue());
+		IDbType* pType = m_pEditedColumn->GetPType();
 		if (pType) {
 			pType->SetNotNull(m_chNotNull->GetValue());
 			pType->SetAutoIncrement(m_chAutoIncrement->GetValue());
@@ -146,7 +146,7 @@ void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 void TableSettings::OnTypeSelect(wxCommandEvent& event) {
 	IDbType* pType = m_pDbAdapter->GetDbTypeByName(m_comboType->GetValue());
 	if (pType) {
-		m_pEditedColumn->setPType(pType);
+		m_pEditedColumn->SetPType(pType);
 	}
 }
 
@@ -208,7 +208,7 @@ void TableSettings::UpdateView() {
 void TableSettings::OnAutoIncrementUI(wxUpdateUIEvent& event) {
 	event.Enable(false);
 	if (m_pEditedColumn) {
-		if (m_pEditedColumn->getPType()) event.Enable(m_pEditedColumn->getPType()->HaveAutoIncrement());
+		if (m_pEditedColumn->GetPType()) event.Enable(m_pEditedColumn->GetPType()->HaveAutoIncrement());
 	}
 }
 
@@ -220,35 +220,35 @@ void TableSettings::OnColNameUI(wxUpdateUIEvent& event) {
 void TableSettings::OnColSizeUI(wxUpdateUIEvent& event) {
 	event.Enable(false);
 	if (m_pEditedColumn) {
-		if (m_pEditedColumn->getPType()) event.Enable(m_pEditedColumn->getPType()->HaveSize());
+		if (m_pEditedColumn->GetPType()) event.Enable(m_pEditedColumn->GetPType()->HaveSize());
 	}
 }
 
 void TableSettings::OnColTypeUI(wxUpdateUIEvent& event) {
 	event.Enable(false);
 	if (m_pEditedColumn) {
-		if (m_pEditedColumn->getPType()) event.Enable(true);
+		if (m_pEditedColumn->GetPType()) event.Enable(true);
 	}
 }
 
 void TableSettings::OnNotNullUI(wxUpdateUIEvent& event) {
 	event.Enable(false);
 	if (m_pEditedColumn) {
-		if (m_pEditedColumn->getPType()) event.Enable(m_pEditedColumn->getPType()->HaveNotNull());
+		if (m_pEditedColumn->GetPType()) event.Enable(m_pEditedColumn->GetPType()->HaveNotNull());
 	}
 }
 
 void TableSettings::OnPrimaryKeyUI(wxUpdateUIEvent& event) {
 	event.Enable(false);
 	if (m_pEditedColumn) {
-		if (m_pEditedColumn->getPType()) event.Enable(m_pEditedColumn->getPType()->HavePrimaryKey());
+		if (m_pEditedColumn->GetPType()) event.Enable(m_pEditedColumn->GetPType()->HavePrimaryKey());
 	}
 }
 
 void TableSettings::OnUniqueUI(wxUpdateUIEvent& event) {
 	event.Enable(false);
 	if (m_pEditedColumn) {
-		if (m_pEditedColumn->getPType()) event.Enable(m_pEditedColumn->getPType()->HaveUnique());
+		if (m_pEditedColumn->GetPType()) event.Enable(m_pEditedColumn->GetPType()->HaveUnique());
 	}
 }
 void TableSettings::OnDeleteColumn(wxCommandEvent& event) {

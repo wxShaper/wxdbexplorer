@@ -32,7 +32,7 @@ Table::~Table()
 {
 
 }
-void Table::setName(const wxString& name)
+void Table::SetName(const wxString& name)
 {
 	 this->m_isSaved = false; 
 	 this->m_name = name; 
