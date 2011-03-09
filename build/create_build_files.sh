@@ -17,8 +17,8 @@ echo done...
 echo 
 #
 # ========== CodeLite project files ==========
-premake/premake-linux --target cl-gcc --wx-version $release --shared --with-wx-shared $unicode $debug --dbl-sqlite --dbl-postgresql --dbl-postgresql-headers "/usr/include/postgresql" --dbl-mysql --dbl-mysql-headers "/usr/include/mysql" $1
-#premake/premake-linux --target cl-gcc --wx-version $release --shared --with-wx-shared $unicode $debug --dbl-sqlite --dbl-mysql --dbl-mysql-headers "/usr/include/mysql" $1
+#premake/premake-linux --target cl-gcc --wx-version $release --shared --with-wx-shared $unicode $debug --dbl-sqlite --dbl-postgresql --dbl-postgresql-headers "/usr/include/postgresql" --dbl-mysql --dbl-mysql-headers "/usr/include/mysql" $1
+premake/premake-linux --target cl-gcc --wx-version $release --shared --with-wx-shared $unicode $debug --dbl-sqlite --dbl-mysql --dbl-mysql-headers "/usr/include/mysql" $1
 #premake/premake-linux --target cl-gcc --wx-version $release $unicode $debug $1
 echo done...
 echo 

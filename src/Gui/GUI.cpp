@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Mar  1 2011)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -224,7 +224,7 @@ _AdapterSelectDlg::_AdapterSelectDlg( wxWindow* parent, wxWindowID id, const wxS
 	wxBoxSizer* bSizer9;
 	bSizer9 = new wxBoxSizer( wxVERTICAL );
 	
-	m_btnMySql = new wxButton( this, wxID_ANY, wxT("MySql"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_btnMySql = new wxButton( this, wxID_ANY, wxT("MySql"), wxDefaultPosition, wxSize( 175,-1 ), 0 );
 	bSizer9->Add( m_btnMySql, 0, wxALL|wxEXPAND, 5 );
 	
 	m_btnSqlite = new wxButton( this, wxID_ANY, wxT("SQLite"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -232,6 +232,7 @@ _AdapterSelectDlg::_AdapterSelectDlg( wxWindow* parent, wxWindowID id, const wxS
 	
 	this->SetSizer( bSizer9 );
 	this->Layout();
+	bSizer9->Fit( this );
 	
 	this->Centre( wxBOTH );
 	
@@ -262,10 +263,10 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	fgSizer18->SetFlexibleDirection( wxBOTH );
 	fgSizer18->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_splitter2 = new wxSplitterWindow( m_panel19, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
-	m_splitter2->Connect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitter2OnIdle ), NULL, this );
+	m_splitterPanels = new wxSplitterWindow( m_panel19, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
+	m_splitterPanels->Connect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitterPanelsOnIdle ), NULL, this );
 	
-	m_panelData = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panelData = new wxPanel( m_splitterPanels, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 	
@@ -286,14 +287,14 @@ _DbViewerPanel::_DbViewerPanel( wxWindow* parent, wxWindowID id, const wxPoint& 
 	m_panelData->SetSizer( bSizer4 );
 	m_panelData->Layout();
 	bSizer4->Fit( m_panelData );
-	m_panelThumb = new wxPanel( m_splitter2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	m_panelThumb = new wxPanel( m_splitterPanels, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	m_thmSizer = new wxBoxSizer( wxVERTICAL );
 	
 	m_panelThumb->SetSizer( m_thmSizer );
 	m_panelThumb->Layout();
 	m_thmSizer->Fit( m_panelThumb );
-	m_splitter2->SplitHorizontally( m_panelData, m_panelThumb, 305 );
-	fgSizer18->Add( m_splitter2, 1, wxEXPAND, 5 );
+	m_splitterPanels->SplitHorizontally( m_panelData, m_panelThumb, 305 );
+	fgSizer18->Add( m_splitterPanels, 1, wxEXPAND, 5 );
 	
 	m_panel19->SetSizer( fgSizer18 );
 	m_panel19->Layout();
@@ -771,7 +772,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_pageType->SetSizer( bSizer7 );
 	m_pageType->Layout();
 	bSizer7->Fit( m_pageType );
-	m_notebook3->AddPage( m_pageType, wxT("Column"), true );
+	m_notebook3->AddPage( m_pageType, wxT("Column"), false );
 	m_pageConstraint = new wxPanel( m_notebook3, wxID_PAGE_CONSTRAINT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer11;
 	bSizer11 = new wxBoxSizer( wxVERTICAL );
@@ -832,7 +833,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_pageConstraint->SetSizer( bSizer11 );
 	m_pageConstraint->Layout();
 	bSizer11->Fit( m_pageConstraint );
-	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), false );
+	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), true );
 	
 	bSizer18->Add( m_notebook3, 1, wxEXPAND | wxALL, 5 );
 	

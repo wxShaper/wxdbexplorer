@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Mar  1 2011)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -163,7 +163,7 @@ class _AdapterSelectDlg : public wxDialog
 	
 	public:
 		
-		_AdapterSelectDlg( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Select dbAdapter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 200,-1 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		_AdapterSelectDlg( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Select dbAdapter"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE ); 
 		~_AdapterSelectDlg();
 	
 };
@@ -178,7 +178,7 @@ class _DbViewerPanel : public wxPanel
 	protected:
 		wxNotebook* m_notebook2;
 		wxPanel* m_panel19;
-		wxSplitterWindow* m_splitter2;
+		wxSplitterWindow* m_splitterPanels;
 		wxPanel* m_panelData;
 		wxToolBar* m_toolBar1;
 		wxTreeCtrl* m_treeDatabases;
@@ -203,10 +203,10 @@ class _DbViewerPanel : public wxPanel
 		_DbViewerPanel( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,500 ), long style = wxTAB_TRAVERSAL ); 
 		~_DbViewerPanel();
 		
-		void m_splitter2OnIdle( wxIdleEvent& )
+		void m_splitterPanelsOnIdle( wxIdleEvent& )
 		{
-			m_splitter2->SetSashPosition( 305 );
-			m_splitter2->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitter2OnIdle ), NULL, this );
+			m_splitterPanels->SetSashPosition( 305 );
+			m_splitterPanels->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _DbViewerPanel::m_splitterPanelsOnIdle ), NULL, this );
 		}
 	
 };
