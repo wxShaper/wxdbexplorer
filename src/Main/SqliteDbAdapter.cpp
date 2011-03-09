@@ -15,7 +15,7 @@ SQLiteDbAdapter::~SQLiteDbAdapter() {
 
 void SQLiteDbAdapter::CloseConnection() {
 }
-DatabaseLayer* SQLiteDbAdapter::GetDatabaseLayer() {
+DatabaseLayer* SQLiteDbAdapter::GetDatabaseLayer(const wxString& dbName) {
 	DatabaseLayer* pDatabase = NULL;
 
 #ifdef DBL_USE_SQLITE
@@ -59,7 +59,7 @@ wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& dbName, const wxStrin
 }
 bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 	int i = 0;
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return NULL;
 		// loading columns
@@ -176,7 +176,7 @@ bool SQLiteDbAdapter::CanConnect() {
 }
 
 void SQLiteDbAdapter::GetDatabases(DbConnection* dbCon) {
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return;
 
@@ -192,7 +192,7 @@ void SQLiteDbAdapter::GetDatabases(DbConnection* dbCon) {
 }
 
 void SQLiteDbAdapter::GetTables(Database* db) {
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return;
 		//TODO:SQL:

@@ -23,7 +23,7 @@ void MySqlDbAdapter::CloseConnection() {
 	this->m_pDbLayer->Close();
 }
 
-DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer() {
+DatabaseLayer* MySqlDbAdapter::GetDatabaseLayer(const wxString& dbName) {
 	DatabaseLayer* dbLayer = NULL;
 
 #ifdef DBL_USE_MYSQL
@@ -159,7 +159,7 @@ wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString
 }
 
 bool MySqlDbAdapter::GetColumns(Table* pTab) {
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 
 	if (!dbLayer->IsOpen()) return NULL;
 	// loading columns
@@ -248,7 +248,7 @@ bool MySqlDbAdapter::CanConnect() {
 }
 void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 	if (dbCon) {
-		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
 
@@ -268,7 +268,7 @@ void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 
 void MySqlDbAdapter::GetTables(Database* db) {
 	if (db) {
-		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
 			// lading tables for database
@@ -353,7 +353,7 @@ wxString MySqlDbAdapter::GetUseDb(const wxString& dbName) {
 	return wxString::Format(wxT("USE `%s`"),dbName.c_str());
 }
 void MySqlDbAdapter::GetViews(Database* db) {
-	DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 
 	if (!dbLayer->IsOpen()) return;
 	// loading columns

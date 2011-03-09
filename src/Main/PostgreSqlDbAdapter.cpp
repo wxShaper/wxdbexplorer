@@ -24,12 +24,15 @@ void PostgreSqlDbAdapter::CloseConnection() {
 	this->m_pDbLayer->Close();
 }
 
-DatabaseLayer* PostgreSqlDbAdapter::GetDatabaseLayer() {
+DatabaseLayer* PostgreSqlDbAdapter::GetDatabaseLayer(const wxString& dbName) {
 	DatabaseLayer* dbLayer = NULL;
+	
 
 #ifdef DBL_USE_POSTGRES
 	if (!CanConnect())  return new PostgresDatabaseLayer();
-	dbLayer = new PostgresDatabaseLayer(this->m_serverName,this->m_defaultDb, this->m_userName, this->m_password);
+	if (!dbName.IsEmpty()) dbLayer = new PostgresDatabaseLayer(this->m_serverName,dbName, this->m_userName, this->m_password);
+	else dbLayer = new PostgresDatabaseLayer(this->m_serverName,this->m_defaultDb, this->m_userName, this->m_password);
+
 #endif
 
 	return dbLayer;
@@ -263,8 +266,8 @@ wxString PostgreSqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxS
 
 bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 	if (pTab){	
-		SetDatabase(pTab->GetParentName());
-		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+//		SetDatabase(pTab->GetParentName());
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer(pTab->GetParentName());
 
 		if (!dbLayer->IsOpen()) return NULL;
 		// loading columns
@@ -377,7 +380,7 @@ bool PostgreSqlDbAdapter::CanConnect() {
 }
 void PostgreSqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 	if (dbCon) {
-		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
 
@@ -397,8 +400,8 @@ void PostgreSqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 
 void PostgreSqlDbAdapter::GetTables(Database* db) {
 	if (db) {
-		SetDatabase(db->GetName());
-		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		//SetDatabase(db->GetName());
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer(db->GetName());
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
 			// lading tables for database
@@ -422,7 +425,7 @@ wxString PostgreSqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxString::Format(wxT("CREATE DATABASE %s"), dbName.c_str());
 }
 wxString PostgreSqlDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxString::Format(wxT("DROP TABLE %s"), pTab->GetParentName().c_str(),pTab->GetName().c_str());
+	return wxString::Format(wxT("DROP TABLE %s"), pTab->GetName().c_str());
 }
 wxString PostgreSqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	//TODO:SQL:
@@ -485,8 +488,8 @@ wxString PostgreSqlDbAdapter::GetUseDb(const wxString& dbName) {
 }
 void PostgreSqlDbAdapter::GetViews(Database* db) {
 	if (db) {
-		SetDatabase(db->GetName());
-		DatabaseLayer* dbLayer = this->GetDatabaseLayer();
+		//SetDatabase(db->GetName());
+		DatabaseLayer* dbLayer = this->GetDatabaseLayer(db->GetName());
 		if (dbLayer) {
 			if (!dbLayer->IsOpen()) return;
 			// lading tables for database

@@ -15,7 +15,7 @@ class View;
 class IDbAdapter {
 
 public:
-	virtual DatabaseLayer* GetDatabaseLayer() = 0;
+	virtual DatabaseLayer* GetDatabaseLayer(const wxString& dbName) = 0;
 	virtual bool IsConnected() = 0;
 	
 	

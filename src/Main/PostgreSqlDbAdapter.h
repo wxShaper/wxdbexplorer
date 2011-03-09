@@ -27,7 +27,7 @@ public:
 	virtual bool CanConnect();
 	virtual bool IsConnected();
 	virtual void CloseConnection();
-	virtual DatabaseLayer* GetDatabaseLayer();
+	virtual DatabaseLayer* GetDatabaseLayer(const wxString& dbName);
 
 	virtual wxString GetUseDb(const wxString& dbName);
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
@@ -42,7 +42,7 @@ public:
 	virtual wxArrayString* GetDbTypes();
 
 protected:
-	void SetDatabase(const wxString& db) { m_defaultDb = db; }
+	//void SetDatabase(const wxString& db) { m_defaultDb = db; }
 
 	IDbType* parseTypeString(const wxString& typeString);
 

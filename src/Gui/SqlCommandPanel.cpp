@@ -39,7 +39,7 @@ void SQLCommandPanel::OnScintilaKeyDown(wxKeyEvent& event)
 }
 void SQLCommandPanel::ExecuteSql()
 {
-	DatabaseLayer* m_pDbLayer = m_pDbAdapter->GetDatabaseLayer();
+	DatabaseLayer* m_pDbLayer = m_pDbAdapter->GetDatabaseLayer(m_dbName);
 	if (m_pDbLayer->IsOpen()){
 		// test for empty string
 		if (this->m_scintillaSQL->GetText() != wxT("")) {

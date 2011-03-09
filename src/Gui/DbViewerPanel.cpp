@@ -332,7 +332,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					//TODO:LANG:
 					wxString dbName = wxGetTextFromUser(wxT("Database name"), wxT("Add database"));
 					if (!dbName.IsEmpty()){					
-						DatabaseLayer* pDbLayer = m_pEditedConnection->GetDbAdapter()->GetDatabaseLayer();
+						DatabaseLayer* pDbLayer = m_pEditedConnection->GetDbAdapter()->GetDatabaseLayer(wxT(""));
 						wxString sql = m_pEditedConnection->GetDbAdapter()->GetCreateDatabaseSql(dbName);
 						if (!sql.empty()){
 						
@@ -361,7 +361,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 						if (!dropSQL.IsEmpty()){						
 							wxMessageDialog dlg(this, wxString::Format(wxT("Remove database '%s'?"),pDb->GetName().c_str()),wxT("Drop database"),wxYES_NO);
 							if (dlg.ShowModal() == wxID_YES){
-								DatabaseLayer* pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer();
+								DatabaseLayer* pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer(wxT(""));
 								pDbLayer->RunQuery(dropSQL);
 								pDbLayer->Close();
 								delete pDbLayer;
@@ -404,7 +404,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					if (pTab){
 						wxMessageDialog dlg(this, wxString::Format(wxT("Remove table '%s'?"),pTab->GetName().c_str()),wxT("Drop table"),wxYES_NO);
 						if (dlg.ShowModal() == wxID_YES){
-							DatabaseLayer* pDbLayer = pTab->GetDbAdapter()->GetDatabaseLayer();
+							DatabaseLayer* pDbLayer = pTab->GetDbAdapter()->GetDatabaseLayer(pTab->GetParentName());
 							pDbLayer->RunQuery(pTab->GetDbAdapter()->GetDropTableSql(pTab));
 							pDbLayer->Close();
 							delete pDbLayer;
@@ -464,7 +464,9 @@ bool DbViewerPanel::ImportDb(const wxString& sqlFile, Database* pDb)
 		wxTextInputStream text( input );	
 		text.SetStringSeparators(wxT(";"));
 		wxString command = wxT("");
-		pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer();
+		
+
+		pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer(pDb->GetName());
 		pDbLayer->BeginTransaction();
 		
 		wxString useSql = pDb->GetDbAdapter()->GetUseDb(pDb->GetName());
