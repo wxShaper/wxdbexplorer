@@ -174,12 +174,11 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 	}
 	break;
 	case IDR_POPUP_MI2: {
+		bool dropTable = ( wxMessageBox( wxT("Add drop table statement?"),wxT("Drop table"),wxYES_NO ) == wxYES );
 		if (wxTheClipboard->Open()) {
 			ErdTable* table = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
 			if (table) {
 				//TODO:LANG:
-				wxMessageDialog dlg(this,wxT("Add drop table statement?"),wxT("Drop table"),wxYES_NO);
-				bool dropTable = (dlg.ShowModal() == wxID_YES);
 				wxTheClipboard->SetData(new wxTextDataObject(m_pDbAdapter->GetCreateTableSql(table->GetTable(), dropTable)));
 			}
 			wxTheClipboard->Close();
