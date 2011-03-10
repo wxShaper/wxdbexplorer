@@ -72,7 +72,7 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pIte
 			}
 		node = node->GetNext();
 	}
-	
+	m_pFrameCanvas->UpdateERD();
 	m_pFrameCanvas->UpdateVirtualSize();
 }
 
