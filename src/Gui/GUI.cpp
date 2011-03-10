@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  1 2011)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -754,17 +754,34 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_stSize->Wrap( -1 );
 	bSizer7->Add( m_stSize, 0, wxALL, 5 );
 	
-	m_txSize = new wxTextCtrl( m_pageType, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT );
-	bSizer7->Add( m_txSize, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 5 );
+	wxBoxSizer* bSizer19;
+	bSizer19 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_chPrimary = new wxCheckBox( m_pageType, wxID_ANY, wxT("Primary key"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer7->Add( m_chPrimary, 0, wxALL, 5 );
+	
+	bSizer19->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	m_staticText25 = new wxStaticText( m_pageType, wxID_ANY, wxT("("), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText25->Wrap( -1 );
+	bSizer19->Add( m_staticText25, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txSize = new wxTextCtrl( m_pageType, wxID_TX_SIZE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT );
+	bSizer19->Add( m_txSize, 0, wxALL|wxALIGN_RIGHT, 5 );
+	
+	m_staticText2511 = new wxStaticText( m_pageType, wxID_ANY, wxT(","), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText2511->Wrap( -1 );
+	bSizer19->Add( m_staticText2511, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_txSize2 = new wxTextCtrl( m_pageType, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT );
+	bSizer19->Add( m_txSize2, 0, wxALL, 5 );
+	
+	m_staticText251 = new wxStaticText( m_pageType, wxID_ANY, wxT(")"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText251->Wrap( -1 );
+	bSizer19->Add( m_staticText251, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	bSizer7->Add( bSizer19, 0, wxEXPAND|wxALIGN_RIGHT, 5 );
 	
 	m_chNotNull = new wxCheckBox( m_pageType, wxID_ANY, wxT("Not null"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chNotNull, 0, wxALL, 5 );
-	
-	m_checkBox3 = new wxCheckBox( m_pageType, wxID_ANY, wxT("Unique"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer7->Add( m_checkBox3, 0, wxALL, 5 );
 	
 	m_chAutoIncrement = new wxCheckBox( m_pageType, wxID_ANY, wxT("Auto increment"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer7->Add( m_chAutoIncrement, 0, wxALL, 5 );
@@ -772,7 +789,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_pageType->SetSizer( bSizer7 );
 	m_pageType->Layout();
 	bSizer7->Fit( m_pageType );
-	m_notebook3->AddPage( m_pageType, wxT("Column"), false );
+	m_notebook3->AddPage( m_pageType, wxT("Column"), true );
 	m_pageConstraint = new wxPanel( m_notebook3, wxID_PAGE_CONSTRAINT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer11;
 	bSizer11 = new wxBoxSizer( wxVERTICAL );
@@ -833,7 +850,7 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_pageConstraint->SetSizer( bSizer11 );
 	m_pageConstraint->Layout();
 	bSizer11->Fit( m_pageConstraint );
-	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), true );
+	m_notebook3->AddPage( m_pageConstraint, wxT("Constraint"), false );
 	
 	bSizer18->Add( m_notebook3, 1, wxEXPAND | wxALL, 5 );
 	
@@ -875,9 +892,8 @@ _TableSettings::_TableSettings( wxWindow* parent, wxWindowID id, const wxString&
 	m_comboType->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
 	m_comboType->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColTypeUI ), NULL, this );
 	m_txSize->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColSizeUI ), NULL, this );
-	m_chPrimary->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPrimaryKeyUI ), NULL, this );
+	m_txSize2->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColSize2UI ), NULL, this );
 	m_chNotNull->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
-	m_checkBox3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
 	m_chAutoIncrement->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
 	m_pageConstraint->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageConstraintUI ), NULL, this );
 	m_comboRefTable->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnRefTabChange ), NULL, this );
@@ -902,9 +918,8 @@ _TableSettings::~_TableSettings()
 	m_comboType->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnTypeSelect ), NULL, this );
 	m_comboType->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColTypeUI ), NULL, this );
 	m_txSize->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColSizeUI ), NULL, this );
-	m_chPrimary->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPrimaryKeyUI ), NULL, this );
+	m_txSize2->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnColSize2UI ), NULL, this );
 	m_chNotNull->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnNotNullUI ), NULL, this );
-	m_checkBox3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnUniqueUI ), NULL, this );
 	m_chAutoIncrement->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnAutoIncrementUI ), NULL, this );
 	m_pageConstraint->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _TableSettings::OnPageConstraintUI ), NULL, this );
 	m_comboRefTable->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( _TableSettings::OnRefTabChange ), NULL, this );

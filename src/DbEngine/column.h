@@ -41,7 +41,7 @@ public:
 	
 	// typ
 	IDbType* GetPType(){ return this->m_pType; }
-	void SetPType(IDbType* pType ) { delete this->m_pType; this->m_pType = pType; }
+	void SetPType(IDbType* pType ) { this->m_pType = pType; }
 	
 	// funkce pro editaci sloupecku - nastuvje prizna isSaved na false
 	void Edit(wxString& name,

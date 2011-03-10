@@ -14,12 +14,14 @@ SqliteType::SqliteType(const SqliteType& obj) {
 	m_size = obj.m_size;
 	m_size2 = obj.m_size2;
 	m_unique = obj.m_unique;
+	m_universalType = obj.m_universalType;
 	InitSerialize();
 }
 
-SqliteType::SqliteType(const wxString& typeName, long propertyFlags) {
+SqliteType::SqliteType(const wxString& typeName, long propertyFlags, UNIVERSAL_TYPE universalType) {
 	m_typeName = typeName;
 	m_dbtPropertyFlags = propertyFlags;
+	m_universalType = universalType;
 
 	m_autoIncrement = false;
 	m_notNull = false;
@@ -48,5 +50,8 @@ void SqliteType::InitSerialize() {
 	XS_SERIALIZE(m_primaryKey, wxT("m_primaryKey"));
 	XS_SERIALIZE(m_notNull, wxT("m_notNull"));
 	XS_SERIALIZE(m_autoIncrement, wxT("m_autoIncrement"));
-
+	XS_SERIALIZE_LONG(m_universalType, wxT("m_universalType"));
+}
+IDbType::UNIVERSAL_TYPE  SqliteType::GetUniversalType() {
+	return (IDbType::UNIVERSAL_TYPE )m_universalType;
 }

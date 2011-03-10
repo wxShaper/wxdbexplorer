@@ -26,6 +26,18 @@ public:
 		/*! \brief Enable parameter AUTO_INCREMENT */
 		dbtAUTO_INCREMENT = 32		
 		};
+	
+	/*! \brief Basic type for conversion */
+	enum UNIVERSAL_TYPE
+	{
+		dbtTYPE_INT = 1,
+		dbtTYPE_FLOAT = 2,
+		dbtTYPE_DECIMAL = 3,
+		dbtTYPE_TEXT = 4,
+		dbtTYPE_DATE_TIME = 5,
+		dbtTYPE_BOOLEAN = 6,
+		dbtTYPE_OTHER = 7
+		};
 
 		virtual wxString GetTypeName() = 0;
 		
@@ -65,7 +77,7 @@ public:
 		
 		virtual long GetPropertyFlags() = 0;
 		virtual void SetPropertyFlags(long flags) = 0;
-		
+		virtual UNIVERSAL_TYPE GetUniversalType() = 0;
 	
 };
 

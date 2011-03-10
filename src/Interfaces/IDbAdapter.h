@@ -11,6 +11,7 @@ class DbConnection;
 class Database;
 class Table;
 class View;
+class IDbType;
 
 class IDbAdapter {
 
@@ -56,8 +57,16 @@ public:
 	
 	/*! \brief Return IDbType by name string */
 	virtual IDbType* GetDbTypeByName(const wxString& typeName) = 0;
+	/*! \brief Return IDbType by name universal name */
+	virtual IDbType* GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) = 0;
 	/*! \brief Return wxArrayString of possible db types */
 	virtual wxArrayString* GetDbTypes () = 0;
+
+	/*! \brief Convert IDbType to the special db type. (!!! Old type is deleted !!!) */
+	virtual IDbType* ConvertType (IDbType* pType) = 0;
+	/*! \brief Return wxArrayString of possible db types */
+	virtual void ConvertTable(Table* pTab) = 0;
+	
 
 };
 

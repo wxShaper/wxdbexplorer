@@ -1,13 +1,11 @@
 #include "MySqlType.h"
 XS_IMPLEMENT_CLONABLE_CLASS(MySqlType,IDbType);
-MySqlType::MySqlType()
-{
+MySqlType::MySqlType() {
 	m_dbtPropertyFlags = 0;
 	InitSerialize();
 }
 
-MySqlType::MySqlType(const MySqlType& obj):IDbType(obj)
-{
+MySqlType::MySqlType(const MySqlType& obj):IDbType(obj) {
 	m_typeName = obj.m_typeName;
 	m_dbtPropertyFlags = obj.m_dbtPropertyFlags;
 	m_autoIncrement = obj.m_autoIncrement;
@@ -16,13 +14,15 @@ MySqlType::MySqlType(const MySqlType& obj):IDbType(obj)
 	m_size = obj.m_size;
 	m_size2 = obj.m_size2;
 	m_unique = obj.m_unique;
+	m_universalType = obj.m_universalType;
 	InitSerialize();
 }
 
-MySqlType::MySqlType(const wxString& typeName, long propertyFlags) {
+MySqlType::MySqlType(const wxString& typeName, long propertyFlags, UNIVERSAL_TYPE universalType) {
 	m_typeName = typeName;
 	m_dbtPropertyFlags = propertyFlags;
-	
+	m_universalType = universalType;
+
 	m_autoIncrement = false;
 	m_notNull = false;
 	m_primaryKey = false;
@@ -45,17 +45,20 @@ wxString MySqlType::ReturnSql() {
 	return sql;
 }
 
-void MySqlType::InitSerialize()
-{
-	XS_SERIALIZE(m_typeName,wxT("m_typeName")); 
-	XS_SERIALIZE_LONG(m_dbtPropertyFlags,wxT("m_dbtPropertyFlags")); 
+void MySqlType::InitSerialize() {
+	XS_SERIALIZE(m_typeName,wxT("m_typeName"));
+	XS_SERIALIZE_LONG(m_dbtPropertyFlags,wxT("m_dbtPropertyFlags"));
 	XS_SERIALIZE_LONG(m_size, wxT("m_size"));
 	XS_SERIALIZE_LONG(m_size2, wxT("m_size2"));
 	XS_SERIALIZE(m_unique, wxT("m_unique"));
 	XS_SERIALIZE(m_primaryKey, wxT("m_primaryKey"));
 	XS_SERIALIZE(m_notNull, wxT("m_notNull"));
 	XS_SERIALIZE(m_autoIncrement, wxT("m_autoIncrement"));
+	XS_SERIALIZE_LONG(m_universalType, wxT("m_universalType"));
 
 }
 
 
+IDbType::UNIVERSAL_TYPE MySqlType::GetUniversalType() {
+	return (IDbType::UNIVERSAL_TYPE )m_universalType;
+}

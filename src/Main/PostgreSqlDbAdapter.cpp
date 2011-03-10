@@ -26,7 +26,7 @@ void PostgreSqlDbAdapter::CloseConnection() {
 
 DatabaseLayer* PostgreSqlDbAdapter::GetDatabaseLayer(const wxString& dbName) {
 	DatabaseLayer* dbLayer = NULL;
-	
+
 
 #ifdef DBL_USE_POSTGRES
 	if (!CanConnect())  return new PostgresDatabaseLayer();
@@ -90,104 +90,104 @@ IDbType* PostgreSqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	IDbType* type = NULL;
 	// numeric types
 	if (typeName == wxT("SMALLINT")) {
-		type = new PostgreSqlType(wxT("SMALLINT"), IDbType::dbtNOT_NULL  );
+		type = new PostgreSqlType(wxT("SMALLINT"), IDbType::dbtNOT_NULL, IDbType::dbtTYPE_INT  );
 	} else if (typeName == wxT("INTEGER")) {
-		type = new PostgreSqlType(wxT("INTEGER"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("BIGINT")) {
-		type = new PostgreSqlType(wxT("BIGINT"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("DECIMAL")) {
-		type = new PostgreSqlType(wxT("DECIMAL"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	}else if (typeName == wxT("NUMERIC")) {
-		type = new PostgreSqlType(wxT("NUMERIC"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	}else if (typeName == wxT("REAL")) {
-		type = new PostgreSqlType(wxT("REAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	}else if (typeName == wxT("DOUBLE PRECISION")) {
-		type = new PostgreSqlType(wxT("DOUBLE PRECISION"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	}else if (typeName == wxT("SERIAL")) {
-		type = new PostgreSqlType(wxT("SERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	}else if (typeName == wxT("BIGSERIAL")) {
-		type = new PostgreSqlType(wxT("BIGSERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-	
-	// Monetary types
-	}else if (typeName == wxT("CHARACTER VARYING")) {
-		type = new PostgreSqlType(wxT("CHARACTER VARYING"),IDbType::dbtNOT_NULL| IDbType::dbtSIZE);
-	// Character types
-	}else if (typeName == wxT("VARCHAR")) {
-		type = new PostgreSqlType(wxT("VARCHAR"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	}else if (typeName == wxT("CHARACTER")) {
-		type = new PostgreSqlType(wxT("CHARACTER"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	}else if (typeName == wxT("CHAR")) {
-		type = new PostgreSqlType(wxT("CHAR"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	}else if (typeName == wxT("TEXT")) {
-		type = new PostgreSqlType(wxT("TEXT"),IDbType::dbtNOT_NULL );
-	
-	// Binary types
-	}else if (typeName == wxT("BYTEA")) {
-		type = new PostgreSqlType(wxT("BYTEA"),IDbType::dbtNOT_NULL);
-	
-	// Date/Time types
-	}else if (typeName == wxT("TIMESTAMP")) {
-		type = new PostgreSqlType(wxT("TIMESTAMP"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	}else if (typeName == wxT("DATE")) {
-		type = new PostgreSqlType(wxT("DATE"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("TIME")) {
-		type = new PostgreSqlType(wxT("TIME"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	}else if (typeName == wxT("INTERVAL")) {
-		type = new PostgreSqlType(wxT("INTERVAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
-	
-	// Boolean types
-	}else if (typeName == wxT("BOOLEAN")) {
-		type = new PostgreSqlType(wxT("BOOLEAN"),IDbType::dbtNOT_NULL );
-	
-	// Geometric types
-	}else if (typeName == wxT("POINT")) {
-		type = new PostgreSqlType(wxT("POINT"),IDbType::dbtNOT_NULL  );
-	}else if (typeName == wxT("LINE")) {
-		type = new PostgreSqlType(wxT("LINE"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("LSEG")) {
-		type = new PostgreSqlType(wxT("LSEG"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("BOX")) {
-		type = new PostgreSqlType(wxT("BOX"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("PATH")) {
-		type = new PostgreSqlType(wxT("PATH"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("POLYGON")) {
-		type = new PostgreSqlType(wxT("POLYGON"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("CIRCLE")) {
-		type = new PostgreSqlType(wxT("CIRCLE"),IDbType::dbtNOT_NULL );
-	
-	// Network address types
-	}else if (typeName == wxT("CIDR")) {
-		type = new PostgreSqlType(wxT("CIDR"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("INET")) {
-		type = new PostgreSqlType(wxT("INET"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("MACADDR")) {
-		type = new PostgreSqlType(wxT("MACADDR"),IDbType::dbtNOT_NULL );
-	
-	// Bit String types 
-	}else if (typeName == wxT("BIT")) {
-		type = new PostgreSqlType(wxT("BIT"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	}else if (typeName == wxT("BIT VARYING")) {
-		type = new PostgreSqlType(wxT("BIT VARYING"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
-	
-	// UUID type
-	}else if (typeName == wxT("UUID")) {
-		type = new PostgreSqlType(wxT("UUID"),IDbType::dbtNOT_NULL );
-	
-	// XML type
-	}else if (typeName == wxT("XML")) {
-		type = new PostgreSqlType(wxT("XML"),IDbType::dbtNOT_NULL );
-	
-	// Other types
-	}else if (typeName == wxT("OID")) {
-		type = new PostgreSqlType(wxT("OID"),IDbType::dbtNOT_NULL);
-	}else if (typeName == wxT("XID")) {
-		type = new PostgreSqlType(wxT("XID"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("ARRAY")) {
-		type = new PostgreSqlType(wxT("ARRAY"),IDbType::dbtNOT_NULL );
-	}else if (typeName == wxT("REGPROX")) {
-		type = new PostgreSqlType(wxT("REGPROX"),IDbType::dbtNOT_NULL );
+		type = new PostgreSqlType(wxT("INTEGER"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_INT );
+	} else if (typeName == wxT("BIGINT")) {
+		type = new PostgreSqlType(wxT("BIGINT"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_INT );
+	} else if (typeName == wxT("DECIMAL")) {
+		type = new PostgreSqlType(wxT("DECIMAL"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_DECIMAL);
+	} else if (typeName == wxT("NUMERIC")) {
+		type = new PostgreSqlType(wxT("NUMERIC"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_DECIMAL);
+	} else if (typeName == wxT("REAL")) {
+		type = new PostgreSqlType(wxT("REAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
+	} else if (typeName == wxT("DOUBLE PRECISION")) {
+		type = new PostgreSqlType(wxT("DOUBLE PRECISION"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
+	} else if (typeName == wxT("SERIAL")) {
+		type = new PostgreSqlType(wxT("SERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
+	} else if (typeName == wxT("BIGSERIAL")) {
+		type = new PostgreSqlType(wxT("BIGSERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
+
+		// Monetary types
+	} else if (typeName == wxT("CHARACTER VARYING")) {
+		type = new PostgreSqlType(wxT("CHARACTER VARYING"),IDbType::dbtNOT_NULL| IDbType::dbtSIZE, IDbType::dbtTYPE_TEXT);
+		// Character types
+	} else if (typeName == wxT("VARCHAR")) {
+		type = new PostgreSqlType(wxT("VARCHAR"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE , IDbType::dbtTYPE_TEXT);
+	} else if (typeName == wxT("CHARACTER")) {
+		type = new PostgreSqlType(wxT("CHARACTER"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_TEXT );
+	} else if (typeName == wxT("CHAR")) {
+		type = new PostgreSqlType(wxT("CHAR"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_TEXT );
+	} else if (typeName == wxT("TEXT")) {
+		type = new PostgreSqlType(wxT("TEXT"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_TEXT );
+
+		// Binary types
+	} else if (typeName == wxT("BYTEA")) {
+		type = new PostgreSqlType(wxT("BYTEA"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER);
+
+		// Date/Time types
+	} else if (typeName == wxT("TIMESTAMP")) {
+		type = new PostgreSqlType(wxT("TIMESTAMP"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_DATE_TIME );
+	} else if (typeName == wxT("DATE")) {
+		type = new PostgreSqlType(wxT("DATE"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_DATE_TIME );
+	} else if (typeName == wxT("TIME")) {
+		type = new PostgreSqlType(wxT("TIME"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_DATE_TIME );
+	} else if (typeName == wxT("INTERVAL")) {
+		type = new PostgreSqlType(wxT("INTERVAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_DATE_TIME );
+
+		// Boolean types
+	} else if (typeName == wxT("BOOLEAN")) {
+		type = new PostgreSqlType(wxT("BOOLEAN"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_BOOLEAN );
+
+		// Geometric types
+	} else if (typeName == wxT("POINT")) {
+		type = new PostgreSqlType(wxT("POINT"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("LINE")) {
+		type = new PostgreSqlType(wxT("LINE"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("LSEG")) {
+		type = new PostgreSqlType(wxT("LSEG"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("BOX")) {
+		type = new PostgreSqlType(wxT("BOX"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("PATH")) {
+		type = new PostgreSqlType(wxT("PATH"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("POLYGON")) {
+		type = new PostgreSqlType(wxT("POLYGON"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("CIRCLE")) {
+		type = new PostgreSqlType(wxT("CIRCLE"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+
+		// Network address types
+	} else if (typeName == wxT("CIDR")) {
+		type = new PostgreSqlType(wxT("CIDR"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("INET")) {
+		type = new PostgreSqlType(wxT("INET"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("MACADDR")) {
+		type = new PostgreSqlType(wxT("MACADDR"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+
+		// Bit String types
+	} else if (typeName == wxT("BIT")) {
+		type = new PostgreSqlType(wxT("BIT"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_OTHER );
+	} else if (typeName == wxT("BIT VARYING")) {
+		type = new PostgreSqlType(wxT("BIT VARYING"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_OTHER );
+
+		// UUID type
+	} else if (typeName == wxT("UUID")) {
+		type = new PostgreSqlType(wxT("UUID"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+
+		// XML type
+	} else if (typeName == wxT("XML")) {
+		type = new PostgreSqlType(wxT("XML"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+
+		// Other types
+	} else if (typeName == wxT("OID")) {
+		type = new PostgreSqlType(wxT("OID"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER );
+	} else if (typeName == wxT("XID")) {
+		type = new PostgreSqlType(wxT("XID"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
+	} else if (typeName == wxT("ARRAY")) {
+		type = new PostgreSqlType(wxT("ARRAY"),IDbType::dbtNOT_NULL , IDbType::dbtTYPE_OTHER );
+	} else if (typeName == wxT("REGPROX")) {
+		type = new PostgreSqlType(wxT("REGPROX"),IDbType::dbtNOT_NULL, IDbType::dbtTYPE_OTHER  );
 	}
-	
+
 	wxASSERT(type);
 	return type;
 }
@@ -204,7 +204,7 @@ wxArrayString* PostgreSqlDbAdapter::GetDbTypes() {
 	pNames->Add(wxT("DOUBLE PRECISION")) ;
 	pNames->Add(wxT("SERIAL")) ;
 	pNames->Add(wxT("BIGSERIAL")) ;
-	
+
 	// Monetary types
 	pNames->Add(wxT("CHARACTER VARYING")) ;
 	// Character types
@@ -212,19 +212,19 @@ wxArrayString* PostgreSqlDbAdapter::GetDbTypes() {
 	pNames->Add(wxT("CHARACTER")) ;
 	pNames->Add(wxT("CHAR"));
 	pNames->Add(wxT("TEXT")) ;
-	
+
 	// Binary types
 	pNames->Add(wxT("BYTEA")) ;
-	
+
 	// Date/Time types
 	pNames->Add(wxT("TIMESTAMP")) ;
 	pNames->Add(wxT("DATE"));
 	pNames->Add(wxT("TIME")) ;
 	pNames->Add(wxT("INTERVAL"));
-	
+
 	// Boolean types
 	pNames->Add(wxT("BOOLEAN"));
-	
+
 	// Geometric types
 	pNames->Add(wxT("POINT")) ;
 	pNames->Add(wxT("LINE")) ;
@@ -233,28 +233,28 @@ wxArrayString* PostgreSqlDbAdapter::GetDbTypes() {
 	pNames->Add(wxT("PATH")) ;
 	pNames->Add(wxT("POLYGON"));
 	pNames->Add(wxT("CIRCLE")) ;
-	
+
 	// Network address types
 	pNames->Add(wxT("CIDR"));
 	pNames->Add(wxT("INET"));
 	pNames->Add(wxT("MACADDR")) ;
-	
-	// Bit String types 
+
+	// Bit String types
 	pNames->Add(wxT("BIT"));
 	pNames->Add(wxT("BIT VARYING")) ;
-	
+
 	// UUID type
 	pNames->Add(wxT("UUID")) ;
-	
+
 	// XML type
 	pNames->Add(wxT("XML")) ;
-	
+
 	// OTHER TYPES
 	pNames->Add(wxT("OID")) ;
 	pNames->Add(wxT("XID")) ;
 	pNames->Add(wxT("ARRAY")) ;
 	pNames->Add(wxT("REGPROX")) ;
-	
+
 
 	return pNames;
 }
@@ -265,7 +265,7 @@ wxString PostgreSqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxS
 }
 
 bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
-	if (pTab){	
+	if (pTab) {
 //		SetDatabase(pTab->GetParentName());
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer(pTab->GetParentName());
 
@@ -274,14 +274,14 @@ bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 		//TODO:SQL:
 		//DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW COLUMNS IN `%s`.`%s`"),pTab->getParentName().c_str(),pTab->getName().c_str()));
 		DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.columns WHERE table_name = '%s'"),pTab->GetName().c_str()));
-		
-		
+
+
 		while (database->Next()) {
 			IDbType* pType = parseTypeString(database->GetResultString(wxT("data_type")));
 			if (pType) {
 				pType->SetSize(database->GetResultInt(wxT("numeric_precision")));
 				pType->SetSize2(database->GetResultInt(wxT("numeric_precision_radix")));
-				pType->SetNotNull(database->GetResultString(wxT("is_nullable")) == wxT("NO"));				
+				pType->SetNotNull(database->GetResultString(wxT("is_nullable")) == wxT("NO"));
 				Column* pCol = new Column(database->GetResultString(wxT("column_name")),pTab->GetName(), pType);
 				pTab->AddChild(pCol);
 			}
@@ -296,10 +296,10 @@ bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 
 		//TODO:SQL:
 		wxString constrSql = wxT("SELECT tc.constraint_name, tc.constraint_type, tc.table_name, kcu.column_name, tc.is_deferrable, tc.initially_deferred, rc.match_option AS match_type, rc.update_rule AS on_update, rc.delete_rule AS on_delete, ccu.table_name AS references_table, ccu.column_name AS references_field FROM information_schema.table_constraints tc LEFT JOIN information_schema.key_column_usage kcu ON tc.constraint_catalog = kcu.constraint_catalog AND tc.constraint_schema = kcu.constraint_schema AND tc.constraint_name = kcu.constraint_name LEFT JOIN information_schema.referential_constraints rc ON tc.constraint_catalog = rc.constraint_catalog AND tc.constraint_schema = rc.constraint_schema AND tc.constraint_name = rc.constraint_name LEFT JOIN information_schema.constraint_column_usage ccu ON rc.unique_constraint_catalog = ccu.constraint_catalog AND rc.unique_constraint_schema = ccu.constraint_schema AND rc.unique_constraint_name = ccu.constraint_name WHERE tc.table_name = '%s'");
-		
+
 		database = dbLayer->RunQueryWithResults(wxString::Format(constrSql, pTab->GetName().c_str()));
 		while (database->Next()) {
-			if ((database->GetResultString(wxT("constraint_type")) == wxT("PRIMARY KEY"))||(database->GetResultString(wxT("constraint_type")) == wxT("FOREIGN KEY"))){			
+			if ((database->GetResultString(wxT("constraint_type")) == wxT("PRIMARY KEY"))||(database->GetResultString(wxT("constraint_type")) == wxT("FOREIGN KEY"))) {
 				Constraint* constr = new Constraint();
 				constr->SetName(database->GetResultString(wxT("constraint_name")));
 				constr->SetLocalColumn(database->GetResultString(wxT("column_name")));
@@ -322,9 +322,9 @@ bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 					if (onUpdate == wxT("NO ACTION")) constr->SetOnDelete(Constraint::noAction);
 
 
-					}
-				pTab->AddChild(constr);
 				}
+				pTab->AddChild(constr);
+			}
 		}
 		dbLayer->CloseResultSet(database);
 		dbLayer->Close();
@@ -335,42 +335,7 @@ bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 IDbType* PostgreSqlDbAdapter::parseTypeString(const wxString& typeString) {
 	wxString text = typeString.Upper().Trim();
 	IDbType* type = this->GetDbTypeByName(text);
-	
-	
-	/*
-	
-	wxString text   = typeString.Upper().Trim();
-	wxString typeName ;
-	//int iMezera = text.Find(wxT(" "));
-	int iZavorka = text.Find(wxT("("));
-	if (iZavorka == -1)typeName = text;
-	else {
-		typeName = text.Mid(0,iZavorka);
-		text = text.Mid(iZavorka);
-	}
 
-	IDbType* type = this->GetDbTypeByName(typeName);
-	if (type) {
-		//TODO:Doresit enum
-		if ((iZavorka > 0) && (typeName.compare(wxT("ENUM")))) {
-			int iKonecZavorky = text.Find(wxT(")"));
-			int iCarka = text.Find(wxT(","));
-			if ((iCarka > 0) && (iCarka<iKonecZavorky)) {
-				long s = 0;
-				long s2 = 0;
-				text.Mid(1,iCarka-1).ToLong(&s);
-				text.Mid(iCarka+1, iZavorka-iCarka+1).ToLong(&s2);
-				type->SetSize(s);
-				type->SetSize2(s2);
-				type->SetPropertyFlags(type->GetPropertyFlags() | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
-			} else {
-				long s = 0;
-				text.Mid(1,iKonecZavorky-1).ToLong(&s);
-				type->SetSize(s);
-			}
-		}
-	}
-	 */
 	return type;
 	//return new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
 }
@@ -442,33 +407,33 @@ wxString PostgreSqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 				str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT %s FOREIGN KEY (%s) REFERENCES %s(%s) " ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
 				str.append(wxT("ON UPDATE "));
 				switch(constr->GetOnUpdate()) {
-				case Constraint::restrict:
-					str.append(wxT("RESTRICT "));
-					break;
-				case Constraint::cascade:
-					str.append(wxT("CASCADE "));
-					break;
-				case Constraint::setNull:
-					str.append(wxT("SET NULL "));
-					break;
-				case Constraint::noAction:
-					str.append(wxT("NO ACTION "));
-					break;
+					case Constraint::restrict:
+						str.append(wxT("RESTRICT "));
+						break;
+					case Constraint::cascade:
+						str.append(wxT("CASCADE "));
+						break;
+					case Constraint::setNull:
+						str.append(wxT("SET NULL "));
+						break;
+					case Constraint::noAction:
+						str.append(wxT("NO ACTION "));
+						break;
 				}
 				str.append(wxT("ON DELETE "));
 				switch(constr->GetOnDelete()) {
-				case Constraint::restrict:
-					str.append(wxT("RESTRICT "));
-					break;
-				case Constraint::cascade:
-					str.append(wxT("CASCADE "));
-					break;
-				case Constraint::setNull:
-					str.append(wxT("SET NULL "));
-					break;
-				case Constraint::noAction:
-					str.append(wxT("NO ACTION "));
-					break;
+					case Constraint::restrict:
+						str.append(wxT("RESTRICT "));
+						break;
+					case Constraint::cascade:
+						str.append(wxT("CASCADE "));
+						break;
+					case Constraint::setNull:
+						str.append(wxT("SET NULL "));
+						break;
+					case Constraint::noAction:
+						str.append(wxT("NO ACTION "));
+						break;
 				}
 				str.append(wxT("; \n"));
 			}
@@ -507,32 +472,60 @@ void PostgreSqlDbAdapter::GetViews(Database* db) {
 			delete dbLayer;
 		}
 	}
-	return;	
-	
-	
-	
-	/*DatabaseLayer* dbLayer = this->GetDatabaseLayer();
-
-	if (!dbLayer->IsOpen()) return;
-	// loading columns
-	//TODO:SQL:
-	DatabaseResultSet *database = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`VIEWS` WHERE TABLE_SCHEMA = '%s'"),db->getName().c_str()));
-	while (database->Next()) {
-		View* pView = new View(this,database->GetResultString(wxT("TABLE_NAME")),db->getName(),database->GetResultString(wxT("VIEW_DEFINITION")));
-		db->AddChild(pView);
-	}
-	dbLayer->CloseResultSet(database);*/
-
-
+	return;
 }
 wxString PostgreSqlDbAdapter::GetCreateViewSql(View* view, bool dropView) {
 	wxString str = wxT("");
-	if (view){
-		if (dropView){
+	if (view) {
+		if (dropView) {
 			str.append(wxString::Format(wxT("DROP VIEW IF EXISTS %s;\n"),view->GetName().c_str()));
-			}			
+		}
 		str.append(wxString::Format(wxT("CREATE VIEW %s AS %s ;\n"),view->GetName().c_str(), view->GetSelect().c_str()));
 	}
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
+}
+void PostgreSqlDbAdapter::ConvertTable(Table* pTab) {
+	SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+	while( node ){
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  {
+			Column* col = (Column*) node->GetData();			
+			col->SetPType(ConvertType(col->GetPType()));
+			}
+		node = node->GetNext();
+		}	
+}
+
+IDbType* PostgreSqlDbAdapter::ConvertType(IDbType* pType) {
+	IDbType* newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
+	delete pType;
+	pType = NULL;
+	return newType;
+}
+IDbType* PostgreSqlDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) {
+	IDbType* newType = NULL;
+	switch (type) {
+		case IDbType::dbtTYPE_INT:
+			newType = GetDbTypeByName(wxT("INTEGER"));
+			break;
+		case IDbType::dbtTYPE_BOOLEAN:
+			newType = GetDbTypeByName(wxT("BOOLEAN"));
+			break;
+		case IDbType::dbtTYPE_DATE_TIME:
+			newType = GetDbTypeByName(wxT("DATE"));
+			break;
+		case IDbType::dbtTYPE_DECIMAL:
+			newType = GetDbTypeByName(wxT("DECIMAL"));
+			break;
+		case IDbType::dbtTYPE_FLOAT:
+			newType = GetDbTypeByName(wxT("DOUBLE PRECISION"));
+			break;
+		case IDbType::dbtTYPE_TEXT:
+			newType = GetDbTypeByName(wxT("TEXT"));
+			break;
+		case IDbType::dbtTYPE_OTHER:
+			newType = GetDbTypeByName(wxT("BYTEA"));
+			break;
+	}
+	return newType;
 }

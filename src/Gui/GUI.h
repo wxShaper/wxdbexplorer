@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  1 2011)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -336,10 +336,13 @@ class _TableSettings : public wxDialog
 		wxStaticText* m_staticText9;
 		wxComboBox* m_comboType;
 		wxStaticText* m_stSize;
+		
+		wxStaticText* m_staticText25;
 		wxTextCtrl* m_txSize;
-		wxCheckBox* m_chPrimary;
+		wxStaticText* m_staticText2511;
+		wxTextCtrl* m_txSize2;
+		wxStaticText* m_staticText251;
 		wxCheckBox* m_chNotNull;
-		wxCheckBox* m_checkBox3;
 		wxCheckBox* m_chAutoIncrement;
 		wxPanel* m_pageConstraint;
 		wxStaticText* m_staticText11;
@@ -368,9 +371,8 @@ class _TableSettings : public wxDialog
 		virtual void OnTypeSelect( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnColTypeUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnColSizeUI( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void OnPrimaryKeyUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnColSize2UI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnNotNullUI( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void OnUniqueUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnAutoIncrementUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnPageConstraintUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnRefTabChange( wxCommandEvent& event ) { event.Skip(); }

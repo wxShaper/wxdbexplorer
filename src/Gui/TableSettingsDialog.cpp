@@ -6,7 +6,7 @@ TableSettings::TableSettings(wxWindow* parent,IDbAdapter* pDbAdapter, wxWindowID
 	m_pEditedColumn = NULL;
 	m_pEditedConstraint = NULL;
 	m_txSize->SetValidator(wxTextValidator(wxFILTER_NUMERIC));
-	
+
 	m_fUpdating = false;
 
 	m_pDbAdapter = pDbAdapter;
@@ -25,9 +25,9 @@ TableSettings::~TableSettings() {
 }
 
 void TableSettings::OnListBoxClick(wxCommandEvent& event) {
-	
+
 	if( m_fUpdating ) return;
-	
+
 	wxString name = m_listColumns->GetStringSelection().substr(4);
 	Column* col = NULL;
 	Constraint* constr = NULL;
@@ -47,10 +47,9 @@ void TableSettings::OnListBoxClick(wxCommandEvent& event) {
 			if (type) {
 				m_comboType->SetValue(type->GetTypeName());
 				m_txSize->SetValue(wxString::Format(wxT("%li"),type->GetSize()));
+				m_txSize2->SetValue(wxString::Format(wxT("%li"),type->GetSize2()));
 				m_chAutoIncrement->SetValue(type->GetAutoIncrement());
 				m_chNotNull->SetValue(type->GetNotNull());
-				m_chPrimary->SetValue(type->GetPrimaryKey());
-				m_checkBox3->SetValue(type->GetUnique());
 			}
 		}
 
@@ -120,12 +119,12 @@ void TableSettings::OnSaveColumnClick(wxCommandEvent& event) {
 		if (pType) {
 			pType->SetNotNull(m_chNotNull->GetValue());
 			pType->SetAutoIncrement(m_chAutoIncrement->GetValue());
-			pType->SetPrimaryKey(m_chPrimary->GetValue());
-			pType->SetUnique(m_checkBox3->GetValue());
 
-			long s;
+			long s,s2;
 			m_txSize->GetValue().ToLong(&s);
+			m_txSize2->GetValue().ToLong(&s2);
 			pType->SetSize(s);
+			pType->SetSize2(s2);
 		}
 	}
 	if (m_pEditedConstraint) {
@@ -176,7 +175,7 @@ void TableSettings::SetTable(Table* tab, wxSFDiagramManager* pManager) {
 
 void TableSettings::UpdateView() {
 	m_fUpdating = true;
-	
+
 	m_listColumns->Clear();
 	if (m_pTable) {
 
@@ -196,12 +195,12 @@ void TableSettings::UpdateView() {
 	m_pEditedConstraint = NULL;
 	m_txColName->Clear();
 	m_txSize->Clear();
+	m_txSize2->Clear();
 	m_comboType->SetValue(wxT(""));
 	m_chAutoIncrement->SetValue(false);
 	m_chNotNull->SetValue(false);
-	m_chPrimary->SetValue(false);
-	m_checkBox3->SetValue(false);
-	
+
+
 	m_fUpdating = false;
 }
 
@@ -345,4 +344,10 @@ void TableSettings::OnDeleteUI(wxUpdateUIEvent& event) {
 
 void TableSettings::OnUpdateUI(wxUpdateUIEvent& event) {
 	event.Enable(m_radioBox1->GetSelection() == 1);
+}
+void TableSettings::OnColSize2UI(wxUpdateUIEvent& event) {
+	event.Enable(false);
+	if (m_pEditedColumn) {
+		if (m_pEditedColumn->GetPType()) event.Enable(m_pEditedColumn->GetPType()->HaveSize2());
+	}
 }

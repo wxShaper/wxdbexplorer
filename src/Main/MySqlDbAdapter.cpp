@@ -85,43 +85,43 @@ wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	IDbType* type = NULL;
 	if (typeName == wxT("INT")) {
-		type = new MySqlType(wxT("INT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE );
+		type = new MySqlType(wxT("INT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_INT );
 	} else if (typeName == wxT("VARCHAR")) {
-		type = new MySqlType(wxT("VARCHAR"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+		type = new MySqlType(wxT("VARCHAR"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_TEXT );
 	} else if (typeName == wxT("DOUBLE")) {
-		type = new MySqlType(wxT("DOUBLE"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+		type = new MySqlType(wxT("DOUBLE"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_DECIMAL);
 	} else if (typeName == wxT("FLOAT")) {
-		type = new MySqlType(wxT("FLOAT"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL );
+		type = new MySqlType(wxT("FLOAT"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL, IDbType::dbtTYPE_FLOAT );
 	} else if (typeName == wxT("DECIMAL")) {
-		type = new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO);
+		type = new MySqlType(wxT("DECIMAL"),IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_DECIMAL);
 	}  else if (typeName == wxT("BOOL")) {
-		type = new MySqlType(wxT("BOOL"), 0);
+		type = new MySqlType(wxT("BOOL"), 0, IDbType::dbtTYPE_BOOLEAN);
 	} else if (typeName == wxT("DATETIME")) {
-		type = new MySqlType(wxT("DATETIME"), IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL);
+		type = new MySqlType(wxT("DATETIME"), IDbType::dbtUNIQUE | IDbType::dbtNOT_NULL, IDbType::dbtTYPE_DATE_TIME);
 	} else if (typeName == wxT("TINYINT")) {
-		type = new MySqlType(wxT("TINYINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+		type = new MySqlType(wxT("TINYINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_INT);
 	} else if (typeName == wxT("BIGINT")) {
-		type = new MySqlType(wxT("BIGINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+		type = new MySqlType(wxT("BIGINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_INT);
 	}  else if (typeName == wxT("SMALLINT")) {
-		type = new MySqlType(wxT("SMALLINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+		type = new MySqlType(wxT("SMALLINT"), IDbType::dbtAUTO_INCREMENT | IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_INT);
 	} else if (typeName == wxT("CHAR")) {
-		type = new MySqlType(wxT("CHAR"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE);
+		type = new MySqlType(wxT("CHAR"), IDbType::dbtNOT_NULL | IDbType::dbtSIZE, IDbType::dbtTYPE_TEXT);
 	} else if (typeName == wxT("TIMESTAMP")) {
-		type = new MySqlType(wxT("TIMESTAMP"), 0);
+		type = new MySqlType(wxT("TIMESTAMP"), 0, IDbType::dbtTYPE_DATE_TIME);
 	} else if (typeName == wxT("ENUM")) {
-		type = new MySqlType(wxT("ENUM"), 0);
+		type = new MySqlType(wxT("ENUM"), 0, IDbType::dbtTYPE_OTHER);
 	} else if (typeName == wxT("SET")) {
-		type = new MySqlType(wxT("SET"), 0);
+		type = new MySqlType(wxT("SET"), 0, IDbType::dbtTYPE_OTHER);
 	} else if (typeName == wxT("LONGBLOB")) {
-		type = new MySqlType(wxT("LONGBLOB"), 0);
+		type = new MySqlType(wxT("LONGBLOB"), 0, IDbType::dbtTYPE_OTHER);
 	} else if (typeName == wxT("BLOB")) {
-		type = new MySqlType(wxT("BLOB"), 0);
+		type = new MySqlType(wxT("BLOB"), 0, IDbType::dbtTYPE_OTHER);
 	} else if (typeName == wxT("MEDIUMTEXT")) {
-		type = new MySqlType(wxT("MEDIUMTEXT"), IDbType::dbtNOT_NULL);
+		type = new MySqlType(wxT("MEDIUMTEXT"), IDbType::dbtNOT_NULL, IDbType::dbtTYPE_TEXT);
 	} else if (typeName == wxT("TEXT")) {
-		type = new MySqlType(wxT("TEXT"), 0);
+		type = new MySqlType(wxT("TEXT"), 0, IDbType::dbtTYPE_TEXT);
 	} else if (typeName == wxT("LONGTEXT")) {
-		type = new MySqlType(wxT("LONGTEXT"), 0);
+		type = new MySqlType(wxT("LONGTEXT"), 0, IDbType::dbtTYPE_TEXT);
 	}
 	wxASSERT(type);
 	return type;
@@ -308,33 +308,33 @@ wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 				str.append(prefix + wxString::Format(wxT("ADD CONSTRAINT `%s` FOREIGN KEY (`%s`) REFERENCES `%s`(`%s`) " ), constr->GetName().c_str(), constr->GetLocalColumn().c_str(), constr->GetRefTable().c_str(), constr->GetRefCol().c_str()));
 				str.append(wxT("ON UPDATE "));
 				switch(constr->GetOnUpdate()) {
-				case Constraint::restrict:
-					str.append(wxT("RESTRICT "));
-					break;
-				case Constraint::cascade:
-					str.append(wxT("CASCADE "));
-					break;
-				case Constraint::setNull:
-					str.append(wxT("SET NULL "));
-					break;
-				case Constraint::noAction:
-					str.append(wxT("NO ACTION "));
-					break;
+					case Constraint::restrict:
+						str.append(wxT("RESTRICT "));
+						break;
+					case Constraint::cascade:
+						str.append(wxT("CASCADE "));
+						break;
+					case Constraint::setNull:
+						str.append(wxT("SET NULL "));
+						break;
+					case Constraint::noAction:
+						str.append(wxT("NO ACTION "));
+						break;
 				}
 				str.append(wxT("ON DELETE "));
 				switch(constr->GetOnDelete()) {
-				case Constraint::restrict:
-					str.append(wxT("RESTRICT "));
-					break;
-				case Constraint::cascade:
-					str.append(wxT("CASCADE "));
-					break;
-				case Constraint::setNull:
-					str.append(wxT("SET NULL "));
-					break;
-				case Constraint::noAction:
-					str.append(wxT("NO ACTION "));
-					break;
+					case Constraint::restrict:
+						str.append(wxT("RESTRICT "));
+						break;
+					case Constraint::cascade:
+						str.append(wxT("CASCADE "));
+						break;
+					case Constraint::setNull:
+						str.append(wxT("SET NULL "));
+						break;
+					case Constraint::noAction:
+						str.append(wxT("NO ACTION "));
+						break;
 				}
 				str.append(wxT("; \n"));
 			}
@@ -369,12 +369,56 @@ void MySqlDbAdapter::GetViews(Database* db) {
 }
 wxString MySqlDbAdapter::GetCreateViewSql(View* view, bool dropView) {
 	wxString str = wxT("");
-	if (view){
-		if (dropView){
+	if (view) {
+		if (dropView) {
 			str.append(wxString::Format(wxT("DROP VIEW IF EXISTS `%s`;\n"),view->GetName().c_str()));
-			}			
+		}
 		str.append(wxString::Format(wxT("CREATE VIEW `%s` AS %s ;\n"),view->GetName().c_str(), view->GetSelect().c_str()));
 	}
 	str.append(wxT("-- -------------------------------------------------------------\n"));
 	return str;
+}
+void MySqlDbAdapter::ConvertTable(Table* pTab) {
+	SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+	while( node ){
+		if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  {
+			Column* col = (Column*) node->GetData();			
+			col->SetPType(ConvertType(col->GetPType()));
+			}
+		node = node->GetNext();
+		}		
+}
+
+IDbType* MySqlDbAdapter::ConvertType(IDbType* pType) {
+	IDbType* newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
+	delete pType;
+	pType = NULL;
+	return newType;
+}
+IDbType* MySqlDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) {
+	IDbType* newType = NULL;
+	switch (type) {
+		case IDbType::dbtTYPE_INT:
+			newType = GetDbTypeByName(wxT("INT"));
+			break;
+		case IDbType::dbtTYPE_BOOLEAN:
+			newType = GetDbTypeByName(wxT("BOOL"));
+			break;
+		case IDbType::dbtTYPE_DATE_TIME:
+			newType = GetDbTypeByName(wxT("DATETIME"));
+			break;
+		case IDbType::dbtTYPE_DECIMAL:
+			newType = GetDbTypeByName(wxT("DECIMAL"));
+			break;
+		case IDbType::dbtTYPE_FLOAT:
+			newType = GetDbTypeByName(wxT("FLOAT"));
+			break;
+		case IDbType::dbtTYPE_TEXT:
+			newType = GetDbTypeByName(wxT("TEXT"));
+			break;
+		case IDbType::dbtTYPE_OTHER:
+			newType = GetDbTypeByName(wxT("BLOB"));
+			break;
+	}
+	return newType;	
 }

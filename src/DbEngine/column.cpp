@@ -8,6 +8,7 @@ Column::Column()
 }
 Column::~Column()
 {
+	delete m_pType;
 //	if (m_pType) delete m_pType;
 }
 // -------------------------------------------------
