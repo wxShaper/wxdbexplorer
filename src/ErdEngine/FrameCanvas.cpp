@@ -34,6 +34,17 @@ FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWi
 	GetDiagramManager()->AcceptShape(wxT("All"));
 
 	SaveCanvasState();
+	
+	
+	wxAcceleratorEntry entries[3];
+	entries[0].Set(wxACCEL_CTRL,  (int) 'C',     wxID_COPY);
+	entries[1].Set(wxACCEL_CTRL,  (int) 'X',     wxID_CUT);
+	entries[2].Set(wxACCEL_CTRL, (int) 'V',      wxID_PASTE);
+	wxAcceleratorTable accel(3, entries);
+	SetAcceleratorTable(accel);
+	
+	
+	
 }
 
 FrameCanvas::~FrameCanvas() {
@@ -89,12 +100,14 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 		break;
 		case ErdPanel::modeLine: {
 			if (GetMode() == modeREADY) {
-
-				wxSFTextShape* pText = wxDynamicCast(GetShapeUnderCursor(),wxSFTextShape);
-				if (pText) {
-					m_srcCol = pText->GetText().substr(3);
-				} else m_srcCol = wxT("");
-				StartInteractiveConnection(CLASSINFO(wxSFOrthoLineShape), event.GetPosition());
+				ErdTable* pTab = wxDynamicCast(GetShapeUnderCursor()->GetGrandParentShape(), ErdTable);
+				if (pTab){
+					wxSFTextShape* pText = wxDynamicCast(GetShapeUnderCursor(),wxSFTextShape);
+					if (pText) {
+						m_srcCol = pText->GetText().substr(3);
+					} else m_srcCol = wxT("");
+					StartInteractiveConnection(CLASSINFO(wxSFOrthoLineShape), event.GetPosition());
+				}
 			} else wxSFShapeCanvas::OnLeftDown(event);
 		}
 		break;
@@ -133,9 +146,18 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 
 }
 void FrameCanvas::OnRightDown(wxMouseEvent& event) {
+	m_mousePos = event.GetPosition();
 	wxMenu mnu;
 	mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
 	
+	mnu.Append(IDR_POPUP_COPY, wxT("Copy"))->Enable(CanCopy());
+	mnu.Append(IDR_POPUP_CUT, wxT("Cut"))->Enable(CanCut());
+	mnu.Append(IDR_POPUP_PASTE, wxT("Paste"))->Enable(CanPaste());
+	mnu.AppendSeparator();
+	
+	mnu.Append(IDR_POPUP_NEW_TABLE, wxT("Add new ERD table"));
+	mnu.Append(IDR_POPUP_NEW_VIEW, wxT("Add new ERD view"));
+	mnu.AppendSeparator();
 	wxSFShapeBase* sBase = GetShapeUnderCursor();
 	if (sBase) {
 
@@ -144,27 +166,16 @@ void FrameCanvas::OnRightDown(wxMouseEvent& event) {
 			mnu.Append(IDR_POPUP_MI1, 	wxT("Add column"));
 			mnu.Append(IDR_POPUP_MI2, 	wxT("Add create sql to clippoard"));
 			mnu.AppendSeparator();
+			mnu.Append(IDR_POPUP_NEW_KEY, wxT("Create foreign key"));
 			mnu.Append(IDR_POPUP_MI3, wxT("Create view for table"));			
 		}
-		mnu.AppendSeparator();		
 	}
-	
-	mnu.Append(IDR_POPUP_COPY, wxT("Copy"))->Enable(CanCopy());
-	mnu.Append(IDR_POPUP_CUT, wxT("Cut"))->Enable(CanCut());
-	mnu.Append(IDR_POPUP_PASTE, wxT("Paste"))->Enable(CanPaste());
+
 	PopupMenu(&mnu);
 }
 
 
 void FrameCanvas::OnKeyDown(wxKeyEvent& event) {
-	if (event.ControlDown()){
-		if (event.GetUnicodeKey() == 'C') Copy();
-		else if (event.GetKeyCode() == 'C') Copy();
-		else if (event.GetUnicodeKey() == 'X') Cut();
-		else if (event.GetKeyCode() == 'X') Cut();
-		else if (event.GetUnicodeKey() == 'V') Paste();
-		else if (event.GetKeyCode() == 'V') Paste();
-		}
 	wxSFShapeCanvas::OnKeyDown(event);
 }
 
@@ -229,6 +240,57 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 			SaveCanvasState();
 		}
 		break;
+		case IDR_POPUP_NEW_TABLE:{
+			wxSFShapeBase* pShape = GetDiagramManager()->AddShape(new ErdTable(), NULL, m_mousePos, sfINITIALIZE, sfDONT_SAVE_STATE);
+			//pShape = GetDiagramManager()->AddShape(CLASSINFO(wxSFRoundRectShape), event.GetPosition(), sfDONT_SAVE_STATE);
+			if (pShape) {
+				pShape->AcceptConnection(wxT("All"));
+				pShape->AcceptSrcNeighbour(wxT("All"));
+				pShape->AcceptTrgNeighbour(wxT("All"));
+
+				Table* tab = new Table();
+				tab->SetName(wxT("NewTable"));
+				pShape->SetUserData(tab);
+
+				((ErdTable*)pShape)->UpdateColumns();
+				pShape->Refresh();
+
+				SaveCanvasState();
+			}
+		}
+		break;
+		case IDR_POPUP_NEW_VIEW:{
+			wxSFShapeBase* pShape = GetDiagramManager()->AddShape(new ErdView(), NULL, m_mousePos, sfINITIALIZE, sfDONT_SAVE_STATE);
+			if (pShape) {
+				pShape->AcceptConnection(wxT("All"));
+				pShape->AcceptSrcNeighbour(wxT("All"));
+				pShape->AcceptTrgNeighbour(wxT("All"));
+
+				View* view = new View();
+				view->SetName(wxT("New view"));
+				view->SetSelect(wxT("SELECT * FROM table"));
+				pShape->SetUserData(view);
+
+				((ErdView*)pShape)->UpdateView();
+				pShape->Refresh();
+
+				SaveCanvasState();
+			}
+			
+		}
+		break;
+		case IDR_POPUP_NEW_KEY:{
+			if (GetMode() == modeREADY) {
+					wxSFTextShape* pText = wxDynamicCast(GetShapeUnderCursor(),wxSFTextShape);
+					if (pText) {
+						m_srcCol = pText->GetText().substr(3);
+					} else m_srcCol = wxT("");
+					StartInteractiveConnection(CLASSINFO(wxSFOrthoLineShape), m_mousePos);
+				}
+			
+		}
+		break;
+		
 	}
 }
 

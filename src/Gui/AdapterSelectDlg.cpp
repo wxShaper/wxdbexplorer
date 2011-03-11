@@ -24,3 +24,11 @@ void AdapterSelectDlg::OnSqliteClick(wxCommandEvent& event) {
 	wxMessageBox( wxT("SQLite ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
 #endif
 }
+void AdapterSelectDlg::OnPostgresClick(wxCommandEvent& event) {
+#ifdef DBL_USE_POSTGRES
+	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new PostgreSqlDbAdapter()),wxT("PostgreSQL ERD diagram"));
+	Destroy();
+#else
+	wxMessageBox( wxT("PostgreSQL ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
+#endif
+}

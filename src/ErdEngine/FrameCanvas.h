@@ -51,6 +51,7 @@ class FrameCanvas : public wxSFShapeCanvas {
 
 		wxString m_srcCol;
 		wxString m_dstCol;
+		wxPoint m_mousePos;
 
 };
 

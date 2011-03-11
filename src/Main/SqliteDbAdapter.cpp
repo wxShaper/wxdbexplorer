@@ -258,9 +258,12 @@ void SQLiteDbAdapter::ConvertTable(Table* pTab) {
 }
 
 IDbType* SQLiteDbAdapter::ConvertType(IDbType* pType) {
-	IDbType* newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
-	delete pType;
-	pType = NULL;
+	SqliteType* newType = wxDynamicCast(pType, SqliteType);
+	if (!newType ){
+		newType = (SqliteType*) GetDbTypeByUniversalName(pType->GetUniversalType());	
+		delete pType;
+		pType = NULL;
+	}
 	return newType;
 }
 IDbType* SQLiteDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) {

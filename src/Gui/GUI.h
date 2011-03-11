@@ -155,10 +155,12 @@ class _AdapterSelectDlg : public wxDialog
 	protected:
 		wxButton* m_btnMySql;
 		wxButton* m_btnSqlite;
+		wxButton* m_button24;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnMysqlClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSqliteClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPostgresClick( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

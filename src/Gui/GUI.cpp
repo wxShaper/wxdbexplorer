@@ -230,6 +230,9 @@ _AdapterSelectDlg::_AdapterSelectDlg( wxWindow* parent, wxWindowID id, const wxS
 	m_btnSqlite = new wxButton( this, wxID_ANY, wxT("SQLite"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer9->Add( m_btnSqlite, 0, wxALL|wxEXPAND, 5 );
 	
+	m_button24 = new wxButton( this, wxID_ANY, wxT("PostgreSQL"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer9->Add( m_button24, 0, wxALL|wxEXPAND, 5 );
+	
 	this->SetSizer( bSizer9 );
 	this->Layout();
 	bSizer9->Fit( this );
@@ -239,6 +242,7 @@ _AdapterSelectDlg::_AdapterSelectDlg( wxWindow* parent, wxWindowID id, const wxS
 	// Connect Events
 	m_btnMySql->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnMysqlClick ), NULL, this );
 	m_btnSqlite->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnSqliteClick ), NULL, this );
+	m_button24->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnPostgresClick ), NULL, this );
 }
 
 _AdapterSelectDlg::~_AdapterSelectDlg()
@@ -246,6 +250,7 @@ _AdapterSelectDlg::~_AdapterSelectDlg()
 	// Disconnect Events
 	m_btnMySql->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnMysqlClick ), NULL, this );
 	m_btnSqlite->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnSqliteClick ), NULL, this );
+	m_button24->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _AdapterSelectDlg::OnPostgresClick ), NULL, this );
 	
 }
 

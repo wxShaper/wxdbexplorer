@@ -497,9 +497,12 @@ void PostgreSqlDbAdapter::ConvertTable(Table* pTab) {
 }
 
 IDbType* PostgreSqlDbAdapter::ConvertType(IDbType* pType) {
-	IDbType* newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
-	delete pType;
-	pType = NULL;
+	IDbType* newType = wxDynamicCast(pType, PostgreSqlType);
+	if (!newType){
+		newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
+		delete pType;
+		pType = NULL;
+	}
 	return newType;
 }
 IDbType* PostgreSqlDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) {

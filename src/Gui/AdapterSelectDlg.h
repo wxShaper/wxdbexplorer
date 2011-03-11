@@ -13,16 +13,22 @@
 #include "../Main/SqliteDbAdapter.h"
 #endif
 
+#ifdef DBL_USE_POSTGRES
+#include "../Main/PostgreSqlDbAdapter.h"
+#endif
+
 class AdapterSelectDlg : public _AdapterSelectDlg {
 
-public:
-	AdapterSelectDlg(wxWindow* parent, wxAuiNotebook* pNotebook);
-	virtual ~AdapterSelectDlg();
+	public:
+		AdapterSelectDlg(wxWindow* parent, wxAuiNotebook* pNotebook);
+		virtual ~AdapterSelectDlg();
 
-	virtual void OnMysqlClick(wxCommandEvent& event);
-	virtual void OnSqliteClick(wxCommandEvent& event);
-protected:
-	wxAuiNotebook* m_pNotebook;
+		virtual void OnMysqlClick(wxCommandEvent& event);
+		virtual void OnSqliteClick(wxCommandEvent& event);
+		virtual void OnPostgresClick(wxCommandEvent& event);
+
+	protected:
+		wxAuiNotebook* m_pNotebook;
 };
 
 #endif // ADAPTERSELECTDLG_H

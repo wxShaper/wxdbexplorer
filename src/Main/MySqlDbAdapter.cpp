@@ -390,9 +390,12 @@ void MySqlDbAdapter::ConvertTable(Table* pTab) {
 }
 
 IDbType* MySqlDbAdapter::ConvertType(IDbType* pType) {
-	IDbType* newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
-	delete pType;
-	pType = NULL;
+	IDbType* newType = wxDynamicCast(pType, MySqlType);
+	if (!newType){	
+		newType = GetDbTypeByUniversalName(pType->GetUniversalType());	
+		delete pType;
+		pType = NULL;
+	}
 	return newType;
 }
 IDbType* MySqlDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) {
