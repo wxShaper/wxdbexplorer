@@ -134,6 +134,7 @@ void FrameCanvas::OnLeftDown(wxMouseEvent& event) {
 }
 void FrameCanvas::OnRightDown(wxMouseEvent& event) {
 	wxMenu mnu;
+	mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
 	
 	wxSFShapeBase* sBase = GetShapeUnderCursor();
 	if (sBase) {
@@ -142,12 +143,12 @@ void FrameCanvas::OnRightDown(wxMouseEvent& event) {
 		if (table) {
 			mnu.Append(IDR_POPUP_MI1, 	wxT("Add column"));
 			mnu.Append(IDR_POPUP_MI2, 	wxT("Add create sql to clippoard"));
-			mnu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&FrameCanvas::OnPopupClick, NULL, this);
 			mnu.AppendSeparator();
 			mnu.Append(IDR_POPUP_MI3, wxT("Create view for table"));			
 		}
 		mnu.AppendSeparator();		
 	}
+	
 	mnu.Append(IDR_POPUP_COPY, wxT("Copy"))->Enable(CanCopy());
 	mnu.Append(IDR_POPUP_CUT, wxT("Cut"))->Enable(CanCut());
 	mnu.Append(IDR_POPUP_PASTE, wxT("Paste"))->Enable(CanPaste());
