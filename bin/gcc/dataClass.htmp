@@ -29,7 +29,7 @@ protected:
 #include <wx/grid.h>
 #include <wx/list.h>
 
-WX_DECLARE_LIST(%%classItemName%%, List);
+WX_DECLARE_LIST(%%classItemName%%, %%classItemName%%List);
 
 /*! \brief Collection from %%classColName%% table */
 class %%classColName%% {
@@ -57,7 +57,7 @@ public:
 	static %%classColName%%* Get(DatabaseLayer* pDbLayer, wxArrayString& conditions,CondConType conType = wAND );
 	
 protected:
-	List m_list;
+	%%classItemName%%List m_list;
 
 };
 

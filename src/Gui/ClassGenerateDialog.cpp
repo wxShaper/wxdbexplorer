@@ -7,6 +7,7 @@ ClassGenerateDialog::ClassGenerateDialog(wxWindow *parent, IDbAdapter* dbAdapter
 	}
 
 ClassGenerateDialog::~ClassGenerateDialog() {
+	Destroy();
 }
 
 bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
@@ -34,8 +35,8 @@ bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
 		}else{
 		if (!cFile.Create()) return false;		
 		}	
-	bool suc = GenerateHFile(pTab,htmpFile,hFile, classItemName, classItemDef,classColName,classTableName );
-	suc &= GenerateCFile(pTab,ctmpFile,cFile, classItemName, classItemDef,classColName,classTableName);
+	bool suc = GenerateFile(pTab,htmpFile,hFile, classItemName, classItemDef,classColName,classTableName );
+	suc &= GenerateFile(pTab,ctmpFile,cFile, classItemName, classItemDef,classColName,classTableName);
 	
 	
 	hFile.Write();
@@ -48,7 +49,8 @@ bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
 }
 
 void ClassGenerateDialog::OnCancelClick(wxCommandEvent& event) {
-}
+	Destroy();
+	}
 
 void ClassGenerateDialog::OnGenerateClick(wxCommandEvent& event) {
 	SerializableList::compatibility_iterator node = m_pItems->GetFirstChildNode();
@@ -65,28 +67,31 @@ void ClassGenerateDialog::OnGenerateClick(wxCommandEvent& event) {
 
 wxString ClassGenerateDialog::GetTypeName(IDbType::UNIVERSAL_TYPE type)
 {
-	if (type == IDbType::dbtTYPE_TEXT) return wxT("wxString&");
-	if (type == IDbType::dbtTYPE_DATE_TIME) return wxT("DateTime");
+	if (type == IDbType::dbtTYPE_TEXT) return wxT("wxString");
+	if (type == IDbType::dbtTYPE_DATE_TIME) return wxT("wxDateTime");
 	if (type == IDbType::dbtTYPE_INT) return wxT("int");
 	if (type == IDbType::dbtTYPE_FLOAT) return wxT("float");
 	if (type == IDbType::dbtTYPE_DECIMAL) return wxT("float");
 	if (type == IDbType::dbtTYPE_BOOLEAN) return wxT("bool");
 	if (type == IDbType::dbtTYPE_OTHER) return wxT("Object*");
+	return wxT("");
 }
 
 wxString ClassGenerateDialog::GetResultFunction(IDbType::UNIVERSAL_TYPE type)
 {
-	if (type == IDbType::dbtTYPE_TEXT) return wxT("GetResultString&");
+	if (type == IDbType::dbtTYPE_TEXT) return wxT("GetResultString");
 	if (type == IDbType::dbtTYPE_DATE_TIME) return wxT("GetResultDate");
 	if (type == IDbType::dbtTYPE_INT) return wxT("GetResultInt");
 	if (type == IDbType::dbtTYPE_FLOAT) return wxT("GetResultDouble");
 	if (type == IDbType::dbtTYPE_DECIMAL) return wxT("GetResultDouble");
 	if (type == IDbType::dbtTYPE_BOOLEAN) return wxT("GetResultBool");
 	if (type == IDbType::dbtTYPE_OTHER) return wxT("GetResultBlob");
+	return wxT("");
 }
 
-bool ClassGenerateDialog::GenerateHFile(Table* pTab, wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName, const wxString& classItemDef, const wxString& classColName, const wxString& classTableName )
+bool ClassGenerateDialog::GenerateFile(Table* pTab, wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName, const wxString& classItemDef, const wxString& classColName, const wxString& classTableName )
 {
+	
 	for ( wxString str = htmpFile.GetFirstLine(); !htmpFile.Eof(); str = htmpFile.GetNextLine() )
 	{
 		if (str.Contains(wxT("%%classItemGetters%%"))){
@@ -94,7 +99,7 @@ bool ClassGenerateDialog::GenerateHFile(Table* pTab, wxTextFile& htmpFile, wxTex
 				while( node ) {
 					Column* pCol = wxDynamicCast(node->GetData(),Column);
 					if (pCol){
-						hFile.AddLine(wxString::Format(wxT("\tconst %s Get%s() const {"), GetTypeName(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
+						hFile.AddLine(wxString::Format(wxT("\tconst %s Get%s() const {"), GetResTypeName(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
 						hFile.AddLine(wxString::Format(wxT("\t\treturn m_%s;"), pCol->GetName().c_str()));
 						hFile.AddLine(wxString::Format(wxT("\t\t}")));						
 						}					
@@ -115,7 +120,28 @@ bool ClassGenerateDialog::GenerateHFile(Table* pTab, wxTextFile& htmpFile, wxTex
 				while( node ) {
 					Column* pCol = wxDynamicCast(node->GetData(),Column);
 					if (pCol){
-						hFile.AddLine(wxString::Format(wxT("\tm_%s = %s(wxT(\"%s\"));"),pCol->GetName().c_str(), GetResultFunction(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
+						hFile.AddLine(wxString::Format(wxT("\t\tm_%s = pResult->%s(wxT(\"%s\"));"),pCol->GetName().c_str(), GetResultFunction(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
+						}					
+					node = node->GetNext();
+					}				
+		}else if (str.Contains(wxT("%%classColLabelFillGrid%%"))){		
+				int i = 0;
+				SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+				while( node ) {
+					Column* pCol = wxDynamicCast(node->GetData(),Column);
+					if (pCol){
+						hFile.AddLine(wxT("\tpGrid->AppendCols(1);"));
+						hFile.AddLine(wxString::Format(wxT("\tpGrid->SetColLabelValue(%i,wxT(\"%s\"));"),i++,pCol->GetName().c_str()));					
+						}					
+					node = node->GetNext();
+					}				
+		}else if (str.Contains(wxT("%%classColDataFillGrid%%"))){			
+				int i = 0;
+				SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+				while( node ) {
+					Column* pCol = wxDynamicCast(node->GetData(),Column);
+					if (pCol){
+						hFile.AddLine(GetFillData(pCol, i++));
 						}					
 					node = node->GetNext();
 					}				
@@ -130,48 +156,28 @@ bool ClassGenerateDialog::GenerateHFile(Table* pTab, wxTextFile& htmpFile, wxTex
 	return true;
 }
 
-bool ClassGenerateDialog::GenerateCFile(Table* pTab, wxTextFile& ctmpFile, wxTextFile& cFile, const wxString& classItemName, const wxString& classItemDef, const wxString& classColName, const wxString& classTableName )
+
+wxString ClassGenerateDialog::GetResTypeName(IDbType::UNIVERSAL_TYPE type)
 {
-	for ( wxString str = ctmpFile.GetFirstLine(); !ctmpFile.Eof(); str = ctmpFile.GetNextLine() )
-	{
-		if (str.Contains(wxT("%%classItemGetters%%"))){
-				SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
-				while( node ) {
-					Column* pCol = wxDynamicCast(node->GetData(),Column);
-					if (pCol){
-						cFile.AddLine(wxString::Format(wxT("\tconst %s Get%s() const {"), GetTypeName(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
-						cFile.AddLine(wxString::Format(wxT("\t\treturn m_%s;"), pCol->GetName().c_str()));
-						cFile.AddLine(wxString::Format(wxT("\t\t}")));						
-						}					
-					node = node->GetNext();
-					}
-			
-		}else if (str.Contains(wxT("%%classItemVariables%%"))){
-				SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
-				while( node ) {
-					Column* pCol = wxDynamicCast(node->GetData(),Column);
-					if (pCol){
-						cFile.AddLine(wxString::Format(wxT("\t%s m_%s;"), GetTypeName(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
-						}					
-					node = node->GetNext();
-					}		
-		}else if (str.Contains(wxT("%%classItemLoading%%"))){
-				SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
-				while( node ) {
-					Column* pCol = wxDynamicCast(node->GetData(),Column);
-					if (pCol){
-						cFile.AddLine(wxString::Format(wxT("\tm_%s = %s(wxT(\"%s\"));"),pCol->GetName().c_str(), GetResultFunction(pCol->GetPType()->GetUniversalType()).c_str(), pCol->GetName().c_str()));
-						}					
-					node = node->GetNext();
-					}				
-		}else{
-			str.Replace(wxT("%%classItemName%%"),classItemName);
-			str.Replace(wxT("%%classItemDef%%"),classItemDef);
-			str.Replace(wxT("%%classColName%%"),classColName);
-			str.Replace(wxT("%%classTableName%%"),classTableName);
-			cFile.AddLine(str);			
-		}	
-	}
-	return true;
+	if (type == IDbType::dbtTYPE_TEXT) return wxT("wxString&");
+	if (type == IDbType::dbtTYPE_DATE_TIME) return wxT("wxDateTime");
+	if (type == IDbType::dbtTYPE_INT) return wxT("int");
+	if (type == IDbType::dbtTYPE_FLOAT) return wxT("float");
+	if (type == IDbType::dbtTYPE_DECIMAL) return wxT("float");
+	if (type == IDbType::dbtTYPE_BOOLEAN) return wxT("bool");
+	if (type == IDbType::dbtTYPE_OTHER) return wxT("Object*");
+	return wxT("");
+}
+
+wxString ClassGenerateDialog::GetFillData(Column* pCol, int colIndex)
+{
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_TEXT) return wxT("\t\tpGrid->SetCellValue(wxString::Format(wxT(\"%s\"),current->Get")+ pCol->GetName() + wxString::Format(wxT("().c_str()),i,%i);"),colIndex);
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_DATE_TIME) return wxT("\t\tpGrid->SetCellValue(current->Get")+ pCol->GetName() + wxString::Format(wxT("().Format(),i,%i);"),colIndex);
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_INT) return wxT("\t\tpGrid->SetCellValue(wxString::Format(wxT(\"%i\"),current->Get")+ pCol->GetName() + wxString::Format(wxT("()),i,%i);"),colIndex);
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_FLOAT) return wxT("\t\tpGrid->SetCellValue(wxString::Format(wxT(\"%f\"),current->Get")+ pCol->GetName() + wxString::Format(wxT("()),i,%i);"),colIndex);
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_DECIMAL) return wxT("\t\tpGrid->SetCellValue(wxString::Format(wxT(\"%d\"),current->Get")+ pCol->GetName() + wxString::Format(wxT("()),i,%i);"),colIndex);
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_BOOLEAN) return wxT("\t\tpGrid->SetCellValue(wxString::Format(wxT(\"%i\"),current->Get")+ pCol->GetName() + wxString::Format(wxT("()),i,%i);"),colIndex);
+	if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_OTHER) return wxT("\t\tpGrid->SetCellValue(wxT(\"some data\")") + wxString::Format(wxT(",i,%i);"),colIndex);
+	return wxT("");
 }
 

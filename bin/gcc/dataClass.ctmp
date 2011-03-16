@@ -31,7 +31,7 @@
 
 #include <wx/listimpl.cpp>
 
-WX_DEFINE_LIST(List);
+WX_DEFINE_LIST(%%classItemName%%List);
 
 %%classColName%%::%%classColName%%(DatabaseResultSet* pResult)
 {
@@ -64,25 +64,23 @@ void %%classColName%%::Fill(wxGrid* pGrid)
 {
 	pGrid->DeleteCols(0,pGrid->GetNumberCols());
 	pGrid->DeleteRows(0,pGrid->GetNumberRows());
-	pGrid->AppendCols(3);
-	pGrid->SetColLabelValue(0,wxT("ID"));
-	pGrid->SetColLabelValue(1,wxT("jmeno"));
-	pGrid->SetColLabelValue(2,wxT("adresa"));
+
+	%%classColLabelFillGrid%%
+
 	
 	int i = 0;
-	List::iterator iter;
-    for (iter = m_list.begin(); iter != m_list.end(); ++iter)
-    {
-		Adresa* current = *iter;
+	%%classItemName%%List::iterator iter;
+   	for (iter = m_list.begin(); iter != m_list.end(); ++iter)
+    	{
+		%%classItemName%%* current = *iter;
 		pGrid->AppendRows();
-		pGrid->SetCellValue(wxString::Format(wxT("%i"),current->GetID()),i,0);
-		pGrid->SetCellValue(current->GetJmeno(),i,1);
-		pGrid->SetCellValue(current->GetAdresa(),i,2);
+		
+		%%classColDataFillGrid%%
 		i++;		
-    }	
+   	 }	
 }
 
-%%classColName%%* %%classColName%%::Get(wxArrayString& conditions, CondConType conType, DatabaseLayer* pDbLayer)
+%%classColName%%* %%classColName%%::Get(DatabaseLayer* pDbLayer, wxArrayString& conditions,CondConType conType)
 {
 	wxString whereStatement = conditions[0];
 	
