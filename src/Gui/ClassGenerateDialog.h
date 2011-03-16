@@ -19,7 +19,6 @@ class ClassGenerateDialog : public _ClassGenerateDialog {
 		bool GenerateClass(Table* pTab, const wxString& path);
 		wxString GetTypeName(IDbType::UNIVERSAL_TYPE type);
 		wxString GetResultFunction(IDbType::UNIVERSAL_TYPE type);
-		wxString FindAppPath();
 		
 		bool GenerateHFile(Table* pTab,wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName,const wxString& classItemDef, const wxString& classColName, const wxString& classTableName );
 		bool GenerateCFile(Table* pTab,wxTextFile& ctmpFile, wxTextFile& cFile,	const wxString& classItemName,const wxString& classItemDef, const wxString& classColName, const wxString& classTableName);

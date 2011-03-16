@@ -10,8 +10,8 @@ ClassGenerateDialog::~ClassGenerateDialog() {
 }
 
 bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
-	wxTextFile htmpFile(FindAppPath() + wxT("/dataClass.htmp"));
-	wxTextFile ctmpFile(FindAppPath() + wxT("/dataClass.ctmp"));
+	wxTextFile htmpFile(wxGetApp().GetAppPath() + wxT("/dataClass.htmp"));
+	wxTextFile ctmpFile(wxGetApp().GetAppPath() + wxT("/dataClass.ctmp"));
 
 	if (!htmpFile.Open()) return false;
 	if (!ctmpFile.Open()) return false;
@@ -63,51 +63,6 @@ void ClassGenerateDialog::OnGenerateClick(wxCommandEvent& event) {
 	}	
 }
 
-
-wxString ClassGenerateDialog::FindAppPath()
-{
-   wxString str;
-
-    // Try appVariableName
-    if (!wxGetApp().GetAppName().IsEmpty())
-    {
-        str = wxGetenv(wxGetApp().GetAppName());
-        if (!str.IsEmpty())
-            return str;
-    }
-
-#if defined(__WXMAC__) && !defined(__DARWIN__)
-    // On Mac, the current directory is the relevant one when
-    // the application starts.
-    return wxGetCwd();
-#endif
-
-    if (wxIsAbsolutePath(wxGetApp().argv[0]))
-        return wxPathOnly(wxGetApp().argv[0]);
-    else
-    {
-        // Is it a relative path?
-        wxString currentDir(wxGetCwd());
-        if (currentDir.Last() != wxFILE_SEP_PATH)
-            currentDir += wxFILE_SEP_PATH;
-
-        str = currentDir + wxGetApp().argv[0];
-        if (wxFileExists(str))
-            return wxPathOnly(str);
-    }
-
-    // OK, it's neither an absolute path nor a relative path.
-    // Search PATH.
-
-    wxPathList pathList;
-    pathList.AddEnvList(wxT("PATH"));
-    str = pathList.FindAbsoluteValidPath(wxGetApp().argv[0]);
-    if (!str.IsEmpty())
-        return wxPathOnly(str);
-
-    // Failed
-    return wxEmptyString;
-}
 wxString ClassGenerateDialog::GetTypeName(IDbType::UNIVERSAL_TYPE type)
 {
 	if (type == IDbType::dbtTYPE_TEXT) return wxT("wxString&");
