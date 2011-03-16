@@ -1,0 +1,64 @@
+#ifndef %%classItemDef%%
+#define %%classItemDef%%
+
+#include <wx/wx.h>
+#include "DatabaseLayer.h"
+
+/*! \brief Class for %%classTableName%% table */
+class %%classItemName%% {
+
+public:
+	/*! \brief Constructor for loading from DB */
+	
+	%%classItemName%%(DatabaseResultSet* pResult);
+	virtual ~%%classItemName%%();
+
+
+	%%classItemGetters%%
+	
+	/*! \brief Return Adrea from db on the ID base */
+	static %%classItemName%%* GetByID(int ID, DatabaseLayer* pDbLayer);
+
+protected:
+
+	%%classItemVariables%%
+
+};
+
+
+#include <wx/grid.h>
+#include <wx/list.h>
+
+WX_DECLARE_LIST(%%classItemName%%, List);
+
+/*! \brief Collection from %%classColName%% table */
+class %%classColName%% {
+
+public:
+
+	/*! \brief conditions connetion type */
+	enum CondConType
+	{
+		wAND = 1,
+		wOR = 2
+	};
+
+	/*! \brief Constructor for loading from db */
+	%%classColName%%(DatabaseResultSet* pResult);
+	virtual ~%%classColName%%();
+	
+	/*! \brief Fill wxGrid from collection. */
+	void Fill(wxGrid* pGrid); 
+	
+	/*! \brief Get all data from database */
+	static %%classColName%%* Get(DatabaseLayer* pDbLayer);
+	
+	/*! \brief Get data from database with WHERE statement */
+	static %%classColName%%* Get(DatabaseLayer* pDbLayer, wxArrayString& conditions,CondConType conType = wAND );
+	
+protected:
+	List m_list;
+
+};
+
+#endif // %%classItemDef%%

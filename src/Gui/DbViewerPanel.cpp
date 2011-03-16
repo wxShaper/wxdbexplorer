@@ -249,15 +249,18 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 			menu.Append(IDR_DBVIEWER_ADD_TABLE,wxT("Add table"),wxT("Run SQL command for creating Table"));
 			menu.Append(IDR_DBVIEWER_DROP_DATABASE, wxT("Drop database"), wxT("Run SQL command for deleting Database"));
 			c++;
+			c++;
 			menu.AppendSeparator();
 			menu.Append(IDR_DBVIEWER_ERD_DB, wxT("Create ERD from DB"),wxT("Create ERD diagram from database"));
+			menu.Append(IDR_DBVIEWER_CLASS_DB, wxT("Create classes from DB"), wxT("Create c++ classes for selected database"));
+			c++;
 			c++;
 			menu.AppendSeparator();
 			menu.Append(IDR_DBVIEWER_IMPORT_DATABASE, wxT("Import database from file"), wxT("Run SQL commands stored in *.sql file"));
 			menu.Append(IDR_DBVIEWER_EXPORT_DATABASE, wxT("Export database to file"), wxT("Export database CREATE SQL statements into *.sql file"));
 			c++;
-
 			c++;
+			
 			m_pEditedDatabase = db;
 			}
 			
@@ -393,6 +396,18 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
 							m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter(),(Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
+						}					
+					}
+				}
+				break;
+			case IDR_DBVIEWER_CLASS_DB:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
+					if (pDb){
+						
+							ClassGenerateDialog dlg(GetParent(), pDb->GetDbAdapter(), (Database*) pDb->Clone());
+							dlg.ShowModal();
 						}					
 					}
 				}

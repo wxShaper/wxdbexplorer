@@ -170,6 +170,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_gridTable->SetMargins( 0, 0 );
 	
 	// Columns
+	m_gridTable->AutoSizeColumns();
 	m_gridTable->EnableDragColMove( false );
 	m_gridTable->EnableDragColSize( true );
 	m_gridTable->SetColLabelSize( 30 );
@@ -194,7 +195,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_panel14->SetSizer( fgSizer15 );
 	m_panel14->Layout();
 	fgSizer15->Fit( m_panel14 );
-	m_splitter1->SplitHorizontally( m_panel13, m_panel14, 264 );
+	m_splitter1->SplitHorizontally( m_panel13, m_panel14, 120 );
 	fgSizer3->Add( m_splitter1, 1, wxEXPAND, 5 );
 	
 	this->SetSizer( fgSizer3 );
@@ -1192,5 +1193,61 @@ _ViewSettings::~_ViewSettings()
 {
 	// Disconnect Events
 	m_btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ViewSettings::OnOKClick ), NULL, this );
+	
+}
+
+_ClassGenerateDialog::_ClassGenerateDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer19;
+	fgSizer19 = new wxFlexGridSizer( 2, 2, 0, 0 );
+	fgSizer19->SetFlexibleDirection( wxBOTH );
+	fgSizer19->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText28 = new wxStaticText( this, wxID_ANY, wxT("Folder:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText28->Wrap( -1 );
+	fgSizer19->Add( m_staticText28, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_dirPicker1 = new wxDirPickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_CHANGE_DIR|wxDIRP_DEFAULT_STYLE|wxDIRP_DIR_MUST_EXIST );
+	fgSizer19->Add( m_dirPicker1, 0, wxALL, 5 );
+	
+	m_staticText29 = new wxStaticText( this, wxID_ANY, wxT("Log:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29->Wrap( -1 );
+	fgSizer19->Add( m_staticText29, 0, wxALL, 5 );
+	
+	m_textCtrl19 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,300 ), wxTE_MULTILINE );
+	fgSizer19->Add( m_textCtrl19, 1, wxALL|wxEXPAND, 5 );
+	
+	
+	fgSizer19->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer20;
+	bSizer20 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_button25 = new wxButton( this, wxID_GENERATE, wxT("Generate"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer20->Add( m_button25, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_button26 = new wxButton( this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer20->Add( m_button26, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	fgSizer19->Add( bSizer20, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	this->SetSizer( fgSizer19 );
+	this->Layout();
+	fgSizer19->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_button25->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ClassGenerateDialog::OnGenerateClick ), NULL, this );
+	m_button26->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ClassGenerateDialog::OnCancelClick ), NULL, this );
+}
+
+_ClassGenerateDialog::~_ClassGenerateDialog()
+{
+	// Disconnect Events
+	m_button25->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ClassGenerateDialog::OnGenerateClick ), NULL, this );
+	m_button26->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ClassGenerateDialog::OnCancelClick ), NULL, this );
 	
 }

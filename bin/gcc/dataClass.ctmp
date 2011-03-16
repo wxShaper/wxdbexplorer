@@ -1,0 +1,104 @@
+#include "%%classItemName%%.h"
+
+%%classItemName%%::%%classItemName%%(DatabaseResultSet* pResult)
+{
+	if (pResult){
+		%%classItemLoading%%
+		}
+}
+
+%%classItemName%%::~%%classItemName%%()
+{
+}
+/*
+%%classItemName%%* %%classItemName%%::GetByID(int ID, DatabaseLayer* pDbLayer)
+{
+	DatabaseResultSet* resSet = NULL;
+	if (pDbLayer){
+		if (pDbLayer->IsOpen()){
+			PreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT("SELECT * FROM Adresy WHERE ID = ?"));
+			pStatement->SetParamInt(1, ID);			
+			resSet = pStatement->RunQueryWithResults();
+			}		
+		}
+		
+	if (resSet){
+		if (resSet->Next()) return new %%classItemName%%(resSet);		
+		}	
+	return NULL;
+}*/
+
+
+#include <wx/listimpl.cpp>
+
+WX_DEFINE_LIST(List);
+
+%%classColName%%::%%classColName%%(DatabaseResultSet* pResult)
+{
+	while(pResult->Next()){
+		m_list.Append(new %%classItemName%%(pResult));		
+		}
+	pResult->Close();
+}    
+
+%%classColName%%::~%%classColName%%()
+{
+	m_list.DeleteContents(true);
+	m_list.Clear();
+}
+
+%%classColName%%* %%classColName%%::Get(DatabaseLayer* pDbLayer)
+{
+	%%classColName%%* pCol = NULL;
+	if (pDbLayer){
+		if (pDbLayer->IsOpen()){
+			PreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT("SELECT * FROM %%classTableName%%"));
+			if (pStatement) pCol = new %%classColName%%(pStatement->RunQueryWithResults());			
+			}		
+		}
+	return pCol;
+}
+
+
+void %%classColName%%::Fill(wxGrid* pGrid)
+{
+	pGrid->DeleteCols(0,pGrid->GetNumberCols());
+	pGrid->DeleteRows(0,pGrid->GetNumberRows());
+	pGrid->AppendCols(3);
+	pGrid->SetColLabelValue(0,wxT("ID"));
+	pGrid->SetColLabelValue(1,wxT("jmeno"));
+	pGrid->SetColLabelValue(2,wxT("adresa"));
+	
+	int i = 0;
+	List::iterator iter;
+    for (iter = m_list.begin(); iter != m_list.end(); ++iter)
+    {
+		Adresa* current = *iter;
+		pGrid->AppendRows();
+		pGrid->SetCellValue(wxString::Format(wxT("%i"),current->GetID()),i,0);
+		pGrid->SetCellValue(current->GetJmeno(),i,1);
+		pGrid->SetCellValue(current->GetAdresa(),i,2);
+		i++;		
+    }	
+}
+
+%%classColName%%* %%classColName%%::Get(wxArrayString& conditions, CondConType conType, DatabaseLayer* pDbLayer)
+{
+	wxString whereStatement = conditions[0];
+	
+	for (int i = 1; i < conditions.Count(); i++){		
+		if (conType == wAND) whereStatement.Append(wxT(" AND "));
+		if (conType == wOR) whereStatement.Append(wxT(" OR "));
+		whereStatement.Append(conditions[i]);		
+		}
+		
+	%%classColName%%* pCol = NULL;
+	if (pDbLayer){
+		if (pDbLayer->IsOpen()){
+			PreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT("SELECT * FROM %%classTableName%% WHERE ") + whereStatement);
+			if (pStatement) pCol = new %%classColName%%(pStatement->RunQueryWithResults());			
+			}		
+		}
+	return pCol;
+}
+

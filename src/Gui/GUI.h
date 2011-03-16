@@ -62,6 +62,7 @@
 #define wxID_TX_SIZE 1014
 #define wxID_PAGE_CONSTRAINT 1015
 #define wxID_ON_UPDATE 1016
+#define wxID_GENERATE 1017
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _MainFrame
@@ -139,7 +140,7 @@ class _SqlCommandPanel : public wxPanel
 		
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 264 );
+			m_splitter1->SetSashPosition( 120 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _SqlCommandPanel::m_splitter1OnIdle ), NULL, this );
 		}
 	
@@ -475,6 +476,34 @@ class _ViewSettings : public wxDialog
 		
 		_ViewSettings( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("View settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 650,450 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~_ViewSettings();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class _ClassGenerateDialog
+///////////////////////////////////////////////////////////////////////////////
+class _ClassGenerateDialog : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText28;
+		wxDirPickerCtrl* m_dirPicker1;
+		wxStaticText* m_staticText29;
+		wxTextCtrl* m_textCtrl19;
+		
+		wxButton* m_button25;
+		wxButton* m_button26;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnGenerateClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_ClassGenerateDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Class generate dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_ClassGenerateDialog();
 	
 };
 
