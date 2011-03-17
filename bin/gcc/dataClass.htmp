@@ -49,6 +49,9 @@ public:
 	/*! \brief Fill wxGrid from collection. */
 	void Fill(wxGrid* pGrid); 
 	
+	/*! \brief Get item list */
+	const %%classItemName%%List& GetCollection() const { return m_list; }
+
 	/*! \brief Get all data from database */
 	static %%classColName%%* Get(DatabaseLayer* pDbLayer);
 	

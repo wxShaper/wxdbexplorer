@@ -19,7 +19,7 @@ bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
 	wxString classTableName = pTab->GetName();
 	wxString classItemName = m_txPrefix->GetValue() + pTab->GetName() + m_txPostfix->GetValue();
 	wxString classItemDef = pTab->GetName().Upper() + wxT("_H");
-	wxString classColName = m_txPrefix->GetValue() + pTab->GetName() + wxT("Col")+ m_txPostfix->GetValue();
+	wxString classColName = m_txPrefix->GetValue() + pTab->GetName() + wxT("Collection")+ m_txPostfix->GetValue();
 
 	wxTextFile hFile(path + wxT("/") + classItemName + wxT(".h"));
 	wxTextFile cFile(path + wxT("/") + classItemName + wxT(".cpp"));
