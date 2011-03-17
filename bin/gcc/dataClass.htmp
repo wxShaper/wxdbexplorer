@@ -8,16 +8,15 @@
 class %%classItemName%% {
 
 public:
-	/*! \brief Constructor for loading from DB */
-	
+	/*! \brief Constructor for loading from DB */	
 	%%classItemName%%(DatabaseResultSet* pResult);
 	virtual ~%%classItemName%%();
 
 
 	%%classItemGetters%%
 	
-	/*! \brief Return Adrea from db on the ID base */
-	static %%classItemName%%* GetByID(int ID, DatabaseLayer* pDbLayer);
+
+	%%primaryKeyHeader%%
 
 protected:
 

@@ -91,6 +91,34 @@ wxString ClassGenerateDialog::GetResultFunction(IDbType::UNIVERSAL_TYPE type)
 
 bool ClassGenerateDialog::GenerateFile(Table* pTab, wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName, const wxString& classItemDef, const wxString& classColName, const wxString& classTableName )
 {
+	Constraint* pPK = NULL;
+	SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+	while( node ) {
+		Constraint* pConstr = wxDynamicCast(node->GetData(),Constraint);
+		if (pConstr){
+			if (pConstr->GetType() == Constraint::primaryKey) pPK = pConstr;		
+			}					
+		node = node->GetNext();
+		}
+	Column* pPKCol = NULL;
+	
+	if (pPK){
+		SerializableList::compatibility_iterator node = pTab->GetFirstChildNode();
+		while( node ) {
+			Column* pCol = wxDynamicCast(node->GetData(),Column);
+			if (pCol){
+				if (pCol->GetName() == pPK->GetLocalColumn()) pPKCol = pCol;		
+				}					
+			node = node->GetNext();
+			}		
+		}
+	
+	
+	
+	
+	
+	
+	
 	
 	for ( wxString str = htmpFile.GetFirstLine(); !htmpFile.Eof(); str = htmpFile.GetNextLine() )
 	{
@@ -145,6 +173,33 @@ bool ClassGenerateDialog::GenerateFile(Table* pTab, wxTextFile& htmpFile, wxText
 						}					
 					node = node->GetNext();
 					}				
+		}else if (str.Contains(wxT("%%primaryKeyHeader%%"))){			
+				if (pPKCol){
+						hFile.AddLine(wxString::Format(wxT("\t/*! \\brief Return %s from db on the %s base */"),pPKCol->GetParentName().c_str(),pPKCol->GetName().c_str()));
+						hFile.AddLine(wxString::Format(wxT("\tstatic %s* GetBy%s(%s %s, DatabaseLayer* pDbLayer);"),classItemName.c_str(),pPKCol->GetName().c_str(), GetTypeName(pPKCol->GetPType()->GetUniversalType()).c_str(),pPKCol->GetName().c_str()));
+					}				
+		}else if (str.Contains(wxT("%%primaryKeyBody%%"))){			
+				if (pPKCol){
+						hFile.AddLine(wxString::Format(wxT("%s* %s::GetBy%s(%s %s, DatabaseLayer* pDbLayer)"),classItemName.c_str(),classItemName.c_str(),pPKCol->GetName().c_str(), GetTypeName(pPKCol->GetPType()->GetUniversalType()).c_str(),pPKCol->GetName().c_str()));
+						hFile.AddLine(wxT("{"));
+						hFile.AddLine(wxT("\tDatabaseResultSet* resSet = NULL;"));
+						hFile.AddLine(wxT("\tif (pDbLayer){"));
+						hFile.AddLine(wxT("\t\tif (pDbLayer->IsOpen()){"));
+						
+						hFile.AddLine(wxString::Format(wxT("\t\t\tPreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT(\"SELECT * FROM %s WHERE %s = ?\"));"),classTableName.c_str(), pPKCol->GetName().c_str()));
+						hFile.AddLine(wxString::Format(wxT("\t\t\tpStatement->SetParamInt(1, %s);"),pPKCol->GetName().c_str()));			
+						hFile.AddLine(wxT("\t\t\tresSet = pStatement->RunQueryWithResults();"));
+						hFile.AddLine(wxT("\t\t\t}"));
+						hFile.AddLine(wxT("\t\t}"));			
+	
+						hFile.AddLine(wxT("\tif (resSet){"));
+						hFile.AddLine(wxString::Format(wxT("\t\tif (resSet->Next()) return new %s(resSet);"),classItemName.c_str()));	
+						hFile.AddLine(wxT("\t\t}"));	
+						hFile.AddLine(wxT("\treturn NULL;"));
+			
+						
+						hFile.AddLine(wxT("}"));
+				}			
 		}else{
 			str.Replace(wxT("%%classItemName%%"),classItemName);
 			str.Replace(wxT("%%classItemDef%%"),classItemDef);

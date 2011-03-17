@@ -10,6 +10,8 @@
 %%classItemName%%::~%%classItemName%%()
 {
 }
+
+%%primaryKeyBody%%
 /*
 %%classItemName%%* %%classItemName%%::GetByID(int ID, DatabaseLayer* pDbLayer)
 {
