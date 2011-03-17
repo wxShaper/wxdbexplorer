@@ -110,7 +110,7 @@ wxString ClassGenerateDialog::GetResultFunction(IDbType::UNIVERSAL_TYPE type)
 	if (type == IDbType::dbtTYPE_OTHER) return wxT("GetResultBlob");
 	return wxT("");
 }
-
+//TODO:Negenerovat požaavky na ID když je auto_increment
 bool ClassGenerateDialog::GenerateFile(Table* pTab, wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName, const wxString& classItemDef, const wxString& classColName, const wxString& classTableName, const wxString& classUtilName)
 {
 	Constraint* pPK = NULL;

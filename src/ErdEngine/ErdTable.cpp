@@ -132,7 +132,26 @@ void ErdTable::UpdateColumns()
 		m_pLabel->SetText(tab->GetName());
 		SerializableList::compatibility_iterator node = tab->GetFirstChildNode();
 		while( node ){
-			if( node->GetData()->IsKindOf( CLASSINFO(Column)) )  AddColumnShape(wxString::Format(wxT("col: %s"),((Column*) node->GetData())->GetName().c_str()),i++);
+			Column* pCol = wxDynamicCast(node->GetData(), Column);
+			if( pCol ) {
+				wxString prefix = wxT("     ");
+				
+				SerializableList::compatibility_iterator cstrNode = tab->GetFirstChildNode();
+				while( cstrNode ){
+					Constraint* constr = wxDynamicCast(cstrNode->GetData(), Constraint);
+					if (constr){
+						if (constr->GetLocalColumn() == pCol->GetName()) prefix = wxT("key: ");
+						}
+					cstrNode = cstrNode->GetNext();
+					}
+				
+				
+				
+				 AddColumnShape(wxString::Format(wxT("%s%s"),prefix.c_str(),pCol->GetName().c_str()),i++);
+				
+				
+				
+				}
 			node = node->GetNext();
 			}		
 			
@@ -141,7 +160,7 @@ void ErdTable::UpdateColumns()
 			if( node->GetData()->IsKindOf( CLASSINFO(Constraint)) ) {
 				ErdTable* pSecondTab = NULL;
 				Constraint* pConstr = wxDynamicCast(node->GetData(), Constraint);
-				AddColumnShape(wxString::Format(wxT("key: %s"),pConstr->GetName().c_str()),i++);
+				//AddColumnShape(wxString::Format(wxT("key: %s"),pConstr->GetName().c_str()),i++);
 				
 				ShapeList::compatibility_iterator nodeTab = list.GetFirst();
 				while(nodeTab){
