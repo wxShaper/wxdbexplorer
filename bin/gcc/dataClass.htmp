@@ -63,4 +63,23 @@ protected:
 
 };
 
+/*! \brief Utils for %%classColName%% table */
+class %%classUtilName%% {
+
+public:
+	/*! \brief Add new item into %%classColName%% table */
+	static int Add( DatabaseLayer* pDbLayer
+			%%classUtilsAddParameters%%			
+			);
+	/*! \brief Edit item in %%classColName%% table */	
+	static int Edit(DatabaseLayer* pDbLayer
+			%%classUtilsAddParameters%%			
+			);
+	/*! \brief Delete item from %%classColName%% table */
+	static int Delete(DatabaseLayer* pDbLayer
+			%%classUtilsDeleteParameters%%			
+			);
+
+};
+
 #endif // %%classItemDef%%

@@ -89,3 +89,54 @@ void %%classColName%%::Fill(wxGrid* pGrid)
 	return pCol;
 }
 
+
+int %%classUtilName%%::Add(DatabaseLayer* pDbLayer
+			%%classUtilsAddParameters%%			
+			)
+{
+	if (pDbLayer){
+		if (pDbLayer->IsOpen()){
+			%%classUtilsAddStatement%%
+			if (pStatement) {
+				%%classUtilsAddSetParams%%
+				pStatement->RunQuery();		
+				pStatement->Close();				
+				}			
+			}		
+		}
+
+
+
+}
+int %%classUtilName%%::Edit(DatabaseLayer* pDbLayer
+			%%classUtilsAddParameters%%			
+			)
+{
+	if (pDbLayer){
+		if (pDbLayer->IsOpen()){
+			%%classUtilsEditStatement%%
+			if (pStatement) {
+				%%classUtilsAddSetParams%%
+				%%classUtilsPKSetParams%%
+				pStatement->RunQuery();			
+				pStatement->Close();				
+				}			
+			}		
+		}
+}
+
+int %%classUtilName%%::Delete(DatabaseLayer* pDbLayer
+			%%classUtilsDeleteParameters%%			
+			)
+{
+	if (pDbLayer){
+		if (pDbLayer->IsOpen()){
+			%%classUtilsDeleteStatement%%
+			if (pStatement) {
+				%%classUtilsAddDelParams%%
+				pStatement->RunQuery();			
+				pStatement->Close();				
+				}			
+			}		
+		}
+}

@@ -21,8 +21,10 @@ class ClassGenerateDialog : public _ClassGenerateDialog {
 		wxString GetResTypeName(IDbType::UNIVERSAL_TYPE type);
 		wxString GetFillData(Column* pCol, int colIndex);
 		wxString GetResultFunction(IDbType::UNIVERSAL_TYPE type);
+		wxString GetParamTypeName(IDbType::UNIVERSAL_TYPE type);
+		wxString GetAddParamFunction(IDbType::UNIVERSAL_TYPE type);
 		
-		bool GenerateFile(Table* pTab,wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName,const wxString& classItemDef, const wxString& classColName, const wxString& classTableName );
+		bool GenerateFile(Table* pTab,wxTextFile& htmpFile, wxTextFile& hFile, const wxString& classItemName,const wxString& classItemDef, const wxString& classColName, const wxString& classTableName, const wxString& classUtilName );
 
 		virtual void OnCancelClick(wxCommandEvent& event);
 		virtual void OnGenerateClick(wxCommandEvent& event);
