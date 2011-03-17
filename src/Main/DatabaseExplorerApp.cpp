@@ -6,7 +6,6 @@ IMPLEMENT_APP(DatabaseExplorerApp);
 bool DatabaseExplorerApp::OnInit()
 {
 	m_AppPath = FindAppPath();
-	wxMessageBox( m_AppPath );
 	
 	SetTopWindow( new DatabaseExplorerFrame( NULL ) );
 	GetTopWindow()->Show();

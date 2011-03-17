@@ -12,24 +12,6 @@
 }
 
 %%primaryKeyBody%%
-/*
-%%classItemName%%* %%classItemName%%::GetByID(int ID, DatabaseLayer* pDbLayer)
-{
-	DatabaseResultSet* resSet = NULL;
-	if (pDbLayer){
-		if (pDbLayer->IsOpen()){
-			PreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT("SELECT * FROM Adresy WHERE ID = ?"));
-			pStatement->SetParamInt(1, ID);			
-			resSet = pStatement->RunQueryWithResults();
-			}		
-		}
-		
-	if (resSet){
-		if (resSet->Next()) return new %%classItemName%%(resSet);		
-		}	
-	return NULL;
-}*/
-
 
 #include <wx/listimpl.cpp>
 
@@ -40,7 +22,6 @@ WX_DEFINE_LIST(%%classItemName%%List);
 	while(pResult->Next()){
 		m_list.Append(new %%classItemName%%(pResult));		
 		}
-	pResult->Close();
 }    
 
 %%classColName%%::~%%classColName%%()
@@ -55,7 +36,10 @@ WX_DEFINE_LIST(%%classItemName%%List);
 	if (pDbLayer){
 		if (pDbLayer->IsOpen()){
 			PreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT("SELECT * FROM %%classTableName%%"));
-			if (pStatement) pCol = new %%classColName%%(pStatement->RunQueryWithResults());			
+			if (pStatement) {
+				pCol = new %%classColName%%(pStatement->RunQueryWithResults());			
+				pStatement->Close();				
+				}			
 			}		
 		}
 	return pCol;
@@ -96,7 +80,10 @@ void %%classColName%%::Fill(wxGrid* pGrid)
 	if (pDbLayer){
 		if (pDbLayer->IsOpen()){
 			PreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT("SELECT * FROM %%classTableName%% WHERE ") + whereStatement);
-			if (pStatement) pCol = new %%classColName%%(pStatement->RunQueryWithResults());			
+			if (pStatement){
+				pCol = new %%classColName%%(pStatement->RunQueryWithResults());	
+				pStatement->Close();
+				}		
 			}		
 		}
 	return pCol;

@@ -487,6 +487,10 @@ class _ClassGenerateDialog : public wxDialog
 	private:
 	
 	protected:
+		wxStaticText* m_staticText30;
+		wxTextCtrl* m_txPrefix;
+		wxStaticText* m_staticText31;
+		wxTextCtrl* m_txPostfix;
 		wxStaticText* m_staticText28;
 		wxDirPickerCtrl* m_dirPicker1;
 		wxStaticText* m_staticText29;

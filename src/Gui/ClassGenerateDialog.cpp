@@ -17,9 +17,9 @@ bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
 	if (!htmpFile.Open()) return false;
 	if (!ctmpFile.Open()) return false;
 	wxString classTableName = pTab->GetName();
-	wxString classItemName = pTab->GetName() + wxT("Base");
+	wxString classItemName = m_txPrefix->GetValue() + pTab->GetName() + m_txPostfix->GetValue();
 	wxString classItemDef = pTab->GetName().Upper() + wxT("_H");
-	wxString classColName = pTab->GetName() + wxT("ColBase");
+	wxString classColName = m_txPrefix->GetValue() + pTab->GetName() + wxT("Col")+ m_txPostfix->GetValue();
 
 	wxTextFile hFile(path + wxT("/") + classItemName + wxT(".h"));
 	wxTextFile cFile(path + wxT("/") + classItemName + wxT(".cpp"));
@@ -53,6 +53,7 @@ void ClassGenerateDialog::OnCancelClick(wxCommandEvent& event) {
 	}
 
 void ClassGenerateDialog::OnGenerateClick(wxCommandEvent& event) {
+	m_textCtrl19->Clear();
 	SerializableList::compatibility_iterator node = m_pItems->GetFirstChildNode();
 	while( node ) {
 		Table* pTab = wxDynamicCast(node->GetData(),Table);
@@ -183,10 +184,11 @@ bool ClassGenerateDialog::GenerateFile(Table* pTab, wxTextFile& htmpFile, wxText
 						hFile.AddLine(wxString::Format(wxT("%s* %s::GetBy%s(%s %s, DatabaseLayer* pDbLayer)"),classItemName.c_str(),classItemName.c_str(),pPKCol->GetName().c_str(), GetTypeName(pPKCol->GetPType()->GetUniversalType()).c_str(),pPKCol->GetName().c_str()));
 						hFile.AddLine(wxT("{"));
 						hFile.AddLine(wxT("\tDatabaseResultSet* resSet = NULL;"));
+						hFile.AddLine(wxT("\tPreparedStatement* pStatement = NULL;"));
 						hFile.AddLine(wxT("\tif (pDbLayer){"));
 						hFile.AddLine(wxT("\t\tif (pDbLayer->IsOpen()){"));
 						
-						hFile.AddLine(wxString::Format(wxT("\t\t\tPreparedStatement* pStatement = pDbLayer->PrepareStatement(wxT(\"SELECT * FROM %s WHERE %s = ?\"));"),classTableName.c_str(), pPKCol->GetName().c_str()));
+						hFile.AddLine(wxString::Format(wxT("\t\t\tpStatement = pDbLayer->PrepareStatement(wxT(\"SELECT * FROM %s WHERE %s = ?\"));"),classTableName.c_str(), pPKCol->GetName().c_str()));
 						hFile.AddLine(wxString::Format(wxT("\t\t\tpStatement->SetParamInt(1, %s);"),pPKCol->GetName().c_str()));			
 						hFile.AddLine(wxT("\t\t\tresSet = pStatement->RunQueryWithResults();"));
 						hFile.AddLine(wxT("\t\t\t}"));
@@ -194,6 +196,7 @@ bool ClassGenerateDialog::GenerateFile(Table* pTab, wxTextFile& htmpFile, wxText
 	
 						hFile.AddLine(wxT("\tif (resSet){"));
 						hFile.AddLine(wxString::Format(wxT("\t\tif (resSet->Next()) return new %s(resSet);"),classItemName.c_str()));	
+						hFile.AddLine(wxT("\t\tpStatement->Close();"));	
 						hFile.AddLine(wxT("\t\t}"));	
 						hFile.AddLine(wxT("\treturn NULL;"));
 			
