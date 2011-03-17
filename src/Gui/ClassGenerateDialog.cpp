@@ -58,7 +58,7 @@ void ClassGenerateDialog::OnGenerateClick(wxCommandEvent& event) {
 	while( node ) {
 		Table* pTab = wxDynamicCast(node->GetData(),Table);
 		if (pTab){
-			if (GenerateClass(pTab, m_dirPicker1->GetPath())) m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Generated successful!\n"));			
+			if (GenerateClass(pTab, m_dirPicker1->GetPath())) m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Generated successfully!\n"));			
 			else m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Error!!!\n"));			 	
 			}
 

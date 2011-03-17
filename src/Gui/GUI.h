@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Mar  1 2011)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -506,7 +506,7 @@ class _ClassGenerateDialog : public wxDialog
 	
 	public:
 		
-		_ClassGenerateDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Class generate dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		_ClassGenerateDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Class generator dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~_ClassGenerateDialog();
 	
 };

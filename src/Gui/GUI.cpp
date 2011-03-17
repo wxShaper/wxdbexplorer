@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Mar  1 2011)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -1200,6 +1200,9 @@ _ClassGenerateDialog::_ClassGenerateDialog( wxWindow* parent, wxWindowID id, con
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
+	wxBoxSizer* bSizer22;
+	bSizer22 = new wxBoxSizer( wxVERTICAL );
+	
 	wxFlexGridSizer* fgSizer19;
 	fgSizer19 = new wxFlexGridSizer( 2, 2, 0, 0 );
 	fgSizer19->SetFlexibleDirection( wxBOTH );
@@ -1210,31 +1213,33 @@ _ClassGenerateDialog::_ClassGenerateDialog( wxWindow* parent, wxWindowID id, con
 	fgSizer19->Add( m_staticText30, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_txPrefix = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer19->Add( m_txPrefix, 0, wxALL, 5 );
+	fgSizer19->Add( m_txPrefix, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticText31 = new wxStaticText( this, wxID_ANY, wxT("Class postfix:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText31->Wrap( -1 );
 	fgSizer19->Add( m_staticText31, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_txPostfix = new wxTextCtrl( this, wxID_ANY, wxT("Base"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer19->Add( m_txPostfix, 0, wxALL, 5 );
+	fgSizer19->Add( m_txPostfix, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticText28 = new wxStaticText( this, wxID_ANY, wxT("Folder:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText28->Wrap( -1 );
 	fgSizer19->Add( m_staticText28, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	m_dirPicker1 = new wxDirPickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_CHANGE_DIR|wxDIRP_DEFAULT_STYLE|wxDIRP_DIR_MUST_EXIST );
-	fgSizer19->Add( m_dirPicker1, 0, wxALL, 5 );
+	m_dirPicker1 = new wxDirPickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE );
+	fgSizer19->Add( m_dirPicker1, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticText29 = new wxStaticText( this, wxID_ANY, wxT("Log:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText29->Wrap( -1 );
 	fgSizer19->Add( m_staticText29, 0, wxALL, 5 );
 	
-	m_textCtrl19 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,300 ), wxTE_MULTILINE );
+	m_textCtrl19 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,300 ), wxTE_MULTILINE|wxTE_READONLY );
 	fgSizer19->Add( m_textCtrl19, 1, wxALL|wxEXPAND, 5 );
 	
 	
 	fgSizer19->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	bSizer22->Add( fgSizer19, 1, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer20;
 	bSizer20 = new wxBoxSizer( wxHORIZONTAL );
@@ -1242,14 +1247,14 @@ _ClassGenerateDialog::_ClassGenerateDialog( wxWindow* parent, wxWindowID id, con
 	m_button25 = new wxButton( this, wxID_GENERATE, wxT("Generate"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer20->Add( m_button25, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	m_button26 = new wxButton( this, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_button26 = new wxButton( this, wxID_CLOSE, wxT("Close"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer20->Add( m_button26, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	fgSizer19->Add( bSizer20, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer22->Add( bSizer20, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	this->SetSizer( fgSizer19 );
+	this->SetSizer( bSizer22 );
 	this->Layout();
-	fgSizer19->Fit( this );
+	bSizer22->Fit( this );
 	
 	this->Centre( wxBOTH );
 	
