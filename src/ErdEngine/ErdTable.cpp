@@ -134,13 +134,13 @@ void ErdTable::UpdateColumns()
 		while( node ){
 			Column* pCol = wxDynamicCast(node->GetData(), Column);
 			if( pCol ) {
-				wxString prefix = wxT("     ");
+				wxString prefix = wxT("\t");
 				
 				SerializableList::compatibility_iterator cstrNode = tab->GetFirstChildNode();
 				while( cstrNode ){
 					Constraint* constr = wxDynamicCast(cstrNode->GetData(), Constraint);
 					if (constr){
-						if (constr->GetLocalColumn() == pCol->GetName()) prefix = wxT("key: ");
+						if (constr->GetLocalColumn() == pCol->GetName()) prefix = wxT("KEY:");
 						}
 					cstrNode = cstrNode->GetNext();
 					}

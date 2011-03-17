@@ -104,9 +104,7 @@ int %%classUtilName%%::Add(DatabaseLayer* pDbLayer
 				}			
 			}		
 		}
-
-
-
+return 0;
 }
 int %%classUtilName%%::Edit(DatabaseLayer* pDbLayer
 			%%classUtilsAddParameters%%			
@@ -123,6 +121,7 @@ int %%classUtilName%%::Edit(DatabaseLayer* pDbLayer
 				}			
 			}		
 		}
+return 0;
 }
 
 int %%classUtilName%%::Delete(DatabaseLayer* pDbLayer
@@ -139,4 +138,5 @@ int %%classUtilName%%::Delete(DatabaseLayer* pDbLayer
 				}			
 			}		
 		}
+return 0;
 }
