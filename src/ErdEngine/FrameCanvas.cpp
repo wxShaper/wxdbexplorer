@@ -35,16 +35,12 @@ FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWi
 
 	SaveCanvasState();
 	
-	
 	wxAcceleratorEntry entries[3];
 	entries[0].Set(wxACCEL_CTRL,  (int) 'C',     wxID_COPY);
 	entries[1].Set(wxACCEL_CTRL,  (int) 'X',     wxID_CUT);
 	entries[2].Set(wxACCEL_CTRL, (int) 'V',      wxID_PASTE);
 	wxAcceleratorTable accel(3, entries);
 	SetAcceleratorTable(accel);
-	
-	
-	
 }
 
 FrameCanvas::~FrameCanvas() {
@@ -230,14 +226,12 @@ void FrameCanvas::OnPopupClick(wxCommandEvent &evt) {
 		}
 		break;
 		case IDR_POPUP_CUT:{
-			Cut();
-			SaveCanvasState();		
+			Cut();	
 		}
 		break;
 		case IDR_POPUP_PASTE:{
 			Paste();
 			UpdateERD();
-			SaveCanvasState();
 		}
 		break;
 		case IDR_POPUP_NEW_TABLE:{

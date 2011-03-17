@@ -221,14 +221,12 @@ void ErdPanel::OnCopy(wxCommandEvent& event)
 void ErdPanel::OnCut(wxCommandEvent& event)
 {
 	m_pFrameCanvas->Cut();
-	m_pFrameCanvas->SaveCanvasState();
 }
 
 void ErdPanel::OnPaste(wxCommandEvent& event)
 {
 	m_pFrameCanvas->Paste();
 	m_pFrameCanvas->UpdateERD();
-	m_pFrameCanvas->SaveCanvasState();
 }
 
 void ErdPanel::OnUpdateCopy(wxUpdateUIEvent& event)
