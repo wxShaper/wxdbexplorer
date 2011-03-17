@@ -3,13 +3,13 @@
 
 #include <wx/wx.h>
 #include <wx/wxxmlserializer/XmlSerializer.h>
-#include "wx/wxsf/RoundRectShape.h" // Base class: wxSFRoundRectShape
+#include "wx/wxsf/RoundRectShape.h"
+#include "wx/wxsf/BitmapShape.h"
 #include "wx/wxsf/TextShape.h"
 #include "wx/wxsf/FlexGridShape.h"
 #include "wx/wxsf/DiagramManager.h"
 #include "../DbEngine/table.h"
 #include "../DbEngine/constraint.h"
-//#include "../ErdEngine/ErdForeignKey.h"
 #include "../ErdEngine/ErdForeignKey.h"
 #include "Gui/Ids.h"
 #include "../Gui/NArrow.h"
@@ -31,7 +31,7 @@ public:
 	
 	Table* GetTable() { return (Table*) this->GetUserData(); }
 
-protected:
+protected:	
 	void Initialize();
 	
 	wxSFTextShape *m_pLabel;
@@ -45,7 +45,8 @@ protected:
 	
 	void ClearGrid();
 	void ClearConnections();
-	void AddColumnShape(const wxString& colName, int id);
+	void AddColumnShape(const wxString& colName, int id, Constraint::constraintType type);
+	void SetCommonProps(wxSFShapeBase* shape);
 };
 
 #endif // ERDTABLE_H

@@ -11,7 +11,8 @@ class Constraint : public xsSerializable {
 public:
 	enum constraintType {
 		primaryKey,
-		foreignKey
+		foreignKey,
+		noKey
 	};
 
 	enum constraintAction {
