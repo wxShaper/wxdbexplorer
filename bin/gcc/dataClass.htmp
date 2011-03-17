@@ -12,16 +12,13 @@ public:
 	%%classItemName%%(DatabaseResultSet* pResult);
 	virtual ~%%classItemName%%();
 
-
-	%%classItemGetters%%
-	
+	%%classItemGetters%%	
 
 	%%primaryKeyHeader%%
 
 protected:
 
 	%%classItemVariables%%
-
 };
 
 
@@ -60,7 +57,6 @@ public:
 	
 protected:
 	%%classItemName%%List m_list;
-
 };
 
 /*! \brief Utils for %%classColName%% table */
@@ -79,7 +75,6 @@ public:
 	static int Delete(DatabaseLayer* pDbLayer
 			%%classUtilsDeleteParameters%%			
 			);
-
 };
 
 #endif // %%classItemDef%%
