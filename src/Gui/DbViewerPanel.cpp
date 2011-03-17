@@ -279,6 +279,8 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 			c++;
 			menu.AppendSeparator();
 			menu.Append(IDR_DBVIEWER_ERD_TABLE, wxT("Create ERD from Table"),wxT("Create ERD diagram from table"));
+			menu.Append(IDR_DBVIEWER_CLASS_TABLE, wxT("Create classes from Table"), wxT("Create c++ classes for selected table"));
+			c++;
 			c++;			
 		}
 	}
@@ -404,9 +406,19 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
-					if (pDb){
-						
+					if (pDb){						
 							ClassGenerateDialog dlg(GetParent(), pDb->GetDbAdapter(), (Database*) pDb->Clone());
+							dlg.ShowModal();
+						}					
+					}
+				}
+				break;
+			case IDR_DBVIEWER_CLASS_TABLE:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				if (data){
+					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
+					if (pTab){						
+							ClassGenerateDialog dlg(GetParent(), pTab->GetDbAdapter(), (Table*) pTab->Clone());
 							dlg.ShowModal();
 						}					
 					}

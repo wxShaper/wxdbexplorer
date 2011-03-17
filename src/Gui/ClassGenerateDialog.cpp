@@ -57,16 +57,24 @@ void ClassGenerateDialog::OnCancelClick(wxCommandEvent& event) {
 
 void ClassGenerateDialog::OnGenerateClick(wxCommandEvent& event) {
 	m_textCtrl19->Clear();
-	SerializableList::compatibility_iterator node = m_pItems->GetFirstChildNode();
-	while( node ) {
-		Table* pTab = wxDynamicCast(node->GetData(),Table);
-		if (pTab){
-			if (GenerateClass(pTab, m_dirPicker1->GetPath())) m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Generated successfully!\n"));			
-			else m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Error!!!\n"));			 	
-			}
+	
+	Table* pTable = wxDynamicCast(m_pItems, Table);
+	
+	if (pTable){
+		if (GenerateClass(pTable, m_dirPicker1->GetPath())) m_textCtrl19->AppendText(pTable->GetName() + wxT("......... Generated successfully!\n"));			
+		else m_textCtrl19->AppendText(pTable->GetName() + wxT("......... Error!!!\n"));			 	
+	}else{
+		SerializableList::compatibility_iterator node = m_pItems->GetFirstChildNode();
+		while( node ) {
+			Table* pTab = wxDynamicCast(node->GetData(),Table);
+			if (pTab){
+				if (GenerateClass(pTab, m_dirPicker1->GetPath())) m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Generated successfully!\n"));			
+				else m_textCtrl19->AppendText(pTab->GetName() + wxT("......... Error!!!\n"));			 	
+				}
 
-		node = node->GetNext();
-	}	
+			node = node->GetNext();
+		}	
+	} 
 }
 
 wxString ClassGenerateDialog::GetTypeName(IDbType::UNIVERSAL_TYPE type)
