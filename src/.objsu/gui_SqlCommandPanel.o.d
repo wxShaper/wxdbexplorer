@@ -1,626 +1,712 @@
-.objsu/gui_SqlCommandPanel.o: \
- /home/jankup/SourceCpp/wxdbexplorer/src/gui/SqlCommandPanel.cpp \
- /usr/include/wx-2.8/wx/file.h /usr/include/wx-2.8/wx/defs.h \
- /usr/include/wx-2.8/wx/platform.h \
- /usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h \
- /usr/include/wx-2.8/wx/chkconf.h /usr/include/wx-2.8/wx/features.h \
- /usr/include/wx-2.8/wx/version.h /usr/include/wx-2.8/wx/cpp.h \
- /usr/include/wx-2.8/wx/dlimpexp.h /usr/include/wx-2.8/wx/debug.h \
- /usr/include/wx-2.8/wx/wxchar.h /usr/include/wx-2.8/wx/string.h \
- /usr/include/wx-2.8/wx/buffer.h /usr/include/wx-2.8/wx/strconv.h \
- /usr/include/wx-2.8/wx/fontenc.h /usr/include/wx-2.8/wx/beforestd.h \
- /usr/include/wx-2.8/wx/afterstd.h /usr/include/wx-2.8/wx/iosfwrap.h \
- /usr/include/wx-2.8/wx/filefn.h /usr/include/wx-2.8/wx/list.h \
- /usr/include/wx-2.8/wx/object.h /usr/include/wx-2.8/wx/memory.h \
- /usr/include/wx-2.8/wx/msgout.h /usr/include/wx-2.8/wx/arrstr.h \
- /usr/include/wx-2.8/wx/textfile.h /usr/include/wx-2.8/wx/textbuf.h \
- /usr/include/wx-2.8/wx/convauto.h /usr/include/wx-2.8/wx/dynarray.h \
- /home/jankup/SourceCpp/wxdbexplorer/src/gui/SqlCommandPanel.h \
- /usr/include/wx-2.8/wx/wx.h /usr/include/wx-2.8/wx/hash.h \
- /usr/include/wx-2.8/wx/hashmap.h /usr/include/wx-2.8/wx/intl.h \
- /usr/include/wx-2.8/wx/log.h /usr/include/wx-2.8/wx/generic/logg.h \
- /usr/include/wx-2.8/wx/event.h /usr/include/wx-2.8/wx/clntdata.h \
- /usr/include/wx-2.8/wx/vector.h /usr/include/wx-2.8/wx/gdicmn.h \
- /usr/include/wx-2.8/wx/math.h /usr/include/wx-2.8/wx/cursor.h \
- /usr/include/wx-2.8/wx/gtk/cursor.h /usr/include/wx-2.8/wx/utils.h \
- /usr/include/wx-2.8/wx/longlong.h /usr/include/wx-2.8/wx/platinfo.h \
- /usr/include/wx-2.8/wx/thread.h /usr/include/wx-2.8/wx/app.h \
- /usr/include/wx-2.8/wx/build.h /usr/include/wx-2.8/wx/init.h \
- /usr/include/wx-2.8/wx/gtk/app.h /usr/include/wx-2.8/wx/stream.h \
- /usr/include/wx-2.8/wx/stopwatch.h /usr/include/wx-2.8/wx/module.h \
- /usr/include/wx-2.8/wx/window.h /usr/include/wx-2.8/wx/font.h \
- /usr/include/wx-2.8/wx/gdiobj.h /usr/include/wx-2.8/wx/gtk/font.h \
- /usr/include/wx-2.8/wx/colour.h /usr/include/wx-2.8/wx/variant.h \
- /usr/include/wx-2.8/wx/datetime.h /usr/include/wx-2.8/wx/gtk/colour.h \
- /usr/include/wx-2.8/wx/region.h /usr/include/wx-2.8/wx/gtk/region.h \
- /usr/include/wx-2.8/wx/validate.h /usr/include/wx-2.8/wx/palette.h \
- /usr/include/wx-2.8/wx/generic/paletteg.h /usr/include/wx-2.8/wx/accel.h \
- /usr/include/wx-2.8/wx/gtk/accel.h \
- /usr/include/wx-2.8/wx/generic/accel.h \
- /usr/include/wx-2.8/wx/gtk/window.h /usr/include/wx-2.8/wx/containr.h \
- /usr/include/wx-2.8/wx/panel.h /usr/include/wx-2.8/wx/generic/panelg.h \
- /usr/include/wx-2.8/wx/toplevel.h /usr/include/wx-2.8/wx/iconbndl.h \
- /usr/include/wx-2.8/wx/gtk/toplevel.h /usr/include/wx-2.8/wx/frame.h \
- /usr/include/wx-2.8/wx/gtk/frame.h /usr/include/wx-2.8/wx/bitmap.h \
- /usr/include/wx-2.8/wx/gtk/bitmap.h /usr/include/wx-2.8/wx/image.h \
- /usr/include/wx-2.8/wx/imagbmp.h /usr/include/wx-2.8/wx/imagpng.h \
- /usr/include/wx-2.8/wx/imaggif.h /usr/include/wx-2.8/wx/imagpcx.h \
- /usr/include/wx-2.8/wx/imagjpeg.h /usr/include/wx-2.8/wx/imagtga.h \
- /usr/include/wx-2.8/wx/imagtiff.h /usr/include/wx-2.8/wx/imagpnm.h \
- /usr/include/wx-2.8/wx/imagxpm.h /usr/include/wx-2.8/wx/imagiff.h \
- /usr/include/wx-2.8/wx/dc.h /usr/include/wx-2.8/wx/brush.h \
- /usr/include/wx-2.8/wx/gtk/brush.h /usr/include/wx-2.8/wx/pen.h \
- /usr/include/wx-2.8/wx/gtk/pen.h /usr/include/wx-2.8/wx/gtk/dc.h \
- /usr/include/wx-2.8/wx/dcgraph.h /usr/include/wx-2.8/wx/geometry.h \
- /usr/include/wx-2.8/wx/graphics.h /usr/include/wx-2.8/wx/dcclient.h \
- /usr/include/wx-2.8/wx/gtk/dcclient.h /usr/include/wx-2.8/wx/dcmemory.h \
- /usr/include/wx-2.8/wx/gtk/dcmemory.h /usr/include/wx-2.8/wx/dcprint.h \
- /usr/include/wx-2.8/wx/dcscreen.h /usr/include/wx-2.8/wx/gtk/dcscreen.h \
- /usr/include/wx-2.8/wx/button.h /usr/include/wx-2.8/wx/control.h \
- /usr/include/wx-2.8/wx/gtk/control.h /usr/include/wx-2.8/wx/gtk/button.h \
- /usr/include/wx-2.8/wx/menuitem.h /usr/include/wx-2.8/wx/gtk/menuitem.h \
- /usr/include/wx-2.8/wx/menu.h /usr/include/wx-2.8/wx/gtk/menu.h \
- /usr/include/wx-2.8/wx/icon.h /usr/include/wx-2.8/wx/iconloc.h \
- /usr/include/wx-2.8/wx/generic/icon.h /usr/include/wx-2.8/wx/dialog.h \
- /usr/include/wx-2.8/wx/gtk/dialog.h /usr/include/wx-2.8/wx/timer.h \
- /usr/include/wx-2.8/wx/gtk/timer.h /usr/include/wx-2.8/wx/settings.h \
- /usr/include/wx-2.8/wx/msgdlg.h /usr/include/wx-2.8/wx/gtk/msgdlg.h \
- /usr/include/wx-2.8/wx/cmndata.h /usr/include/wx-2.8/wx/encinfo.h \
- /usr/include/wx-2.8/wx/dataobj.h /usr/include/wx-2.8/wx/gtk/dataform.h \
- /usr/include/wx-2.8/wx/gtk/dataobj.h \
- /usr/include/wx-2.8/wx/gtk/dataobj2.h /usr/include/wx-2.8/wx/ctrlsub.h \
- /usr/include/wx-2.8/wx/bmpbuttn.h /usr/include/wx-2.8/wx/gtk/bmpbuttn.h \
- /usr/include/wx-2.8/wx/checkbox.h /usr/include/wx-2.8/wx/gtk/checkbox.h \
- /usr/include/wx-2.8/wx/checklst.h /usr/include/wx-2.8/wx/listbox.h \
- /usr/include/wx-2.8/wx/gtk/listbox.h \
- /usr/include/wx-2.8/wx/gtk/checklst.h /usr/include/wx-2.8/wx/choice.h \
- /usr/include/wx-2.8/wx/gtk/choice.h /usr/include/wx-2.8/wx/scrolbar.h \
- /usr/include/wx-2.8/wx/gtk/scrolbar.h /usr/include/wx-2.8/wx/stattext.h \
- /usr/include/wx-2.8/wx/gtk/stattext.h /usr/include/wx-2.8/wx/statbmp.h \
- /usr/include/wx-2.8/wx/gtk/statbmp.h /usr/include/wx-2.8/wx/statbox.h \
- /usr/include/wx-2.8/wx/gtk/statbox.h /usr/include/wx-2.8/wx/radiobox.h \
- /usr/include/wx-2.8/wx/gtk/radiobox.h /usr/include/wx-2.8/wx/radiobut.h \
- /usr/include/wx-2.8/wx/gtk/radiobut.h /usr/include/wx-2.8/wx/textctrl.h \
- /usr/include/wx-2.8/wx/ioswrap.h /usr/include/wx-2.8/wx/gtk/textctrl.h \
- /usr/include/wx-2.8/wx/slider.h /usr/include/wx-2.8/wx/gtk/slider.h \
- /usr/include/wx-2.8/wx/gauge.h /usr/include/wx-2.8/wx/gtk/gauge.h \
- /usr/include/wx-2.8/wx/scrolwin.h /usr/include/wx-2.8/wx/gtk/scrolwin.h \
- /usr/include/wx-2.8/wx/dirdlg.h /usr/include/wx-2.8/wx/gtk/dirdlg.h \
- /usr/include/wx-2.8/wx/generic/dirdlgg.h \
- /usr/include/wx-2.8/wx/toolbar.h /usr/include/wx-2.8/wx/tbarbase.h \
- /usr/include/wx-2.8/wx/gtk/tbargtk.h /usr/include/wx-2.8/wx/combobox.h \
- /usr/include/wx-2.8/wx/gtk/combobox.h /usr/include/wx-2.8/wx/layout.h \
- /usr/include/wx-2.8/wx/sizer.h /usr/include/wx-2.8/wx/mdi.h \
- /usr/include/wx-2.8/wx/gtk/mdi.h /usr/include/wx-2.8/wx/statusbr.h \
- /usr/include/wx-2.8/wx/generic/statusbr.h \
- /usr/include/wx-2.8/wx/choicdlg.h \
- /usr/include/wx-2.8/wx/generic/choicdgg.h \
- /usr/include/wx-2.8/wx/textdlg.h \
- /usr/include/wx-2.8/wx/generic/textdlgg.h \
- /usr/include/wx-2.8/wx/valtext.h /usr/include/wx-2.8/wx/filedlg.h \
- /usr/include/wx-2.8/wx/gtk/filedlg.h \
- /usr/include/wx-2.8/wx/generic/filedlgg.h \
- /usr/include/wx-2.8/wx/listctrl.h /usr/include/wx-2.8/wx/listbase.h \
- /usr/include/wx-2.8/wx/generic/listctrl.h \
- controls/include/wx/dblayer/DatabaseLayerException.h \
- /home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.h \
+.objsu/Gui_SqlCommandPanel.o: \
+ D:/SourcesCpp/wxdbexplorer/src/Gui/SqlCommandPanel.cpp \
+ C:\wxWidgets-2.8.10/include/wx/file.h \
+ C:\wxWidgets-2.8.10/include/wx/defs.h \
+ C:\wxWidgets-2.8.10/include/wx/platform.h \
+ C:\wxWidgets-2.8.10/lib/gcc_dll/mswu/wx/setup.h \
+ C:\wxWidgets-2.8.10/include/wx/chkconf.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/chkconf.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/libraries.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/gccpriv.h \
+ C:\wxWidgets-2.8.10/include/wx/features.h \
+ C:\wxWidgets-2.8.10/include/wx/version.h \
+ C:\wxWidgets-2.8.10/include/wx/cpp.h \
+ C:\wxWidgets-2.8.10/include/wx/dlimpexp.h \
+ C:\wxWidgets-2.8.10/include/wx/debug.h \
+ C:\wxWidgets-2.8.10/include/wx/wxchar.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/winundef.h \
+ C:\wxWidgets-2.8.10/include/wx/string.h \
+ C:\wxWidgets-2.8.10/include/wx/buffer.h \
+ C:\wxWidgets-2.8.10/include/wx/strconv.h \
+ C:\wxWidgets-2.8.10/include/wx/fontenc.h \
+ C:\wxWidgets-2.8.10/include/wx/beforestd.h \
+ C:\wxWidgets-2.8.10/include/wx/afterstd.h \
+ C:\wxWidgets-2.8.10/include/wx/filefn.h \
+ C:\wxWidgets-2.8.10/include/wx/list.h \
+ C:\wxWidgets-2.8.10/include/wx/object.h \
+ C:\wxWidgets-2.8.10/include/wx/memory.h \
+ C:\wxWidgets-2.8.10/include/wx/msgout.h \
+ C:\wxWidgets-2.8.10/include/wx/arrstr.h \
+ C:\wxWidgets-2.8.10/include/wx/textfile.h \
+ C:\wxWidgets-2.8.10/include/wx/textbuf.h \
+ C:\wxWidgets-2.8.10/include/wx/convauto.h \
+ C:\wxWidgets-2.8.10/include/wx/dynarray.h \
+ D:/SourcesCpp/wxdbexplorer/src/Gui/SqlCommandPanel.h \
+ C:\wxWidgets-2.8.10/include/wx/wx.h \
+ C:\wxWidgets-2.8.10/include/wx/hash.h \
+ C:\wxWidgets-2.8.10/include/wx/hashmap.h \
+ C:\wxWidgets-2.8.10/include/wx/intl.h \
+ C:\wxWidgets-2.8.10/include/wx/log.h \
+ C:\wxWidgets-2.8.10/include/wx/iosfwrap.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/logg.h \
+ C:\wxWidgets-2.8.10/include/wx/event.h \
+ C:\wxWidgets-2.8.10/include/wx/clntdata.h \
+ C:\wxWidgets-2.8.10/include/wx/vector.h \
+ C:\wxWidgets-2.8.10/include/wx/gdicmn.h \
+ C:\wxWidgets-2.8.10/include/wx/math.h \
+ C:\wxWidgets-2.8.10/include/wx/cursor.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/cursor.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/gdiimage.h \
+ C:\wxWidgets-2.8.10/include/wx/gdiobj.h \
+ C:\wxWidgets-2.8.10/include/wx/utils.h \
+ C:\wxWidgets-2.8.10/include/wx/longlong.h \
+ C:\wxWidgets-2.8.10/include/wx/platinfo.h \
+ C:\wxWidgets-2.8.10/include/wx/thread.h \
+ C:\wxWidgets-2.8.10/include/wx/app.h \
+ C:\wxWidgets-2.8.10/include/wx/build.h \
+ C:\wxWidgets-2.8.10/include/wx/init.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/app.h \
+ C:\wxWidgets-2.8.10/include/wx/icon.h \
+ C:\wxWidgets-2.8.10/include/wx/iconloc.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/icon.h \
+ C:\wxWidgets-2.8.10/include/wx/variant.h \
+ C:\wxWidgets-2.8.10/include/wx/datetime.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/wrapwin.h \
+ C:\wxWidgets-2.8.10/include/wx/stream.h \
+ C:\wxWidgets-2.8.10/include/wx/stopwatch.h \
+ C:\wxWidgets-2.8.10/include/wx/module.h \
+ C:\wxWidgets-2.8.10/include/wx/window.h \
+ C:\wxWidgets-2.8.10/include/wx/font.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/font.h \
+ C:\wxWidgets-2.8.10/include/wx/colour.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/colour.h \
+ C:\wxWidgets-2.8.10/include/wx/region.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/region.h \
+ C:\wxWidgets-2.8.10/include/wx/validate.h \
+ C:\wxWidgets-2.8.10/include/wx/palette.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/palette.h \
+ C:\wxWidgets-2.8.10/include/wx/accel.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/accel.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/window.h \
+ C:\wxWidgets-2.8.10/include/wx/containr.h \
+ C:\wxWidgets-2.8.10/include/wx/panel.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/panelg.h \
+ C:\wxWidgets-2.8.10/include/wx/toplevel.h \
+ C:\wxWidgets-2.8.10/include/wx/iconbndl.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/toplevel.h \
+ C:\wxWidgets-2.8.10/include/wx/frame.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/frame.h \
+ C:\wxWidgets-2.8.10/include/wx/bitmap.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/bitmap.h \
+ C:\wxWidgets-2.8.10/include/wx/image.h \
+ C:\wxWidgets-2.8.10/include/wx/imagbmp.h \
+ C:\wxWidgets-2.8.10/include/wx/imagpng.h \
+ C:\wxWidgets-2.8.10/include/wx/imaggif.h \
+ C:\wxWidgets-2.8.10/include/wx/imagpcx.h \
+ C:\wxWidgets-2.8.10/include/wx/imagjpeg.h \
+ C:\wxWidgets-2.8.10/include/wx/imagtga.h \
+ C:\wxWidgets-2.8.10/include/wx/imagtiff.h \
+ C:\wxWidgets-2.8.10/include/wx/imagpnm.h \
+ C:\wxWidgets-2.8.10/include/wx/imagxpm.h \
+ C:\wxWidgets-2.8.10/include/wx/imagiff.h \
+ C:\wxWidgets-2.8.10/include/wx/dc.h \
+ C:\wxWidgets-2.8.10/include/wx/brush.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/brush.h \
+ C:\wxWidgets-2.8.10/include/wx/pen.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/pen.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dc.h \
+ C:\wxWidgets-2.8.10/include/wx/dcclient.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dcclient.h \
+ C:\wxWidgets-2.8.10/include/wx/dcmemory.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dcmemory.h \
+ C:\wxWidgets-2.8.10/include/wx/dcprint.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dcprint.h \
+ C:\wxWidgets-2.8.10/include/wx/cmndata.h \
+ C:\wxWidgets-2.8.10/include/wx/encinfo.h \
+ C:\wxWidgets-2.8.10/include/wx/dcscreen.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dcscreen.h \
+ C:\wxWidgets-2.8.10/include/wx/button.h \
+ C:\wxWidgets-2.8.10/include/wx/control.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/control.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/button.h \
+ C:\wxWidgets-2.8.10/include/wx/menuitem.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/menuitem.h \
+ C:\wxWidgets-2.8.10/include/wx/ownerdrw.h \
+ C:\wxWidgets-2.8.10/include/wx/menu.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/menu.h \
+ C:\wxWidgets-2.8.10/include/wx/dialog.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dialog.h \
+ C:\wxWidgets-2.8.10/include/wx/timer.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/timer.h \
+ C:\wxWidgets-2.8.10/include/wx/settings.h \
+ C:\wxWidgets-2.8.10/include/wx/msgdlg.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/msgdlg.h \
+ C:\wxWidgets-2.8.10/include/wx/dataobj.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/ole/dataform.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/ole/dataobj.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/ole/dataobj2.h \
+ C:\wxWidgets-2.8.10/include/wx/ctrlsub.h \
+ C:\wxWidgets-2.8.10/include/wx/bmpbuttn.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/bmpbuttn.h \
+ C:\wxWidgets-2.8.10/include/wx/checkbox.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/checkbox.h \
+ C:\wxWidgets-2.8.10/include/wx/checklst.h \
+ C:\wxWidgets-2.8.10/include/wx/listbox.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/listbox.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/checklst.h \
+ C:\wxWidgets-2.8.10/include/wx/choice.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/choice.h \
+ C:\wxWidgets-2.8.10/include/wx/scrolbar.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/scrolbar.h \
+ C:\wxWidgets-2.8.10/include/wx/stattext.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/stattext.h \
+ C:\wxWidgets-2.8.10/include/wx/statbmp.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/statbmp.h \
+ C:\wxWidgets-2.8.10/include/wx/statbox.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/statbox.h \
+ C:\wxWidgets-2.8.10/include/wx/radiobox.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/radiobox.h \
+ C:\wxWidgets-2.8.10/include/wx/radiobut.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/radiobut.h \
+ C:\wxWidgets-2.8.10/include/wx/textctrl.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/textctrl.h \
+ C:\wxWidgets-2.8.10/include/wx/slider.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/slider95.h \
+ C:\wxWidgets-2.8.10/include/wx/gauge.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/gauge95.h \
+ C:\wxWidgets-2.8.10/include/wx/scrolwin.h \
+ C:\wxWidgets-2.8.10/include/wx/dirdlg.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/dirdlg.h \
+ C:\wxWidgets-2.8.10/include/wx/toolbar.h \
+ C:\wxWidgets-2.8.10/include/wx/tbarbase.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/tbar95.h \
+ C:\wxWidgets-2.8.10/include/wx/imaglist.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/imaglist.h \
+ C:\wxWidgets-2.8.10/include/wx/combobox.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/combobox.h \
+ C:\wxWidgets-2.8.10/include/wx/layout.h \
+ C:\wxWidgets-2.8.10/include/wx/sizer.h \
+ C:\wxWidgets-2.8.10/include/wx/mdi.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/mdi.h \
+ C:\wxWidgets-2.8.10/include/wx/statusbr.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/statbr95.h \
+ C:\wxWidgets-2.8.10/include/wx/choicdlg.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/choicdgg.h \
+ C:\wxWidgets-2.8.10/include/wx/textdlg.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/textdlgg.h \
+ C:\wxWidgets-2.8.10/include/wx/valtext.h \
+ C:\wxWidgets-2.8.10/include/wx/filedlg.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/filedlg.h \
+ controls/include/wx/dblayer/include/DatabaseLayerException.h \
+ D:/SourcesCpp/wxdbexplorer/src/Gui/GUI.h \
  controls/include/wx/wxScintilla/wxscintilla.h \
- /usr/include/wx-2.8/wx/dnd.h /usr/include/wx-2.8/wx/gtk/dnd.h \
- /usr/include/wx-2.8/wx/grid.h /usr/include/wx-2.8/wx/generic/grid.h \
- /usr/include/wx-2.8/wx/treectrl.h /usr/include/wx-2.8/wx/treebase.h \
- /usr/include/wx-2.8/wx/generic/treectlg.h \
- /usr/include/wx-2.8/wx/statline.h /usr/include/wx-2.8/wx/gtk/statline.h \
- controls/include/wx/propgrid/propgrid.h /usr/include/wx-2.8/wx/tooltip.h \
- /usr/include/wx-2.8/wx/gtk/tooltip.h \
- controls/include/wx/propgrid/advprops.h \
- /usr/include/wx-2.8/wx/notebook.h /usr/include/wx-2.8/wx/bookctrl.h \
- /usr/include/wx-2.8/wx/gtk/notebook.h \
- /usr/include/wx-2.8/wx/filepicker.h /usr/include/wx-2.8/wx/pickerbase.h \
- /usr/include/wx-2.8/wx/gtk/filepicker.h \
- /usr/include/wx-2.8/wx/generic/filepickerg.h \
- controls/include/wx/dblayer/DatabaseLayer.h \
- /usr/include/wx-2.8/wx/wxprec.h /usr/include/wx-2.8/wx/hashset.h \
- controls/include/wx/dblayer/DatabaseLayerDef.h \
- controls/include/wx/dblayer/DatabaseErrorReporter.h \
- controls/include/wx/dblayer/DatabaseStringConverter.h \
- controls/include/wx/dblayer/DatabaseResultSet.h \
- controls/include/wx/dblayer/ResultSetMetaData.h \
- controls/include/wx/dblayer/PreparedStatement.h \
- controls/include/wx/dblayer/DatabaseQueryParser.h \
- controls/include/wx/dblayer/MysqlDatabaseLayer.h \
- controls/include/wx/dblayer/DatabaseLayer.h \
- controls/include/wx/dblayer/DatabaseErrorCodes.h IDbAdapter.h IDbType.h \
+ C:\wxWidgets-2.8.10/include/wx/dnd.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/ole/dropsrc.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/ole/droptgt.h \
+ C:\wxWidgets-2.8.10/include/wx/grid.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/grid.h \
+ C:\wxWidgets-2.8.10/include/wx/splitter.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/splitter.h \
+ C:\wxWidgets-2.8.10/include/wx/treectrl.h \
+ C:\wxWidgets-2.8.10/include/wx/treebase.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/treectrl.h \
+ C:\wxWidgets-2.8.10/include/wx/notebook.h \
+ C:\wxWidgets-2.8.10/include/wx/bookctrl.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/notebook.h \
+ C:\wxWidgets-2.8.10/include/wx/filepicker.h \
+ C:\wxWidgets-2.8.10/include/wx/pickerbase.h \
+ C:\wxWidgets-2.8.10/include/wx/generic/filepickerg.h \
+ C:\wxWidgets-2.8.10/include/wx/statline.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/statline.h \
+ C:\wxWidgets-2.8.10/include/wx/gbsizer.h \
+ controls/include/wx/dblayer/include/DatabaseLayer.h \
+ C:\wxWidgets-2.8.10/include/wx/wxprec.h \
+ C:\wxWidgets-2.8.10/include/wx/hashset.h \
+ controls/include/wx/dblayer/include/DatabaseLayerDef.h \
+ controls/include/wx/dblayer/include/DatabaseErrorReporter.h \
+ controls/include/wx/dblayer/include/DatabaseStringConverter.h \
+ controls/include/wx/dblayer/include/DatabaseResultSet.h \
+ controls/include/wx/dblayer/include/ResultSetMetaData.h \
+ controls/include/wx/dblayer/include/PreparedStatement.h \
+ controls/include/wx/dblayer/include/DatabaseQueryParser.h \
+ controls/include/wx/dblayer/include/DatabaseErrorCodes.h \
+ Interfaces/IDbAdapter.h Interfaces/IDbType.h \
  controls/include/wx/wxxmlserializer/XmlSerializer.h \
  controls/include/wx/wxxmlserializer/PropertyIO.h \
- /usr/include/wx-2.8/wx/xml/xml.h /usr/include/wx-2.8/wx/tokenzr.h \
+ C:\wxWidgets-2.8.10/include/wx/xml/xml.h \
+ C:\wxWidgets-2.8.10/include/wx/tokenzr.h \
  controls/include/wx/wxxmlserializer/Defs.h \
- /home/jankup/SourceCpp/wxdbexplorer/src/gui/DatabaseExplorerFrame.h \
- /usr/include/wx-2.8/wx/aui/aui.h \
- /usr/include/wx-2.8/wx/aui/framemanager.h \
- /usr/include/wx-2.8/wx/aui/dockart.h \
- /usr/include/wx-2.8/wx/aui/floatpane.h /usr/include/wx-2.8/wx/minifram.h \
- /usr/include/wx-2.8/wx/gtk/minifram.h \
- /usr/include/wx-2.8/wx/aui/auibar.h /usr/include/wx-2.8/wx/aui/auibook.h \
- /usr/include/wx-2.8/wx/aui/tabmdi.h
+ D:/SourcesCpp/wxdbexplorer/src/Gui/DatabaseExplorerFrame.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/aui.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/framemanager.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/dockart.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/floatpane.h \
+ C:\wxWidgets-2.8.10/include/wx/minifram.h \
+ C:\wxWidgets-2.8.10/include/wx/msw/minifram.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/auibar.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/auibook.h \
+ C:\wxWidgets-2.8.10/include/wx/aui/tabmdi.h
 
-/usr/include/wx-2.8/wx/file.h:
+C:\wxWidgets-2.8.10/include/wx/file.h:
 
-/usr/include/wx-2.8/wx/defs.h:
+C:\wxWidgets-2.8.10/include/wx/defs.h:
 
-/usr/include/wx-2.8/wx/platform.h:
+C:\wxWidgets-2.8.10/include/wx/platform.h:
 
-/usr/lib/wx/include/gtk2-unicode-release-2.8/wx/setup.h:
+C:\wxWidgets-2.8.10/lib/gcc_dll/mswu/wx/setup.h:
 
-/usr/include/wx-2.8/wx/chkconf.h:
+C:\wxWidgets-2.8.10/include/wx/chkconf.h:
 
-/usr/include/wx-2.8/wx/features.h:
+C:\wxWidgets-2.8.10/include/wx/msw/chkconf.h:
 
-/usr/include/wx-2.8/wx/version.h:
+C:\wxWidgets-2.8.10/include/wx/msw/libraries.h:
 
-/usr/include/wx-2.8/wx/cpp.h:
+C:\wxWidgets-2.8.10/include/wx/msw/gccpriv.h:
 
-/usr/include/wx-2.8/wx/dlimpexp.h:
+C:\wxWidgets-2.8.10/include/wx/features.h:
 
-/usr/include/wx-2.8/wx/debug.h:
+C:\wxWidgets-2.8.10/include/wx/version.h:
 
-/usr/include/wx-2.8/wx/wxchar.h:
+C:\wxWidgets-2.8.10/include/wx/cpp.h:
 
-/usr/include/wx-2.8/wx/string.h:
+C:\wxWidgets-2.8.10/include/wx/dlimpexp.h:
 
-/usr/include/wx-2.8/wx/buffer.h:
+C:\wxWidgets-2.8.10/include/wx/debug.h:
 
-/usr/include/wx-2.8/wx/strconv.h:
+C:\wxWidgets-2.8.10/include/wx/wxchar.h:
 
-/usr/include/wx-2.8/wx/fontenc.h:
+C:\wxWidgets-2.8.10/include/wx/msw/winundef.h:
 
-/usr/include/wx-2.8/wx/beforestd.h:
+C:\wxWidgets-2.8.10/include/wx/string.h:
 
-/usr/include/wx-2.8/wx/afterstd.h:
+C:\wxWidgets-2.8.10/include/wx/buffer.h:
 
-/usr/include/wx-2.8/wx/iosfwrap.h:
+C:\wxWidgets-2.8.10/include/wx/strconv.h:
 
-/usr/include/wx-2.8/wx/filefn.h:
+C:\wxWidgets-2.8.10/include/wx/fontenc.h:
 
-/usr/include/wx-2.8/wx/list.h:
+C:\wxWidgets-2.8.10/include/wx/beforestd.h:
 
-/usr/include/wx-2.8/wx/object.h:
+C:\wxWidgets-2.8.10/include/wx/afterstd.h:
 
-/usr/include/wx-2.8/wx/memory.h:
+C:\wxWidgets-2.8.10/include/wx/filefn.h:
 
-/usr/include/wx-2.8/wx/msgout.h:
+C:\wxWidgets-2.8.10/include/wx/list.h:
 
-/usr/include/wx-2.8/wx/arrstr.h:
+C:\wxWidgets-2.8.10/include/wx/object.h:
 
-/usr/include/wx-2.8/wx/textfile.h:
+C:\wxWidgets-2.8.10/include/wx/memory.h:
 
-/usr/include/wx-2.8/wx/textbuf.h:
+C:\wxWidgets-2.8.10/include/wx/msgout.h:
 
-/usr/include/wx-2.8/wx/convauto.h:
+C:\wxWidgets-2.8.10/include/wx/arrstr.h:
 
-/usr/include/wx-2.8/wx/dynarray.h:
+C:\wxWidgets-2.8.10/include/wx/textfile.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/src/gui/SqlCommandPanel.h:
+C:\wxWidgets-2.8.10/include/wx/textbuf.h:
 
-/usr/include/wx-2.8/wx/wx.h:
+C:\wxWidgets-2.8.10/include/wx/convauto.h:
 
-/usr/include/wx-2.8/wx/hash.h:
+C:\wxWidgets-2.8.10/include/wx/dynarray.h:
 
-/usr/include/wx-2.8/wx/hashmap.h:
+D:/SourcesCpp/wxdbexplorer/src/Gui/SqlCommandPanel.h:
 
-/usr/include/wx-2.8/wx/intl.h:
+C:\wxWidgets-2.8.10/include/wx/wx.h:
 
-/usr/include/wx-2.8/wx/log.h:
+C:\wxWidgets-2.8.10/include/wx/hash.h:
 
-/usr/include/wx-2.8/wx/generic/logg.h:
+C:\wxWidgets-2.8.10/include/wx/hashmap.h:
 
-/usr/include/wx-2.8/wx/event.h:
+C:\wxWidgets-2.8.10/include/wx/intl.h:
 
-/usr/include/wx-2.8/wx/clntdata.h:
+C:\wxWidgets-2.8.10/include/wx/log.h:
 
-/usr/include/wx-2.8/wx/vector.h:
+C:\wxWidgets-2.8.10/include/wx/iosfwrap.h:
 
-/usr/include/wx-2.8/wx/gdicmn.h:
+C:\wxWidgets-2.8.10/include/wx/generic/logg.h:
 
-/usr/include/wx-2.8/wx/math.h:
+C:\wxWidgets-2.8.10/include/wx/event.h:
 
-/usr/include/wx-2.8/wx/cursor.h:
+C:\wxWidgets-2.8.10/include/wx/clntdata.h:
 
-/usr/include/wx-2.8/wx/gtk/cursor.h:
+C:\wxWidgets-2.8.10/include/wx/vector.h:
 
-/usr/include/wx-2.8/wx/utils.h:
+C:\wxWidgets-2.8.10/include/wx/gdicmn.h:
 
-/usr/include/wx-2.8/wx/longlong.h:
+C:\wxWidgets-2.8.10/include/wx/math.h:
 
-/usr/include/wx-2.8/wx/platinfo.h:
+C:\wxWidgets-2.8.10/include/wx/cursor.h:
 
-/usr/include/wx-2.8/wx/thread.h:
+C:\wxWidgets-2.8.10/include/wx/msw/cursor.h:
 
-/usr/include/wx-2.8/wx/app.h:
+C:\wxWidgets-2.8.10/include/wx/msw/gdiimage.h:
 
-/usr/include/wx-2.8/wx/build.h:
+C:\wxWidgets-2.8.10/include/wx/gdiobj.h:
 
-/usr/include/wx-2.8/wx/init.h:
+C:\wxWidgets-2.8.10/include/wx/utils.h:
 
-/usr/include/wx-2.8/wx/gtk/app.h:
+C:\wxWidgets-2.8.10/include/wx/longlong.h:
 
-/usr/include/wx-2.8/wx/stream.h:
+C:\wxWidgets-2.8.10/include/wx/platinfo.h:
 
-/usr/include/wx-2.8/wx/stopwatch.h:
+C:\wxWidgets-2.8.10/include/wx/thread.h:
 
-/usr/include/wx-2.8/wx/module.h:
+C:\wxWidgets-2.8.10/include/wx/app.h:
 
-/usr/include/wx-2.8/wx/window.h:
+C:\wxWidgets-2.8.10/include/wx/build.h:
 
-/usr/include/wx-2.8/wx/font.h:
+C:\wxWidgets-2.8.10/include/wx/init.h:
 
-/usr/include/wx-2.8/wx/gdiobj.h:
+C:\wxWidgets-2.8.10/include/wx/msw/app.h:
 
-/usr/include/wx-2.8/wx/gtk/font.h:
+C:\wxWidgets-2.8.10/include/wx/icon.h:
 
-/usr/include/wx-2.8/wx/colour.h:
+C:\wxWidgets-2.8.10/include/wx/iconloc.h:
 
-/usr/include/wx-2.8/wx/variant.h:
+C:\wxWidgets-2.8.10/include/wx/msw/icon.h:
 
-/usr/include/wx-2.8/wx/datetime.h:
+C:\wxWidgets-2.8.10/include/wx/variant.h:
 
-/usr/include/wx-2.8/wx/gtk/colour.h:
+C:\wxWidgets-2.8.10/include/wx/datetime.h:
 
-/usr/include/wx-2.8/wx/region.h:
+C:\wxWidgets-2.8.10/include/wx/msw/wrapwin.h:
 
-/usr/include/wx-2.8/wx/gtk/region.h:
+C:\wxWidgets-2.8.10/include/wx/stream.h:
 
-/usr/include/wx-2.8/wx/validate.h:
+C:\wxWidgets-2.8.10/include/wx/stopwatch.h:
 
-/usr/include/wx-2.8/wx/palette.h:
+C:\wxWidgets-2.8.10/include/wx/module.h:
 
-/usr/include/wx-2.8/wx/generic/paletteg.h:
+C:\wxWidgets-2.8.10/include/wx/window.h:
 
-/usr/include/wx-2.8/wx/accel.h:
+C:\wxWidgets-2.8.10/include/wx/font.h:
 
-/usr/include/wx-2.8/wx/gtk/accel.h:
+C:\wxWidgets-2.8.10/include/wx/msw/font.h:
 
-/usr/include/wx-2.8/wx/generic/accel.h:
+C:\wxWidgets-2.8.10/include/wx/colour.h:
 
-/usr/include/wx-2.8/wx/gtk/window.h:
+C:\wxWidgets-2.8.10/include/wx/msw/colour.h:
 
-/usr/include/wx-2.8/wx/containr.h:
+C:\wxWidgets-2.8.10/include/wx/region.h:
 
-/usr/include/wx-2.8/wx/panel.h:
+C:\wxWidgets-2.8.10/include/wx/msw/region.h:
 
-/usr/include/wx-2.8/wx/generic/panelg.h:
+C:\wxWidgets-2.8.10/include/wx/validate.h:
 
-/usr/include/wx-2.8/wx/toplevel.h:
+C:\wxWidgets-2.8.10/include/wx/palette.h:
 
-/usr/include/wx-2.8/wx/iconbndl.h:
+C:\wxWidgets-2.8.10/include/wx/msw/palette.h:
 
-/usr/include/wx-2.8/wx/gtk/toplevel.h:
+C:\wxWidgets-2.8.10/include/wx/accel.h:
 
-/usr/include/wx-2.8/wx/frame.h:
+C:\wxWidgets-2.8.10/include/wx/msw/accel.h:
 
-/usr/include/wx-2.8/wx/gtk/frame.h:
+C:\wxWidgets-2.8.10/include/wx/msw/window.h:
 
-/usr/include/wx-2.8/wx/bitmap.h:
+C:\wxWidgets-2.8.10/include/wx/containr.h:
 
-/usr/include/wx-2.8/wx/gtk/bitmap.h:
+C:\wxWidgets-2.8.10/include/wx/panel.h:
 
-/usr/include/wx-2.8/wx/image.h:
+C:\wxWidgets-2.8.10/include/wx/generic/panelg.h:
 
-/usr/include/wx-2.8/wx/imagbmp.h:
+C:\wxWidgets-2.8.10/include/wx/toplevel.h:
 
-/usr/include/wx-2.8/wx/imagpng.h:
+C:\wxWidgets-2.8.10/include/wx/iconbndl.h:
 
-/usr/include/wx-2.8/wx/imaggif.h:
+C:\wxWidgets-2.8.10/include/wx/msw/toplevel.h:
 
-/usr/include/wx-2.8/wx/imagpcx.h:
+C:\wxWidgets-2.8.10/include/wx/frame.h:
 
-/usr/include/wx-2.8/wx/imagjpeg.h:
+C:\wxWidgets-2.8.10/include/wx/msw/frame.h:
 
-/usr/include/wx-2.8/wx/imagtga.h:
+C:\wxWidgets-2.8.10/include/wx/bitmap.h:
 
-/usr/include/wx-2.8/wx/imagtiff.h:
+C:\wxWidgets-2.8.10/include/wx/msw/bitmap.h:
 
-/usr/include/wx-2.8/wx/imagpnm.h:
+C:\wxWidgets-2.8.10/include/wx/image.h:
 
-/usr/include/wx-2.8/wx/imagxpm.h:
+C:\wxWidgets-2.8.10/include/wx/imagbmp.h:
 
-/usr/include/wx-2.8/wx/imagiff.h:
+C:\wxWidgets-2.8.10/include/wx/imagpng.h:
 
-/usr/include/wx-2.8/wx/dc.h:
+C:\wxWidgets-2.8.10/include/wx/imaggif.h:
 
-/usr/include/wx-2.8/wx/brush.h:
+C:\wxWidgets-2.8.10/include/wx/imagpcx.h:
 
-/usr/include/wx-2.8/wx/gtk/brush.h:
+C:\wxWidgets-2.8.10/include/wx/imagjpeg.h:
 
-/usr/include/wx-2.8/wx/pen.h:
+C:\wxWidgets-2.8.10/include/wx/imagtga.h:
 
-/usr/include/wx-2.8/wx/gtk/pen.h:
+C:\wxWidgets-2.8.10/include/wx/imagtiff.h:
 
-/usr/include/wx-2.8/wx/gtk/dc.h:
+C:\wxWidgets-2.8.10/include/wx/imagpnm.h:
 
-/usr/include/wx-2.8/wx/dcgraph.h:
+C:\wxWidgets-2.8.10/include/wx/imagxpm.h:
 
-/usr/include/wx-2.8/wx/geometry.h:
+C:\wxWidgets-2.8.10/include/wx/imagiff.h:
 
-/usr/include/wx-2.8/wx/graphics.h:
+C:\wxWidgets-2.8.10/include/wx/dc.h:
 
-/usr/include/wx-2.8/wx/dcclient.h:
+C:\wxWidgets-2.8.10/include/wx/brush.h:
 
-/usr/include/wx-2.8/wx/gtk/dcclient.h:
+C:\wxWidgets-2.8.10/include/wx/msw/brush.h:
 
-/usr/include/wx-2.8/wx/dcmemory.h:
+C:\wxWidgets-2.8.10/include/wx/pen.h:
 
-/usr/include/wx-2.8/wx/gtk/dcmemory.h:
+C:\wxWidgets-2.8.10/include/wx/msw/pen.h:
 
-/usr/include/wx-2.8/wx/dcprint.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dc.h:
 
-/usr/include/wx-2.8/wx/dcscreen.h:
+C:\wxWidgets-2.8.10/include/wx/dcclient.h:
 
-/usr/include/wx-2.8/wx/gtk/dcscreen.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dcclient.h:
 
-/usr/include/wx-2.8/wx/button.h:
+C:\wxWidgets-2.8.10/include/wx/dcmemory.h:
 
-/usr/include/wx-2.8/wx/control.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dcmemory.h:
 
-/usr/include/wx-2.8/wx/gtk/control.h:
+C:\wxWidgets-2.8.10/include/wx/dcprint.h:
 
-/usr/include/wx-2.8/wx/gtk/button.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dcprint.h:
 
-/usr/include/wx-2.8/wx/menuitem.h:
+C:\wxWidgets-2.8.10/include/wx/cmndata.h:
 
-/usr/include/wx-2.8/wx/gtk/menuitem.h:
+C:\wxWidgets-2.8.10/include/wx/encinfo.h:
 
-/usr/include/wx-2.8/wx/menu.h:
+C:\wxWidgets-2.8.10/include/wx/dcscreen.h:
 
-/usr/include/wx-2.8/wx/gtk/menu.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dcscreen.h:
 
-/usr/include/wx-2.8/wx/icon.h:
+C:\wxWidgets-2.8.10/include/wx/button.h:
 
-/usr/include/wx-2.8/wx/iconloc.h:
+C:\wxWidgets-2.8.10/include/wx/control.h:
 
-/usr/include/wx-2.8/wx/generic/icon.h:
+C:\wxWidgets-2.8.10/include/wx/msw/control.h:
 
-/usr/include/wx-2.8/wx/dialog.h:
+C:\wxWidgets-2.8.10/include/wx/msw/button.h:
 
-/usr/include/wx-2.8/wx/gtk/dialog.h:
+C:\wxWidgets-2.8.10/include/wx/menuitem.h:
 
-/usr/include/wx-2.8/wx/timer.h:
+C:\wxWidgets-2.8.10/include/wx/msw/menuitem.h:
 
-/usr/include/wx-2.8/wx/gtk/timer.h:
+C:\wxWidgets-2.8.10/include/wx/ownerdrw.h:
 
-/usr/include/wx-2.8/wx/settings.h:
+C:\wxWidgets-2.8.10/include/wx/menu.h:
 
-/usr/include/wx-2.8/wx/msgdlg.h:
+C:\wxWidgets-2.8.10/include/wx/msw/menu.h:
 
-/usr/include/wx-2.8/wx/gtk/msgdlg.h:
+C:\wxWidgets-2.8.10/include/wx/dialog.h:
 
-/usr/include/wx-2.8/wx/cmndata.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dialog.h:
 
-/usr/include/wx-2.8/wx/encinfo.h:
+C:\wxWidgets-2.8.10/include/wx/timer.h:
 
-/usr/include/wx-2.8/wx/dataobj.h:
+C:\wxWidgets-2.8.10/include/wx/msw/timer.h:
 
-/usr/include/wx-2.8/wx/gtk/dataform.h:
+C:\wxWidgets-2.8.10/include/wx/settings.h:
 
-/usr/include/wx-2.8/wx/gtk/dataobj.h:
+C:\wxWidgets-2.8.10/include/wx/msgdlg.h:
 
-/usr/include/wx-2.8/wx/gtk/dataobj2.h:
+C:\wxWidgets-2.8.10/include/wx/msw/msgdlg.h:
 
-/usr/include/wx-2.8/wx/ctrlsub.h:
+C:\wxWidgets-2.8.10/include/wx/dataobj.h:
 
-/usr/include/wx-2.8/wx/bmpbuttn.h:
+C:\wxWidgets-2.8.10/include/wx/msw/ole/dataform.h:
 
-/usr/include/wx-2.8/wx/gtk/bmpbuttn.h:
+C:\wxWidgets-2.8.10/include/wx/msw/ole/dataobj.h:
 
-/usr/include/wx-2.8/wx/checkbox.h:
+C:\wxWidgets-2.8.10/include/wx/msw/ole/dataobj2.h:
 
-/usr/include/wx-2.8/wx/gtk/checkbox.h:
+C:\wxWidgets-2.8.10/include/wx/ctrlsub.h:
 
-/usr/include/wx-2.8/wx/checklst.h:
+C:\wxWidgets-2.8.10/include/wx/bmpbuttn.h:
 
-/usr/include/wx-2.8/wx/listbox.h:
+C:\wxWidgets-2.8.10/include/wx/msw/bmpbuttn.h:
 
-/usr/include/wx-2.8/wx/gtk/listbox.h:
+C:\wxWidgets-2.8.10/include/wx/checkbox.h:
 
-/usr/include/wx-2.8/wx/gtk/checklst.h:
+C:\wxWidgets-2.8.10/include/wx/msw/checkbox.h:
 
-/usr/include/wx-2.8/wx/choice.h:
+C:\wxWidgets-2.8.10/include/wx/checklst.h:
 
-/usr/include/wx-2.8/wx/gtk/choice.h:
+C:\wxWidgets-2.8.10/include/wx/listbox.h:
 
-/usr/include/wx-2.8/wx/scrolbar.h:
+C:\wxWidgets-2.8.10/include/wx/msw/listbox.h:
 
-/usr/include/wx-2.8/wx/gtk/scrolbar.h:
+C:\wxWidgets-2.8.10/include/wx/msw/checklst.h:
 
-/usr/include/wx-2.8/wx/stattext.h:
+C:\wxWidgets-2.8.10/include/wx/choice.h:
 
-/usr/include/wx-2.8/wx/gtk/stattext.h:
+C:\wxWidgets-2.8.10/include/wx/msw/choice.h:
 
-/usr/include/wx-2.8/wx/statbmp.h:
+C:\wxWidgets-2.8.10/include/wx/scrolbar.h:
 
-/usr/include/wx-2.8/wx/gtk/statbmp.h:
+C:\wxWidgets-2.8.10/include/wx/msw/scrolbar.h:
 
-/usr/include/wx-2.8/wx/statbox.h:
+C:\wxWidgets-2.8.10/include/wx/stattext.h:
 
-/usr/include/wx-2.8/wx/gtk/statbox.h:
+C:\wxWidgets-2.8.10/include/wx/msw/stattext.h:
 
-/usr/include/wx-2.8/wx/radiobox.h:
+C:\wxWidgets-2.8.10/include/wx/statbmp.h:
 
-/usr/include/wx-2.8/wx/gtk/radiobox.h:
+C:\wxWidgets-2.8.10/include/wx/msw/statbmp.h:
 
-/usr/include/wx-2.8/wx/radiobut.h:
+C:\wxWidgets-2.8.10/include/wx/statbox.h:
 
-/usr/include/wx-2.8/wx/gtk/radiobut.h:
+C:\wxWidgets-2.8.10/include/wx/msw/statbox.h:
 
-/usr/include/wx-2.8/wx/textctrl.h:
+C:\wxWidgets-2.8.10/include/wx/radiobox.h:
 
-/usr/include/wx-2.8/wx/ioswrap.h:
+C:\wxWidgets-2.8.10/include/wx/msw/radiobox.h:
 
-/usr/include/wx-2.8/wx/gtk/textctrl.h:
+C:\wxWidgets-2.8.10/include/wx/radiobut.h:
 
-/usr/include/wx-2.8/wx/slider.h:
+C:\wxWidgets-2.8.10/include/wx/msw/radiobut.h:
 
-/usr/include/wx-2.8/wx/gtk/slider.h:
+C:\wxWidgets-2.8.10/include/wx/textctrl.h:
 
-/usr/include/wx-2.8/wx/gauge.h:
+C:\wxWidgets-2.8.10/include/wx/msw/textctrl.h:
 
-/usr/include/wx-2.8/wx/gtk/gauge.h:
+C:\wxWidgets-2.8.10/include/wx/slider.h:
 
-/usr/include/wx-2.8/wx/scrolwin.h:
+C:\wxWidgets-2.8.10/include/wx/msw/slider95.h:
 
-/usr/include/wx-2.8/wx/gtk/scrolwin.h:
+C:\wxWidgets-2.8.10/include/wx/gauge.h:
 
-/usr/include/wx-2.8/wx/dirdlg.h:
+C:\wxWidgets-2.8.10/include/wx/msw/gauge95.h:
 
-/usr/include/wx-2.8/wx/gtk/dirdlg.h:
+C:\wxWidgets-2.8.10/include/wx/scrolwin.h:
 
-/usr/include/wx-2.8/wx/generic/dirdlgg.h:
+C:\wxWidgets-2.8.10/include/wx/dirdlg.h:
 
-/usr/include/wx-2.8/wx/toolbar.h:
+C:\wxWidgets-2.8.10/include/wx/msw/dirdlg.h:
 
-/usr/include/wx-2.8/wx/tbarbase.h:
+C:\wxWidgets-2.8.10/include/wx/toolbar.h:
 
-/usr/include/wx-2.8/wx/gtk/tbargtk.h:
+C:\wxWidgets-2.8.10/include/wx/tbarbase.h:
 
-/usr/include/wx-2.8/wx/combobox.h:
+C:\wxWidgets-2.8.10/include/wx/msw/tbar95.h:
 
-/usr/include/wx-2.8/wx/gtk/combobox.h:
+C:\wxWidgets-2.8.10/include/wx/imaglist.h:
 
-/usr/include/wx-2.8/wx/layout.h:
+C:\wxWidgets-2.8.10/include/wx/msw/imaglist.h:
 
-/usr/include/wx-2.8/wx/sizer.h:
+C:\wxWidgets-2.8.10/include/wx/combobox.h:
 
-/usr/include/wx-2.8/wx/mdi.h:
+C:\wxWidgets-2.8.10/include/wx/msw/combobox.h:
 
-/usr/include/wx-2.8/wx/gtk/mdi.h:
+C:\wxWidgets-2.8.10/include/wx/layout.h:
 
-/usr/include/wx-2.8/wx/statusbr.h:
+C:\wxWidgets-2.8.10/include/wx/sizer.h:
 
-/usr/include/wx-2.8/wx/generic/statusbr.h:
+C:\wxWidgets-2.8.10/include/wx/mdi.h:
 
-/usr/include/wx-2.8/wx/choicdlg.h:
+C:\wxWidgets-2.8.10/include/wx/msw/mdi.h:
 
-/usr/include/wx-2.8/wx/generic/choicdgg.h:
+C:\wxWidgets-2.8.10/include/wx/statusbr.h:
 
-/usr/include/wx-2.8/wx/textdlg.h:
+C:\wxWidgets-2.8.10/include/wx/msw/statbr95.h:
 
-/usr/include/wx-2.8/wx/generic/textdlgg.h:
+C:\wxWidgets-2.8.10/include/wx/choicdlg.h:
 
-/usr/include/wx-2.8/wx/valtext.h:
+C:\wxWidgets-2.8.10/include/wx/generic/choicdgg.h:
 
-/usr/include/wx-2.8/wx/filedlg.h:
+C:\wxWidgets-2.8.10/include/wx/textdlg.h:
 
-/usr/include/wx-2.8/wx/gtk/filedlg.h:
+C:\wxWidgets-2.8.10/include/wx/generic/textdlgg.h:
 
-/usr/include/wx-2.8/wx/generic/filedlgg.h:
+C:\wxWidgets-2.8.10/include/wx/valtext.h:
 
-/usr/include/wx-2.8/wx/listctrl.h:
+C:\wxWidgets-2.8.10/include/wx/filedlg.h:
 
-/usr/include/wx-2.8/wx/listbase.h:
+C:\wxWidgets-2.8.10/include/wx/msw/filedlg.h:
 
-/usr/include/wx-2.8/wx/generic/listctrl.h:
+controls/include/wx/dblayer/include/DatabaseLayerException.h:
 
-controls/include/wx/dblayer/DatabaseLayerException.h:
-
-/home/jankup/SourceCpp/wxdbexplorer/src/gui/GUI.h:
+D:/SourcesCpp/wxdbexplorer/src/Gui/GUI.h:
 
 controls/include/wx/wxScintilla/wxscintilla.h:
 
-/usr/include/wx-2.8/wx/dnd.h:
+C:\wxWidgets-2.8.10/include/wx/dnd.h:
 
-/usr/include/wx-2.8/wx/gtk/dnd.h:
+C:\wxWidgets-2.8.10/include/wx/msw/ole/dropsrc.h:
 
-/usr/include/wx-2.8/wx/grid.h:
+C:\wxWidgets-2.8.10/include/wx/msw/ole/droptgt.h:
 
-/usr/include/wx-2.8/wx/generic/grid.h:
+C:\wxWidgets-2.8.10/include/wx/grid.h:
 
-/usr/include/wx-2.8/wx/treectrl.h:
+C:\wxWidgets-2.8.10/include/wx/generic/grid.h:
 
-/usr/include/wx-2.8/wx/treebase.h:
+C:\wxWidgets-2.8.10/include/wx/splitter.h:
 
-/usr/include/wx-2.8/wx/generic/treectlg.h:
+C:\wxWidgets-2.8.10/include/wx/generic/splitter.h:
 
-/usr/include/wx-2.8/wx/statline.h:
+C:\wxWidgets-2.8.10/include/wx/treectrl.h:
 
-/usr/include/wx-2.8/wx/gtk/statline.h:
+C:\wxWidgets-2.8.10/include/wx/treebase.h:
 
-controls/include/wx/propgrid/propgrid.h:
+C:\wxWidgets-2.8.10/include/wx/msw/treectrl.h:
 
-/usr/include/wx-2.8/wx/tooltip.h:
+C:\wxWidgets-2.8.10/include/wx/notebook.h:
 
-/usr/include/wx-2.8/wx/gtk/tooltip.h:
+C:\wxWidgets-2.8.10/include/wx/bookctrl.h:
 
-controls/include/wx/propgrid/advprops.h:
+C:\wxWidgets-2.8.10/include/wx/msw/notebook.h:
 
-/usr/include/wx-2.8/wx/notebook.h:
+C:\wxWidgets-2.8.10/include/wx/filepicker.h:
 
-/usr/include/wx-2.8/wx/bookctrl.h:
+C:\wxWidgets-2.8.10/include/wx/pickerbase.h:
 
-/usr/include/wx-2.8/wx/gtk/notebook.h:
+C:\wxWidgets-2.8.10/include/wx/generic/filepickerg.h:
 
-/usr/include/wx-2.8/wx/filepicker.h:
+C:\wxWidgets-2.8.10/include/wx/statline.h:
 
-/usr/include/wx-2.8/wx/pickerbase.h:
+C:\wxWidgets-2.8.10/include/wx/msw/statline.h:
 
-/usr/include/wx-2.8/wx/gtk/filepicker.h:
+C:\wxWidgets-2.8.10/include/wx/gbsizer.h:
 
-/usr/include/wx-2.8/wx/generic/filepickerg.h:
+controls/include/wx/dblayer/include/DatabaseLayer.h:
 
-controls/include/wx/dblayer/DatabaseLayer.h:
+C:\wxWidgets-2.8.10/include/wx/wxprec.h:
 
-/usr/include/wx-2.8/wx/wxprec.h:
+C:\wxWidgets-2.8.10/include/wx/hashset.h:
 
-/usr/include/wx-2.8/wx/hashset.h:
+controls/include/wx/dblayer/include/DatabaseLayerDef.h:
 
-controls/include/wx/dblayer/DatabaseLayerDef.h:
+controls/include/wx/dblayer/include/DatabaseErrorReporter.h:
 
-controls/include/wx/dblayer/DatabaseErrorReporter.h:
+controls/include/wx/dblayer/include/DatabaseStringConverter.h:
 
-controls/include/wx/dblayer/DatabaseStringConverter.h:
+controls/include/wx/dblayer/include/DatabaseResultSet.h:
 
-controls/include/wx/dblayer/DatabaseResultSet.h:
+controls/include/wx/dblayer/include/ResultSetMetaData.h:
 
-controls/include/wx/dblayer/ResultSetMetaData.h:
+controls/include/wx/dblayer/include/PreparedStatement.h:
 
-controls/include/wx/dblayer/PreparedStatement.h:
+controls/include/wx/dblayer/include/DatabaseQueryParser.h:
 
-controls/include/wx/dblayer/DatabaseQueryParser.h:
+controls/include/wx/dblayer/include/DatabaseErrorCodes.h:
 
-controls/include/wx/dblayer/MysqlDatabaseLayer.h:
+Interfaces/IDbAdapter.h:
 
-controls/include/wx/dblayer/DatabaseLayer.h:
-
-controls/include/wx/dblayer/DatabaseErrorCodes.h:
-
-IDbAdapter.h:
-
-IDbType.h:
+Interfaces/IDbType.h:
 
 controls/include/wx/wxxmlserializer/XmlSerializer.h:
 
 controls/include/wx/wxxmlserializer/PropertyIO.h:
 
-/usr/include/wx-2.8/wx/xml/xml.h:
+C:\wxWidgets-2.8.10/include/wx/xml/xml.h:
 
-/usr/include/wx-2.8/wx/tokenzr.h:
+C:\wxWidgets-2.8.10/include/wx/tokenzr.h:
 
 controls/include/wx/wxxmlserializer/Defs.h:
 
-/home/jankup/SourceCpp/wxdbexplorer/src/gui/DatabaseExplorerFrame.h:
+D:/SourcesCpp/wxdbexplorer/src/Gui/DatabaseExplorerFrame.h:
 
-/usr/include/wx-2.8/wx/aui/aui.h:
+C:\wxWidgets-2.8.10/include/wx/aui/aui.h:
 
-/usr/include/wx-2.8/wx/aui/framemanager.h:
+C:\wxWidgets-2.8.10/include/wx/aui/framemanager.h:
 
-/usr/include/wx-2.8/wx/aui/dockart.h:
+C:\wxWidgets-2.8.10/include/wx/aui/dockart.h:
 
-/usr/include/wx-2.8/wx/aui/floatpane.h:
+C:\wxWidgets-2.8.10/include/wx/aui/floatpane.h:
 
-/usr/include/wx-2.8/wx/minifram.h:
+C:\wxWidgets-2.8.10/include/wx/minifram.h:
 
-/usr/include/wx-2.8/wx/gtk/minifram.h:
+C:\wxWidgets-2.8.10/include/wx/msw/minifram.h:
 
-/usr/include/wx-2.8/wx/aui/auibar.h:
+C:\wxWidgets-2.8.10/include/wx/aui/auibar.h:
 
-/usr/include/wx-2.8/wx/aui/auibook.h:
+C:\wxWidgets-2.8.10/include/wx/aui/auibook.h:
 
-/usr/include/wx-2.8/wx/aui/tabmdi.h:
+C:\wxWidgets-2.8.10/include/wx/aui/tabmdi.h:

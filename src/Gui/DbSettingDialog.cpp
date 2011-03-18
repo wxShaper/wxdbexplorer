@@ -18,7 +18,12 @@ DbSettingDialog::DbSettingDialog(DbViewerPanel *parent):_DBSettingsDialog( wxGet
 
 	m_pParent = parent;
 	LoadHistory();
-
+#ifndef DBL_USE_MYSQL
+	m_MySqlPanel->Enable(false);
+#endif
+#ifndef DBL_USE_POSTGRES
+	m_PostgrePanel->Enable(false);
+#endif
 }
 
 DbSettingDialog::~DbSettingDialog() {
