@@ -35,12 +35,15 @@ FrameCanvas::FrameCanvas(wxSFDiagramManager* manager,IDbAdapter* dbAdapter, wxWi
 
 	SaveCanvasState();
 	
-	wxAcceleratorEntry entries[3];
+	wxAcceleratorEntry entries[4];
 	entries[0].Set(wxACCEL_CTRL,  (int) 'C',     wxID_COPY);
 	entries[1].Set(wxACCEL_CTRL,  (int) 'X',     wxID_CUT);
 	entries[2].Set(wxACCEL_CTRL, (int) 'V',      wxID_PASTE);
-	wxAcceleratorTable accel(3, entries);
+	entries[3].Set(wxACCEL_CTRL, (int) 'A',      wxID_SELECTALL);
+	wxAcceleratorTable accel(4, entries);
 	SetAcceleratorTable(accel);
+	
+	Connect( wxID_SELECTALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( FrameCanvas::OnSelectAll ) );
 }
 
 FrameCanvas::~FrameCanvas() {
@@ -419,3 +422,7 @@ void FrameCanvas::OnPaste(const ShapeList& pasted)
 	wxSFShapeCanvas::OnPaste(pasted);
 }
 
+void FrameCanvas::OnSelectAll(wxCommandEvent& evt)
+{
+	SelectAll();
+}

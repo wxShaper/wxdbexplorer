@@ -35,12 +35,10 @@ class FrameCanvas : public wxSFShapeCanvas {
 		virtual bool OnPreConnectionFinished(wxSFLineShape* connection);
 		virtual void OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList& dropped);
 
-
 		virtual void OnPaste(const ShapeList& pasted);
 
-
 		void OnPopupClick(wxCommandEvent &evt);
-
+		void OnSelectAll(wxCommandEvent &evt);
 
 		wxString GetSqlScript();
 		void UpdateERD();

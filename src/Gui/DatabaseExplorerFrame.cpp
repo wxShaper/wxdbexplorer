@@ -8,6 +8,37 @@
 #include <wx/dblayer/include/MysqlDatabaseLayer.h>
 #endif
 
+#include <wx/aboutdlg.h>
+
+#include "wx/wxsf/AutoLayout.h"
+
+enum wxbuildinfoformat {
+    short_f, long_f };
+
+wxString wxbuildinfo(wxbuildinfoformat format)
+{
+    wxString wxbuild(wxVERSION_STRING);
+
+    if (format == long_f )
+    {
+#if defined(__WXMSW__)
+        wxbuild << _T("-Windows");
+#elif defined(__WXMAC__)
+        wxbuild << _T("-Mac");
+#elif defined(__UNIX__)
+        wxbuild << _T("-Linux");
+#endif
+
+#if wxUSE_UNICODE
+        wxbuild << _T("-Unicode build");
+#else
+        wxbuild << _T("-ANSI build");
+#endif // wxUSE_UNICODE
+    }
+
+    return wxbuild;
+}
+
 DatabaseExplorerFrame::DatabaseExplorerFrame(wxWindow *parent) : _MainFrame(parent)
 {
 	#ifdef DBL_USE_MYSQL
@@ -36,6 +67,15 @@ DatabaseExplorerFrame::DatabaseExplorerFrame(wxWindow *parent) : _MainFrame(pare
 	m_Manager.GetArtProvider()->SetMetric(wxAUI_DOCKART_PANE_BORDER_SIZE, 0);
 	m_Manager.GetArtProvider()->SetMetric(wxAUI_DOCKART_SASH_SIZE, 4);
 
+	// configure autolayout algorithns
+	wxSFAutoLayout layout;
+	
+	wxSFLayoutHorizontalTree *pHTreeAlg = wxDynamicCast( layout.GetAlgorithm( wxT("Horizontal Tree") ), wxSFLayoutHorizontalTree );
+	if( pHTreeAlg ) pHTreeAlg->SetHSpace( 200 );
+	
+	wxSFLayoutVerticalTree *pVTreeAlg = wxDynamicCast( layout.GetAlgorithm( wxT("Vertical Tree") ), wxSFLayoutVerticalTree );
+	if( pVTreeAlg ) pVTreeAlg->SetVSpace( 75 );
+	
 	Maximize();
 	
 	m_Manager.Update();
@@ -43,7 +83,10 @@ DatabaseExplorerFrame::DatabaseExplorerFrame(wxWindow *parent) : _MainFrame(pare
 
 DatabaseExplorerFrame::~DatabaseExplorerFrame()
 {
+	wxSFAutoLayout::CleanUp();
+	
 	m_Manager.UnInit();
+	
 	delete m_pNotebook;
 }
 
@@ -113,5 +156,19 @@ void DatabaseExplorerFrame::InitStyledTextCtrl(wxScintilla *sci)
 
 void DatabaseExplorerFrame::OnAbout(wxCommandEvent& event)
 {
-	wxMessageBox( wxString::Format( wxT("DatabaseExplorer (build %d)"), deBUILD_NUMBER ) );
+	wxString version = wxString::Format( wxT("0.1.%d Alpha"), deBUILD_NUMBER);
+
+    wxString desc = wxT("Cross-platform database tool designed for managing data, ERD and code generation.\n\n");
+	desc << wxbuildinfo(long_f) << wxT("\n\n");
+
+    wxAboutDialogInfo info;
+    info.SetName(wxT("DatabaseExplorer"));
+    info.SetVersion(version);
+    info.SetDescription(desc);
+    info.SetCopyright(wxT("2011 (C) Tomas Bata University, Zlin, Czech Republic"));
+    info.SetWebSite(wxT("http://www.fai.utb.cz"));
+    info.AddDeveloper(wxT("Peter Janků"));
+    info.AddDeveloper(wxT("Michal Bližňák"));
+
+    wxAboutBox(info);
 }
