@@ -156,7 +156,7 @@ void DatabaseExplorerFrame::InitStyledTextCtrl(wxScintilla *sci)
 
 void DatabaseExplorerFrame::OnAbout(wxCommandEvent& event)
 {
-	wxString version = wxString::Format( wxT("0.1.%d Alpha"), deBUILD_NUMBER);
+	wxString version = wxString::Format( wxT("0.1.0.%d Alpha"), deBUILD_NUMBER);
 
     wxString desc = wxT("Cross-platform database tool designed for managing data, ERD and code generation.\n\n");
 	desc << wxbuildinfo(long_f) << wxT("\n\n");
