@@ -239,7 +239,9 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 	//TODO:LANG:nekolikrat
 	m_pEditedDatabase = NULL;
 	m_pEditedConnection = NULL;
-	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(event.GetItem());
+	m_selectedID = event.GetItem();
+	
+	DbItem* item = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 	wxMenu menu;
 	int c = 0;
 	if (item) {
@@ -323,6 +325,8 @@ void DbViewerPanel::OnToolCloseUI(wxUpdateUIEvent& event) {
 
 void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 {
+	if( !m_selectedID.IsOk() ) return;
+	
 	try{
 		switch(evt.GetId()) {
 			case IDR_DBVIEWER_ADD_TABLE: {
@@ -357,7 +361,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_DROP_DATABASE:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
@@ -382,7 +386,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_ERD_TABLE:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 					if (pTab){
@@ -392,7 +396,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_ERD_DB:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
@@ -402,7 +406,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_CLASS_DB:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){						
@@ -413,7 +417,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_CLASS_TABLE:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 					if (pTab){						
@@ -424,7 +428,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_DROP_TABLE:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 					if (pTab){
@@ -446,7 +450,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				}
 				break;
 			case IDR_DBVIEWER_IMPORT_DATABASE:{
-				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_treeDatabases->GetSelection());
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){				
