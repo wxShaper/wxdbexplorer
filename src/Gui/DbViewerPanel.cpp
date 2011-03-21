@@ -6,7 +6,6 @@
 #include "Main/DatabaseExplorerApp.h"
 
 #include <wx/wfstream.h>
-#include <wx/propgrid/propgrid.h>
 #include <wx/imaglist.h>
 
 DbViewerPanel::DbViewerPanel(wxWindow *parent, wxAuiNotebook* notebook):_DbViewerPanel(parent) {

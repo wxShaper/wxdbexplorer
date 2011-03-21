@@ -71,7 +71,7 @@ end
 package.config["Debug"].prebuildcommands = { "python $(ProjectPath)/create_buildnum.py" }
 
 -- Set the libraries it links to.
-package.links = { "wxPropGrid", "wxScintilla", "wxShapeFramework" }
+package.links = { "wxScintilla", "wxShapeFramework" }
 if( options["dbl-mysql"] ) then
 	table.insert( package.links, "DatabaseLayerMySQL" )
 end

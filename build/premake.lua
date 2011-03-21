@@ -26,7 +26,7 @@ end
 if( options["dbl-postgresql"] ) then
 	dopackage( "dblayer/postgresql" )
 end
-dopackage( "propgrid" )
+
 dopackage( "wxScintilla" )
 dopackage( "wxShapeFramework" )
 dopackage( "../src" )
