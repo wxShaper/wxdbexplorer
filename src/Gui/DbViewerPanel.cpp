@@ -262,6 +262,10 @@ void DbViewerPanel::OnItemRightClick(wxTreeEvent& event) {
 			c++;
 			c++;
 			
+			menu.AppendSeparator();
+			menu.Append(IDR_DBVIEWER_DUMP_DATABASE, wxT("Dump data to file"), wxT("Dump data from database into .sql file"));
+			c++;
+			
 			m_pEditedDatabase = db;
 			}
 			
@@ -353,6 +357,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 							m_pEditedConnection->RefreshChildren();
 							RefreshDbView();
 						}else{
+							//TODO:LANG:
 							wxMessageDialog dlg(this, wxT("Can't create new db in this database engine!"), wxT("Error"),wxOK|wxICON_ERROR);
 							dlg.ShowModal();							
 							}	
@@ -366,7 +371,8 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
 						wxString dropSQL = pDb->GetDbAdapter()->GetDropDatabaseSql(pDb);
-						if (!dropSQL.IsEmpty()){						
+						if (!dropSQL.IsEmpty()){	
+							//TODO:LANG:
 							wxMessageDialog dlg(this, wxString::Format(wxT("Remove database '%s'?"),pDb->GetName().c_str()),wxT("Drop database"),wxYES_NO);
 							if (dlg.ShowModal() == wxID_YES){
 								DatabaseLayer* pDbLayer = pDb->GetDbAdapter()->GetDatabaseLayer(wxT(""));
@@ -432,6 +438,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 					if (pTab){
+						//TODO:LANG:
 						wxMessageDialog dlg(this, wxString::Format(wxT("Remove table '%s'?"),pTab->GetName().c_str()),wxT("Drop table"),wxYES_NO);
 						if (dlg.ShowModal() == wxID_YES){
 							DatabaseLayer* pDbLayer = pTab->GetDbAdapter()->GetDatabaseLayer(pTab->GetParentName());
@@ -453,7 +460,8 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
-					if (pDb){				
+					if (pDb){	
+						//TODO:LANG:
 						wxFileDialog dlg(this, wxT("Import database from SQL file ..."), wxGetCwd(), wxT(""), wxT("SQL Files (*.sql)|*.sql"), wxOPEN | wxFILE_MUST_EXIST);
 						if(dlg.ShowModal() == wxID_OK) {							
 							ImportDb(dlg.GetPath(), pDb);
@@ -463,7 +471,31 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 					}
 					RefreshDbView();
 				}
-				break;			
+				break;	
+			
+			
+			case IDR_DBVIEWER_DUMP_DATABASE:{
+				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
+				if (data){
+					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
+					if (pDb){	
+						//TODO:LANG:
+						wxFileDialog dlg(this, wxT("Select file ..."),wxT(""), pDb->GetName() + wxT(".sql"),wxT("SQL files (*.sql)|*.sql"));
+						dlg.ShowModal();
+						
+						DumpClass* dump = new DumpClass(pDb->GetDbAdapter(),pDb, dlg.GetFilename());
+						dump->DumpData();
+						wxMessageBox(wxT("Ready!"));
+						
+					}
+				
+				}
+				
+				
+				}
+				break;
+
+		
 			default:{
 				wxMessageBox(wxT("Sorry, requested feature isn't implemented yet. "),wxT("Sorry"));
 				}

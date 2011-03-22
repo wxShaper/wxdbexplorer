@@ -29,6 +29,7 @@
 #include "../DbEngine/table.h"
 #include "../DbEngine/column.h"
 #include "../DbEngine/view.h"
+#include "../DbEngine/dumpclass.h"
 #include "../Interfaces/IDbAdapter.h"
 #include "../Main/MySqlDbAdapter.h"
 #include "../DbEngine/dbitem.h"
