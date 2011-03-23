@@ -27,7 +27,7 @@ public:
 	virtual void GetDatabases(DbConnection* dbCon) = 0;
 
 	/*! \brief Function connect tables to the Database */
-	virtual void GetTables(Database* db) = 0;
+	virtual void GetTables(Database* db, bool includeViews) = 0;
 	
 	/*! \brief Function connect views to the Database */
 	virtual void GetViews(Database* db) = 0;

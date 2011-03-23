@@ -21,7 +21,7 @@ class PostgreSqlDbAdapter : public IDbAdapter {
 
 		virtual bool GetColumns(Table* pTab);
 		virtual void GetDatabases(DbConnection* dbCon);
-		virtual void GetTables(Database* db);
+		virtual void GetTables(Database* db, bool includeViews);
 		virtual void GetViews(Database* db);
 
 		virtual bool CanConnect();

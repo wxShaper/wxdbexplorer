@@ -363,7 +363,7 @@ void PostgreSqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 	return;
 }
 
-void PostgreSqlDbAdapter::GetTables(Database* db) {
+void PostgreSqlDbAdapter::GetTables(Database* db, bool includeViews) {
 	if (db) {
 		//SetDatabase(db->GetName());
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer(db->GetName());

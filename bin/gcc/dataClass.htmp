@@ -59,19 +59,19 @@ protected:
 	%%classItemName%%List m_list;
 };
 
-/*! \brief Utils for %%classColName%% table */
+/*! \brief Utils for %%classTableName%% table */
 class %%classUtilName%% {
 
 public:
-	/*! \brief Add new item into %%classColName%% table */
+	/*! \brief Add new item into %%classTableName%% table */
 	static int Add( DatabaseLayer* pDbLayer
 			%%classUtilsAddParameters%%			
 			);
-	/*! \brief Edit item in %%classColName%% table */	
+	/*! \brief Edit item in %%classTableName%% table */	
 	static int Edit(DatabaseLayer* pDbLayer
 			%%classUtilsAddParameters%%			
 			);
-	/*! \brief Delete item from %%classColName%% table */
+	/*! \brief Delete item from %%classTableName%% table */
 	static int Delete(DatabaseLayer* pDbLayer
 			%%classUtilsDeleteParameters%%			
 			);

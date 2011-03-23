@@ -191,7 +191,7 @@ void SQLiteDbAdapter::GetDatabases(DbConnection* dbCon) {
 	}
 }
 
-void SQLiteDbAdapter::GetTables(Database* db) {
+void SQLiteDbAdapter::GetTables(Database* db, bool includeViews) {
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return;

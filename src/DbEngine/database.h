@@ -24,7 +24,8 @@ public:
 	Database(const Database& obj);
 	Database(IDbAdapter* dbAdapter,const wxString& dbName);
 	virtual ~Database();
-	void RefreshChildren();
+	void RefreshChildren(bool includeViews);
+	void RefreshChildrenDetails();
 
 	IDbAdapter* GetDbAdapter() { return this->m_pDbAdapter; }
 	// nazev databáze

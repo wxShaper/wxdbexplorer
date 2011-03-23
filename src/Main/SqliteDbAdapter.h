@@ -25,7 +25,7 @@ class SQLiteDbAdapter : public IDbAdapter {
 
 
 		virtual void GetDatabases(DbConnection* dbCon);
-		virtual void GetTables(Database* db);
+		virtual void GetTables(Database* db, bool includeViews);
 		virtual bool GetColumns(Table* pTab);
 		virtual void GetViews(Database* db);
 

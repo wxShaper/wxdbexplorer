@@ -79,7 +79,7 @@ void DbViewerPanel::OnRefreshClick(wxCommandEvent& event) {
 		DbConnection* pCon = wxDynamicCast(data->GetData(), DbConnection);
 		if (pCon) pCon->RefreshChildren();
 		Database* pDb = wxDynamicCast(data->GetData(),Database);
-		if (pDb) pDb->RefreshChildren();
+		if (pDb) pDb->RefreshChildren(false);
 		Table* pTab = wxDynamicCast(data->GetData(), Table);
 		if (pTab) pTab->RefreshChildren();
 		
@@ -215,6 +215,7 @@ void DbViewerPanel::OnDnDStart(wxTreeEvent& event) {
 				
 				Table* table = wxDynamicCast(item->GetData(),Table);
 				if (table){
+					if (table->GetChildrenList().GetCount() == 0) table->RefreshChildren();
 					table = (Table*) table->Clone();
 					wxSFShapeBase *pShape = new dndTableShape(table);
 					lstDnD.Append(pShape);
@@ -333,12 +334,6 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 	
 	try{
 		switch(evt.GetId()) {
-			case IDR_DBVIEWER_ADD_TABLE: {
-				//TODO:LANG:
-				wxString tabName = wxGetTextFromUser(wxT("Table name"),wxT("New table"),wxT("NewTab"));
-				
-				}
-				break;
 			case IDR_DBVIEWER_ADD_DATABASE: {
 				if (m_pEditedConnection){
 					//TODO:LANG:
@@ -396,6 +391,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 					if (pTab){
+							pTab->RefreshChildren();
 							m_pNotebook->AddPage(new ErdPanel(this,pTab->GetDbAdapter(),(Table*) pTab->Clone() ), CreatePanelName(pTab, DbViewerPanel::Erd),true);
 						}					
 					}
@@ -406,6 +402,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){
+							pDb->RefreshChildrenDetails();
 							m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter(),(Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
 						}					
 					}
@@ -415,7 +412,10 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
-					if (pDb){						
+					if (pDb){	
+							pDb = (Database*) pDb->Clone();
+							pDb->RefreshChildren(true);
+							pDb->RefreshChildrenDetails();
 							ClassGenerateDialog dlg(GetParent(), pDb->GetDbAdapter(), (Database*) pDb->Clone());
 							dlg.ShowModal();
 						}					
@@ -426,7 +426,8 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
 				if (data){
 					Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
-					if (pTab){						
+					if (pTab){		
+							pTab->RefreshChildren();
 							ClassGenerateDialog dlg(GetParent(), pTab->GetDbAdapter(), (Table*) pTab->Clone());
 							dlg.ShowModal();
 						}					
@@ -449,7 +450,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 							wxMessageBox(wxT("Table dropped successfully"));
 							
 							Database* pDb = wxDynamicCast(pTab->GetParent(), Database);
-							if (pDb) pDb->RefreshChildren();
+							if (pDb) pDb->RefreshChildren(false);
 							RefreshDbView();						
 							}					
 						}					
@@ -466,7 +467,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 						if(dlg.ShowModal() == wxID_OK) {							
 							ImportDb(dlg.GetPath(), pDb);
 							}				
-						pDb->RefreshChildren();
+						pDb->RefreshChildren(false);
 						}							
 					}
 					RefreshDbView();
@@ -479,6 +480,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				if (data){
 					Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 					if (pDb){	
+						pDb->RefreshChildrenDetails();
 						//TODO:LANG:
 						wxFileDialog dlg(this, wxT("Select file ..."),wxT(""), pDb->GetName() + wxT(".sql"),wxT("SQL files (*.sql)|*.sql"));
 						dlg.ShowModal();

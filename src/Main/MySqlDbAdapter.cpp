@@ -154,7 +154,7 @@ wxArrayString* MySqlDbAdapter::GetDbTypes() {
 }
 wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	//TODO:SQL:
-	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s`"), dbName.c_str(), tableName.c_str());
+	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s` LIMIT 100"), dbName.c_str(), tableName.c_str());
 	return ret;
 }
 
@@ -266,7 +266,7 @@ void MySqlDbAdapter::GetDatabases(DbConnection* dbCon) {
 	return;
 }
 
-void MySqlDbAdapter::GetTables(Database* db) {
+void MySqlDbAdapter::GetTables(Database* db, bool includeViews) {
 	if (db) {
 		DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 		if (dbLayer) {
@@ -275,12 +275,19 @@ void MySqlDbAdapter::GetTables(Database* db) {
 			//TODO:SQL:
 
 			//DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
-			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->GetName().c_str()) );
-
-			while (tabulky->Next()) {
-				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),0));
-			}
-			dbLayer->CloseResultSet(tabulky);
+			
+			DatabaseResultSet *tabulky = NULL;
+			if (!includeViews){
+				tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->GetName().c_str()) );
+			}else{
+				tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND (`TABLE_TYPE` = 'BASE TABLE' OR `TABLE_TYPE` = 'VIEW')"), db->GetName().c_str()) );				
+				}
+			if (tabulky){	
+				while (tabulky->Next()) {
+					db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),0));
+					}
+				dbLayer->CloseResultSet(tabulky);
+				}			
 			dbLayer->Close();
 			delete dbLayer;
 		}

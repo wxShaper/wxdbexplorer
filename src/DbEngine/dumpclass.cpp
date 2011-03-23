@@ -73,19 +73,20 @@ bool DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
 						if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_TEXT){
 							dataLine += wxString::Format(wxT("'%s'"), pResult->GetResultString(colIndex).c_str());							
 							} else if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_DATE_TIME){
-								dataLine += wxString::Format(wxT("'%s'"), pResult->GetResultString(colIndex).c_str());							
+								dataLine += wxString::Format(wxT("'%s'"), pResult->GetResultDate(colIndex).FormatDate().c_str());							
 							} else if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_DECIMAL){
-								dataLine += wxString::Format(wxT("%d"), pResult->GetResultDouble(colIndex));							
+								wxString cislo = wxString::Format(wxT("%f"), pResult->GetResultDouble(colIndex));
+								cislo.Replace(wxT(","),wxT("."));
+								dataLine += cislo;	
 							} else if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_FLOAT){
-								dataLine += wxString::Format(wxT("%d"), pResult->GetResultDouble(colIndex));							
+								wxString cislo = wxString::Format(wxT("%f"), pResult->GetResultDouble(colIndex));
+								cislo.Replace(wxT(","),wxT("."));
+								dataLine += cislo;							
 							} else if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_INT){
 								dataLine += wxString::Format(wxT("%i"), pResult->GetResultInt(colIndex));							
 							} else if (pCol->GetPType()->GetUniversalType() == IDbType::dbtTYPE_BOOLEAN){
 								if (pResult->GetResultBool(colIndex)) dataLine += wxT("true");	
 								else dataLine += wxT("false");
-								
-								
-								dataLine += wxString::Format(wxT("'%s'"), pResult->GetResultString(colIndex).c_str());							
 							} else if (pCol->GetPType()->GetUniversalType() != IDbType::dbtTYPE_OTHER){
 								dataLine += wxString::Format(wxT("%s"), pResult->GetResultString(colIndex).c_str());							
 							}				
