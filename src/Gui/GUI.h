@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  1 2011)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -140,7 +140,7 @@ class _SqlCommandPanel : public wxPanel
 		
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 120 );
+			m_splitter1->SetSashPosition( 190 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _SqlCommandPanel::m_splitter1OnIdle ), NULL, this );
 		}
 	

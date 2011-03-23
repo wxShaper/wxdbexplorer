@@ -17,6 +17,7 @@ wxString DumpClass::DumpData() {
 		pOutFile->Clear();
 	} else {
 		pOutFile->Create();
+		pOutFile->Open();
 	}
 
 	if (pOutFile->IsOpened()) {
@@ -53,13 +54,14 @@ bool DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
 		wxString startLine = wxString::Format(wxT("INSERT INTO %s (%s) VALUES"), pTab->GetName().c_str(), cols.c_str());	
 		int n = 0;
 		bool pocatek = false;
+		int rowCount = 0;
 		
 		DatabaseLayer* pDbLayer = m_pDbAdapter->GetDatabaseLayer(pTab->GetParentName());
 		if (pDbLayer){
 			DatabaseResultSet* pResult = pDbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT %s FROM %s.%s"), cols.c_str(),pTab->GetParentName().c_str(), pTab->GetName().c_str()));
 			while (pResult->Next()){
 				if (n == 0 ) pFile->AddLine(startLine);		
-				
+				rowCount++;
 				
 				int colIndex = 1;
 				wxString dataLine = wxT("");
@@ -110,7 +112,7 @@ bool DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
 					}				
 				
 				}
-			pFile->AddLine(wxT(";"));
+			if (rowCount > 0) pFile->AddLine(wxT(";"));
 			pDbLayer->CloseResultSet(pResult);
 			pDbLayer->Close();
 			}			

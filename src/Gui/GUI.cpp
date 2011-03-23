@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  1 2011)
+// C++ code generated with wxFormBuilder (version Nov 18 2010)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -164,7 +164,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	
 	// Grid
 	m_gridTable->CreateGrid( 5, 5 );
-	m_gridTable->EnableEditing( true );
+	m_gridTable->EnableEditing( false );
 	m_gridTable->EnableGridLines( true );
 	m_gridTable->EnableDragGridSize( false );
 	m_gridTable->SetMargins( 0, 0 );
@@ -182,6 +182,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_gridTable->SetRowSize( 2, 25 );
 	m_gridTable->SetRowSize( 3, 26 );
 	m_gridTable->SetRowSize( 4, 25 );
+	m_gridTable->AutoSizeRows();
 	m_gridTable->EnableDragRowSize( true );
 	m_gridTable->SetRowLabelSize( 80 );
 	m_gridTable->SetRowLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
@@ -195,7 +196,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	m_panel14->SetSizer( fgSizer15 );
 	m_panel14->Layout();
 	fgSizer15->Fit( m_panel14 );
-	m_splitter1->SplitHorizontally( m_panel13, m_panel14, 120 );
+	m_splitter1->SplitHorizontally( m_panel13, m_panel14, 190 );
 	fgSizer3->Add( m_splitter1, 1, wxEXPAND, 5 );
 	
 	this->SetSizer( fgSizer3 );
