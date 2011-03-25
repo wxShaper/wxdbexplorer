@@ -4,6 +4,7 @@ IMPLEMENT_DYNAMIC_CLASS(ErdPanel,_ErdPanel)
 BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_TOOL(wxID_OPEN, ErdPanel::OnLoad)
 	EVT_TOOL(wxID_SAVE, ErdPanel::OnSave)
+	EVT_TOOL(IDS_ERD_COMMIT, ErdPanel::OnCommit)
 	EVT_TOOL(IDS_ERD_SAVE_SQL, ErdPanel::OnSaveSql)
 	EVT_TOOL(IDS_ERD_SAVE_BMP, ErdPanel::OnSaveImg)
 	EVT_TOOL(IDT_ERD_ZOOM100, ErdPanel::OnZoom100)
@@ -28,19 +29,20 @@ BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_UPDATE_UI_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnToolUpdate)
 END_EVENT_TABLE()
 
-ErdPanel::ErdPanel():_ErdPanel(NULL)
-{
+ErdPanel::ErdPanel():_ErdPanel(NULL) {
 }
 
-ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter):_ErdPanel(parent){
+ErdPanel::ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, xsSerializable* pConnections):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
+	m_pConnections = pConnections;
 	Init(parent, dbAdapter);
 }
 
-ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdPanel(parent) {
+ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pConnections, Table* pTable):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
+	m_pConnections = pConnections;
 	Init(parent, dbAdapter);
 	if (pTable) {
 		ErdTable* pErdTab = new ErdTable(pTable);
@@ -49,9 +51,10 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, Table* pTable):_ErdP
 	}
 }
 
-ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pItems):_ErdPanel(parent) {
+ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pConnections, xsSerializable* pItems):_ErdPanel(parent) {
 	m_pErdTable = NULL;
 	m_pDbAdapter = dbAdapter;
+	m_pConnections = pConnections;
 	Init(parent, dbAdapter);
 	int i = 10;
 	SerializableList::compatibility_iterator node = pItems->GetFirstChildNode();
@@ -64,12 +67,12 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pIte
 			pErdTab->UpdateColumns();
 		}
 		View* pView = wxDynamicCast(node->GetData(),View);
-		if (pView){
+		if (pView) {
 			ErdView* pErdView = new ErdView(pView);
 			m_diagramManager.AddShape(pErdView, NULL, wxPoint( i ,10), sfINITIALIZE, sfDONT_SAVE_STATE);
 			i+= 200;
 			pErdView->UpdateView();
-			}
+		}
 		node = node->GetNext();
 	}
 	m_pFrameCanvas->UpdateERD();
@@ -88,6 +91,7 @@ void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
 	m_toolBarErd->AddTool(wxID_OPEN, wxT("Open"), wxBitmap(fileopen_xpm),  wxT("Open diagram"));
 	m_toolBarErd->AddTool(wxID_SAVE, wxT("Save"), wxBitmap(filesave_xpm),  wxT("Save diagram"));
 	m_toolBarErd->AddTool(IDS_ERD_SAVE_SQL, wxT("Save SQL"), wxBitmap(export_sql_xpm),wxT("Save SQL"));
+	m_toolBarErd->AddTool(IDS_ERD_COMMIT, wxT("Commit ERD"), wxBitmap(export_sql_xpm),wxT("Commit ERD"));	
 	m_toolBarErd->AddTool(IDS_ERD_SAVE_BMP, wxT("Save BMP"), wxBitmap(export_img_xpm),wxT("Save BMP"));
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddTool(wxID_PRINT, wxT("Print"), wxBitmap(fileprint_xpm),  wxT("Print diagram"));
@@ -102,7 +106,7 @@ void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddRadioTool(IDT_ERD_TOOL, wxT("Tool"), wxBitmap(Tool_xpm), wxNullBitmap, wxT("Design tool"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_TABLE, wxT("Table"), wxBitmap(form_blue_xpm),wxNullBitmap, wxT("Database table"));
-	m_toolBarErd->AddRadioTool(IDT_ERD_VIEW, wxT("View"), wxBitmap(form_yellow_xpm),wxNullBitmap, wxT("Database view"));	
+	m_toolBarErd->AddRadioTool(IDT_ERD_VIEW, wxT("View"), wxBitmap(form_yellow_xpm),wxNullBitmap, wxT("Database view"));
 	m_toolBarErd->AddRadioTool(IDT_ERD_LINE, wxT("Constraint 1:N"), wxBitmap(link_editor_xpm),wxNullBitmap, wxT("Foreign key connection"));
 	m_toolBarErd->AddSeparator();
 	m_toolBarErd->AddTool(IDT_ERD_ALIGN_CIRCLE, wxT("Align into circle"), wxBitmap(AlignCircle_xpm),  wxT("Align into circle"));
@@ -117,38 +121,38 @@ void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
 
 void ErdPanel::OnTool(wxCommandEvent& event) {
 	switch(event.GetId()) {
-	case IDT_ERD_TOOL:
-		m_nToolMode = modeDESIGN;
-		break;
-	case IDT_ERD_TABLE:
-		m_nToolMode = modeTABLE;
-		break;
-	case IDT_ERD_LINE:
-		m_nToolMode = modeLine;
-		break;
-	case IDT_ERD_VIEW:
-		m_nToolMode = modeVIEW;
-		break;
+		case IDT_ERD_TOOL:
+			m_nToolMode = modeDESIGN;
+			break;
+		case IDT_ERD_TABLE:
+			m_nToolMode = modeTABLE;
+			break;
+		case IDT_ERD_LINE:
+			m_nToolMode = modeLine;
+			break;
+		case IDT_ERD_VIEW:
+			m_nToolMode = modeVIEW;
+			break;
 	}
 }
 
 void ErdPanel::OnToolUpdate(wxUpdateUIEvent& event) {
 	switch(event.GetId()) {
-	case IDT_ERD_TOOL:
-		event.Check(m_nToolMode == modeDESIGN);
-		break;
-	case IDT_ERD_TABLE:
-		event.Check(m_nToolMode == modeTABLE);
-		break;
-	case IDT_ERD_LINE:
-		event.Check(m_nToolMode == modeLine);
-		break;
-	case IDT_ERD_VIEW:
-		event.Check(m_nToolMode == modeVIEW);
-		break;
-	default:
-		event.Skip();
-		break;
+		case IDT_ERD_TOOL:
+			event.Check(m_nToolMode == modeDESIGN);
+			break;
+		case IDT_ERD_TABLE:
+			event.Check(m_nToolMode == modeTABLE);
+			break;
+		case IDT_ERD_LINE:
+			event.Check(m_nToolMode == modeLine);
+			break;
+		case IDT_ERD_VIEW:
+			event.Check(m_nToolMode == modeVIEW);
+			break;
+		default:
+			event.Skip();
+			break;
 
 	}
 
@@ -191,115 +195,102 @@ void ErdPanel::OnSaveSql(wxCommandEvent& event) {
 	}
 }
 
-void ErdPanel::OnZoom100(wxCommandEvent& event)
-{
+void ErdPanel::OnZoom100(wxCommandEvent& event) {
 	m_pFrameCanvas->SetScale( 1 );
 	m_pFrameCanvas->Refresh( false );
 }
 
-void ErdPanel::OnZoomAll(wxCommandEvent& event)
-{
+void ErdPanel::OnZoomAll(wxCommandEvent& event) {
 	m_pFrameCanvas->SetScaleToViewAll();
 	m_pFrameCanvas->Refresh( false );
 }
 
-void ErdPanel::OnPreview(wxCommandEvent& event)
-{
+void ErdPanel::OnPreview(wxCommandEvent& event) {
 	m_pFrameCanvas->PrintPreview();
 }
 
-void ErdPanel::OnPrint(wxCommandEvent& event)
-{
+void ErdPanel::OnPrint(wxCommandEvent& event) {
 	m_pFrameCanvas->Print();
 }
 
-void ErdPanel::OnCopy(wxCommandEvent& event)
-{
+void ErdPanel::OnCopy(wxCommandEvent& event) {
 	m_pFrameCanvas->Copy();
 }
 
-void ErdPanel::OnCut(wxCommandEvent& event)
-{
+void ErdPanel::OnCut(wxCommandEvent& event) {
 	m_pFrameCanvas->Cut();
 }
 
-void ErdPanel::OnPaste(wxCommandEvent& event)
-{
+void ErdPanel::OnPaste(wxCommandEvent& event) {
 	m_pFrameCanvas->Paste();
 	m_pFrameCanvas->UpdateERD();
 }
 
-void ErdPanel::OnUpdateCopy(wxUpdateUIEvent& event)
-{
+void ErdPanel::OnUpdateCopy(wxUpdateUIEvent& event) {
 	event.Enable( m_pFrameCanvas->CanCopy() );
 }
 
-void ErdPanel::OnUpdateCut(wxUpdateUIEvent& event)
-{
+void ErdPanel::OnUpdateCut(wxUpdateUIEvent& event) {
 	event.Enable( m_pFrameCanvas->CanCut() );
 }
 
-void ErdPanel::OnUpdatePaste(wxUpdateUIEvent& event)
-{
+void ErdPanel::OnUpdatePaste(wxUpdateUIEvent& event) {
 	event.Enable( m_pFrameCanvas->CanPaste() );
 }
 
-void ErdPanel::OnRedo(wxCommandEvent& event)
-{
+void ErdPanel::OnRedo(wxCommandEvent& event) {
 	m_pFrameCanvas->Redo();
 	m_pFrameCanvas->UpdateERD();
 }
 
-void ErdPanel::OnUndo(wxCommandEvent& event)
-{
+void ErdPanel::OnUndo(wxCommandEvent& event) {
 	m_pFrameCanvas->Undo();
 	m_pFrameCanvas->UpdateERD();
 }
 
-void ErdPanel::OnUpdateRedo(wxUpdateUIEvent& event)
-{
+void ErdPanel::OnUpdateRedo(wxUpdateUIEvent& event) {
 	event.Enable( m_pFrameCanvas->CanRedo() );
 }
 
-void ErdPanel::OnUpdateUndo(wxUpdateUIEvent& event)
-{
+void ErdPanel::OnUpdateUndo(wxUpdateUIEvent& event) {
 	event.Enable( m_pFrameCanvas->CanUndo() );
 }
 
-void ErdPanel::OnSaveImg(wxCommandEvent& event)
-{
+void ErdPanel::OnSaveImg(wxCommandEvent& event) {
 	wxFileDialog dlg(this, wxT("Export canvas to BMP..."), wxGetCwd(), wxT(""), wxT("BMP Files (*.bmp)|*.bmp"), wxSAVE);
 
-	if(dlg.ShowModal() == wxID_OK){
-        m_pFrameCanvas->SaveCanvasToBMP(dlg.GetPath());
+	if(dlg.ShowModal() == wxID_OK) {
+		m_pFrameCanvas->SaveCanvasToBMP(dlg.GetPath());
 	}
 }
 
-void ErdPanel::OnAlignCircle(wxCommandEvent& event)
-{
+void ErdPanel::OnAlignCircle(wxCommandEvent& event) {
 	wxSFAutoLayout layout;
 	layout.Layout( m_pFrameCanvas, wxT("Circle") );
 	m_pFrameCanvas->SaveCanvasState();
 }
 
-void ErdPanel::OnAlignHTree(wxCommandEvent& event)
-{
+void ErdPanel::OnAlignHTree(wxCommandEvent& event) {
 	wxSFAutoLayout layout;
 	layout.Layout( m_pFrameCanvas, wxT("Horizontal Tree") );
 	m_pFrameCanvas->SaveCanvasState();
 }
 
-void ErdPanel::OnAlignMesh(wxCommandEvent& event)
-{
+void ErdPanel::OnAlignMesh(wxCommandEvent& event) {
 	wxSFAutoLayout layout;
 	layout.Layout( m_pFrameCanvas, wxT("Mesh") );
 	m_pFrameCanvas->SaveCanvasState();
 }
 
-void ErdPanel::OnAlignVTree(wxCommandEvent& event)
-{
+void ErdPanel::OnAlignVTree(wxCommandEvent& event) {
 	wxSFAutoLayout layout;
 	layout.Layout( m_pFrameCanvas, wxT("Vertical Tree") );
 	m_pFrameCanvas->SaveCanvasState();
+}
+
+void ErdPanel::OnCommit(wxCommandEvent& event)
+{
+	ErdCommitDialog dlg(this, m_pConnections);
+	dlg.ShowModal();	
 }
 

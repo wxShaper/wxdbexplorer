@@ -84,10 +84,10 @@ void SQLCommandPanel::ExecuteSql()
 							m_gridTable->SetCellValue(wxString::Format(wxT("%b"),pResultSet->GetResultBool(i)),rows,i-1);
 							break;
 						case ResultSetMetaData::COLUMN_DATE:
-							m_gridTable->SetCellValue(pResultSet->GetResultString(i),rows,i-1);
+							m_gridTable->SetCellValue(pResultSet->GetResultDate(i).Format(),rows,i-1);
 							break;
 						case ResultSetMetaData::COLUMN_DOUBLE:
-							m_gridTable->SetCellValue(wxString::Format(wxT("%d"),pResultSet->GetResultDouble(i)),rows,i-1);
+							m_gridTable->SetCellValue(wxString::Format(wxT("%f"),pResultSet->GetResultDouble(i)),rows,i-1);
 							break;
 						case ResultSetMetaData::COLUMN_NULL:
 							//m_gridTable->SetCellValue(pResultSet->GetResultString(i),rows,i-1);
@@ -100,7 +100,7 @@ void SQLCommandPanel::ExecuteSql()
 					rows++;
 				}
 				m_pDbLayer->CloseResultSet(pResultSet);
-
+				m_gridTable->AutoSize();
 				// show result status
 				m_labelStatus->SetLabel(wxString::Format(wxT("Result: %i rows"),rows));
 

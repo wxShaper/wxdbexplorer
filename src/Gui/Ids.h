@@ -10,6 +10,7 @@ enum APPIDS
     //---------------------------------------------------------------//
 	IDS_ERD_SAVE_SQL,
 	IDS_ERD_SAVE_BMP,
+	IDS_ERD_COMMIT,
 	IDT_ERD_FIRST,
     IDT_ERD_TOOL,
 	IDT_ERD_TABLE,

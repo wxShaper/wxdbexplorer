@@ -21,6 +21,7 @@
 #include <wx/frame.h>
 #include <wx/sizer.h>
 #include <wx/panel.h>
+#include <wx/toolbar.h>
 #include <wx/wxScintilla/wxscintilla.h>
 #ifdef __VISUALC__
 #include <wx/link_additions.h>
@@ -30,7 +31,6 @@
 #include <wx/grid.h>
 #include <wx/splitter.h>
 #include <wx/dialog.h>
-#include <wx/toolbar.h>
 #include <wx/treectrl.h>
 #include <wx/notebook.h>
 #include <wx/textctrl.h>
@@ -115,6 +115,7 @@ class _SqlCommandPanel : public wxPanel
 	private:
 	
 	protected:
+		wxToolBar* m_toolBar3;
 		wxSplitterWindow* m_splitter1;
 		wxPanel* m_panel13;
 		wxScintilla* m_scintillaSQL;
@@ -140,7 +141,7 @@ class _SqlCommandPanel : public wxPanel
 		
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 190 );
+			m_splitter1->SetSashPosition( 163 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( _SqlCommandPanel::m_splitter1OnIdle ), NULL, this );
 		}
 	
@@ -508,6 +509,51 @@ class _ClassGenerateDialog : public wxDialog
 		
 		_ClassGenerateDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Class generator dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~_ClassGenerateDialog();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class _ErdCommitDialog
+///////////////////////////////////////////////////////////////////////////////
+class _ErdCommitDialog : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxNotebook* m_notebook4;
+		wxPanel* m_pnSelDatabase;
+		wxTreeCtrl* m_treeConnection;
+		wxPanel* m_pnBackup;
+		wxStaticText* m_staticText32;
+		wxFilePickerCtrl* m_fileData;
+		wxStaticLine* m_staticline31;
+		wxCheckBox* m_checkBox3;
+		wxFilePickerCtrl* m_fileStructure;
+		wxStaticLine* m_staticline3;
+		wxButton* m_btnBackup;
+		wxPanel* m_panel20;
+		wxTextCtrl* m_textCtrl22;
+		wxButton* m_btnWrite;
+		
+		wxButton* m_btnBack;
+		wxButton* m_btnNext;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnNtbPageChanging( wxNotebookEvent& event ) { event.Skip(); }
+		virtual void OnStructureFileUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnBtnBackup( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBackupUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnBtnWrite( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnWriteUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnBtnBack( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBtnBackUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnNextUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_ErdCommitDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ERD commit structure"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,500 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_ErdCommitDialog();
 	
 };
 

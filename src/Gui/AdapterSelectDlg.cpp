@@ -10,7 +10,7 @@ AdapterSelectDlg::~AdapterSelectDlg() {
 
 void AdapterSelectDlg::OnMysqlClick(wxCommandEvent& event) {
 #ifdef DBL_USE_MYSQL
-	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new MySqlDbAdapter()),wxT("MySQL ERD diagram"));
+	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new MySqlDbAdapter(), NULL),wxT("MySQL ERD diagram"));
 	Destroy();
 #else
 	wxMessageBox( wxT("MySQL ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
@@ -18,7 +18,7 @@ void AdapterSelectDlg::OnMysqlClick(wxCommandEvent& event) {
 }
 void AdapterSelectDlg::OnSqliteClick(wxCommandEvent& event) {
 #ifdef DBL_USE_SQLITE
-	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new SQLiteDbAdapter()),wxT("SQLite ERD diagram"));
+	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new SQLiteDbAdapter(), NULL),wxT("SQLite ERD diagram"));
 	Destroy();
 #else
 	wxMessageBox( wxT("SQLite ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
@@ -26,7 +26,7 @@ void AdapterSelectDlg::OnSqliteClick(wxCommandEvent& event) {
 }
 void AdapterSelectDlg::OnPostgresClick(wxCommandEvent& event) {
 #ifdef DBL_USE_POSTGRES
-	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new PostgreSqlDbAdapter()),wxT("PostgreSQL ERD diagram"));
+	m_pNotebook->AddPage(new ErdPanel(m_pNotebook, new PostgreSqlDbAdapter(), NULL),wxT("PostgreSQL ERD diagram"));
 	Destroy();
 #else
 	wxMessageBox( wxT("PostgreSQL ERD is not supported."), wxT("DB Error"), wxOK | wxICON_WARNING );
