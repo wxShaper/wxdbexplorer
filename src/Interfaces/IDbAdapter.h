@@ -13,10 +13,15 @@ class Table;
 class View;
 class IDbType;
 
+
+/*! \brief Basic virtual class for creating universal interface between different database servers. */
 class IDbAdapter {
 
 public:
+	/*! \brief Return opened DatabaseLayer for selected database. If dbName is empty, DatabaseLayer will be opend without defalut database. */
 	virtual DatabaseLayer* GetDatabaseLayer(const wxString& dbName) = 0;
+	
+	/*! \brief Return true if dbAdapter is connected. DEPRECATED!!! */
 	virtual bool IsConnected() = 0;
 	
 	
