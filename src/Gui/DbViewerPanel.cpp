@@ -404,7 +404,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 				if (pTab) {
 					pTab->RefreshChildren();
-					m_pNotebook->AddPage(new ErdPanel(this,pTab->GetDbAdapter(),(Table*) pTab->Clone() ), CreatePanelName(pTab, DbViewerPanel::Erd),true);
+					m_pNotebook->AddPage(new ErdPanel(this,pTab->GetDbAdapter(),m_pConnections, (Table*) pTab->Clone() ), CreatePanelName(pTab, DbViewerPanel::Erd),true);
 				}
 			}
 		}
@@ -415,7 +415,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 				if (pDb) {
 					pDb->RefreshChildrenDetails();
-					m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter(),(Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
+					m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter(),m_pConnections, (Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
 				}
 			}
 		}

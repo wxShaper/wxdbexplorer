@@ -1297,7 +1297,7 @@ _ErdCommitDialog::_ErdCommitDialog( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer21->SetFlexibleDirection( wxBOTH );
 	fgSizer21->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_treeConnection = new wxTreeCtrl( m_pnSelDatabase, wxID_ANY, wxDefaultPosition, wxSize( 300,-1 ), wxTR_DEFAULT_STYLE );
+	m_treeConnection = new wxTreeCtrl( m_pnSelDatabase, wxID_ANY, wxDefaultPosition, wxSize( 300,-1 ), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT );
 	fgSizer21->Add( m_treeConnection, 0, wxALL|wxEXPAND, 5 );
 	
 	m_pnSelDatabase->SetSizer( fgSizer21 );
@@ -1324,7 +1324,7 @@ _ErdCommitDialog::_ErdCommitDialog( wxWindow* parent, wxWindowID id, const wxStr
 	m_checkBox3 = new wxCheckBox( m_pnBackup, wxID_ANY, wxT("Backup database structure"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer22->Add( m_checkBox3, 0, wxALL, 5 );
 	
-	m_fileStructure = new wxFilePickerCtrl( m_pnBackup, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE|wxFLP_USE_TEXTCTRL );
+	m_fileStructure = new wxFilePickerCtrl( m_pnBackup, wxID_ANY, wxT("dbStructure.sql"), wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_OVERWRITE_PROMPT|wxFLP_SAVE|wxFLP_USE_TEXTCTRL );
 	fgSizer22->Add( m_fileStructure, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticline3 = new wxStaticLine( m_pnBackup, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
@@ -1348,13 +1348,48 @@ _ErdCommitDialog::_ErdCommitDialog( wxWindow* parent, wxWindowID id, const wxStr
 	m_textCtrl22 = new wxTextCtrl( m_panel20, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY );
 	fgSizer24->Add( m_textCtrl22, 1, wxALL|wxEXPAND, 5 );
 	
+	wxBoxSizer* bSizer23;
+	bSizer23 = new wxBoxSizer( wxHORIZONTAL );
+	
+	
+	bSizer23->Add( 0, 0, 1, wxEXPAND, 5 );
+	
 	m_btnWrite = new wxButton( m_panel20, wxID_ANY, wxT("Write !"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer24->Add( m_btnWrite, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer23->Add( m_btnWrite, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_btnShowSql = new wxButton( m_panel20, wxID_ANY, wxT("Show SQL"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer23->Add( m_btnShowSql, 0, wxALL, 5 );
+	
+	
+	bSizer23->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	fgSizer24->Add( bSizer23, 1, wxEXPAND, 5 );
 	
 	m_panel20->SetSizer( fgSizer24 );
 	m_panel20->Layout();
 	fgSizer24->Fit( m_panel20 );
 	m_notebook4->AddPage( m_panel20, wxT("3) Write structure "), false );
+	m_panel201 = new wxPanel( m_notebook4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer241;
+	fgSizer241 = new wxFlexGridSizer( 3, 1, 0, 0 );
+	fgSizer241->AddGrowableCol( 0 );
+	fgSizer241->AddGrowableRow( 1 );
+	fgSizer241->SetFlexibleDirection( wxBOTH );
+	fgSizer241->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_fileRestore = new wxFilePickerCtrl( m_panel201, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_FILE_MUST_EXIST|wxFLP_OPEN|wxFLP_USE_TEXTCTRL );
+	fgSizer241->Add( m_fileRestore, 1, wxALL|wxEXPAND, 5 );
+	
+	m_textCtrl221 = new wxTextCtrl( m_panel201, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY );
+	fgSizer241->Add( m_textCtrl221, 1, wxALL|wxEXPAND, 5 );
+	
+	m_btnRestore = new wxButton( m_panel201, wxID_ANY, wxT("Restore"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer241->Add( m_btnRestore, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_panel201->SetSizer( fgSizer241 );
+	m_panel201->Layout();
+	fgSizer241->Fit( m_panel201 );
+	m_notebook4->AddPage( m_panel201, wxT("4) Restore data      "), false );
 	
 	fgSizer20->Add( m_notebook4, 1, wxEXPAND|wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
@@ -1384,8 +1419,12 @@ _ErdCommitDialog::_ErdCommitDialog( wxWindow* parent, wxWindowID id, const wxStr
 	m_btnBackup->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBackupUI ), NULL, this );
 	m_btnWrite->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnWrite ), NULL, this );
 	m_btnWrite->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnWriteUI ), NULL, this );
+	m_btnShowSql->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnShowSqlClick ), NULL, this );
+	m_btnRestore->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnRestoreClick ), NULL, this );
+	m_btnRestore->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBtnRestoreUI ), NULL, this );
 	m_btnBack->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnBack ), NULL, this );
 	m_btnBack->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBtnBackUI ), NULL, this );
+	m_btnNext->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnNext ), NULL, this );
 	m_btnNext->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnNextUI ), NULL, this );
 }
 
@@ -1398,8 +1437,12 @@ _ErdCommitDialog::~_ErdCommitDialog()
 	m_btnBackup->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBackupUI ), NULL, this );
 	m_btnWrite->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnWrite ), NULL, this );
 	m_btnWrite->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnWriteUI ), NULL, this );
+	m_btnShowSql->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnShowSqlClick ), NULL, this );
+	m_btnRestore->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnRestoreClick ), NULL, this );
+	m_btnRestore->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBtnRestoreUI ), NULL, this );
 	m_btnBack->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnBack ), NULL, this );
 	m_btnBack->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBtnBackUI ), NULL, this );
+	m_btnNext->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnNext ), NULL, this );
 	m_btnNext->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnNextUI ), NULL, this );
 	
 }

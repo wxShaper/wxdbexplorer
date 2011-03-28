@@ -533,7 +533,14 @@ class _ErdCommitDialog : public wxDialog
 		wxButton* m_btnBackup;
 		wxPanel* m_panel20;
 		wxTextCtrl* m_textCtrl22;
+		
 		wxButton* m_btnWrite;
+		wxButton* m_btnShowSql;
+		
+		wxPanel* m_panel201;
+		wxFilePickerCtrl* m_fileRestore;
+		wxTextCtrl* m_textCtrl221;
+		wxButton* m_btnRestore;
 		
 		wxButton* m_btnBack;
 		wxButton* m_btnNext;
@@ -545,8 +552,12 @@ class _ErdCommitDialog : public wxDialog
 		virtual void OnBackupUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnBtnWrite( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnWriteUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnShowSqlClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBtnRestoreClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBtnRestoreUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnBtnBack( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBtnBackUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void OnBtnNext( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNextUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		
 	
