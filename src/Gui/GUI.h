@@ -568,4 +568,27 @@ class _ErdCommitDialog : public wxDialog
 	
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class _CodePreviewDialog
+///////////////////////////////////////////////////////////////////////////////
+class _CodePreviewDialog : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxScintilla* m_scintilla3;
+		wxStdDialogButtonSizer* m_sdbSizer2;
+		wxButton* m_sdbSizer2OK;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnOKClick( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		_CodePreviewDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_CodePreviewDialog();
+	
+};
+
 #endif //__GUI__

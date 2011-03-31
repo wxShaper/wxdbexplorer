@@ -41,7 +41,7 @@ bool MySqlDbAdapter::IsConnected() {
 wxString MySqlDbAdapter::GetCreateTableSql(Table* tab, bool dropTable) {
 	//TODO:SQL:
 	wxString str = wxT("");
-	if (dropTable) str = wxString::Format(wxT("DROP TABLE IF EXISTS `%s` CASCADE; \n"),tab->GetName().c_str());
+	if (dropTable) str = wxString::Format(wxT("SET FOREIGN_KEY_CHECKS = 0;\nDROP TABLE IF EXISTS `%s` ;\nSET FOREIGN_KEY_CHECKS = 1; \n"),tab->GetName().c_str());
 	str.append(wxString::Format(wxT("CREATE TABLE `%s` (\n"),tab->GetName().c_str()));
 
 
@@ -298,7 +298,7 @@ wxString MySqlDbAdapter::GetCreateDatabaseSql(const wxString& dbName) {
 	return wxString::Format(wxT("CREATE DATABASE `%s`"), dbName.c_str());
 }
 wxString MySqlDbAdapter::GetDropTableSql(Table* pTab) {
-	return wxString::Format(wxT("DROP TABLE `%s`.`%s`"), pTab->GetParentName().c_str(),pTab->GetName().c_str());
+	return wxString::Format(wxT("SET FOREIGN_KEY_CHECKS = 0;\nDROP TABLE `%s`.`%s\nSET FOREIGN_KEY_CHECKS = 1;`"), pTab->GetParentName().c_str(),pTab->GetName().c_str());
 }
 wxString MySqlDbAdapter::GetAlterTableConstraintSql(Table* tab) {
 	//TODO:SQL:

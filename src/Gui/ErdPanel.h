@@ -14,6 +14,7 @@
 #include "../Interfaces/IDbAdapter.h"
 #include "dbeclasstype.h"
 #include "ErdCommitDialog.h"
+#include "ErdCommitWizard.h"
 
 class FrameCanvas;
 class ErdPanel : public _ErdPanel {

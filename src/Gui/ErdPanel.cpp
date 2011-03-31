@@ -290,7 +290,9 @@ void ErdPanel::OnAlignVTree(wxCommandEvent& event) {
 
 void ErdPanel::OnCommit(wxCommandEvent& event)
 {
-	ErdCommitDialog dlg(this, m_pConnections, m_pFrameCanvas->GetSqlScript());
-	dlg.ShowModal();	
+	ErdCommitWizard wizard(this, m_pConnections, m_pFrameCanvas->GetSqlScript()); 
+	wizard.RunWizard(wizard.GetFirstPage());
+	//ErdCommitDialog dlg(this, m_pConnections, m_pFrameCanvas->GetSqlScript());
+	//dlg.ShowModal();	
 }
 

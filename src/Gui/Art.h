@@ -28,5 +28,5 @@
 #include "../res/gui/ZoomAll.xpm"
 #include "../res/gui/export-sql.xpm"
 #include "../res/gui/export-img.xpm"
-
+#include "../res/gui/wiztest.xpm"
 #endif // ART_H_INCLUDED

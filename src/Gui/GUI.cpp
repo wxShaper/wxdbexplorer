@@ -1306,7 +1306,7 @@ _ErdCommitDialog::_ErdCommitDialog( wxWindow* parent, wxWindowID id, const wxStr
 	m_notebook4->AddPage( m_pnSelDatabase, wxT("1) Select database"), true );
 	m_pnBackup = new wxPanel( m_notebook4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer22;
-	fgSizer22 = new wxFlexGridSizer( 4, 1, 0, 0 );
+	fgSizer22 = new wxFlexGridSizer( 7, 1, 0, 0 );
 	fgSizer22->AddGrowableCol( 0 );
 	fgSizer22->SetFlexibleDirection( wxBOTH );
 	fgSizer22->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
@@ -1319,7 +1319,7 @@ _ErdCommitDialog::_ErdCommitDialog( wxWindow* parent, wxWindowID id, const wxStr
 	fgSizer22->Add( m_fileData, 0, wxALL|wxEXPAND, 5 );
 	
 	m_staticline31 = new wxStaticLine( m_pnBackup, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	fgSizer22->Add( m_staticline31, 0, wxEXPAND | wxALL, 5 );
+	fgSizer22->Add( m_staticline31, 0, wxALL|wxEXPAND, 5 );
 	
 	m_checkBox3 = new wxCheckBox( m_pnBackup, wxID_ANY, wxT("Backup database structure"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer22->Add( m_checkBox3, 0, wxALL, 5 );
@@ -1444,5 +1444,75 @@ _ErdCommitDialog::~_ErdCommitDialog()
 	m_btnBack->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnBtnBackUI ), NULL, this );
 	m_btnNext->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _ErdCommitDialog::OnBtnNext ), NULL, this );
 	m_btnNext->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _ErdCommitDialog::OnNextUI ), NULL, this );
+	
+}
+
+_CodePreviewDialog::_CodePreviewDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer25;
+	fgSizer25 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer25->AddGrowableRow( 0 );
+	fgSizer25->SetFlexibleDirection( wxBOTH );
+	fgSizer25->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_scintilla3 = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( 500,400 ), 0, wxEmptyString );
+	m_scintilla3->SetUseTabs( true );
+	m_scintilla3->SetTabWidth( 4 );
+	m_scintilla3->SetIndent( 4 );
+	m_scintilla3->SetTabIndents( true );
+	m_scintilla3->SetBackSpaceUnIndents( true );
+	m_scintilla3->SetViewEOL( false );
+	m_scintilla3->SetViewWhiteSpace( false );
+	m_scintilla3->SetMarginWidth( 2, 0 );
+	m_scintilla3->SetIndentationGuides( true );
+	m_scintilla3->SetMarginType( 1, wxSCI_MARGIN_SYMBOL );
+	m_scintilla3->SetMarginMask( 1, wxSCI_MASK_FOLDERS );
+	m_scintilla3->SetMarginWidth( 1, 16);
+	m_scintilla3->SetMarginSensitive( 1, true );
+	m_scintilla3->SetProperty( wxT("fold"), wxT("1") );
+	m_scintilla3->SetFoldFlags( wxSCI_FOLDFLAG_LINEBEFORE_CONTRACTED | wxSCI_FOLDFLAG_LINEAFTER_CONTRACTED );
+	m_scintilla3->SetMarginType( 0, wxSCI_MARGIN_NUMBER );
+	m_scintilla3->SetMarginWidth( 0, m_scintilla3->TextWidth( wxSCI_STYLE_LINENUMBER, wxT("_99999") ) );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDER, wxSCI_MARK_BOXPLUS );
+	m_scintilla3->MarkerSetBackground( wxSCI_MARKNUM_FOLDER, wxColour( wxT("BLACK") ) );
+	m_scintilla3->MarkerSetForeground( wxSCI_MARKNUM_FOLDER, wxColour( wxT("WHITE") ) );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDEROPEN, wxSCI_MARK_BOXMINUS );
+	m_scintilla3->MarkerSetBackground( wxSCI_MARKNUM_FOLDEROPEN, wxColour( wxT("BLACK") ) );
+	m_scintilla3->MarkerSetForeground( wxSCI_MARKNUM_FOLDEROPEN, wxColour( wxT("WHITE") ) );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDERSUB, wxSCI_MARK_EMPTY );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDEREND, wxSCI_MARK_BOXPLUS );
+	m_scintilla3->MarkerSetBackground( wxSCI_MARKNUM_FOLDEREND, wxColour( wxT("BLACK") ) );
+	m_scintilla3->MarkerSetForeground( wxSCI_MARKNUM_FOLDEREND, wxColour( wxT("WHITE") ) );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDEROPENMID, wxSCI_MARK_BOXMINUS );
+	m_scintilla3->MarkerSetBackground( wxSCI_MARKNUM_FOLDEROPENMID, wxColour( wxT("BLACK") ) );
+	m_scintilla3->MarkerSetForeground( wxSCI_MARKNUM_FOLDEROPENMID, wxColour( wxT("WHITE") ) );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDERMIDTAIL, wxSCI_MARK_EMPTY );
+	m_scintilla3->MarkerDefine( wxSCI_MARKNUM_FOLDERTAIL, wxSCI_MARK_EMPTY );
+	m_scintilla3->SetSelBackground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHT ) );
+	m_scintilla3->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
+	fgSizer25->Add( m_scintilla3, 1, wxEXPAND|wxALL, 5 );
+	
+	m_sdbSizer2 = new wxStdDialogButtonSizer();
+	m_sdbSizer2OK = new wxButton( this, wxID_OK );
+	m_sdbSizer2->AddButton( m_sdbSizer2OK );
+	m_sdbSizer2->Realize();
+	fgSizer25->Add( m_sdbSizer2, 1, wxEXPAND, 5 );
+	
+	this->SetSizer( fgSizer25 );
+	this->Layout();
+	fgSizer25->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_sdbSizer2OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _CodePreviewDialog::OnOKClick ), NULL, this );
+}
+
+_CodePreviewDialog::~_CodePreviewDialog()
+{
+	// Disconnect Events
+	m_sdbSizer2OK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _CodePreviewDialog::OnOKClick ), NULL, this );
 	
 }

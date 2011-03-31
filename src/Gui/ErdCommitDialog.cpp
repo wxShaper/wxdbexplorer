@@ -24,6 +24,9 @@ void ErdCommitDialog::OnBtnBackUI(wxUpdateUIEvent& event) {
 	event.Enable(m_notebook4->GetSelection() > 0);
 }
 void ErdCommitDialog::OnBtnBackup(wxCommandEvent& event) {
+	
+	m_pSelectedDatabase->RefreshChildrenDetails();
+	
 	DumpClass* pDump = new DumpClass(m_pSelectedDatabase->GetDbAdapter(), m_pSelectedDatabase, m_fileData->GetPath());
 	if (pDump) pDump->DumpData();
 
