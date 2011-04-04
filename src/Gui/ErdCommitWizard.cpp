@@ -46,8 +46,8 @@ FirstPage::FirstPage(wxWizard* parent):wxWizardPageSimple(parent) {
 	                     wxT("on ERD diagram base.\n\n")
 	                     wxT("All tables, which really exist in\n")
 	                     wxT("database, will be deleted during\n")
-	                     wxT("this process, but you can backuped\n")
-	                     wxT("it in second step.")),
+	                     wxT("this process, but you can backup\n")
+	                     wxT("it in the second step.")),
 	    0,wxALL,5);
 	SetSizer(mainSizer);
 	mainSizer->Fit(this);

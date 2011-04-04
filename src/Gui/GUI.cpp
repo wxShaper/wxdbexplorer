@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Nov 18 2010)
+// C++ code generated with wxFormBuilder (version Mar  1 2011)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -1449,15 +1449,16 @@ _ErdCommitDialog::~_ErdCommitDialog()
 
 _CodePreviewDialog::_CodePreviewDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( 500,470 ), wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer25;
 	fgSizer25 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer25->AddGrowableCol( 0 );
 	fgSizer25->AddGrowableRow( 0 );
 	fgSizer25->SetFlexibleDirection( wxBOTH );
 	fgSizer25->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_scintilla3 = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( 500,400 ), 0, wxEmptyString );
+	m_scintilla3 = new wxScintilla( this, wxID_ANY, wxDefaultPosition, wxSize( 480,400 ), 0, wxEmptyString );
 	m_scintilla3->SetUseTabs( true );
 	m_scintilla3->SetTabWidth( 4 );
 	m_scintilla3->SetIndent( 4 );
@@ -1498,11 +1499,10 @@ _CodePreviewDialog::_CodePreviewDialog( wxWindow* parent, wxWindowID id, const w
 	m_sdbSizer2OK = new wxButton( this, wxID_OK );
 	m_sdbSizer2->AddButton( m_sdbSizer2OK );
 	m_sdbSizer2->Realize();
-	fgSizer25->Add( m_sdbSizer2, 1, wxEXPAND, 5 );
+	fgSizer25->Add( m_sdbSizer2, 1, wxEXPAND|wxTOP|wxBOTTOM|wxRIGHT, 5 );
 	
 	this->SetSizer( fgSizer25 );
 	this->Layout();
-	fgSizer25->Fit( this );
 	
 	this->Centre( wxBOTH );
 	
