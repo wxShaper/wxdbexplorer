@@ -40,7 +40,7 @@ protected:
 	virtual void OnSaveClick(wxCommandEvent& event);
 	virtual void OnSaveUI(wxUpdateUIEvent& event);
 	virtual void OnOKUI(wxUpdateUIEvent& event);
-
+	virtual void OnMySqlPassKeyDown(wxKeyEvent& event);
 
 	virtual void OnPgCancelClick(wxCommandEvent& event);
 	virtual void OnPgOkClick(wxCommandEvent& event);
@@ -51,6 +51,9 @@ protected:
 	virtual void OnPgOKUI(wxUpdateUIEvent& event);
 	virtual void OnPgRmoveUI(wxUpdateUIEvent& event);
 	virtual void OnPgSaveUI(wxUpdateUIEvent& event);
+	virtual void OnPgSqlKeyDown(wxKeyEvent& event);
+
+
 
 	void LoadHistory();
 

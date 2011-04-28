@@ -80,6 +80,7 @@ ErdPanel::ErdPanel(wxWindow* parent, IDbAdapter* dbAdapter, xsSerializable* pCon
 }
 
 ErdPanel::~ErdPanel() {
+	delete m_pDbAdapter;
 }
 
 void ErdPanel::Init(wxWindow* parent, IDbAdapter* dbAdapter) {
@@ -158,7 +159,7 @@ void ErdPanel::OnToolUpdate(wxUpdateUIEvent& event) {
 
 }
 void ErdPanel::OnLoad(wxCommandEvent& WXUNUSED(event)) {
-	wxFileDialog dlg(this, wxT("Load canvas from XML..."), wxGetCwd(), wxT(""), wxT("XML Files (*.xml)|*.xml"), wxOPEN | wxFD_FILE_MUST_EXIST);
+	wxFileDialog dlg(this, wxT("Load canvas from file..."), wxGetCwd(), wxT(""), wxT("ERD Files (*.erd)|*.erd"), wxOPEN | wxFD_FILE_MUST_EXIST);
 
 	if(dlg.ShowModal() == wxID_OK) {
 		m_pFrameCanvas->LoadCanvas(dlg.GetPath());
@@ -167,7 +168,7 @@ void ErdPanel::OnLoad(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void ErdPanel::OnSave(wxCommandEvent& WXUNUSED(event)) {
-	wxFileDialog dlg(this, wxT("Save canvas to XML..."), wxGetCwd(), wxT(""), wxT("XML Files (*.xml)|*.xml"), wxSAVE | wxFD_OVERWRITE_PROMPT);
+	wxFileDialog dlg(this, wxT("Save canvas to file..."), wxGetCwd(), wxT(""), wxT("ERD Files (*.erd)|*.erd"), wxSAVE | wxFD_OVERWRITE_PROMPT);
 
 	if(dlg.ShowModal() == wxID_OK) {
 		m_pFrameCanvas->SaveCanvas(dlg.GetPath());
@@ -290,9 +291,9 @@ void ErdPanel::OnAlignVTree(wxCommandEvent& event) {
 
 void ErdPanel::OnCommit(wxCommandEvent& event)
 {
-	ErdCommitWizard wizard(this, m_pConnections, m_pFrameCanvas->GetSqlScript()); 
-	wizard.RunWizard(wizard.GetFirstPage());
-	//ErdCommitDialog dlg(this, m_pConnections, m_pFrameCanvas->GetSqlScript());
-	//dlg.ShowModal();	
+	if (m_pConnections){
+		ErdCommitWizard wizard(this, m_pConnections, m_pFrameCanvas->GetSqlScript()); 
+		wizard.RunWizard(wizard.GetFirstPage());
+	}
 }
 

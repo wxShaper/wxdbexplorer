@@ -3,6 +3,7 @@
 #include <wx/textfile.h>
 #include "SqlCommandPanel.h"
 #include "DatabaseExplorerFrame.h"
+#include "Ids.h"
 
 
 
@@ -47,7 +48,7 @@ void SQLCommandPanel::ExecuteSql()
 			//TODO:SQL:
 			//m_pDbLayer->RunQuery(wxT("USE ")+ m_dbName);
 			try {
-				m_pDbLayer->RunQuery(m_pDbAdapter->GetUseDb(m_dbName));
+				if (!m_pDbAdapter->GetUseDb(m_dbName).IsEmpty()) m_pDbLayer->RunQuery(m_pDbAdapter->GetUseDb(m_dbName));
 				// run query
 				DatabaseResultSet* pResultSet = m_pDbLayer->RunQueryWithResults(this->m_scintillaSQL->GetText());
 				// clear variables
@@ -105,11 +106,12 @@ void SQLCommandPanel::ExecuteSql()
 				m_labelStatus->SetLabel(wxString::Format(wxT("Result: %i rows"),rows));
 
 			} catch (DatabaseLayerException& e) {
-				// error report
-				if (e.GetErrorCode() != DATABASE_LAYER_QUERY_RESULT_ERROR ){
-					wxMessageBox(e.GetErrorMessage());
-					m_labelStatus->SetLabel(wxString::Format(wxT("Result: Error %i..."),e.GetErrorCode()));
-				}
+				wxString errorMessage = wxString::Format(_("Error (%d): %s"), e.GetErrorCode(), e.GetErrorMessage().c_str());
+				wxMessageDialog dlg(this,errorMessage,wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
+				dlg.ShowModal();
+			} catch( ... ) {
+				wxMessageDialog dlg(this,wxT("Unknown error."),wxT("DB Error"),wxOK | wxCENTER | wxICON_ERROR);
+				dlg.ShowModal();
 			}
 		}
 		
@@ -145,4 +147,28 @@ void SQLCommandPanel::OnSaveClick(wxCommandEvent& event)
 			}
 		}
 }
+void SQLCommandPanel::OnTeplatesLeftDown(wxMouseEvent& event) {
+}
+void SQLCommandPanel::OnTemplatesBtnClick(wxCommandEvent& event) {
+	wxMenu menu;
 
+	menu.Append(IDR_SQLCOMMAND_SELECT,wxT("Insert SELECT SQL template"),wxT("Insert SELECT SQL statement template into editor."));
+	menu.Append(IDR_SQLCOMMAND_INSERT,wxT("Insert INSERT SQL template"),wxT("Insert INSERT SQL statement template into editor."));
+	menu.Append(IDR_SQLCOMMAND_UPDATE,wxT("Insert UPDATE SQL template"),wxT("Insert UPDATE SQL statement template into editor."));
+	menu.Append(IDR_SQLCOMMAND_DELETE,wxT("Insert DELETE SQL template"),wxT("Insert DELETE SQL statement template into editor."));
+	menu.Connect(wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SQLCommandPanel::OnPopupClick, NULL, this);	
+	PopupMenu(&menu);
+}
+void SQLCommandPanel::OnPopupClick(wxCommandEvent& evt)
+{
+	
+	if (evt.GetId() == IDR_SQLCOMMAND_SELECT) {
+		m_scintillaSQL->AddText(wxT("SELECT * FROM TableName\n"));
+	} else	if (evt.GetId() == IDR_SQLCOMMAND_INSERT) {
+		m_scintillaSQL->AddText(wxT("INSERT INTO TableName (ColumnA, ColumnB) VALUES (1,'Test text')\n"));
+	} else	if (evt.GetId() == IDR_SQLCOMMAND_UPDATE) {
+		m_scintillaSQL->AddText(wxT("UPDATE TableName SET ColumnA = 2, ColumnB = 'Second text' WHERE ID = 1\n"));
+	} else	if (evt.GetId() == IDR_SQLCOMMAND_DELETE) {
+		m_scintillaSQL->AddText(wxT("DELETE FROM TableName WHERE ID = 1\n"));
+	} 
+}

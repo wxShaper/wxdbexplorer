@@ -105,7 +105,7 @@ void DbSettingDialog::OnSqliteOkClick(wxCommandEvent& event) {
 }
 
 void DbSettingDialog::OnHistoruUI(wxUpdateUIEvent& event) {
-	event.Enable( m_listBox2->GetCount() > 0 );
+	//event.Enable( m_listBox2->GetCount() > 0 );
 }
 
 void DbSettingDialog::OnHistoryClick(wxCommandEvent& event) {
@@ -234,4 +234,18 @@ void DbSettingDialog::OnPgRmoveUI(wxUpdateUIEvent& event) {
 
 void DbSettingDialog::OnPgSaveUI(wxUpdateUIEvent& event) {
 	event.Enable(!m_txPgName->IsEmpty());
+}
+void DbSettingDialog::OnMySqlPassKeyDown(wxKeyEvent& event) {
+	if (event.KeyCode() == WXK_RETURN){	
+		wxCommandEvent event2;
+		OnOkClick(event2);
+	} else event.Skip();
+	
+}
+
+void DbSettingDialog::OnPgSqlKeyDown(wxKeyEvent& event) {
+	if (event.KeyCode() == WXK_RETURN){
+		wxCommandEvent event2;
+		OnPgOkClick(event2);
+	} else event.Skip();
 }

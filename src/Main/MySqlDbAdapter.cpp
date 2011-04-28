@@ -123,7 +123,7 @@ IDbType* MySqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	} else if (typeName == wxT("LONGTEXT")) {
 		type = new MySqlType(wxT("LONGTEXT"), 0, IDbType::dbtTYPE_TEXT);
 	}
-	wxASSERT(type);
+	//wxASSERT(type);
 	return type;
 }
 
@@ -284,7 +284,7 @@ void MySqlDbAdapter::GetTables(Database* db, bool includeViews) {
 				}
 			if (tabulky){	
 				while (tabulky->Next()) {
-					db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),0));
+					db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),  tabulky->GetResultString(wxT("TABLE_TYPE")).Contains(wxT("VIEW"))));
 					}
 				dbLayer->CloseResultSet(tabulky);
 				}			
@@ -431,4 +431,8 @@ IDbType* MySqlDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type) 
 			break;
 	}
 	return newType;	
+}
+IDbAdapter* MySqlDbAdapter::Clone()
+{
+	return new MySqlDbAdapter(m_serverName, m_userName, m_password);
 }

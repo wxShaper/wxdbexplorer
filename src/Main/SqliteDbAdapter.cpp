@@ -53,6 +53,7 @@ wxArrayString* SQLiteDbAdapter::GetDbTypes() {
 }
 
 bool SQLiteDbAdapter::IsConnected() {
+	return false;
 }
 wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	return wxString::Format(wxT("SELECT * FROM '%s'.'%s';"),dbName.c_str(),tableName.c_str());
@@ -196,9 +197,17 @@ void SQLiteDbAdapter::GetTables(Database* db, bool includeViews) {
 	if (dbLayer) {
 		if (!dbLayer->IsOpen()) return;
 		//TODO:SQL:
-		DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='table'"), db->GetName().c_str()) );
+		
+		DatabaseResultSet *tabulky = NULL;
+		if (includeViews){
+			tabulky= dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='table' OR type='view'"), db->GetName().c_str()) );
+		}else{			
+			tabulky= dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM '%s'.sqlite_master WHERE type='table'"), db->GetName().c_str()) );
+			}
+		
+		
 		while (tabulky->Next()) {
-			db->AddChild(new Table(this, tabulky->GetResultString(2), db->GetName(), 0));
+			db->AddChild(new Table(this, tabulky->GetResultString(2), db->GetName(), tabulky->GetResultString(wxT("type")).Contains(wxT("view"))));
 		}
 		dbLayer->CloseResultSet(tabulky);
 
@@ -293,3 +302,8 @@ IDbType* SQLiteDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type)
 	}
 	return newType;
 }
+IDbAdapter* SQLiteDbAdapter::Clone()
+{
+	return new SQLiteDbAdapter(m_sFileName);
+}
+

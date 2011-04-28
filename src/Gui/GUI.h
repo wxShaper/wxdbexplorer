@@ -116,6 +116,7 @@ class _SqlCommandPanel : public wxPanel
 	
 	protected:
 		wxToolBar* m_toolBar3;
+		wxButton* m_button34;
 		wxSplitterWindow* m_splitter1;
 		wxPanel* m_panel13;
 		wxScintilla* m_scintillaSQL;
@@ -128,6 +129,7 @@ class _SqlCommandPanel : public wxPanel
 		wxGrid* m_gridTable;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnTemplatesBtnClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnScintilaKeyDown( wxKeyEvent& event ) { event.Skip(); }
 		virtual void OnExecuteClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveClick( wxCommandEvent& event ) { event.Skip(); }
@@ -261,6 +263,7 @@ class _DBSettingsDialog : public wxDialog
 		wxListBox* m_listBoxPg;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnMySqlPassKeyDown( wxKeyEvent& event ) { event.Skip(); }
 		virtual void OnOkClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOKUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
@@ -272,6 +275,7 @@ class _DBSettingsDialog : public wxDialog
 		virtual void OnHistoryDClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnHistoruUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnSqliteOkClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPgSqlKeyDown( wxKeyEvent& event ) { event.Skip(); }
 		virtual void OnPgOkClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPgOKUI( wxUpdateUIEvent& event ) { event.Skip(); }
 		virtual void OnPgCancelClick( wxCommandEvent& event ) { event.Skip(); }

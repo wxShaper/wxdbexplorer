@@ -24,6 +24,7 @@ class PostgreSqlDbAdapter : public IDbAdapter {
 		virtual void GetTables(Database* db, bool includeViews);
 		virtual void GetViews(Database* db);
 
+		virtual IDbAdapter* Clone();
 		virtual bool CanConnect();
 		virtual bool IsConnected();
 		virtual void CloseConnection();

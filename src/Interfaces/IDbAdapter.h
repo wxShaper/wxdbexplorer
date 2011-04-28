@@ -24,6 +24,8 @@ public:
 	/*! \brief Return true if dbAdapter is connected. DEPRECATED!!! */
 	virtual bool IsConnected() = 0;
 	
+	/*! \brief Clone DbAdapter and return new object */
+	virtual IDbAdapter* Clone() = 0;
 	
 	/*! \brief Return true if adapter settings are set and adapter can connect to the database */
 	virtual bool CanConnect() = 0;

@@ -22,6 +22,8 @@ class MySqlDbAdapter : public IDbAdapter {
 		virtual void GetDatabases(DbConnection* dbCon);
 		virtual void GetTables(Database* db, bool includeViews);
 		virtual void GetViews(Database* db);
+	
+		virtual IDbAdapter* Clone();
 
 		virtual bool CanConnect();
 		virtual bool IsConnected();

@@ -185,11 +185,11 @@ void BackupPage::OnFileStructureUI(wxUpdateUIEvent& event) {
 
 void BackupPage::OnBtnBackupClick(wxCommandEvent& event) {
 	m_pParentWizard->GetSelectedDatabase()->RefreshChildrenDetails();
-
+	wxString dumpResult = wxT("");
 	DumpClass* pDump = new DumpClass(m_pParentWizard->GetSelectedDatabase()->GetDbAdapter(), m_pParentWizard->GetSelectedDatabase(), m_pFileData->GetPath());
-	if (pDump) pDump->DumpData();
+	if (pDump) dumpResult = pDump->DumpData();
 
-	wxMessageBox(wxT("Data saved!"));
+	wxMessageBox(wxT("Data saved! ")+ dumpResult );
 
 	if (m_pCheckStructure->IsChecked()) {
 		wxString retStr;

@@ -48,21 +48,23 @@ void DbViewerPanel::OnItemActivate(wxTreeEvent& event)
 		wxMouseState cState = wxGetMouseState();
 
 		if (Table* tab =  wxDynamicCast(item->GetData(), Table)) {
+			tab->RefreshChildren();
 			if( cState.ControlDown() ) {
-				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,tab->GetDbAdapter(),(Table*)tab->Clone()), CreatePanelName(tab, DbViewerPanel::Erd), true);
+				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,tab->GetDbAdapter()->Clone(),m_pConnections,(Table*)tab->Clone()), CreatePanelName(tab, DbViewerPanel::Erd), true);
 			} else
-				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter(),tab->GetParentName(),tab->GetName()), CreatePanelName(tab, DbViewerPanel::Sql),true);
+				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,tab->GetDbAdapter()->Clone(),tab->GetParentName(),tab->GetName()), CreatePanelName(tab, DbViewerPanel::Sql),true);
 		}
 
 		if (View* pView = wxDynamicCast(item->GetData(), View)) {
-			m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,pView->GetDbAdapter(),pView->GetParentName(),pView->GetName()), CreatePanelName(pView, DbViewerPanel::Sql),true);
+			m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,pView->GetDbAdapter()->Clone(),pView->GetParentName(),pView->GetName()), CreatePanelName(pView, DbViewerPanel::Sql),true);
 		}
 
 		if (Database* db = wxDynamicCast(item->GetData(), Database)) {
 			if( cState.ControlDown() ) {
-				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,db->GetDbAdapter(),(Database*)db->Clone()), CreatePanelName(db, DbViewerPanel::Erd),true);
+				db->RefreshChildrenDetails();
+				m_pNotebook->AddPage(new ErdPanel(m_pNotebook,db->GetDbAdapter()->Clone(),m_pConnections,(Database*)db->Clone()), CreatePanelName(db, DbViewerPanel::Erd),true);
 			} else {
-				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,db->GetDbAdapter(),db->GetName(),wxT("")), CreatePanelName(db, DbViewerPanel::Sql),true);
+				m_pNotebook->AddPage(new SQLCommandPanel(m_pNotebook,db->GetDbAdapter()->Clone(),db->GetName(),wxT("")), CreatePanelName(db, DbViewerPanel::Sql),true);
 			}
 		}
 	}
@@ -201,16 +203,10 @@ void DbViewerPanel::OnItemSelectionChange(wxTreeEvent& event)
 }
 void DbViewerPanel::OnERDClick(wxCommandEvent& event)
 {
-	AdapterSelectDlg dlg(this, m_pNotebook);
+	AdapterSelectDlg dlg(this, m_pNotebook, m_pConnections);
 	dlg.ShowModal();
-	if (m_pDbAdapter) {
-
-
-
-
-		//m_pNotebook->AddPage(new ErdPanel(m_pNotebook, m_pDbAdapter),wxT("ERD diagram"));
-	}
 }
+
 void DbViewerPanel::OnDnDStart(wxTreeEvent& event)
 {
 	ShapeList lstDnD;
@@ -404,7 +400,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				Table* pTab = (Table*) wxDynamicCast(data->GetData(),Table);
 				if (pTab) {
 					pTab->RefreshChildren();
-					m_pNotebook->AddPage(new ErdPanel(this,pTab->GetDbAdapter(),m_pConnections, (Table*) pTab->Clone() ), CreatePanelName(pTab, DbViewerPanel::Erd),true);
+					m_pNotebook->AddPage(new ErdPanel(this,pTab->GetDbAdapter()->Clone(),m_pConnections, (Table*) pTab->Clone() ), CreatePanelName(pTab, DbViewerPanel::Erd),true);
 				}
 			}
 		}
@@ -415,7 +411,7 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 				Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
 				if (pDb) {
 					pDb->RefreshChildrenDetails();
-					m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter(),m_pConnections, (Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
+					m_pNotebook->AddPage(new ErdPanel(this,pDb->GetDbAdapter()->Clone(),m_pConnections, (Database*) pDb->Clone() ), CreatePanelName(pDb, DbViewerPanel::Erd),true);
 				}
 			}
 		}

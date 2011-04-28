@@ -11,8 +11,22 @@ ClassGenerateDialog::~ClassGenerateDialog() {
 }
 
 bool ClassGenerateDialog::GenerateClass(Table* pTab, const wxString& path) {
-	wxTextFile htmpFile(wxGetApp().GetAppPath() + wxT("/dataClass.htmp"));
-	wxTextFile ctmpFile(wxGetApp().GetAppPath() + wxT("/dataClass.ctmp"));
+	
+	wxString hFileName = wxT("");
+	wxString cFileName = wxT("");
+
+	if (pTab->IsView()){
+	  	hFileName = wxT("viewClass.htmp");
+		cFileName = wxT("viewClass.ctmp");		
+		
+	}else{
+	  	hFileName = wxT("dataClass.htmp");
+		cFileName = wxT("dataClass.ctmp");	
+		}
+
+	
+	wxTextFile htmpFile(wxGetApp().GetAppPath() + wxT("/") + hFileName);
+	wxTextFile ctmpFile(wxGetApp().GetAppPath() + wxT("/") + cFileName);
 
 	if (!htmpFile.Open()) return false;
 	if (!ctmpFile.Open()) return false;

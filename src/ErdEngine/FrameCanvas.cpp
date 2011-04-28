@@ -357,7 +357,7 @@ void FrameCanvas::OnDrop(wxCoord x, wxCoord y, wxDragResult def, const ShapeList
 }
 
 wxString FrameCanvas::GetSqlScript() {
-	wxString retStr;
+	wxString retStr = wxT("");
 
 	ShapeList lstShapes;
 	GetDiagramManager()->GetShapes( CLASSINFO(ErdTable), lstShapes );

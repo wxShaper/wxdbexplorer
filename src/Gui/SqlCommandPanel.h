@@ -14,11 +14,9 @@
 #include "Interfaces/IDbAdapter.h"
 
 
-class SQLCommandPanel : public _SqlCommandPanel
-{
+class SQLCommandPanel : public _SqlCommandPanel{
 
 public:
-
 	SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter, const wxString& dbName,const wxString& dbTable);
 	virtual ~SQLCommandPanel();
 	virtual void OnExecuteClick(wxCommandEvent& event);
@@ -26,7 +24,10 @@ public:
 
 	virtual void OnLoadClick(wxCommandEvent& event);
 	virtual void OnSaveClick(wxCommandEvent& event);
+	virtual void OnTeplatesLeftDown(wxMouseEvent& event);
+	virtual void OnTemplatesBtnClick(wxCommandEvent& event);
 
+	void OnPopupClick(wxCommandEvent &evt);
 	void ExecuteSql();
 
 protected:

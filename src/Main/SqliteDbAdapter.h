@@ -34,7 +34,7 @@ class SQLiteDbAdapter : public IDbAdapter {
 		virtual IDbType* GetDbTypeByName(const wxString& typeName);
 		virtual wxArrayString* GetDbTypes();
 
-
+		virtual IDbAdapter* Clone();
 		virtual bool CanConnect();
 		virtual bool IsConnected();
 

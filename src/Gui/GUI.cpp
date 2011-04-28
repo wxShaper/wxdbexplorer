@@ -75,6 +75,8 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	fgSizer3->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	m_toolBar3 = new wxToolBar( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL ); 
+	m_button34 = new wxButton( m_toolBar3, wxID_ANY, wxT("Templates"), wxDefaultPosition, wxDefaultSize, wxNO_BORDER );
+	m_toolBar3->AddControl( m_button34 );
 	m_toolBar3->Realize(); 
 	
 	fgSizer3->Add( m_toolBar3, 0, wxEXPAND, 5 );
@@ -208,6 +210,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 	this->Layout();
 	
 	// Connect Events
+	m_button34->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnTemplatesBtnClick ), NULL, this );
 	m_scintillaSQL->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( _SqlCommandPanel::OnScintilaKeyDown ), NULL, this );
 	m_btnExecute->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnExecuteClick ), NULL, this );
 	m_btnSave->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnSaveClick ), NULL, this );
@@ -217,6 +220,7 @@ _SqlCommandPanel::_SqlCommandPanel( wxWindow* parent, wxWindowID id, const wxPoi
 _SqlCommandPanel::~_SqlCommandPanel()
 {
 	// Disconnect Events
+	m_button34->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnTemplatesBtnClick ), NULL, this );
 	m_scintillaSQL->Disconnect( wxEVT_KEY_DOWN, wxKeyEventHandler( _SqlCommandPanel::OnScintilaKeyDown ), NULL, this );
 	m_btnExecute->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnExecuteClick ), NULL, this );
 	m_btnSave->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _SqlCommandPanel::OnSaveClick ), NULL, this );
@@ -579,6 +583,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	m_txPassword->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( _DBSettingsDialog::OnMySqlPassKeyDown ), NULL, this );
 	m_btnOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnOkClick ), NULL, this );
 	m_btnOK->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnOKUI ), NULL, this );
 	m_btnCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnCancelClick ), NULL, this );
@@ -591,6 +596,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_listBox2->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnHistoruUI ), NULL, this );
 	m_btnOKSqlite->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnSqliteOkClick ), NULL, this );
 	m_btnCancel1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnCancelClick ), NULL, this );
+	m_txPgPassword->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( _DBSettingsDialog::OnPgSqlKeyDown ), NULL, this );
 	m_btnPgOK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgOkClick ), NULL, this );
 	m_btnPgOK->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgOKUI ), NULL, this );
 	m_btnPgCancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgCancelClick ), NULL, this );
@@ -606,6 +612,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 _DBSettingsDialog::~_DBSettingsDialog()
 {
 	// Disconnect Events
+	m_txPassword->Disconnect( wxEVT_KEY_DOWN, wxKeyEventHandler( _DBSettingsDialog::OnMySqlPassKeyDown ), NULL, this );
 	m_btnOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnOkClick ), NULL, this );
 	m_btnOK->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnOKUI ), NULL, this );
 	m_btnCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnCancelClick ), NULL, this );
@@ -618,6 +625,7 @@ _DBSettingsDialog::~_DBSettingsDialog()
 	m_listBox2->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnHistoruUI ), NULL, this );
 	m_btnOKSqlite->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnSqliteOkClick ), NULL, this );
 	m_btnCancel1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnCancelClick ), NULL, this );
+	m_txPgPassword->Disconnect( wxEVT_KEY_DOWN, wxKeyEventHandler( _DBSettingsDialog::OnPgSqlKeyDown ), NULL, this );
 	m_btnPgOK->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgOkClick ), NULL, this );
 	m_btnPgOK->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( _DBSettingsDialog::OnPgOKUI ), NULL, this );
 	m_btnPgCancel->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( _DBSettingsDialog::OnPgCancelClick ), NULL, this );

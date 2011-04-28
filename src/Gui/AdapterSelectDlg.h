@@ -20,7 +20,7 @@
 class AdapterSelectDlg : public _AdapterSelectDlg {
 
 	public:
-		AdapterSelectDlg(wxWindow* parent, wxAuiNotebook* pNotebook);
+		AdapterSelectDlg(wxWindow* parent, wxAuiNotebook* pNotebook, xsSerializable* pConnections);
 		virtual ~AdapterSelectDlg();
 
 		virtual void OnMysqlClick(wxCommandEvent& event);
@@ -29,6 +29,7 @@ class AdapterSelectDlg : public _AdapterSelectDlg {
 
 	protected:
 		wxAuiNotebook* m_pNotebook;
+		xsSerializable* m_pConnectons;
 };
 
 #endif // ADAPTERSELECTDLG_H

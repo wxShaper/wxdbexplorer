@@ -104,9 +104,9 @@ IDbType* PostgreSqlDbAdapter::GetDbTypeByName(const wxString& typeName) {
 	} else if (typeName == wxT("DOUBLE PRECISION")) {
 		type = new PostgreSqlType(wxT("DOUBLE PRECISION"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
 	} else if (typeName == wxT("SERIAL")) {
-		type = new PostgreSqlType(wxT("SERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
+		type = new PostgreSqlType(wxT("SERIAL"),IDbType::dbtNOT_NULL , IDbType::dbtTYPE_INT);
 	} else if (typeName == wxT("BIGSERIAL")) {
-		type = new PostgreSqlType(wxT("BIGSERIAL"),IDbType::dbtNOT_NULL | IDbType::dbtSIZE | IDbType::dbtSIZE_TWO, IDbType::dbtTYPE_FLOAT);
+		type = new PostgreSqlType(wxT("BIGSERIAL"),IDbType::dbtNOT_NULL , IDbType::dbtTYPE_INT);
 
 		// Monetary types
 	} else if (typeName == wxT("CHARACTER VARYING")) {
@@ -374,10 +374,14 @@ void PostgreSqlDbAdapter::GetTables(Database* db, bool includeViews) {
 
 			//DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SHOW TABLES IN `%s`"), db->getName().c_str()) );
 			//DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA` = '%s' AND `TABLE_TYPE` = 'BASE TABLE'"), db->getName().c_str()) );
-			DatabaseResultSet *tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'")) );
-
+			DatabaseResultSet *tabulky = NULL;
+			if (includeViews){
+				tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.tables WHERE table_schema = 'public' AND (table_type = 'BASE TABLE' OR table_type = 'VIEW')")) );
+			}else {
+				tabulky = dbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT * FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'")) );				
+				}
 			while (tabulky->Next()) {
-				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),0));
+				db->AddChild(new Table(this,  tabulky->GetResultString(wxT("TABLE_NAME")), db->GetName(),    tabulky->GetResultString(wxT("TABLE_TYPE")).Contains(wxT("VIEW"))    ));
 			}
 			dbLayer->CloseResultSet(tabulky);
 			dbLayer->Close();
@@ -532,3 +536,8 @@ IDbType* PostgreSqlDbAdapter::GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE t
 	}
 	return newType;
 }
+IDbAdapter* PostgreSqlDbAdapter::Clone()
+{
+	return new PostgreSqlDbAdapter(m_serverName, m_defaultDb, m_userName, m_password);
+}
+
