@@ -6,6 +6,7 @@
 #include <wx/wx.h>
 #include "../DbEngine/table.h"
 
+/*! \brief Transpor class for DnD functions  */
 class dndTableShape : public wxSFShapeBase {
 
 public:

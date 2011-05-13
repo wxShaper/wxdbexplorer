@@ -11,7 +11,7 @@
 #include "../Gui/NArrow.h"
 #include "../Gui/OneArrow.h"
 #include "DbEngine/constraint.h"
-
+/*! \brief Class representing line in ERD diagram constructed on Foreign Key base. For more info see wxSF manual */
 class ErdForeignKey : public wxSFRoundOrthoLineShape {
 public:
 	XS_DECLARE_CLONABLE_CLASS(ErdForeignKey);	

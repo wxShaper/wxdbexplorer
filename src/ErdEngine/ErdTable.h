@@ -14,7 +14,7 @@
 #include "Gui/Ids.h"
 #include "../Gui/NArrow.h"
 #include "Interfaces/IDbType.h"
-
+/*! \brief Class representig table graphics in ERD diagram. For more info see wxSF manual. */
 class ErdTable : public wxSFRoundRectShape {
 
 public:

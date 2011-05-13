@@ -6,7 +6,6 @@
 #include "../DbEngine/table.h"
 #include "../DbEngine/view.h"
 #include "../DbEngine/database.h"
-#include "../DbEngine/databasecol.h"
 
 #ifdef DBL_USE_SQLITE
 #include <wx/dblayer/include/SqliteDatabaseLayer.h>
@@ -40,13 +39,14 @@ class SQLiteDbAdapter : public IDbAdapter {
 
 		virtual wxString GetUseDb(const wxString& dbName);
 
-		virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
-		virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
-		virtual wxString GetCreateViewSql(View* view, bool dropView);
-		virtual wxString GetAlterTableConstraintSql(Table* tab);
-		virtual wxString GetCreateDatabaseSql(const wxString& dbName);
-		virtual wxString GetDropTableSql(Table* pTab);
-		virtual wxString GetDropDatabaseSql(Database* pDb);
+	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
+	virtual wxString GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName);
+	virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
+	virtual wxString GetCreateViewSql(View* view, bool dropView);
+	virtual wxString GetAlterTableConstraintSql(Table* tab);
+	virtual wxString GetCreateDatabaseSql(const wxString& dbName);
+	virtual wxString GetDropTableSql(Table* pTab);
+	virtual wxString GetDropDatabaseSql(Database* pDb);
 
 
 		virtual IDbType* GetDbTypeByUniversalName(IDbType::UNIVERSAL_TYPE type);

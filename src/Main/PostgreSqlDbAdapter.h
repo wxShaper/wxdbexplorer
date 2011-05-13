@@ -30,14 +30,15 @@ class PostgreSqlDbAdapter : public IDbAdapter {
 		virtual void CloseConnection();
 		virtual DatabaseLayer* GetDatabaseLayer(const wxString& dbName);
 
-		virtual wxString GetUseDb(const wxString& dbName);
-		virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
-		virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
-		virtual wxString GetCreateViewSql(View* view, bool dropView);
-		virtual wxString GetAlterTableConstraintSql(Table* tab);
-		virtual wxString GetCreateDatabaseSql(const wxString& dbName);
-		virtual wxString GetDropTableSql(Table* pTab);
-		virtual wxString GetDropDatabaseSql(Database* pDb);
+	virtual wxString GetUseDb(const wxString& dbName);
+	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
+	virtual wxString GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName);
+	virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
+	virtual wxString GetCreateViewSql(View* view, bool dropView);
+	virtual wxString GetAlterTableConstraintSql(Table* tab);
+	virtual wxString GetCreateDatabaseSql(const wxString& dbName);
+	virtual wxString GetDropTableSql(Table* pTab);
+	virtual wxString GetDropDatabaseSql(Database* pDb);
 
 		virtual IDbType* GetDbTypeByName(const wxString& typeName);
 		virtual wxArrayString* GetDbTypes();

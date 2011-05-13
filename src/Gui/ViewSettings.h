@@ -9,13 +9,15 @@
 #include "../Interfaces/IDbAdapter.h"
 #include "../DbEngine/view.h"
 
-
+/*! \brief Dialog for editing database view */
 class ViewSettings : public _ViewSettings {
 
 public:
+	/*! \brief Default constructor */
 	ViewSettings( wxWindow* parent,IDbAdapter* pDbAdapter);
+	/*! \brief Default desctructor */
 	virtual ~ViewSettings();
-
+	/*! \brief Load view into dialog */
 	void SetView(View* pView, wxSFDiagramManager* pManager);
 
 	virtual void OnOKClick(wxCommandEvent& event);

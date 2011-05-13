@@ -4,7 +4,7 @@
 #include <wx/wx.h>
 #include "DatabaseExplorerFrame.h"
 #include "GUI.h" // Base class: _CodePreviewDialog
-
+/*! \brief Dialog for code preview. Dialog support syntax highlighting. */
 class CodePreviewDialog : public _CodePreviewDialog {
 
 public:

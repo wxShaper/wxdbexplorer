@@ -437,7 +437,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_MySqlPanel->SetSizer( fgSizer3 );
 	m_MySqlPanel->Layout();
 	fgSizer3->Fit( m_MySqlPanel );
-	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), true );
+	m_notebook2->AddPage( m_MySqlPanel, wxT("MySql"), false );
 	m_Sqlite = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer31;
 	fgSizer31 = new wxFlexGridSizer( 2, 1, 0, 0 );
@@ -487,7 +487,7 @@ _DBSettingsDialog::_DBSettingsDialog( wxWindow* parent, wxWindowID id, const wxS
 	m_Sqlite->SetSizer( fgSizer31 );
 	m_Sqlite->Layout();
 	fgSizer31->Fit( m_Sqlite );
-	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), false );
+	m_notebook2->AddPage( m_Sqlite, wxT("Sqlite"), true );
 	m_PostgrePanel = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer32;
 	fgSizer32 = new wxFlexGridSizer( 2, 1, 0, 0 );

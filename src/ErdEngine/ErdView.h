@@ -8,7 +8,7 @@
 #include "wx/wxsf/FlexGridShape.h"
 #include "wx/wxsf/DiagramManager.h"
 #include "../DbEngine/view.h"
-
+/*! \brief Class representing graphical wiev in ERD diagram, for more info see wxSF manual. */
 class ErdView : public wxSFRoundRectShape {
 
 public:

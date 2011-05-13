@@ -503,6 +503,66 @@ void DbViewerPanel::OnPopupClick(wxCommandEvent& evt)
 		break;
 
 
+		case IDR_DBVIEWER_EXPORT_DATABASE:{
+			DbItem* data = (DbItem*) m_treeDatabases->GetItemData(m_selectedID);
+			if (data) {
+				Database* pDb = (Database*) wxDynamicCast(data->GetData(),Database);
+				if (pDb) {
+					pDb->RefreshChildrenDetails();
+
+					wxFileDialog dlg(this, wxT("Export database..."), wxGetCwd(), wxT(""), wxT("SQL Files (*.sql)|*.sql"), wxSAVE | wxFD_OVERWRITE_PROMPT);
+
+					if(dlg.ShowModal() == wxID_OK) {					
+						// CreateStructure
+						wxString retStr = wxT("-- SQL script created by wxDbExplorer\n\n ");
+						SerializableList::compatibility_iterator tabNode = pDb->GetFirstChildNode();
+						while(tabNode) {
+							Table* tab = wxDynamicCast(tabNode->GetData(),Table);
+							if (tab) {
+								retStr.append(pDb->GetDbAdapter()->GetCreateTableSql(tab,true));
+							}
+							tabNode = tabNode->GetNext();
+						}
+
+						tabNode = pDb->GetFirstChildNode();
+						while(tabNode) {
+							View* view = wxDynamicCast(tabNode->GetData(),View);
+							if (view) {
+								retStr.append(pDb->GetDbAdapter()->GetCreateViewSql(view,true));
+							}
+							tabNode = tabNode->GetNext();
+						}
+
+						tabNode = pDb->GetFirstChildNode();
+						while(tabNode) {
+							Table* tab = wxDynamicCast(tabNode->GetData(),Table);
+							if (tab) {
+								retStr.append(pDb->GetDbAdapter()->GetAlterTableConstraintSql(tab));
+							}
+							tabNode = tabNode->GetNext();
+						}
+
+						DumpClass dump(pDb->GetDbAdapter(), pDb, dlg.GetPath());
+						dump.DumpData();
+						
+						
+						wxTextFile file(dlg.GetPath());
+						if (!file.Exists()) file.Create();
+						file.Open();
+						if (file.IsOpened()) {
+							file.InsertLine(retStr,0);
+							file.Write();
+							file.Close();
+							}
+						
+					wxMessageBox(wxString::Format(wxT("The database has been exported to '%s'."), dlg.GetPath().GetData()), wxT("wxDbExplorer"));
+					}					
+					
+				}
+			}		
+		}
+		break;
+
 		default: {
 			wxMessageBox(wxT("Sorry, requested feature isn't implemented yet. "),wxT("Sorry"));
 		}

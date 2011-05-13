@@ -19,6 +19,7 @@
 #include "DnDTableShape.h"
 
 class ErdPanel;
+/*! \brief Frame canvas. */
 class FrameCanvas : public wxSFShapeCanvas {
 
 	public:

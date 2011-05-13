@@ -23,9 +23,7 @@
 
 #include "../ErdEngine/DnDTableShape.h"
 #include "../DbEngine/dbconnection.h"
-#include "../DbEngine/databasecol.h"
 #include "../DbEngine/database.h"
-#include "../DbEngine/tablecol.h"
 #include "../DbEngine/table.h"
 #include "../DbEngine/column.h"
 #include "../DbEngine/view.h"
@@ -40,6 +38,9 @@
 
 WX_DECLARE_HASH_MAP( wxString, wxTreeItemId, wxStringHash, wxStringEqual, TableHashMap );
 
+
+
+/*! \brief Main application panel. It show database tree and can open special editors. */
 class DbViewerPanel : public _DbViewerPanel {
 
 public:

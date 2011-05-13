@@ -1,4 +1,5 @@
 #include "database.h"
+#include "table.h"
 #include "../Interfaces/IDbAdapter.h"
 XS_IMPLEMENT_CLONABLE_CLASS(Database,xsSerializable);
 

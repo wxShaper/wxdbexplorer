@@ -263,6 +263,11 @@ wxString PostgreSqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxS
 	wxString ret = wxString::Format(wxT("SELECT * FROM %s"), tableName.c_str());
 	return ret;
 }
+wxString PostgreSqlDbAdapter::GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName) {
+	//TODO:SQL:
+	wxString ret = wxString::Format(wxT("SELECT %s FROM %s"),cols.c_str(), tableName.c_str());
+	return ret;
+}
 
 bool PostgreSqlDbAdapter::GetColumns(Table* pTab) {
 	if (pTab) {

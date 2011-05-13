@@ -154,10 +154,15 @@ wxArrayString* MySqlDbAdapter::GetDbTypes() {
 }
 wxString MySqlDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	//TODO:SQL:
-	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s` LIMIT 100"), dbName.c_str(), tableName.c_str());
+	wxString ret = wxString::Format(wxT("SELECT * FROM `%s`.`%s`"), dbName.c_str(), tableName.c_str());
 	return ret;
 }
-
+wxString MySqlDbAdapter::GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName) {
+	//TODO:SQL:
+	wxString ret = wxString::Format(wxT("SELECT %s FROM `%s`.`%s`"), cols.c_str(), dbName.c_str(), tableName.c_str());
+	return ret;
+	
+}
 bool MySqlDbAdapter::GetColumns(Table* pTab) {
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));
 
@@ -436,3 +441,4 @@ IDbAdapter* MySqlDbAdapter::Clone()
 {
 	return new MySqlDbAdapter(m_serverName, m_userName, m_password);
 }
+

@@ -10,6 +10,7 @@
 // -------------------------------------------------
 // Trida databazove tabulky
 // -------------------------------------------------
+/*! \brief Class representing one database table */
 class Table : public xsSerializable {
 protected:
 	wxString m_name;
@@ -24,10 +25,8 @@ protected:
 	
 	
 public:
-	XS_DECLARE_CLONABLE_CLASS(Table);
-	
-	
-	/*! \brief Default consturctorsL */
+	XS_DECLARE_CLONABLE_CLASS(Table);	
+	/*! \brief Default consturctors */
 	Table();
 	Table(const Table& obj);
 	Table(IDbAdapter* dbAdapter,const wxString& tableName, const wxString& parentName, bool isView);

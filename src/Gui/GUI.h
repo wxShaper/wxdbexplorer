@@ -289,7 +289,7 @@ class _DBSettingsDialog : public wxDialog
 	
 	public:
 		
-		_DBSettingsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Conncetion settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		_DBSettingsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Connection settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~_DBSettingsDialog();
 	
 };
@@ -505,6 +505,7 @@ class _ClassGenerateDialog : public wxDialog
 		wxButton* m_button26;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnBtnBrowseClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGenerateClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCancelClick( wxCommandEvent& event ) { event.Skip(); }
 		

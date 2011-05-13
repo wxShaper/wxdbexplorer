@@ -9,7 +9,7 @@
 #include "DbEngine/constraint.h"
 
 #include "Gui/GUI.h" // Base class: _CreateForeignKey
-
+/*! \brief  Dialog for foreign key creating. If N:M connection type is selected, dialog create new connection table. */
 class CreateForeignKey : public _CreateForeignKey {
 
 public:

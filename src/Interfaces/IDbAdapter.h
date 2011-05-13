@@ -47,6 +47,7 @@ public:
 	virtual wxString GetUseDb(const wxString& dbName) = 0;
 	/*! \brief Return wxString with defalut SELECT for defined table and db */
 	virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName) = 0;
+	virtual wxString GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName) = 0;
 	/*! \brief Return Create table sql statement */
 	virtual wxString GetCreateTableSql(Table* tab, bool dropTable) = 0;	
 	/*! \brief Return Create view sql statement */

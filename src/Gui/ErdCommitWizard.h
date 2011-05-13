@@ -22,6 +22,7 @@
 
 #include "Art.h"
 
+/*! \brief Wizard for commiting database structure from ERD diagrom to database server. */
 class ErdCommitWizard : public wxWizard {
 
 public:
@@ -43,7 +44,7 @@ protected:
 	
 };
 
-
+/*! \brief Fist page of ErdCommitWizard */
 class FirstPage : public wxWizardPageSimple {
 
 public:
@@ -67,7 +68,7 @@ protected:
 	wxFlexGridSizer* m_mainSizer;
 	
 	};
-
+/*! \brief Second page of ErdCommitWizard */
 class BackupPage : public wxWizardPageSimple{
 public:
 	BackupPage(ErdCommitWizard* parent);
@@ -93,7 +94,7 @@ protected:
 	bool backuped;
 	};
 
-
+/*! \brief Third page of ErdCommitWizard */
 class WriteStructurePage : public wxWizardPageSimple{
 public:
 	WriteStructurePage(ErdCommitWizard* parent);
@@ -119,14 +120,14 @@ protected:
 	
 	bool commited;
 	};
-	
+/*! \brief Last page of ErdCommitWizard */
 class LastPage : public wxWizardPageSimple{
 public:
 	LastPage(wxWizard* parent);
 	virtual ~LastPage();	
 	
 	}; 
-
+/*! \brief Restore page of ErdCommitWizard */
 class RestorePage : public wxWizardPageSimple{
 public:
 	RestorePage(ErdCommitWizard* parent);

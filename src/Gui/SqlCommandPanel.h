@@ -13,6 +13,8 @@
 #include <wx/dblayer/include/DatabaseErrorCodes.h>
 #include "Interfaces/IDbAdapter.h"
 
+#include "Ids.h"
+
 
 class SQLCommandPanel : public _SqlCommandPanel{
 
@@ -29,6 +31,7 @@ public:
 
 	void OnPopupClick(wxCommandEvent &evt);
 	void ExecuteSql();
+
 
 protected:
 	IDbAdapter* m_pDbAdapter;

@@ -27,6 +27,7 @@ BEGIN_EVENT_TABLE(ErdPanel, _ErdPanel)
 	EVT_UPDATE_UI(wxID_REDO, ErdPanel::OnUpdateRedo)
 	EVT_TOOL_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnTool)
 	EVT_UPDATE_UI_RANGE(IDT_ERD_FIRST, IDT_ERD_LAST, ErdPanel::OnToolUpdate)
+	
 END_EVENT_TABLE()
 
 ErdPanel::ErdPanel():_ErdPanel(NULL) {

@@ -32,6 +32,7 @@ class MySqlDbAdapter : public IDbAdapter {
 
 		virtual wxString GetUseDb(const wxString& dbName);
 		virtual wxString GetDefaultSelect(const wxString& dbName, const wxString& tableName);
+		virtual wxString GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName);
 		virtual wxString GetCreateTableSql(Table* tab, bool dropTable);
 		virtual wxString GetCreateViewSql(View* view, bool dropView);
 		virtual wxString GetAlterTableConstraintSql(Table* tab);

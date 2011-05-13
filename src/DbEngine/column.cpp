@@ -27,7 +27,6 @@ Column::Column(const wxString& name,
 {
 		this->m_name = name;
 		this->m_parentName = parentName;
-		this->m_isSaved = true;
 		this->m_pType = type;
 		initSerializable();
 		}
@@ -41,7 +40,6 @@ void Column::Edit(wxString& name,
 		this->m_parentName = parentName;
 		if (this->m_pType) delete this->m_pType;
 		this->m_pType = type;
-		this->m_isSaved = false;	
 
 }
 

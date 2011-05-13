@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <wx/wxsf/SolidArrow.h> // Base class: wxSFArrowBase
 
+/*! \brief Class representing arrow end used in ERD. Connection type - one */
 class OneArrow : public wxSFSolidArrow {
 
 public:

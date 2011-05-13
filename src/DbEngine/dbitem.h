@@ -3,7 +3,7 @@
 #include "database.h"
 #include "table.h"
 #include <wx/treebase.h> // Base class: wxTreeItemData
-
+/*! \brief Class for saving pointer to database objects into tree control in DbViewerPanel */
 class DbItem : public wxTreeItemData {
 protected:
 	Database* m_pDatabase;

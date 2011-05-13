@@ -13,10 +13,10 @@
 #include "../ErdEngine/ErdView.h"
 #include "../Interfaces/IDbAdapter.h"
 #include "dbeclasstype.h"
-#include "ErdCommitDialog.h"
 #include "ErdCommitWizard.h"
 
 class FrameCanvas;
+/*! \brief Editor for ERD creating. */
 class ErdPanel : public _ErdPanel {
 	public:
 		DECLARE_DYNAMIC_CLASS(ErdPanel)
@@ -26,11 +26,11 @@ class ErdPanel : public _ErdPanel {
 			modeVIEW,
 			modeLine
 		};
-
 		// public data accessors
 		MODE GetToolMode() {
 			return m_nToolMode;
 		}
+		
 		void SetToolMode(MODE m) {
 			m_nToolMode = m;
 		}
@@ -40,7 +40,6 @@ class ErdPanel : public _ErdPanel {
 		ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, xsSerializable* pConnections, Table* pTable);
 		ErdPanel(wxWindow *parent, IDbAdapter* dbAdapter, xsSerializable* pConnections, xsSerializable* pItems);
 		virtual ~ErdPanel();
-
 		void Init(wxWindow *parent, IDbAdapter* dbAdapter);
 
 		wxSFShapeCanvas* getCanvas() {

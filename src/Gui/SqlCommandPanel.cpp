@@ -23,8 +23,8 @@ SQLCommandPanel::SQLCommandPanel(wxWindow *parent,IDbAdapter* dbAdapter,  const 
 	}
 }
 
-SQLCommandPanel::~SQLCommandPanel()
-{
+SQLCommandPanel::~SQLCommandPanel() {
+	delete m_pDbAdapter;
 }
 
 void SQLCommandPanel::OnExecuteClick(wxCommandEvent& event)
@@ -44,9 +44,6 @@ void SQLCommandPanel::ExecuteSql()
 	if (m_pDbLayer->IsOpen()){
 		// test for empty string
 		if (this->m_scintillaSQL->GetText() != wxT("")) {
-			// selec working db
-			//TODO:SQL:
-			//m_pDbLayer->RunQuery(wxT("USE ")+ m_dbName);
 			try {
 				if (!m_pDbAdapter->GetUseDb(m_dbName).IsEmpty()) m_pDbLayer->RunQuery(m_pDbAdapter->GetUseDb(m_dbName));
 				// run query

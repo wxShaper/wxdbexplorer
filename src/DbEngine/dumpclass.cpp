@@ -11,6 +11,8 @@ DumpClass::~DumpClass() {
 }
 
 wxString DumpClass::DumpData() {
+	int totalRowCount = 0;
+	int tableCount = 0;
 	wxTextFile* pOutFile = new wxTextFile(m_fileName);
 	if (pOutFile->Exists()) {
 		pOutFile->Open();
@@ -25,7 +27,10 @@ wxString DumpClass::DumpData() {
 		SerializableList::compatibility_iterator node = m_pItems->GetFirstChildNode();
 		while( node ) {
 			Table* pTab = wxDynamicCast(node->GetData(), Table);
-			if (pTab) DumpTable(pOutFile, pTab);			
+			if (pTab) {
+				totalRowCount += DumpTable(pOutFile, pTab);
+				tableCount++;
+			}			
 			node = node->GetNext();
 			}
 			
@@ -34,10 +39,11 @@ wxString DumpClass::DumpData() {
 		
 	}
 	if (pOutFile)  delete pOutFile;
-	return wxT("OK");
+	return wxString::Format(wxT("Dumped %i rows in %i tables"),totalRowCount, tableCount );
 }
 
-bool DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
+int DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
+	int rowCount = 0;
 	if ((pFile->IsOpened())&&(pTab != NULL)) {
 		
 		wxString cols = wxT("");
@@ -54,11 +60,13 @@ bool DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
 		wxString startLine = wxString::Format(wxT("INSERT INTO %s (%s) VALUES"), pTab->GetName().c_str(), cols.c_str());	
 		int n = 0;
 		bool pocatek = false;
-		int rowCount = 0;
+
 		
 		DatabaseLayer* pDbLayer = m_pDbAdapter->GetDatabaseLayer(pTab->GetParentName());
 		if (pDbLayer){
-			DatabaseResultSet* pResult = pDbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT %s FROM %s.%s"), cols.c_str(),pTab->GetParentName().c_str(), pTab->GetName().c_str()));
+			//DatabaseResultSet* pResult = pDbLayer->RunQueryWithResults(wxString::Format(wxT("SELECT %s FROM %s.%s"), cols.c_str(),pTab->GetParentName().c_str(), pTab->GetName().c_str()));
+			DatabaseResultSet* pResult = pDbLayer->RunQueryWithResults(m_pDbAdapter->GetDefaultSelect(cols ,pTab->GetParentName(), pTab->GetName()));
+			
 			while (pResult->Next()){
 				if (n == 0 ) pFile->AddLine(startLine);		
 				rowCount++;
@@ -117,4 +125,5 @@ bool DumpClass::DumpTable(wxTextFile* pFile, Table* pTab) {
 			pDbLayer->Close();
 			}			
 	}
+	return rowCount;
 }

@@ -58,6 +58,9 @@ bool SQLiteDbAdapter::IsConnected() {
 wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& dbName, const wxString& tableName) {
 	return wxString::Format(wxT("SELECT * FROM '%s'.'%s';"),dbName.c_str(),tableName.c_str());
 }
+wxString SQLiteDbAdapter::GetDefaultSelect(const wxString& cols, const wxString& dbName, const wxString& tableName) {
+	return wxString::Format(wxT("SELECT %s FROM '%s'.'%s';"),cols.c_str(), dbName.c_str(),tableName.c_str());
+}
 bool SQLiteDbAdapter::GetColumns(Table* pTab) {
 	int i = 0;
 	DatabaseLayer* dbLayer = this->GetDatabaseLayer(wxT(""));

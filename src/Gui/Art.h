@@ -1,6 +1,9 @@
 #ifndef ART_H_INCLUDED
 #define ART_H_INCLUDED
 
+/*! \brief xpm picture list */
+
+
 #include "../res/gui/folder.xpm"
 #include "../res/elements/Bound.xpm"
 #include "../res/elements/Tool.xpm"

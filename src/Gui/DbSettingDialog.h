@@ -20,6 +20,8 @@
 #include "MysqlConnectionHistory.h"
 #include "PostgresConnectionHistory.h"
 
+
+/*! \brief Dialog for connection to the database server. It should be change everytime, if new database server typ is add. */
 class DbSettingDialog : public _DBSettingsDialog {
 
 public:
