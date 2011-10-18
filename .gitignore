@@ -1,0 +1,9 @@
+#ignore build files
+*.o
+*.o.d
+#ignore build folders
+.objsu/*
+.objsud/*
+#ignnore projekt files
+*.mk
+*.proj
