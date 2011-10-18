@@ -2,8 +2,10 @@
 *.o
 *.o.d
 #ignore build folders
-.objsu/*
-.objsud/*
+.objsu
+.objsud
 #ignnore projekt files
 *.mk
-*.proj
+*.project
+Makefile
+*.workspace*
